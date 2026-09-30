@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="The page you requested could not be found.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<script src="js/i18n.js"></script>
+<script src="data/products.js"></script>
+<script src="js/vm-core.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#06111C;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#00AEEF;text-underline-offset:4px}
+a:hover{color:#FFFFFF}
+*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
+@keyframes vmUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes vmDash{to{stroke-dashoffset:-320}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+
+<dc-import name="SiteHeader" page="404" hint-size="100%,122px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#FFFFFF;background:#06111C;background-image:linear-gradient(rgba(120,170,220,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,220,.06) 1px,transparent 1px);background-size:48px 48px;min-height:70vh;display:flex;align-items:center">
+  <div style="max-width:1360px;width:100%;margin:0 auto;padding:clamp(56px,8vw,120px) clamp(16px,3.5vw,48px);display:grid;grid-template-columns:{{ cols }};gap:40px 80px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:20px;animation:vmUp .8s both">
+      <span style="font-family:{{ fMono }};font-size:12.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#FF9A9A">{{ t.nf_code }}</span>
+      <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(38px,5vw,72px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ t.nf_title }}</h1>
+      <p style="margin:0;color:#AFC0D0;font-size:17px;max-width:44ch">{{ t.nf_body }}</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;height:50px;padding-inline:22px;background:#0759A5;color:#FFFFFF;text-decoration:none;font-weight:700">{{ t.nf_btn }} <span aria-hidden="true">{{ arrow }}</span></a>
+        <a href="products.dc.html" style="display:inline-flex;align-items:center;height:50px;padding-inline:22px;border:1px solid rgba(255,255,255,.3);color:#FFFFFF;text-decoration:none;font-weight:700">{{ t.cats_link }}</a>
+      </div>
+    </div>
+    <div aria-hidden="true" dir="ltr" style="position:relative;aspect-ratio:1/0.7">
+      <svg viewBox="0 0 500 350" style="position:absolute;inset:0;width:100%;height:100%" fill="none">
+        <circle cx="250" cy="175" r="150" stroke="rgba(120,170,220,.2)"></circle>
+        <circle cx="250" cy="175" r="90" stroke="rgba(120,170,220,.2)" stroke-dasharray="2 6"></circle>
+        <line x1="250" y1="10" x2="250" y2="340" stroke="rgba(120,170,220,.16)"></line>
+        <line x1="60" y1="175" x2="440" y2="175" stroke="rgba(120,170,220,.16)"></line>
+        <path d="M40 320 C 140 260, 200 220, 250 175" stroke="#00AEEF" stroke-dasharray="6 10" style="animation:vmDash 14s linear infinite"></path>
+        <path d="M250 175 L 330 110" stroke="#D62828" stroke-dasharray="3 6"></path>
+        <circle cx="330" cy="110" r="6" stroke="#D62828"></circle>
+      </svg>
+      <span style="position:absolute;left:68%;top:22%;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#FF9A9A">404 · OFF TRACK</span>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { ready: false };
+  componentDidMount() {
+    const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    go();
+  }
+  componentDidUpdate() { if (this.state.ready) window.VM.meta('404'); }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv();
+    return { ...v, ready: true, t, cols: v.lg ? 'minmax(0,1fr) minmax(0,1fr)' : 'minmax(0,1fr)' };
+  }
+}
+</script>
+</body>
+</html>

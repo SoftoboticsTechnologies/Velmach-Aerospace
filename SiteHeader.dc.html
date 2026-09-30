@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<script src="js/i18n.js"></script>
+<script src="data/products.js"></script>
+<script src="js/vm-core.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#0759A5;text-underline-offset:4px}
+a:hover{color:#0B1B2B}
+*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
+@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(214,40,40,.55)}70%{box-shadow:0 0 0 7px rgba(214,40,40,0)}100%{box-shadow:0 0 0 0 rgba(214,40,40,0)}}
+@keyframes vmFade{from{opacity:0}to{opacity:1}}
+@keyframes vmUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes vmFromR{from{transform:translateX(100%)}to{transform:none}}
+@keyframes vmFromL{from{transform:translateX(-100%)}to{transform:none}}
+@keyframes vmSheet{from{transform:translateY(100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<div dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:1.5">
+  <a href="#main" style="position:fixed;top:8px;inset-inline-start:-9999px;z-index:300;background:#0759A5;color:#FFFFFF;padding:10px 16px;font-weight:700" style-focus="inset-inline-start:8px">{{ t.skip }}</a>
+
+  <header style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,{{ hdrAlpha }});backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid #E3E7EB;box-shadow:{{ hdrShadow }};transition:box-shadow .35s ease,background .35s ease">
+    <div ref="{{ progRef }}" aria-hidden="true" style="position:absolute;bottom:-1px;inset-inline-start:0;height:2px;width:0;background:#00AEEF;transition:width .1s linear"></div>
+
+    <div style="background:#06111C;color:#C9D3DD;font-size:12.5px;overflow:hidden;max-height:{{ utilH }};transition:max-height .35s ease">
+      <div style="max-width:1360px;margin:0 auto;height:36px;padding-inline:clamp(16px,3.5vw,48px);display:flex;align-items:center;justify-content:space-between;gap:16px">
+        <div style="display:flex;align-items:center;gap:22px;min-width:0">
+          <a href="mailto:AOG@velmachaerospace.com" style="display:inline-flex;align-items:center;gap:8px;color:#FFFFFF;text-decoration:none;white-space:nowrap">
+            <span style="width:7px;height:7px;border-radius:50%;background:#D62828;animation:vmPulse 2.4s infinite"></span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.12em;color:#FF7B7B">AOG 24/7</span>
+            <sc-if value="{{ notSm }}" hint-placeholder-val="{{ true }}"><span dir="ltr" style="unicode-bidi:isolate">AOG@velmachaerospace.com</span></sc-if>
+          </a>
+          <sc-if value="{{ lg }}" hint-placeholder-val="{{ true }}">
+            <a href="tel:+971509259286" dir="ltr" style="color:#C9D3DD;text-decoration:none;unicode-bidi:isolate;font-family:'IBM Plex Mono',monospace;font-size:12px">+971 50 925 9286</a>
+            <a href="mailto:info@velmachaerospace.com" dir="ltr" style="color:#C9D3DD;text-decoration:none;unicode-bidi:isolate">info@velmachaerospace.com</a>
+          </sc-if>
+        </div>
+        <button type="button" onClick="{{ toggleLang }}" aria-label="{{ t.lang_aria }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:0;color:#FFFFFF;cursor:pointer;font:inherit;font-family:{{ fAlt }};font-size:13px;font-weight:600;padding:4px 0">
+          <span style="width:14px;height:14px;border:1px solid #6E8296;border-radius:50%;display:inline-block"></span>{{ t.lang_btn }}
+        </button>
+      </div>
+    </div>
+
+    <div style="max-width:1360px;margin:0 auto;height:{{ barH }};padding-inline:clamp(16px,3.5vw,48px);display:flex;align-items:center;gap:28px;transition:height .35s ease">
+      <a href="index.html" aria-label="Velmach Aerospace, home" style="display:flex;flex-shrink:0;padding-block:6px">
+        <img src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" style="height:{{ logoH }};width:auto;display:block;transition:height .35s ease">
+      </a>
+      <sc-if value="{{ lg }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="Main" style="display:flex;align-items:stretch;gap:4px;flex:1;height:100%;justify-content:center">
+          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+            <a href="{{ n.href }}" aria-current="{{ n.current }}" style="position:relative;display:flex;align-items:center;padding-inline:12px;font-size:14.5px;font-weight:{{ n.weight }};color:{{ n.color }};text-decoration:none;white-space:nowrap;transition:color .2s" style-hover="color:#0B1B2B">
+              {{ n.label }}
+              <span style="position:absolute;bottom:0;inset-inline:12px;height:2px;background:#0759A5;transform:scaleX({{ n.bar }});transform-origin:center;transition:transform .35s ease"></span>
+            </a>
+          </sc-for>
+        </nav>
+      </sc-if>
+      <sc-if value="{{ notLg }}" hint-placeholder-val="{{ false }}"><div style="flex:1"></div></sc-if>
+      <sc-if value="{{ showSearch }}" hint-placeholder-val="{{ true }}">
+        <form role="search" action="products.dc.html" method="get" style="display:flex;align-items:center;height:40px;width:210px;border-bottom:1px solid #B7C0C9;gap:8px">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#6B7280" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><line x1="11" y1="11" x2="15" y2="15"></line></svg>
+          <input type="search" name="q" placeholder="{{ t.p_pn_label }}" aria-label="{{ t.search_aria }}" style="flex:1;min-width:0;border:0;background:transparent;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#0B1B2B;outline:none;height:100%">
+        </form>
+      </sc-if>
+      <button type="button" onClick="{{ openRfq }}" aria-haspopup="dialog" style="position:relative;display:inline-flex;align-items:center;gap:10px;height:44px;padding-inline:{{ rqPad }};background:#0759A5;color:#FFFFFF;border:0;border-radius:2px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;flex-shrink:0;transition:background .2s" style-hover="background:#0B1B2B">
+        <sc-if value="{{ notSm }}" hint-placeholder-val="{{ true }}"><span>{{ t.cta_quote }}</span></sc-if>
+        <sc-if value="{{ sm }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.08em">RFQ</span></sc-if>
+        <sc-if value="{{ hasCount }}" hint-placeholder-val="{{ false }}">
+          <span aria-label="{{ t.rfq_aria }}" style="min-width:22px;height:22px;padding-inline:6px;background:#00AEEF;color:#06111C;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;border-radius:11px">{{ count }}</span>
+        </sc-if>
+      </button>
+      <sc-if value="{{ notLg }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ openDrawer }}" aria-label="{{ t.menu }}" aria-expanded="{{ drawer }}" style="width:44px;height:44px;border:1px solid #D3D9DF;background:#FFFFFF;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:6px;padding-inline:11px;cursor:pointer;flex-shrink:0">
+          <span style="width:22px;height:1.5px;background:#0B1B2B"></span><span style="width:14px;height:1.5px;background:#0B1B2B"></span>
+        </button>
+      </sc-if>
+    </div>
+  </header>
+  <div aria-hidden="true" style="height:{{ spacerH }}"></div>
+
+  <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
+    <div ref="{{ drawerRef }}" role="dialog" aria-modal="true" aria-label="{{ t.menu }}" style="position:fixed;inset:0;z-index:200;background:#06111C;color:#FFFFFF;display:flex;flex-direction:column;overflow-y:auto;animation:{{ drawerAnim }} .45s cubic-bezier(.2,.7,.2,1);background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:16px clamp(16px,4vw,32px);border-bottom:1px solid rgba(255,255,255,.1)">
+        <button type="button" onClick="{{ toggleLang }}" style="background:transparent;border:1px solid rgba(255,255,255,.25);color:#FFFFFF;padding:8px 16px;font:inherit;font-family:{{ fAlt }};font-weight:600;cursor:pointer">{{ t.lang_btn }}</button>
+        <button type="button" onClick="{{ closeDrawer }}" aria-label="{{ t.close }}" style="width:44px;height:44px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#FFFFFF;font-size:22px;cursor:pointer;line-height:1">×</button>
+      </div>
+      <nav style="display:flex;flex-direction:column;padding:20px clamp(16px,4vw,32px)">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+          <a href="{{ n.href }}" aria-current="{{ n.current }}" style="display:flex;align-items:baseline;gap:16px;padding-block:14px;border-bottom:1px solid rgba(255,255,255,.08);color:#FFFFFF;text-decoration:none;font-family:{{ fHead }};font-size:clamp(24px,7vw,34px);font-weight:500;animation:vmUp .5s both;animation-delay:{{ n.delay }}">
+            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:{{ n.numColor }}">{{ n.num }}</span>{{ n.label }}
+          </a>
+        </sc-for>
+      </nav>
+      <div style="margin-top:auto;padding:20px clamp(16px,4vw,32px) 28px;display:flex;flex-direction:column;gap:12px">
+        <button type="button" onClick="{{ openRfqFromDrawer }}" style="height:52px;background:#0759A5;color:#FFFFFF;border:0;font:inherit;font-weight:700;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px">{{ t.cta_quote }} <span aria-hidden="true">{{ arrow }}</span></button>
+        <a href="mailto:AOG@velmachaerospace.com" style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#D62828;color:#FFFFFF;padding:14px 16px;text-decoration:none;font-weight:700">
+          <span style="display:inline-flex;align-items:center;gap:10px"><span style="width:7px;height:7px;border-radius:50%;background:#FFFFFF"></span>AOG 24/7</span>
+          <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500">AOG@velmachaerospace.com</span>
+        </a>
+        <div style="display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14px;color:#C9D3DD">
+          <a href="tel:+971509259286" dir="ltr" style="color:#C9D3DD;text-decoration:none;font-family:'IBM Plex Mono',monospace">+971 50 925 9286</a>
+          <a href="tel:+971509155899" dir="ltr" style="color:#C9D3DD;text-decoration:none;font-family:'IBM Plex Mono',monospace">+971 50 915 5899</a>
+          <a href="mailto:info@velmachaerospace.com" dir="ltr" style="color:#C9D3DD;text-decoration:none">info@velmachaerospace.com</a>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ rfqOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeRfq }}" style="position:fixed;inset:0;z-index:210;background:rgba(6,17,28,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:vmFade .3s ease"></div>
+    <div ref="{{ rfqRef }}" role="dialog" aria-modal="true" aria-labelledby="rq-title" style="position:fixed;z-index:211;background:#FFFFFF;display:flex;flex-direction:column;top:{{ rqTop }};bottom:0;left:{{ rqL }};right:{{ rqR }};width:{{ rqW }};height:{{ rqHt }};animation:{{ rqAnim }} .5s cubic-bezier(.2,.7,.2,1);box-shadow:0 20px 60px rgba(6,17,28,.35)">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px;background:#06111C;color:#FFFFFF;flex-shrink:0;border-top-left-radius:{{ rqRad }};border-top-right-radius:{{ rqRad }}">
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span id="rq-title" style="font-family:{{ fMono }};font-size:13px;letter-spacing:{{ ls }};text-transform:uppercase;color:#FFFFFF">{{ t.rq_title }}</span>
+          <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#7F93A7;text-align:{{ start }}">RFQ · {{ count }} · VELMACH AEROSPACE</span>
+        </div>
+        <button type="button" onClick="{{ closeRfq }}" aria-label="{{ t.rq_close }}" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#FFFFFF;font-size:20px;cursor:pointer;line-height:1">×</button>
+      </div>
+      <div style="flex:1;overflow-y:auto">
+        <dc-import name="RfqPanel" mode="modal" hint-size="100%,600px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showFloat }}" hint-placeholder-val="{{ true }}">
+    <div onMouseEnter="{{ aogIn }}" onMouseLeave="{{ aogOut }}" onFocus="{{ aogIn }}" onBlur="{{ aogBlur }}" dir="{{ dir }}" style="position:fixed;bottom:{{ floatB }};left:{{ floatX }};z-index:90;display:flex;flex-direction:column;align-items:flex-start;gap:10px">
+      <sc-if value="{{ aogOpen }}" hint-placeholder-val="{{ false }}">
+        <div role="group" aria-label="{{ t.aog_tag }}" style="width:300px;background:#FFFFFF;color:#0B1B2B;box-shadow:0 20px 50px rgba(6,17,28,.22);border-top:3px solid #D62828;animation:vmUp .28s cubic-bezier(.2,.7,.2,1);font-family:{{ fBody }}">
+          <div style="padding:16px 18px 12px;display:flex;flex-direction:column;gap:4px;border-bottom:1px solid #F0D6D6">
+            <span style="display:flex;align-items:center;gap:8px;white-space:nowrap;line-height:1.4;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#B01E1E;font-weight:500"><span style="flex-shrink:0;width:7px;height:7px;border-radius:50%;background:#D62828;animation:vmPulse 2.4s infinite"></span>{{ t.aog_tag }}</span>
+            <span style="font-size:14px;color:#4B5563;line-height:1.45">{{ aogDesc }}</span>
+          </div>
+          <a href="mailto:AOG@velmachaerospace.com?subject=AOG%20request" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid #F3E3E3;text-decoration:none;color:#0B1B2B;transition:background .2s" style-hover="background:#FFF5F5">
+            <span style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:12px;font-weight:600;color:#6B7280">{{ t.aog_email }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;white-space:nowrap;text-align:{{ start }}">AOG@velmachaerospace.com</span></span>
+            <span aria-hidden="true" style="color:#D62828;flex-shrink:0">{{ arrow }}</span>
+          </a>
+          <a href="tel:+971509259286" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;text-decoration:none;color:#0B1B2B;transition:background .2s" style-hover="background:#FFF5F5">
+            <span style="display:flex;flex-direction:column;gap:1px"><span style="font-size:12px;font-weight:600;color:#6B7280">{{ t.aog_call }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;white-space:nowrap;text-align:{{ start }}">+971 50 925 9286</span></span>
+            <span aria-hidden="true" style="color:#D62828;flex-shrink:0">{{ arrow }}</span>
+          </a>
+        </div>
+      </sc-if>
+      <a href="mailto:AOG@velmachaerospace.com" aria-label="AOG 24/7, AOG@velmachaerospace.com" aria-expanded="{{ aogOpen }}" dir="ltr" style="display:flex;align-items:center;gap:10px;height:52px;padding-inline:18px 20px;background:{{ aogPillBg }};color:#FFFFFF;text-decoration:none;box-shadow:0 10px 28px rgba(214,40,40,.3);border-radius:26px;transition:background .25s ease">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink:0;transform:rotate(45deg)"><path fill="#FFFFFF" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"></path></svg>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;font-weight:500;letter-spacing:.12em">AOG</span>
+        <span style="width:1px;height:18px;background:rgba(255,255,255,.4)"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;opacity:.9">24/7</span>
+      </a>
+    </div>
+    <a href="https://wa.me/971509259286" target="_blank" rel="noopener" aria-label="{{ t.float_wa }}" onMouseEnter="{{ waIn }}" onMouseLeave="{{ waOut }}" onFocus="{{ waIn }}" onBlur="{{ waOut }}" dir="ltr" style="position:fixed;bottom:{{ floatB }};right:{{ floatX }};z-index:90;height:56px;min-width:56px;border-radius:28px;background:#25D366;display:flex;align-items:center;justify-content:flex-end;gap:{{ waGap }};padding-inline:{{ waPadL }} 15px;box-shadow:0 10px 28px rgba(18,140,70,.3);text-decoration:none;transition:padding .35s cubic-bezier(.2,.7,.2,1),gap .35s ease">
+      <span style="display:block;overflow:hidden;white-space:nowrap;max-width:{{ waLabelW }};opacity:{{ waLabelOp }};color:#0B3D20;font-family:{{ fBody }};font-weight:700;font-size:15px;transition:max-width .35s cubic-bezier(.2,.7,.2,1),opacity .25s ease">{{ waLabel }}</span>
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" style="flex-shrink:0"><path fill="#FFFFFF" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.900-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.200-1.8-1.9-3.9-1.9-6.1C4.9 9.8 9.9 4.9 16 4.9s11.1 4.9 11.1 10.9S22.1 26.4 16 26.4zm6.1-8.1c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1.1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.500c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.300-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"></path></svg>
+    </a>
+  </sc-if>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:fixed;bottom:88px;left:50%;transform:translateX(-50%);z-index:220;background:#06111C;color:#FFFFFF;padding:12px 18px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 30px rgba(6,17,28,.3);animation:vmUp .3s ease;white-space:nowrap">
+      <span style="width:8px;height:8px;background:#00AEEF"></span>{{ toast }}
+      <button type="button" onClick="{{ openRfq }}" style="background:transparent;border:0;color:#00AEEF;font:inherit;font-weight:700;cursor:pointer;padding:0">{{ t.cta_quote }}</button>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;products&quot;,&quot;industries&quot;,&quot;services&quot;,&quot;quality&quot;,&quot;contact&quot;,&quot;rfq&quot;,&quot;404&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showFloating&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { ready: false, scrolled: false, drawer: false, rfqOpen: false, toast: '', aogOpen: false, waOpen: false };
+  progRef = React.createRef(); rfqRef = React.createRef(); drawerRef = React.createRef();
+  componentDidMount() {
+    const go = () => {
+      if (window.VM && window.VM_I18N && window.VM_PRODUCTS) {
+        this.unsub = window.VM.subscribe(() => this.forceUpdate());
+        this.setState({ ready: true }); this.onScroll();
+      } else this.tw = setTimeout(go, 30);
+    };
+    go();
+    this.onScroll = this.onScroll.bind(this);
+    this.onOpen = () => this.setState({ rfqOpen: true, drawer: false });
+    this.onToast = e => { this.setState({ toast: e.detail }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 3200); };
+    this.onKey = e => {
+      const box = this.state.rfqOpen ? this.rfqRef.current : this.state.drawer ? this.drawerRef.current : null;
+      if (!box) return;
+      if (e.key === 'Escape') { this.setState({ rfqOpen: false, drawer: false }); return; }
+      if (e.key === 'Tab') {
+        const f = [...box.querySelectorAll('button,a[href],input,select,textarea')].filter(x => !x.disabled && x.offsetParent !== null);
+        if (!f.length) return; const a = f[0], z = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+        else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+      }
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('vm:open-rfq', this.onOpen);
+    window.addEventListener('vm:toast', this.onToast);
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() {
+    clearTimeout(this.tw); clearTimeout(this.tt); this.unsub && this.unsub();
+    window.removeEventListener('scroll', this.onScroll); window.removeEventListener('vm:open-rfq', this.onOpen);
+    window.removeEventListener('vm:toast', this.onToast); window.removeEventListener('keydown', this.onKey);
+  }
+  componentDidUpdate(pp, ps) {
+    const open = this.state.rfqOpen || this.state.drawer;
+    if (open !== (ps.rfqOpen || ps.drawer)) {
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) { this.lastFocus = document.activeElement; setTimeout(() => { const b = (this.state.rfqOpen ? this.rfqRef : this.drawerRef).current; b && b.querySelector('button') && b.querySelector('button').focus(); }, 60); }
+      else if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus();
+    }
+  }
+  onScroll() {
+    const y = window.scrollY, h = document.documentElement.scrollHeight - window.innerHeight;
+    if (this.progRef.current) this.progRef.current.style.width = (h > 0 ? Math.min(100, (y / h) * 100) : 0) + '%';
+    const s = y > 24; if (s !== this.state.scrolled) this.setState({ scrolled: s });
+  }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), s = this.state, page = this.props.page || 'home';
+    const count = VM.rfq().length;
+    const sc = s.scrolled;
+    return {
+      ...v, ready: true, t,
+      fAlt: v.ar ? "'Manrope', system-ui, sans-serif" : "'IBM Plex Sans Arabic', Tahoma, sans-serif",
+      logoAlt: v.ar ? 'شعار فيلماك إيروسبايس' : 'Velmach Aerospace F.Z.C logo',
+      progRef: this.progRef, rfqRef: this.rfqRef, drawerRef: this.drawerRef,
+      utilH: sc ? '0px' : '36px', barH: sc ? '66px' : (v.sm ? '72px' : '86px'), logoH: sc ? '40px' : (v.sm ? '46px' : '58px'),
+      spacerH: v.sm ? '108px' : '122px', hdrAlpha: sc ? '.9' : '1',
+      hdrShadow: sc ? '0 8px 30px rgba(6,17,28,.07)' : 'none',
+      showSearch: v.lg && typeof window !== 'undefined' && window.innerWidth >= 1340,
+      rqPad: v.sm ? '12px' : '20px',
+      nav: VM.PAGES.map((k, i) => ({ href: VM.HREF[k], label: t.nav[k], current: page === k ? 'page' : undefined,
+        color: page === k ? '#0B1B2B' : '#4B5563', weight: page === k ? 700 : 600, bar: page === k ? 1 : 0,
+        num: String(i + 1).padStart(2, '0'), numColor: page === k ? '#00AEEF' : '#6E8296', delay: (80 + i * 45) + 'ms' })),
+      count, hasCount: count > 0,
+      toggleLang: () => VM.toggleLang(),
+      drawer: s.drawer, openDrawer: () => this.setState({ drawer: true }), closeDrawer: () => this.setState({ drawer: false }),
+      drawerAnim: v.ar ? 'vmFromL' : 'vmFromR',
+      rfqOpen: s.rfqOpen, openRfq: () => this.setState({ rfqOpen: true, toast: '' }), closeRfq: () => this.setState({ rfqOpen: false }),
+      openRfqFromDrawer: () => this.setState({ drawer: false, rfqOpen: true }),
+      rqTop: v.sm ? 'auto' : '0px', rqL: v.sm ? '0px' : (v.ar ? '0px' : 'auto'), rqR: v.sm ? '0px' : (v.ar ? 'auto' : '0px'), rqW: v.sm ? 'auto' : 'min(600px,100vw)', rqHt: v.sm ? '92vh' : '100%',
+      rqAnim: v.sm ? 'vmSheet' : (v.ar ? 'vmFromL' : 'vmFromR'), rqRad: v.sm ? '8px' : '0px',
+      showFloat: this.props.showFloating !== false, aogOpen: s.aogOpen && !v.sm,
+      aogIn: () => this.setState({ aogOpen: true }), aogOut: () => this.setState({ aogOpen: false }),
+      aogBlur: e => { if (!e.currentTarget.contains(e.relatedTarget)) this.setState({ aogOpen: false }); },
+      aogDesc: t.depts[0].b, aogPillBg: s.aogOpen && !v.sm ? '#B81F1F' : '#D62828',
+      floatB: v.sm ? '14px' : '22px', floatX: v.sm ? '14px' : '22px',
+      toast: s.toast,
+      waLabel: v.ar ? 'تحدث معنا' : 'Chat with us', waOpen: s.waOpen,
+      waIn: () => this.setState({ waOpen: true }), waOut: () => this.setState({ waOpen: false }),
+      waLabelW: s.waOpen ? '160px' : '0px', waLabelOp: s.waOpen ? 1 : 0, waGap: s.waOpen ? '12px' : '0px', waPadL: s.waOpen ? '24px' : '15px'
+    };
+  }
+}
+</script>
+</body>
+</html>

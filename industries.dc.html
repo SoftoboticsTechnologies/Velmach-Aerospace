@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Commercial aviation, business aviation, MRO, defence, oil and gas and industrial buyers.">
+<meta property="og:title" content="Industries Served | Velmach Aerospace">
+<meta property="og:description" content="Target markets for Velmach Aerospace parts, materials and services.">
+<meta property="og:type" content="website">
+<!-- TODO: replace canonical domain -->
+<link rel="canonical" href="https://www.velmachaerospace.com/industries.html">
+<link rel="alternate" hreflang="en" href="https://www.velmachaerospace.com/industries.html?lang=en">
+<link rel="alternate" hreflang="ar" href="https://www.velmachaerospace.com/industries.html?lang=ar">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<script src="js/i18n.js"></script>
+<script src="data/products.js"></script>
+<script src="js/vm-core.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#0759A5;text-underline-offset:4px}
+a:hover{color:#0B1B2B}
+*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
+@keyframes vmUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+
+<dc-import name="SiteHeader" page="industries" hint-size="100%,122px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px">
+  <section style="background:#06111C;color:#FFFFFF;background-image:linear-gradient(rgba(120,170,220,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,220,.06) 1px,transparent 1px);background-size:48px 48px">
+    <div style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(16px,3.5vw,48px) 0;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;align-items:center;gap:14px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#00AEEF;animation:vmUp .8s both"><span style="width:28px;height:1px;background:#00AEEF"></span>{{ t.ip_eyebrow }}</div>
+      <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(36px,5vw,72px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};animation:vmUp .8s .1s both">{{ t.ip_title }}</h1>
+      <p style="margin:0;color:#AFC0D0;font-size:17px;max-width:52ch;animation:vmUp .8s .2s both">{{ t.ip_sub }}</p>
+      <nav aria-label="{{ t.ip_title }}" style="display:flex;flex-wrap:wrap;margin-top:28px;border-top:1px solid rgba(255,255,255,.14)">
+        <sc-for list="{{ inds }}" as="i" hint-placeholder-count="6">
+          <a href="{{ i.anchor }}" style="flex:1 1 180px;display:flex;flex-direction:column;gap:4px;padding:18px 16px 22px 0;padding-inline-end:16px;color:#FFFFFF;text-decoration:none;border-inline-end:1px solid rgba(255,255,255,.08)" style-hover="color:#00AEEF">
+            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#6E8296;text-align:{{ start }}">{{ i.code }}</span>
+            <span style="font-size:14.5px;font-weight:600">{{ i.title }}</span>
+          </a>
+        </sc-for>
+      </nav>
+    </div>
+  </section>
+
+  <sc-for list="{{ inds }}" as="i" hint-placeholder-count="6">
+    <section id="{{ i.id2 }}" aria-labelledby="{{ i.hid }}" onMouseEnter="{{ i.enter }}" onMouseLeave="{{ i.leave }}" style="background:{{ i.bg }};border-bottom:1px solid #E3E7EB;scroll-margin-top:80px">
+      <div style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(16px,3.5vw,48px);display:grid;grid-template-columns:{{ cols }};gap:32px clamp(32px,5vw,80px);align-items:start">
+        <div data-reveal="" dir="ltr" aria-hidden="true" style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(88px,11vw,176px);line-height:.85;letter-spacing:-.04em;color:{{ i.numFill }};-webkit-text-stroke:1.5px {{ i.numStroke }};transition:color .6s ease;position:{{ sticky }};top:120px;text-align:{{ start }}">{{ i.code }}</div>
+        <div data-reveal="" data-reveal-delay="100" style="display:flex;flex-direction:column;gap:22px">
+          <h2 id="{{ i.hid }}" style="margin:0;font-family:{{ fHead }};font-size:clamp(28px,3.2vw,48px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ i.title }}</h2>
+          <p style="margin:0;font-size:18px;color:#374151;max-width:52ch;text-wrap:pretty">{{ i.body }}</p>
+          <div style="border-top:1px solid #0B1B2B;padding-top:16px;display:flex;flex-direction:column;gap:12px">
+            <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5">{{ t.ip_needs }}</span>
+            <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ needCols }};gap:0 24px">
+              <sc-for list="{{ i.needs }}" as="n" hint-placeholder-count="4">
+                <li style="display:flex;align-items:center;gap:12px;padding-block:11px;border-bottom:1px solid #E3E7EB;font-weight:600;font-size:15.5px">
+                  <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7280;font-weight:400">{{ n.k }}</span>{{ n.txt }}
+                </li>
+              </sc-for>
+            </ul>
+          </div>
+          <a href="rfq.dc.html" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;font-weight:700;color:#0759A5;text-decoration:none;border-bottom:1px solid #0759A5;padding-bottom:4px">{{ t.ip_cta }} <span aria-hidden="true" style="transform:translateX({{ i.arrowX }});transition:transform .35s">{{ arrow }}</span></a>
+        </div>
+        <!-- TODO: replace industry image -->
+        <div data-reveal="" data-reveal-delay="200" style="position:relative;aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#EDF0F3 0 12px,#F5F7F9 12px 24px);border:1px solid #E3E7EB;overflow:hidden">
+          <span aria-hidden="true" style="position:absolute;inset:14px;border:1px solid {{ i.frame }};transition:border-color .5s"></span>
+          <span aria-hidden="true" style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(7,89,165,.25);transform:translateX({{ i.cross }});transition:transform .9s cubic-bezier(.2,.7,.2,1)"></span>
+          <span aria-hidden="true" style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(7,89,165,.25)"></span>
+          <span style="position:absolute;bottom:22px;inset-inline-start:22px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4B5563;background:#FFFFFF;padding:4px 8px">{{ t.ip_img }}</span>
+        </div>
+      </div>
+    </section>
+  </sc-for>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const pad = i => String(i + 1).padStart(2, '0');
+class Component extends DCLogic {
+  state = { ready: false, hover: -1 };
+  componentDidMount() {
+    const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    go();
+  }
+  componentDidUpdate(pp, ps) {
+    if (!this.state.ready) return;
+    window.VM.meta('industries'); window.VM.reveal();
+    if (!ps.ready && location.hash) setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70 }); }, 300);
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), h = this.state.hover;
+    return { ...v, ready: true, t,
+      cols: v.lg ? 'minmax(0,.7fr) minmax(0,1.5fr) minmax(0,.9fr)' : v.md ? 'minmax(0,.6fr) minmax(0,1.4fr)' : 'minmax(0,1fr)',
+      sticky: v.lg ? 'sticky' : 'static', needCols: v.sm ? 'minmax(0,1fr)' : 'repeat(2,minmax(0,1fr))',
+      inds: t.industries.map((x, i) => { const on = h === i;
+        return { ...x, code: pad(i), id2: 'ind-' + x.id, anchor: '#ind-' + x.id, hid: 'ih-' + x.id,
+          needs: x.needs.map((n, j) => ({ k: pad(i) + '.' + (j + 1), txt: n })),
+          bg: i % 2 ? '#F7F9FA' : '#FFFFFF', numFill: on ? '#0759A5' : 'transparent', numStroke: on ? '#0759A5' : '#9FB0C0',
+          frame: on ? '#0759A5' : 'rgba(11,27,43,.12)', cross: on ? '-40px' : '0px', arrowX: on ? (v.ar ? '-5px' : '5px') : '0px',
+          enter: () => this.setState({ hover: i }), leave: () => this.setState(st => st.hover === i ? { hover: -1 } : null) }; }) };
+  }
+}
+</script>
+</body>
+</html>

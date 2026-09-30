@@ -1,0 +1,110 @@
+[
+  {
+    "partNumber": "VA-SAMPLE-001",
+    "category": "parts",
+    "condition": "new",
+    "name_en": "Sample hydraulic component",
+    "name_ar": "مكوّن هيدروليكي تجريبي",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-002",
+    "category": "parts",
+    "condition": "used",
+    "name_en": "Sample avionics unit",
+    "name_ar": "وحدة إلكترونيات طيران تجريبية",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-003",
+    "category": "lubricants",
+    "condition": "new",
+    "name_en": "Sample aviation grease",
+    "name_ar": "شحم طيران تجريبي",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-004",
+    "category": "lubricants",
+    "condition": "new",
+    "name_en": "Sample turbine oil",
+    "name_ar": "زيت توربينات تجريبي",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-005",
+    "category": "chemicals",
+    "condition": "new",
+    "name_en": "Sample corrosion inhibitor",
+    "name_ar": "مثبّط تآكل تجريبي",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-006",
+    "category": "paints",
+    "condition": "new",
+    "name_en": "Sample epoxy primer",
+    "name_ar": "طلاء أساس إيبوكسي تجريبي",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-007",
+    "category": "adhesives",
+    "condition": "new",
+    "name_en": "Sample polysulfide sealant",
+    "name_ar": "مادة إحكام بوليسلفيد تجريبية",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-008",
+    "category": "tapes",
+    "condition": "new",
+    "name_en": "Sample aluminium foil tape",
+    "name_ar": "شريط رقائق ألومنيوم تجريبي",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-009",
+    "category": "petrochem",
+    "condition": "new",
+    "name_en": "Sample petrochemical solvent",
+    "name_ar": "مذيب بتروكيماوي تجريبي",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-010",
+    "category": "oilgas",
+    "condition": "surplus",
+    "name_en": "Sample wellhead valve spare",
+    "name_ar": "قطعة غيار صمام رأس بئر تجريبية",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-011",
+    "category": "used",
+    "condition": "used",
+    "name_en": "Sample used serviceable actuator",
+    "name_ar": "مشغّل مستعمل صالح للخدمة تجريبي",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  },
+  {
+    "partNumber": "VA-SAMPLE-012",
+    "category": "parts",
+    "condition": "surplus",
+    "name_en": "Sample surplus fastener kit",
+    "name_ar": "طقم مثبتات فائض تجريبي",
+    "desc_en": "Placeholder catalogue entry. Replace with real product data.",
+    "desc_ar": "إدخال تجريبي في الكتالوج، يُستبدل ببيانات المنتج الفعلية."
+  }
+]

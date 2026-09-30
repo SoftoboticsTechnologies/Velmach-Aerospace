@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Aircraft spare parts, components, lubricants, chemicals and technical materials traded from Ajman Free Zone, UAE. 24/7 AOG desk.">
+<meta property="og:title" content="Velmach Aerospace F.Z.C">
+<meta property="og:description" content="Aircraft parts and aerospace materials, sourced and delivered from the UAE.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/velmach-logo.png">
+<link rel="alternate" hreflang="en" href="?lang=en">
+<link rel="alternate" hreflang="ar" href="?lang=ar">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<script src="js/i18n.js"></script>
+<script src="data/products.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"VELMACH AEROSPACE F.Z.C","alternateName":"فيلماك إيروسبايس ش.م.ح","logo":"assets/img/velmach-logo.png","address":{"@type":"PostalAddress","streetAddress":"Office C1-1F-SF20786, Ajman Free Zone C1 Building","addressLocality":"Ajman Free Zone","addressCountry":"AE"},"telephone":["+971509259286","+971509155899"],"email":"info@velmachaerospace.com","contactPoint":[{"@type":"ContactPoint","contactType":"AOG support","email":"AOG@velmachaerospace.com","hoursAvailable":"Mo-Su 00:00-23:59"},{"@type":"ContactPoint","contactType":"sales","email":"sales@velmachaerospace.com"},{"@type":"ContactPoint","contactType":"quality","email":"QC@velmachaerospace.com"},{"@type":"ContactPoint","contactType":"customer support","email":"partsupport@velmachaerospace.com"}]}</script>
+<style>
+html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+*{box-sizing:border-box}
+a{color:#0B1B2B;text-decoration-color:#F2A900;text-underline-offset:3px}
+a:hover{color:#12324F}
+*:focus-visible{outline:2px solid #F2A900;outline-offset:2px}
+@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(214,40,40,.7)}70%{box-shadow:0 0 0 8px rgba(214,40,40,0)}100%{box-shadow:0 0 0 0 rgba(214,40,40,0)}}
+@keyframes vmIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;scroll-behavior:auto !important}}
+</style>
+</helmet>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<div dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;background:#FFFFFF;min-height:100vh;font-size:16px">
+
+  <a href="#main" style="position:absolute;top:8px;inset-inline-start:-9999px;z-index:200;background:#F2A900;color:#0B1B2B;padding:10px 16px;font-weight:700;border-radius:4px" style-focus="inset-inline-start:8px">{{ t.skip }}</a>
+
+  <!-- ===== Utility bar ===== -->
+  <div style="background:#0B1B2B;color:#DCE3EA;font-size:13px">
+    <div style="max-width:1280px;margin:0 auto;padding:8px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+        <a href="mailto:AOG@velmachaerospace.com" style="display:inline-flex;align-items:center;gap:8px;color:#FFFFFF;text-decoration:none;font-weight:600">
+          <span style="width:8px;height:8px;border-radius:50%;background:#D62828;animation:vmPulse 1.8s infinite"></span>
+          <span style="color:#FF8A8A">{{ t.aog_247 }}:</span>
+          <span dir="ltr" style="unicode-bidi:isolate">AOG@velmachaerospace.com</span>
+        </a>
+        <sc-if value="{{ showPhones }}" hint-placeholder-val="{{ true }}">
+          <span style="display:inline-flex;gap:14px">
+            <a href="tel:+971509259286" dir="ltr" style="color:#DCE3EA;text-decoration:none;unicode-bidi:isolate">+971 50 925 9286</a>
+            <a href="tel:+971509155899" dir="ltr" style="color:#DCE3EA;text-decoration:none;unicode-bidi:isolate">+971 50 915 5899</a>
+          </span>
+        </sc-if>
+      </div>
+      <button type="button" onClick="{{ toggleLang }}" aria-label="{{ t.lang_aria }}" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:#FFFFFF;padding:4px 12px;border-radius:3px;cursor:pointer;font:inherit;font-family:{{ fAlt }};font-weight:600;font-size:13px" style-hover="border-color:#F2A900">{{ t.lang_btn }}</button>
+    </div>
+  </div>
+
+  <!-- ===== Main header (sticky) ===== -->
+  <header style="position:sticky;top:0;z-index:60;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid #DDE2E7;box-shadow:{{ hdrShadow }};transition:box-shadow .2s">
+    <div style="max-width:1280px;margin:0 auto;padding:{{ hdrPad }} clamp(16px,4vw,40px);display:flex;align-items:center;gap:20px;transition:padding .2s">
+      <a href="#home" aria-label="Velmach Aerospace" style="display:flex;flex-shrink:0">
+        <img src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" style="height:{{ logoH }};width:auto;display:block;transition:height .2s">
+      </a>
+      <sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="Main" style="display:flex;gap:2px;flex:1;justify-content:center">
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="8">
+            <a href="{{ n.href }}" aria-current="{{ n.current }}" style="position:relative;padding:8px 10px;font-size:14.5px;font-weight:600;text-decoration:none;color:{{ n.color }};border-bottom:2px solid {{ n.bar }};white-space:nowrap" style-hover="color:#0B1B2B">{{ n.label }}</a>
+          </sc-for>
+        </nav>
+      </sc-if>
+      <sc-if value="{{ showBurger }}" hint-placeholder-val="{{ false }}"><div style="flex:1"></div></sc-if>
+      <sc-if value="{{ showHdrSearch }}" hint-placeholder-val="{{ true }}">
+        <form role="search" onSubmit="{{ searchSubmit }}" style="display:flex;align-items:center;border:1px solid #CBD2D9;border-radius:4px;background:#F6F8F9;height:40px;width:200px">
+          <input type="search" value="{{ hq }}" onChange="{{ onHq }}" placeholder="{{ t.search_ph }}" aria-label="{{ t.search_aria }}" style="flex:1;min-width:0;border:0;background:transparent;padding:0 12px;font:inherit;font-size:13px;color:#0B1B2B;outline:none">
+          <button type="submit" aria-label="{{ t.search_btn }}" style="border:0;background:transparent;padding:0 10px;cursor:pointer;display:flex;color:#3F4C59">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="5"></circle><line x1="11" y1="11" x2="15" y2="15"></line></svg>
+          </button>
+        </form>
+      </sc-if>
+      <a href="#rfq" style="position:relative;display:inline-flex;align-items:center;gap:8px;background:#F2A900;color:#0B1B2B;font-weight:700;font-size:14px;padding:10px 16px;border-radius:4px;text-decoration:none;white-space:nowrap;flex-shrink:0" style-hover="background:#FFB81C">
+        {{ t.cta_quote }}
+        <span aria-label="{{ t.rfq_aria }}" style="min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#0B1B2B;color:#FFFFFF;font-size:12px;display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace">{{ rfqCount }}</span>
+      </a>
+      <sc-if value="{{ showBurger }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ openDrawer }}" aria-label="{{ t.menu }}" aria-expanded="{{ drawerOpen }}" style="width:44px;height:44px;border:1px solid #CBD2D9;background:#FFFFFF;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;flex-shrink:0">
+          <span style="width:18px;height:2px;background:#0B1B2B"></span><span style="width:18px;height:2px;background:#0B1B2B"></span><span style="width:18px;height:2px;background:#0B1B2B"></span>
+        </button>
+      </sc-if>
+    </div>
+  </header>
+
+  <!-- ===== Mobile drawer ===== -->
+  <sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeDrawer }}" style="position:fixed;inset:0;background:rgba(11,27,43,.55);z-index:90"></div>
+    <aside aria-label="{{ t.menu }}" style="position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(340px,88vw);background:#0B1B2B;color:#FFFFFF;z-index:91;display:flex;flex-direction:column;padding:20px;gap:20px;overflow-y:auto;animation:vmIn .2s ease">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <button type="button" onClick="{{ toggleLang }}" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:#FFFFFF;padding:6px 14px;border-radius:3px;font:inherit;font-family:{{ fAlt }};font-weight:600;cursor:pointer">{{ t.lang_btn }}</button>
+        <button type="button" onClick="{{ closeDrawer }}" aria-label="{{ t.close }}" style="width:44px;height:44px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#FFFFFF;border-radius:4px;font-size:22px;cursor:pointer">×</button>
+      </div>
+      <form role="search" onSubmit="{{ searchSubmit }}" style="display:flex;border:1px solid rgba(255,255,255,.25);border-radius:4px;height:46px">
+        <input type="search" value="{{ hq }}" onChange="{{ onHq }}" placeholder="{{ t.search_ph }}" aria-label="{{ t.search_aria }}" style="flex:1;min-width:0;border:0;background:transparent;padding:0 12px;font:inherit;color:#FFFFFF;outline:none">
+        <button type="submit" style="border:0;background:#F2A900;color:#0B1B2B;font-weight:700;padding:0 14px;font:inherit;font-weight:700;cursor:pointer">{{ t.search_btn }}</button>
+      </form>
+      <nav style="display:flex;flex-direction:column">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="8">
+          <a href="{{ n.href }}" style="padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1);color:#FFFFFF;text-decoration:none;font-size:18px;font-weight:600;font-family:{{ fHead }}">{{ n.label }}</a>
+        </sc-for>
+      </nav>
+      <a href="mailto:AOG@velmachaerospace.com" style="margin-top:auto;display:flex;align-items:center;gap:10px;background:#D62828;color:#FFFFFF;padding:14px;border-radius:4px;text-decoration:none;font-weight:700">
+        <span style="width:8px;height:8px;border-radius:50%;background:#FFFFFF"></span>{{ t.aog_247 }}
+      </a>
+    </aside>
+  </sc-if>
+
+  <main id="main" tabindex="-1" style="outline:none">
+
+  <!-- =============================== HOME =============================== -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <section style="background-color:#0B1B2B;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;color:#FFFFFF;position:relative;overflow:hidden">
+      <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,112px) clamp(16px,4vw,40px) clamp(64px,8vw,104px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(40px,5vw,72px);align-items:center">
+        <div style="display:flex;flex-direction:column;gap:26px">
+          <div style="font-family:{{ fMono }};font-size:12.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#F2A900">{{ t.hero_eyebrow }}</div>
+          <h1 style="margin:0;font-family:{{ fHead }};font-weight:600;font-size:clamp(34px,4.6vw,60px);line-height:{{ lhHead }};letter-spacing:{{ lsHead }};text-wrap:balance">{{ t.hero_title }}</h1>
+          <p style="margin:0;font-size:clamp(16px,1.3vw,18px);color:#C4CFDA;max-width:58ch;text-wrap:pretty">{{ t.hero_sub }}</p>
+          <form role="search" onSubmit="{{ searchSubmit }}" style="display:flex;background:#FFFFFF;border-radius:5px;padding:6px;gap:6px;max-width:560px">
+            <input type="search" value="{{ hq }}" onChange="{{ onHq }}" placeholder="{{ t.search_ph }}" aria-label="{{ t.search_aria }}" style="flex:1;min-width:0;border:0;padding:0 14px;font:inherit;font-size:16px;color:#0B1B2B;outline:none;height:48px;background:transparent">
+            <button type="submit" style="border:0;background:#0B1B2B;color:#FFFFFF;font:inherit;font-weight:700;padding:0 22px;border-radius:3px;cursor:pointer" style-hover="background:#1A3350">{{ t.search_btn }}</button>
+          </form>
+          <p style="margin:-12px 0 0;font-size:13.5px;color:#9FB0C0">{{ t.hero_note }}</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="#products" style="display:inline-flex;align-items:center;gap:10px;background:#F2A900;color:#0B1B2B;font-weight:700;padding:14px 22px;border-radius:4px;text-decoration:none" style-hover="background:#FFB81C">{{ t.hero_cta1 }} <span aria-hidden="true">{{ arrow }}</span></a>
+            <a href="#services" style="display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.35);color:#FFFFFF;font-weight:600;padding:14px 22px;border-radius:4px;text-decoration:none" style-hover="border-color:#D62828;background:rgba(214,40,40,.12)"><span style="width:8px;height:8px;border-radius:50%;background:#D62828;animation:vmPulse 1.8s infinite"></span>{{ t.hero_cta2 }}</a>
+          </div>
+        </div>
+        <div style="position:relative;border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:22px;background:rgba(255,255,255,.02)">
+          <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8FA3B6;letter-spacing:.08em" dir="ltr">
+            <span>VA / REF-01</span><span>25.41° N · 55.44° E</span>
+          </div>
+          <svg viewBox="0 0 400 400" style="width:100%;height:auto;display:block;margin-top:8px" fill="none" aria-hidden="true">
+            <line x1="200" y1="20" x2="200" y2="380" stroke="rgba(242,169,0,.35)" stroke-dasharray="4 6"></line>
+            <line x1="20" y1="205" x2="380" y2="205" stroke="rgba(255,255,255,.12)" stroke-dasharray="2 6"></line>
+            <circle cx="200" cy="205" r="150" stroke="rgba(255,255,255,.08)"></circle>
+            <path d="M200 44 C211 44 216 70 216 104 L216 298 C216 328 208 350 200 362 C192 350 184 328 184 298 L184 104 C184 70 189 44 200 44 Z" stroke="#FFFFFF" stroke-width="1.6"></path>
+            <polygon points="184,172 44,242 44,258 184,222" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"></polygon>
+            <polygon points="216,172 356,242 356,258 216,222" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"></polygon>
+            <polygon points="188,314 142,340 142,352 190,342" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"></polygon>
+            <polygon points="212,314 258,340 258,352 210,342" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"></polygon>
+            <rect x="110" y="206" width="14" height="34" rx="7" stroke="#FFFFFF" stroke-width="1.4"></rect>
+            <rect x="276" y="206" width="14" height="34" rx="7" stroke="#FFFFFF" stroke-width="1.4"></rect>
+            <line x1="44" y1="384" x2="356" y2="384" stroke="#F2A900" stroke-width="1"></line>
+            <line x1="44" y1="378" x2="44" y2="390" stroke="#F2A900"></line>
+            <line x1="356" y1="378" x2="356" y2="390" stroke="#F2A900"></line>
+            <circle cx="200" cy="205" r="3" fill="#F2A900"></circle>
+          </svg>
+          <div style="font-family:{{ fMono }};font-size:11px;color:#8FA3B6;letter-spacing:{{ ls }};text-transform:uppercase;margin-top:6px">{{ t.hero_panel }}</div>
+        </div>
+      </div>
+      <div aria-hidden="true" style="height:10px;background-image:radial-gradient(circle,#F2A900 2px,transparent 2.6px);background-size:30px 10px;background-repeat:repeat-x;opacity:.8;margin-bottom:18px"></div>
+    </section>
+
+    <section aria-labelledby="loc-h" style="border-bottom:1px solid #DDE2E7">
+      <div style="max-width:1280px;margin:0 auto;padding:36px clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px 48px;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#56646F;display:flex;align-items:center;gap:10px"><span style="width:8px;height:8px;background:#F2A900"></span>{{ t.loc_eyebrow }}</div>
+          <h2 id="loc-h" style="margin:0;font-family:{{ fHead }};font-size:22px;font-weight:600;line-height:1.3">{{ t.loc_title }}</h2>
+        </div>
+        <p style="margin:0;color:#3F4C59;font-size:15px;text-wrap:pretty">{{ t.loc_body }}</p>
+        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ t.regions }}" as="r" hint-placeholder-count="4">
+            <li style="border:1px solid #CBD2D9;border-radius:30px;padding:6px 14px;font-size:14px;font-weight:600;color:#0B1B2B;display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#0B1B2B"></span>{{ r }}</li>
+          </sc-for>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="cats-h" style="padding-block:clamp(64px,8vw,104px)">
+      <div style="max-width:1280px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)">
+        <div style="display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#56646F;display:flex;align-items:center;gap:10px"><span style="width:8px;height:8px;background:#F2A900"></span>{{ t.cats_eyebrow }}</div>
+            <h2 id="cats-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(28px,3.4vw,44px);font-weight:600;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ t.cats_title }}</h2>
+            <p style="margin:0;color:#3F4C59">{{ t.cats_sub }}</p>
+          </div>
+          <a href="#products" style="font-weight:700;display:inline-flex;gap:8px">{{ t.cats_link }} <span aria-hidden="true">{{ arrow }}</span></a>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));border-top:1px solid #DDE2E7;border-inline-start:1px solid #DDE2E7">
+          <sc-for list="{{ cats }}" as="c" hint-placeholder-count="10">
+            <a href="{{ c.href }}" style="display:flex;flex-direction:column;gap:14px;padding:24px 22px 28px;border-bottom:1px solid #DDE2E7;border-inline-end:1px solid #DDE2E7;text-decoration:none;color:#0B1B2B;background:#FFFFFF;transition:background .15s;min-height:200px" style-hover="background:#F3F6F8">
+              <div style="display:flex;justify-content:flex-end;align-items:center">
+                <span style="width:10px;height:10px;border:1.5px solid #F2A900;transform:rotate(45deg)"></span>
+              </div>
+              <h3 style="margin:0;font-family:{{ fHead }};font-size:18px;font-weight:600;line-height:1.3">{{ c.title }}</h3>
+              <p style="margin:0;font-size:14px;color:#3F4C59;line-height:1.6">{{ c.desc }}</p>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="why-h" style="background:#F2F5F7;padding-block:clamp(64px,8vw,104px)">
+      <div style="max-width:1280px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)">
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;max-width:720px">
+          <div style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#56646F;display:flex;align-items:center;gap:10px"><span style="width:8px;height:8px;background:#F2A900"></span>{{ t.why_eyebrow }}</div>
+          <h2 id="why-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(28px,3.4vw,44px);font-weight:600;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};text-wrap:balance">{{ t.why_title }}</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px">
+          <sc-for list="{{ whys }}" as="w" hint-placeholder-count="6">
+            <div style="background:#FFFFFF;border:1px solid #DDE2E7;border-radius:6px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:border-color .15s,transform .15s" style-hover="border-color:#0B1B2B;transform:translateY(-2px)">
+              
+              <h3 style="margin:0;font-family:{{ fHead }};font-size:19px;font-weight:600;line-height:1.3">{{ w.t }}</h3>
+              <p style="margin:0;font-size:15px;color:#3F4C59">{{ w.b }}</p>
+              <sc-if value="{{ w.email }}" hint-placeholder-val="{{ false }}">
+                <a href="mailto:QC@velmachaerospace.com" dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;unicode-bidi:isolate;align-self:flex-start">{{ w.email }}</a>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="how-h" style="padding-block:clamp(64px,8vw,104px)">
+      <div style="max-width:1280px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)">
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:48px;max-width:720px">
+          <div style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#56646F;display:flex;align-items:center;gap:10px"><span style="width:8px;height:8px;background:#F2A900"></span>{{ t.how_eyebrow }}</div>
+          <h2 id="how-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(28px,3.4vw,44px);font-weight:600;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};text-wrap:balance">{{ t.how_title }}</h2>
+        </div>
+        <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:32px">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+            <li style="display:flex;flex-direction:column;gap:14px;border-top:2px solid #0B1B2B;padding-top:20px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:500;color:#0B1B2B">{{ s.code }}</span>
+                <span style="flex:1;height:1px;background:repeating-linear-gradient(90deg,#9AA7B3 0 4px,transparent 4px 8px)"></span>
+              </div>
+              <h3 style="margin:0;font-family:{{ fHead }};font-size:19px;font-weight:600">{{ s.t }}</h3>
+              <p style="margin:0;font-size:15px;color:#3F4C59">{{ s.b }}</p>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="ind-h" style="background:#0B1B2B;color:#FFFFFF;padding-block:clamp(64px,8vw,104px)">
+      <div style="max-width:1280px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)">
+        <div style="display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#F2A900">{{ t.ind_eyebrow }}</div>
+            <h2 id="ind-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(28px,3.4vw,44px);font-weight:600;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ t.ind_title }}</h2>
+          </div>
+          <a href="#industries" style="color:#FFFFFF;font-weight:700;display:inline-flex;gap:8px">{{ t.ind_link }} <span aria-hidden="true">{{ arrow }}</span></a>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14)">
+          <sc-for list="{{ inds }}" as="i" hint-placeholder-count="6">
+            <a href="#industries" style="background:#0B1B2B;padding:28px;display:flex;flex-direction:column;gap:10px;color:#FFFFFF;text-decoration:none;transition:background .15s" style-hover="background:#12283D">
+              
+              <h3 style="margin:0;font-family:{{ fHead }};font-size:20px;font-weight:600">{{ i.title }}</h3>
+              <p style="margin:0;font-size:14.5px;color:#B8C4D0">{{ i.short }}</p>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="aog-h" style="background:#D62828;color:#FFFFFF">
+      <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,56px) clamp(16px,4vw,40px);display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:10px;max-width:640px">
+          <div style="display:flex;align-items:center;gap:10px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;font-weight:500"><span style="width:8px;height:8px;border-radius:50%;background:#FFFFFF"></span>{{ t.aog_tag }}</div>
+          <h2 id="aog-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(24px,2.8vw,34px);font-weight:600;line-height:1.2">{{ t.aog_title }}</h2>
+          <p style="margin:0;font-size:15.5px;color:#FFFFFF">{{ t.aog_body }}</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="mailto:AOG@velmachaerospace.com?subject=AOG%20request" style="display:inline-flex;flex-direction:column;gap:2px;background:#FFFFFF;color:#8E1414;padding:12px 20px;border-radius:4px;text-decoration:none;font-weight:700">
+            <span style="font-size:12px;font-weight:600;color:#6B1010">{{ t.aog_email }}</span>
+            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:15px;unicode-bidi:isolate">AOG@velmachaerospace.com</span>
+          </a>
+          <a href="tel:+971509259286" style="display:inline-flex;flex-direction:column;gap:2px;border:1px solid rgba(255,255,255,.7);color:#FFFFFF;padding:12px 20px;border-radius:4px;text-decoration:none;font-weight:700">
+            <span style="font-size:12px;font-weight:600">{{ t.aog_call }}</span>
+            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:15px;unicode-bidi:isolate">+971 50 925 9286</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="cta-h" style="padding-block:clamp(64px,8vw,104px);background-image:linear-gradient(#EEF1F4 1px,transparent 1px),linear-gradient(90deg,#EEF1F4 1px,transparent 1px);background-size:44px 44px">
+      <div style="max-width:880px;margin:0 auto;padding-inline:clamp(16px,4vw,40px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px">
+        <h2 id="cta-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(28px,3.6vw,46px);font-weight:600;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ t.cta_title }}</h2>
+        <p style="margin:0;color:#3F4C59;font-size:17px;max-width:60ch;text-wrap:pretty">{{ t.cta_body }}</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+          <a href="#rfq" style="display:inline-flex;align-items:center;gap:10px;background:#F2A900;color:#0B1B2B;font-weight:700;padding:14px 24px;border-radius:4px;text-decoration:none" style-hover="background:#FFB81C">{{ t.cta_btn }} <span aria-hidden="true">{{ arrow }}</span></a>
+          <a href="mailto:sales@velmachaerospace.com" style="display:inline-flex;align-items:center;gap:10px;background:#0B1B2B;color:#FFFFFF;font-weight:700;padding:14px 24px;border-radius:4px;text-decoration:none" style-hover="background:#1A3350">{{ t.cta_btn2 }}</a>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- ===== Inner page header (shared) ===== -->
+  <sc-if value="{{ isInner }}" hint-placeholder-val="{{ false }}">
+    <section style="background-color:#0B1B2B;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;color:#FFFFFF">
+      <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(16px,4vw,40px) clamp(40px,5vw,64px);display:flex;flex-direction:column;gap:16px">
+        <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(34px,4.4vw,56px);font-weight:600;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};text-wrap:balance">{{ ph.title }}</h1>
+        <p style="margin:0;color:#C4CFDA;font-size:17px;max-width:64ch;text-wrap:pretty">{{ ph.sub }}</p>
+      </div>
+      <div aria-hidden="true" style="height:10px;background-image:radial-gradient(circle,#F2A900 2px,transparent 2.6px);background-size:30px 10px;background-repeat:repeat-x;opacity:.7;margin-bottom:14px"></div>
+    </section>
+  </sc-if>
+
+  <!-- =============================== ABOUT =============================== -->
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:48px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:20px;font-size:17px;color:#26323E">
+        <p style="margin:0;text-wrap:pretty">{{ t.about_intro1 }}</p>
+        <p style="margin:0;text-wrap:pretty">{{ t.about_intro2 }}</p>
+      </div>
+      <!-- TODO: replace with office / team photo -->
+      <div style="aspect-ratio:4/3;border-radius:6px;background:repeating-linear-gradient(135deg,#E8ECF0 0 10px,#F2F4F6 10px 20px);display:flex;align-items:center;justify-content:center;border:1px solid #DDE2E7">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#56646F;background:#FFFFFF;padding:6px 10px;border-radius:3px">{{ t.about_photo }}</span>
+      </div>
+    </section>
+    <section style="background:#F2F5F7;padding-block:clamp(56px,7vw,96px)">
+      <div style="max-width:1280px;margin:0 auto;padding-inline:clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+        <div style="background:#FFFFFF;border:1px solid #DDE2E7;border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:12px">
+          
+          <h2 style="margin:0;font-family:{{ fHead }};font-size:24px;font-weight:600">{{ t.mission_t }}</h2>
+          <p style="margin:0;color:#3F4C59">{{ t.mission_b }}</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #DDE2E7;border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:12px">
+          
+          <h2 style="margin:0;font-family:{{ fHead }};font-size:24px;font-weight:600">{{ t.vision_t }}</h2>
+          <p style="margin:0;color:#3F4C59">{{ t.vision_b }}</p>
+        </div>
+        <div style="background:#0B1B2B;color:#FFFFFF;border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:14px">
+          
+          <h2 style="margin:0;font-family:{{ fHead }};font-size:24px;font-weight:600">{{ t.values_t }}</h2>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ t.values }}" as="v" hint-placeholder-count="4">
+              <li style="display:flex;flex-direction:column;gap:2px;border-top:1px solid rgba(255,255,255,.14);padding-top:10px"><strong style="font-weight:700">{{ v.t }}</strong><span style="color:#C4CFDA;font-size:14.5px">{{ v.b }}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:32px;align-items:start">
+      <div style="border:1px solid #CBD2D9;border-radius:6px;overflow:hidden">
+        <div style="background:#0B1B2B;color:#FFFFFF;padding:16px 24px;display:flex;justify-content:space-between;align-items:center">
+          <h2 style="margin:0;font-family:{{ fHead }};font-size:19px;font-weight:600">{{ t.det_title }}</h2>
+          
+        </div>
+        <dl style="margin:0">
+          <sc-for list="{{ t.det }}" as="d" hint-placeholder-count="7">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:16px;padding:14px 24px;border-top:1px solid #E4E8EC">
+              <dt style="color:#56646F;font-size:14px">{{ d.k }}</dt>
+              <dd style="margin:0;font-weight:600;font-size:15px;unicode-bidi:isolate">{{ d.v }}</dd>
+            </div>
+          </sc-for>
+        </dl>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#56646F;display:flex;align-items:center;gap:10px"><span style="width:8px;height:8px;background:#F2A900"></span>{{ t.lead_title }}</div>
+        <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+          <!-- TODO: replace with manager photo -->
+          <div style="width:160px;aspect-ratio:4/5;border-radius:6px;background:repeating-linear-gradient(135deg,#E8ECF0 0 10px,#F2F4F6 10px 20px);border:1px solid #DDE2E7;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#56646F;background:#FFFFFF;padding:4px 8px;border-radius:3px">{{ t.mgr_photo }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+            <h2 style="margin:0;font-family:{{ fHead }};font-size:24px;font-weight:600;line-height:1.25">{{ t.mgr_name }}</h2>
+            <span style="color:#56646F;font-weight:600">{{ t.mgr_role }} · VELMACH AEROSPACE F.Z.C</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- =============================== PRODUCTS =============================== -->
+  <sc-if value="{{ isProducts }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1280px;margin:0 auto;padding:40px clamp(16px,4vw,40px) clamp(64px,8vw,104px);display:grid;grid-template-columns:{{ prodCols }};gap:32px;align-items:start">
+      <aside aria-label="{{ t.p_cats }}" style="display:flex;flex-direction:column;gap:12px;position:{{ sidePos }};top:96px">
+        <div style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#56646F">{{ t.p_cats }}</div>
+        <div style="display:flex;flex-direction:{{ catDir }};flex-wrap:wrap;gap:4px">
+          <sc-for list="{{ catItems }}" as="c" hint-placeholder-count="11">
+            <button type="button" onClick="{{ c.onClick }}" aria-pressed="{{ c.active }}" style="display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:start;padding:9px 12px;border-radius:4px;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};font:inherit;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#0B1B2B">
+              <span>{{ c.label }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;opacity:.75">{{ c.count }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </aside>
+      <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <div style="flex:1 1 280px;display:flex;align-items:center;border:1px solid #9AA7B3;border-radius:4px;height:48px;background:#FFFFFF">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#56646F" stroke-width="1.8" style="margin-inline:14px 4px;flex-shrink:0" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><line x1="11" y1="11" x2="15" y2="15"></line></svg>
+            <input type="search" value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.p_search_ph }}" aria-label="{{ t.search_aria }}" style="flex:1;min-width:0;border:0;background:transparent;padding:0 12px;font:inherit;font-size:15px;color:#0B1B2B;outline:none;height:100%">
+          </div>
+          <div role="group" aria-label="{{ t.p_cond_label }}" style="display:flex;border:1px solid #9AA7B3;border-radius:4px;overflow:hidden;flex-wrap:wrap">
+            <sc-for list="{{ condChips }}" as="c" hint-placeholder-count="4">
+              <button type="button" onClick="{{ c.onClick }}" aria-pressed="{{ c.active }}" style="border:0;padding:0 14px;height:46px;background:{{ c.bg }};color:{{ c.fg }};font:inherit;font-size:13.5px;font-weight:600;cursor:pointer">{{ c.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13.5px;color:#56646F">
+          <span style="font-weight:600;color:#0B1B2B">{{ resultsLabel }}</span>
+          <!-- TODO: replace sample catalogue -->
+          <span style="font-family:{{ fMono }};font-size:12px">{{ t.p_sample }}</span>
+        </div>
+        <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:14px">
+            <sc-for list="{{ cards }}" as="p" hint-placeholder-count="6">
+              <article onClick="{{ p.open }}" style="border:1px solid #DDE2E7;border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:12px;background:#FFFFFF;cursor:pointer;transition:border-color .15s,box-shadow .15s" style-hover="border-color:#0B1B2B;box-shadow:0 6px 20px rgba(11,27,43,.08)">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+                  <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;font-weight:500;unicode-bidi:isolate">{{ p.pn }}</span>
+                  <span style="font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:3px;background:{{ p.condBg }};color:{{ p.condFg }};white-space:nowrap">{{ p.cond }}</span>
+                </div>
+                <h3 style="margin:0;font-family:{{ fHead }};font-size:17px;font-weight:600;line-height:1.35">{{ p.name }}</h3>
+                <span style="align-self:flex-start;font-size:12px;font-weight:600;color:#3F4C59;border:1px solid #CBD2D9;border-radius:30px;padding:2px 10px">{{ p.cat }}</span>
+                <p style="margin:0;font-size:13.5px;color:#56646F;line-height:1.55;flex:1">{{ p.desc }}</p>
+                <div style="display:flex;gap:8px;align-items:center;border-top:1px solid #E4E8EC;padding-top:14px">
+                  <div onClick="{{ p.stop }}" style="display:flex;align-items:center;border:1px solid #CBD2D9;border-radius:4px;height:40px" dir="ltr">
+                    <button type="button" onClick="{{ p.dec }}" aria-label="{{ t.p_dec }}" style="width:34px;height:100%;border:0;background:transparent;font-size:18px;cursor:pointer;color:#0B1B2B">−</button>
+                    <input type="number" min="1" value="{{ p.qty }}" onChange="{{ p.onQty }}" aria-label="{{ t.p_qty }}" style="width:44px;height:100%;border:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:14px;outline:none;-moz-appearance:textfield">
+                    <button type="button" onClick="{{ p.inc }}" aria-label="{{ t.p_inc }}" style="width:34px;height:100%;border:0;background:transparent;font-size:18px;cursor:pointer;color:#0B1B2B">+</button>
+                  </div>
+                  <button type="button" onClick="{{ p.add }}" style="flex:1;height:40px;border:0;border-radius:4px;background:#0B1B2B;color:#FFFFFF;font:inherit;font-size:14px;font-weight:700;cursor:pointer" style-hover="background:#1A3350">{{ t.p_add }}</button>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+          <sc-if value="{{ multiPage }}" hint-placeholder-val="{{ false }}">
+            <nav style="display:flex;justify-content:center;align-items:center;gap:12px;margin-top:8px">
+              <button type="button" onClick="{{ prevPg }}" disabled="{{ prevDisabled }}" style="padding:10px 16px;border:1px solid #CBD2D9;background:#FFFFFF;border-radius:4px;font:inherit;font-weight:600;cursor:pointer">{{ t.p_prev }}</button>
+              <span style="font-size:14px;color:#3F4C59">{{ pageLabel }}</span>
+              <button type="button" onClick="{{ nextPg }}" disabled="{{ nextDisabled }}" style="padding:10px 16px;border:1px solid #CBD2D9;background:#FFFFFF;border-radius:4px;font:inherit;font-weight:600;cursor:pointer">{{ t.p_next }}</button>
+            </nav>
+          </sc-if>
+        </sc-if>
+        <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px dashed #9AA7B3;border-radius:6px;padding:clamp(28px,5vw,56px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;background:#F6F8F9">
+            <h2 style="margin:0;font-family:{{ fHead }};font-size:24px;font-weight:600">{{ t.p_none_t }}</h2>
+            <p style="margin:0;color:#3F4C59;max-width:48ch">{{ t.p_none_b }}</p>
+            <sc-if value="{{ q }}" hint-placeholder-val="{{ false }}"><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;background:#FFFFFF;border:1px solid #CBD2D9;padding:6px 12px;border-radius:3px;unicode-bidi:isolate">{{ q }}</span></sc-if>
+            <button type="button" onClick="{{ requestMissing }}" style="display:inline-flex;align-items:center;gap:10px;background:#F2A900;color:#0B1B2B;font:inherit;font-weight:700;padding:14px 22px;border-radius:4px;border:0;cursor:pointer" style-hover="background:#FFB81C">{{ t.p_none_btn }} <span aria-hidden="true">{{ arrow }}</span></button>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+    <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(11,27,43,.6);z-index:120;display:flex;align-items:center;justify-content:center;padding:20px">
+        <div ref="{{ modalRef }}" role="dialog" aria-modal="true" aria-labelledby="m-title" onClick="{{ stop }}" style="background:#FFFFFF;border-radius:8px;width:min(560px,100%);max-height:90vh;overflow:auto;animation:vmIn .18s ease">
+          <div style="background:#0B1B2B;color:#FFFFFF;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:15px;unicode-bidi:isolate">{{ mp.pn }}</span>
+            <button type="button" onClick="{{ closeModal }}" aria-label="{{ t.close }}" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#FFFFFF;border-radius:4px;font-size:20px;cursor:pointer">×</button>
+          </div>
+          <div style="padding:24px;display:flex;flex-direction:column;gap:18px">
+            <h2 id="m-title" style="margin:0;font-family:{{ fHead }};font-size:24px;font-weight:600;line-height:1.3">{{ mp.name }}</h2>
+            <p style="margin:0;color:#3F4C59">{{ mp.desc }}</p>
+            <dl style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 20px;font-size:14.5px">
+              <dt style="color:#56646F">{{ t.m_pn }}</dt><dd dir="ltr" style="margin:0;font-family:'IBM Plex Mono',monospace;unicode-bidi:isolate;text-align:start">{{ mp.pn }}</dd>
+              <dt style="color:#56646F">{{ t.m_cat }}</dt><dd style="margin:0;font-weight:600">{{ mp.cat }}</dd>
+              <dt style="color:#56646F">{{ t.m_cond }}</dt><dd style="margin:0"><span style="font-size:12px;font-weight:700;padding:3px 8px;border-radius:3px;background:{{ mp.condBg }};color:{{ mp.condFg }}">{{ mp.cond }}</span></dd>
+            </dl>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;border:1px solid #CBD2D9;border-radius:4px;height:46px" dir="ltr">
+                <button type="button" onClick="{{ mp.dec }}" aria-label="{{ t.p_dec }}" style="width:40px;height:100%;border:0;background:transparent;font-size:18px;cursor:pointer">−</button>
+                <input type="number" min="1" value="{{ mp.qty }}" onChange="{{ mp.onQty }}" aria-label="{{ t.p_qty }}" style="width:52px;height:100%;border:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:15px;outline:none">
+                <button type="button" onClick="{{ mp.inc }}" aria-label="{{ t.p_inc }}" style="width:40px;height:100%;border:0;background:transparent;font-size:18px;cursor:pointer">+</button>
+              </div>
+              <button type="button" onClick="{{ mp.add }}" style="flex:1;height:46px;border:0;border-radius:4px;background:#F2A900;color:#0B1B2B;font:inherit;font-weight:700;cursor:pointer;min-width:160px" style-hover="background:#FFB81C">{{ t.p_add }}</button>
+            </div>
+            <p style="margin:0;font-size:13px;color:#56646F">{{ t.m_note }}</p>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <!-- =============================== INDUSTRIES =============================== -->
+  <sc-if value="{{ isIndustries }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,4vw,40px) clamp(64px,8vw,104px);display:flex;flex-direction:column">
+      <sc-for list="{{ inds }}" as="i" hint-placeholder-count="6">
+        <section aria-labelledby="{{ i.hid }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(24px,4vw,56px);padding-block:clamp(36px,5vw,56px);border-bottom:1px solid #DDE2E7;align-items:center">
+          <div style="display:flex;flex-direction:column;gap:14px;order:{{ i.order }}">
+            
+            <h2 id="{{ i.hid }}" style="margin:0;font-family:{{ fHead }};font-size:clamp(24px,2.6vw,32px);font-weight:600;line-height:1.2">{{ i.title }}</h2>
+            <p style="margin:0;color:#3F4C59;font-size:16.5px;text-wrap:pretty">{{ i.body }}</p>
+            <div style="border:1px solid #DDE2E7;border-radius:6px;padding:18px 20px;background:#F6F8F9">
+              <div style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#56646F;margin-bottom:10px">{{ t.ip_needs }}</div>
+              <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px 20px">
+                <sc-for list="{{ i.needs }}" as="n" hint-placeholder-count="4">
+                  <li style="display:flex;gap:10px;align-items:baseline;font-size:15px;font-weight:600"><span style="width:6px;height:6px;background:#F2A900;flex-shrink:0;transform:translateY(-2px)"></span>{{ n }}</li>
+                </sc-for>
+              </ul>
+            </div>
+            <a href="#rfq" style="font-weight:700;display:inline-flex;gap:8px;align-self:flex-start">{{ t.ip_cta }} <span aria-hidden="true">{{ arrow }}</span></a>
+          </div>
+          <!-- TODO: replace industry image -->
+          <div style="aspect-ratio:16/10;border-radius:6px;background:repeating-linear-gradient(135deg,#E8ECF0 0 10px,#F2F4F6 10px 20px);border:1px solid #DDE2E7;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#56646F;background:#FFFFFF;padding:5px 10px;border-radius:3px">{{ t.ip_img }} · {{ i.title }}</span>
+          </div>
+        </section>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- =============================== SERVICES =============================== -->
+  <sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,4vw,40px) clamp(64px,8vw,104px);display:flex;flex-direction:column;gap:16px">
+      <sc-for list="{{ svcs }}" as="s" hint-placeholder-count="5">
+        <section aria-labelledby="{{ s.hid }}" style="border:1px solid {{ s.border }};border-radius:6px;padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:24px 48px;background:{{ s.bg }}">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;gap:12px">
+              
+              <sc-if value="{{ s.isAog }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#FFFFFF;background:#D62828;padding:3px 10px;border-radius:3px"><span style="width:6px;height:6px;border-radius:50%;background:#FFFFFF;animation:vmPulse 1.8s infinite"></span>24/7</span></sc-if>
+            </div>
+            <h2 id="{{ s.hid }}" style="margin:0;font-family:{{ fHead }};font-size:clamp(24px,2.6vw,32px);font-weight:600;line-height:1.2">{{ s.title }}</h2>
+            <p style="margin:0;color:#3F4C59;font-size:16.5px;text-wrap:pretty">{{ s.body }}</p>
+            <a href="{{ s.mailto }}" style="display:inline-flex;flex-direction:column;gap:2px;align-self:flex-start;background:{{ s.btnBg }};color:{{ s.btnFg }};padding:12px 20px;border-radius:4px;text-decoration:none;font-weight:700;margin-top:6px">
+              <span style="font-size:14px">{{ s.cta }}</span>
+              <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;unicode-bidi:isolate">{{ s.email }}</span>
+            </a>
+          </div>
+          <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-self:center">
+            <sc-for list="{{ s.pts }}" as="p" hint-placeholder-count="3">
+              <li style="display:flex;gap:16px;padding-block:14px;border-top:1px solid #DDE2E7;font-size:15.5px;font-weight:600">
+                <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#56646F;font-weight:500;padding-top:3px">{{ p.n }}</span>{{ p.txt }}
+              </li>
+            </sc-for>
+          </ol>
+        </section>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- =============================== QUALITY =============================== -->
+  <sc-if value="{{ isQuality }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px) 0">
+      <h2 style="margin:0 0 28px;font-family:{{ fHead }};font-size:clamp(26px,3vw,38px);font-weight:600">{{ t.q_commit_t }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+        <sc-for list="{{ commits }}" as="c" hint-placeholder-count="4">
+          <div style="border-top:2px solid #0B1B2B;padding-top:18px;display:flex;flex-direction:column;gap:10px">
+            
+            <h3 style="margin:0;font-family:{{ fHead }};font-size:19px;font-weight:600">{{ c.t }}</h3>
+            <p style="margin:0;color:#3F4C59;font-size:15px">{{ c.b }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,4vw,40px)">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:28px">
+        <h2 style="margin:0;font-family:{{ fHead }};font-size:clamp(26px,3vw,38px);font-weight:600">{{ t.q_docs_t }}</h2>
+        <p style="margin:0;color:#3F4C59">{{ t.q_docs_sub }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+        <sc-for list="{{ t.docs }}" as="d" hint-placeholder-count="3">
+          <div style="border:1px solid #CBD2D9;border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px;background:#FFFFFF">
+            <div style="width:44px;height:54px;border:1.5px solid #0B1B2B;border-radius:3px;position:relative;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500">PDF</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <h3 style="margin:0;font-family:{{ fHead }};font-size:19px;font-weight:600">{{ d.t }}</h3>
+              <span style="font-size:14px;color:#56646F">{{ d.issuer }}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:12px;padding:10px 12px;background:#F2F5F7;border-radius:4px;font-size:14px">
+              <span style="color:#56646F">{{ d.k }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-weight:500;unicode-bidi:isolate">{{ d.no }}</span>
+            </div>
+            <!-- TODO: replace with the real PDF file in /docs -->
+            <a href="{{ d.href }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-weight:700;align-self:flex-start">{{ t.q_view }} <span aria-hidden="true">{{ arrow }}</span></a>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    <section style="background:#0B1B2B;color:#FFFFFF">
+      <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,56px) clamp(16px,4vw,40px);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <h2 style="margin:0;font-family:{{ fHead }};font-size:26px;font-weight:600">{{ t.q_contact_t }}</h2>
+          <p style="margin:0;color:#C4CFDA">{{ t.q_contact_b }}</p>
+        </div>
+        <a href="mailto:QC@velmachaerospace.com" style="display:inline-flex;flex-direction:column;gap:2px;background:#F2A900;color:#0B1B2B;padding:12px 22px;border-radius:4px;text-decoration:none;font-weight:700">
+          <span style="font-size:14px">{{ t.q_contact_btn }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;unicode-bidi:isolate">QC@velmachaerospace.com</span>
+        </a>
+      </div>
+    </section>
+  </sc-if>
+
+  <!-- =============================== RFQ =============================== -->
+  <sc-if value="{{ isRfq }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ rfqSent }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:720px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(16px,4vw,40px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px">
+        <div style="width:64px;height:64px;border-radius:50%;background:#E3F1E8;display:flex;align-items:center;justify-content:center">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E6B3A" stroke-width="2.4"><polyline points="5,12 10,17 19,7"></polyline></svg>
+        </div>
+        <h2 style="margin:0;font-family:{{ fHead }};font-size:32px;font-weight:600">{{ t.r_ok_t }}</h2>
+        <p style="margin:0;color:#3F4C59;font-size:17px">{{ sentMsg }}</p>
+        <button type="button" onClick="{{ resetRfq }}" style="background:#0B1B2B;color:#FFFFFF;border:0;border-radius:4px;padding:14px 24px;font:inherit;font-weight:700;cursor:pointer">{{ t.r_ok_again }}</button>
+      </section>
+    </sc-if>
+    <sc-if value="{{ rfqNotSent }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ submitRfq }}" noValidate="{{ true }}" style="max-width:1280px;margin:0 auto;padding:40px clamp(16px,4vw,40px) clamp(64px,8vw,104px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:32px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+          <div style="border:1px solid #CBD2D9;border-radius:6px;overflow:hidden">
+            <div style="background:#0B1B2B;color:#FFFFFF;padding:14px 20px;display:flex;justify-content:space-between;align-items:center">
+              <h2 style="margin:0;font-family:{{ fHead }};font-size:19px;font-weight:600">{{ t.r_list_t }}</h2>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#F2A900">{{ rfqCount }}</span>
+            </div>
+            <sc-if value="{{ rfqEmpty }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:28px 20px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+                <p style="margin:0;color:#3F4C59">{{ t.r_empty }}</p>
+                <a href="#products" style="font-weight:700;display:inline-flex;gap:8px">{{ t.r_browse }} <span aria-hidden="true">{{ arrow }}</span></a>
+              </div>
+            </sc-if>
+            <sc-if value="{{ rfqHas }}" hint-placeholder-val="{{ false }}">
+              <div style="overflow-x:auto">
+                <table style="width:100%;border-collapse:collapse;font-size:14px;min-width:520px">
+                  <thead>
+                    <tr style="background:#F2F5F7;text-align:start">
+                      <th scope="col" style="padding:10px 14px;text-align:start;font-weight:600;color:#3F4C59">{{ t.th.pn }}</th>
+                      <th scope="col" style="padding:10px 14px;text-align:start;font-weight:600;color:#3F4C59">{{ t.th.name }}</th>
+                      <th scope="col" style="padding:10px 14px;text-align:start;font-weight:600;color:#3F4C59">{{ t.th.qty }}</th>
+                      <th scope="col" style="padding:10px 14px;text-align:start;font-weight:600;color:#3F4C59">{{ t.th.cond }}</th>
+                      <th scope="col" style="padding:10px 14px"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">{{ t.th.act }}</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <sc-for list="{{ rows }}" as="r" hint-placeholder-count="2">
+                      <tr style="border-top:1px solid #E4E8EC">
+                        <td dir="ltr" style="padding:10px 14px;font-family:'IBM Plex Mono',monospace;white-space:nowrap;text-align:{{ tdAlign }}">{{ r.pn }}</td>
+                        <td style="padding:10px 14px">{{ r.name }}</td>
+                        <td style="padding:10px 14px"><input type="number" min="1" value="{{ r.qty }}" onChange="{{ r.onQty }}" aria-label="{{ t.th.qty }}" style="width:70px;padding:7px 8px;border:1px solid #CBD2D9;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:14px"></td>
+                        <td style="padding:10px 14px">
+                          <select value="{{ r.cond }}" onChange="{{ r.onCond }}" aria-label="{{ t.th.cond }}" style="padding:7px 8px;border:1px solid #CBD2D9;border-radius:4px;font:inherit;font-size:13.5px;background:#FFFFFF">
+                            <sc-for list="{{ condOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+                          </select>
+                        </td>
+                        <td style="padding:10px 14px;text-align:end"><button type="button" onClick="{{ r.remove }}" aria-label="{{ r.removeLabel }}" style="border:1px solid #CBD2D9;background:#FFFFFF;border-radius:4px;width:34px;height:34px;cursor:pointer;font-size:16px;color:#8E1414" style-hover="border-color:#D62828">×</button></td>
+                      </tr>
+                    </sc-for>
+                  </tbody>
+                </table>
+              </div>
+            </sc-if>
+          </div>
+          <sc-if value="{{ errItems }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:-8px 0 0;color:#B01E1E;font-size:14px;font-weight:600">{{ errItems }}</p></sc-if>
+
+          <div style="border:1px dashed #9AA7B3;border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:12px;background:#F6F8F9">
+            <div>
+              <h3 style="margin:0;font-family:{{ fHead }};font-size:17px;font-weight:600">{{ t.r_manual_t }}</h3>
+              <p style="margin:4px 0 0;font-size:14px;color:#56646F">{{ t.r_manual_sub }}</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input value="{{ mPn }}" onChange="{{ onMPn }}" onKeyDown="{{ mKey }}" placeholder="{{ t.r_manual_pn }}" aria-label="{{ t.r_manual_pn }}" dir="ltr" style="flex:2 1 180px;min-width:0;padding:11px 12px;border:1px solid #9AA7B3;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:14px;background:#FFFFFF">
+              <input type="number" min="1" value="{{ mQty }}" onChange="{{ onMQty }}" aria-label="{{ t.r_manual_qty }}" style="flex:0 0 80px;padding:11px 10px;border:1px solid #9AA7B3;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:14px;background:#FFFFFF">
+              <button type="button" onClick="{{ addManual }}" style="flex:1 1 120px;border:0;border-radius:4px;background:#0B1B2B;color:#FFFFFF;font:inherit;font-weight:700;padding:11px 16px;cursor:pointer">{{ t.r_manual_add }}</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="border:1px solid #CBD2D9;border-radius:6px;padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+            <h2 style="margin:0;font-family:{{ fHead }};font-size:22px;font-weight:600">{{ t.r_form_t }}</h2>
+            <span style="font-size:13px;color:#56646F">{{ t.r_req }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px">
+            <sc-for list="{{ rfqFields }}" as="f" hint-placeholder-count="7">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">
+                {{ f.label }}
+                <input type="{{ f.type }}" value="{{ f.value }}" onChange="{{ f.onChange }}" autoComplete="{{ f.ac }}" aria-invalid="{{ f.invalid }}" dir="{{ f.dir }}" style="width:100%;padding:11px 12px;border:1px solid {{ f.border }};border-radius:4px;font:inherit;font-weight:400;font-size:15px;background:#FFFFFF;color:#0B1B2B;text-align:start">
+                <sc-if value="{{ f.err }}" hint-placeholder-val="{{ false }}"><span role="alert" style="color:#B01E1E;font-size:13px;font-weight:600">{{ f.err }}</span></sc-if>
+              </label>
+            </sc-for>
+          </div>
+          <fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+            <legend style="font-size:14px;font-weight:600;padding:0;margin-bottom:8px">{{ t.fl.priority }}</legend>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ priOpts }}" as="p" hint-placeholder-count="3">
+                <button type="button" onClick="{{ p.onClick }}" aria-pressed="{{ p.active }}" style="flex:1 1 90px;padding:11px 14px;border-radius:4px;border:1px solid {{ p.border }};background:{{ p.bg }};color:{{ p.fg }};font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px">{{ p.label }}</button>
+              </sc-for>
+            </div>
+            <sc-if value="{{ isAogPri }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:13.5px;color:#B01E1E;font-weight:600">{{ t.r_aog_note }}</p></sc-if>
+          </fieldset>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">
+            {{ t.fl.notes }}
+            <textarea value="{{ form.notes }}" onChange="{{ onNotes }}" rows="4" style="width:100%;padding:11px 12px;border:1px solid #9AA7B3;border-radius:4px;font:inherit;font-weight:400;font-size:15px;resize:vertical"></textarea>
+          </label>
+          <button type="submit" style="height:52px;border:0;border-radius:4px;background:{{ submitBg }};color:{{ submitFg }};font:inherit;font-size:16px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px">{{ t.r_submit }} <span aria-hidden="true">{{ arrow }}</span></button>
+          <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#56646F;text-align:center;unicode-bidi:isolate">→ {{ rfqTo }}</span>
+        </div>
+      </form>
+    </sc-if>
+  </sc-if>
+
+  <!-- =============================== CONTACT =============================== -->
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1280px;margin:0 auto;padding:40px clamp(16px,4vw,40px) 0">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px">
+        <sc-for list="{{ depts }}" as="d" hint-placeholder-count="5">
+          <a href="{{ d.mailto }}" style="border:1px solid {{ d.border }};background:{{ d.bg }};color:{{ d.fg }};border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:10px;text-decoration:none;transition:transform .15s" style-hover="transform:translateY(-2px)">
+            <div style="display:flex;align-items:center;gap:8px">
+              <sc-if value="{{ d.isAog }}" hint-placeholder-val="{{ false }}"><span style="width:8px;height:8px;border-radius:50%;background:#FFFFFF;animation:vmPulse 1.8s infinite"></span></sc-if>
+              <h2 style="margin:0;font-family:{{ fHead }};font-size:18px;font-weight:600">{{ d.t }}</h2>
+            </div>
+            <p style="margin:0;font-size:14px;opacity:.9;flex:1">{{ d.b }}</p>
+            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;word-break:break-all;unicode-bidi:isolate;text-align:start">{{ d.email }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+    <section style="max-width:1280px;margin:0 auto;padding:32px clamp(16px,4vw,40px) clamp(64px,8vw,104px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:32px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+          <div style="border:1px solid #CBD2D9;border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:8px">
+            <h3 style="margin:0;font-size:14px;font-weight:600;color:#56646F">{{ t.c_phones_t }}</h3>
+            <a href="tel:+971509259286" dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:16px;unicode-bidi:isolate;text-align:start;text-decoration:none;font-weight:500">+971 50 925 9286</a>
+            <a href="tel:+971509155899" dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:16px;unicode-bidi:isolate;text-align:start;text-decoration:none;font-weight:500">+971 50 915 5899</a>
+            <a href="https://wa.me/971509259286" target="_blank" rel="noopener" style="margin-top:6px;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:#1F7A4D;color:#FFFFFF;padding:9px 14px;border-radius:4px;text-decoration:none;font-weight:700;font-size:14px">{{ t.c_whatsapp }}</a>
+          </div>
+          <div style="border:1px solid #CBD2D9;border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:8px">
+            <h3 style="margin:0;font-size:14px;font-weight:600;color:#56646F">{{ t.c_hours_t }}</h3>
+            <!-- TODO: replace business hours -->
+            <p style="margin:0;font-weight:600">{{ t.c_hours }}</p>
+            <p style="margin:0;display:flex;align-items:center;gap:8px;color:#B01E1E;font-weight:700"><span style="width:8px;height:8px;border-radius:50%;background:#D62828;animation:vmPulse 1.8s infinite"></span>{{ t.c_hours_aog }}</p>
+          </div>
+        </div>
+        <div style="border:1px solid #CBD2D9;border-radius:6px;overflow:hidden">
+          <div style="padding:20px;display:flex;flex-direction:column;gap:6px">
+            <h3 style="margin:0;font-size:14px;font-weight:600;color:#56646F">{{ t.c_addr_t }}</h3>
+            <address style="font-style:normal;font-weight:600;font-size:15.5px">{{ t.addr }}</address>
+          </div>
+          <!-- TODO: replace with Google Maps iframe embed for Ajman Free Zone -->
+          <div style="aspect-ratio:16/9;background:repeating-linear-gradient(135deg,#E8ECF0 0 10px,#F2F4F6 10px 20px);display:flex;align-items:center;justify-content:center;border-top:1px solid #DDE2E7">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#56646F;background:#FFFFFF;padding:5px 10px;border-radius:3px">{{ t.c_map }}</span>
+          </div>
+        </div>
+      </div>
+      <form onSubmit="{{ submitContact }}" noValidate="{{ true }}" style="border:1px solid #CBD2D9;border-radius:6px;padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:14px">
+        <h2 style="margin:0 0 4px;font-family:{{ fHead }};font-size:22px;font-weight:600">{{ t.c_form_t }}</h2>
+        <sc-for list="{{ cFields }}" as="f" hint-placeholder-count="3">
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">
+            {{ f.label }}
+            <input type="{{ f.type }}" value="{{ f.value }}" onChange="{{ f.onChange }}" aria-invalid="{{ f.invalid }}" dir="{{ f.dir }}" style="width:100%;padding:11px 12px;border:1px solid {{ f.border }};border-radius:4px;font:inherit;font-weight:400;font-size:15px;text-align:start">
+            <sc-if value="{{ f.err }}" hint-placeholder-val="{{ false }}"><span role="alert" style="color:#B01E1E;font-size:13px;font-weight:600">{{ f.err }}</span></sc-if>
+          </label>
+        </sc-for>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">
+          {{ t.cf.message }}
+          <textarea value="{{ cform.message }}" onChange="{{ onCMsg }}" rows="5" aria-invalid="{{ cMsgInvalid }}" style="width:100%;padding:11px 12px;border:1px solid {{ cMsgBorder }};border-radius:4px;font:inherit;font-weight:400;font-size:15px;resize:vertical"></textarea>
+          <sc-if value="{{ cMsgErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="color:#B01E1E;font-size:13px;font-weight:600">{{ cMsgErr }}</span></sc-if>
+        </label>
+        <button type="submit" style="height:50px;border:0;border-radius:4px;background:#0B1B2B;color:#FFFFFF;font:inherit;font-weight:700;cursor:pointer" style-hover="background:#1A3350">{{ t.c_send }}</button>
+        <sc-if value="{{ csent }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin:0;color:#1E6B3A;font-weight:600;font-size:14px">{{ t.c_ok }}</p></sc-if>
+      </form>
+    </section>
+  </sc-if>
+
+  <!-- =============================== 404 =============================== -->
+  <sc-if value="{{ is404 }}" hint-placeholder-val="{{ false }}">
+    <section style="min-height:60vh;background-color:#0B1B2B;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;color:#FFFFFF;display:flex;align-items:center">
+      <div style="max-width:720px;margin:0 auto;padding:80px clamp(16px,4vw,40px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px">
+        <span style="font-family:{{ fMono }};color:#F2A900;letter-spacing:{{ ls }};font-size:13px">{{ t.nf_code }}</span>
+        <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(36px,5vw,60px);font-weight:600">{{ t.nf_title }}</h1>
+        <p style="margin:0;color:#C4CFDA;font-size:17px">{{ t.nf_body }}</p>
+        <a href="#home" style="background:#F2A900;color:#0B1B2B;padding:14px 24px;border-radius:4px;font-weight:700;text-decoration:none">{{ t.nf_btn }}</a>
+      </div>
+    </section>
+  </sc-if>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer style="background:#08141F;color:#C4CFDA;font-size:14.5px">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,72px) clamp(16px,4vw,40px) 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:40px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:#FFFFFF;border-radius:6px;padding:12px 16px;align-self:flex-start">
+          <img src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" loading="lazy" style="height:64px;width:auto;display:block">
+        </div>
+        <p style="margin:0;max-width:34ch">{{ t.f_desc }}</p>
+        <!-- TODO: replace social links -->
+        <div aria-label="{{ t.f_social }}" style="display:flex;gap:8px">
+          <a href="#" aria-label="LinkedIn" style="width:36px;height:36px;border:1px solid rgba(255,255,255,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#FFFFFF;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:12px" style-hover="border-color:#F2A900">in</a>
+          <a href="#" aria-label="X" style="width:36px;height:36px;border:1px solid rgba(255,255,255,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#FFFFFF;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:12px" style-hover="border-color:#F2A900">X</a>
+          <a href="#" aria-label="Instagram" style="width:36px;height:36px;border:1px solid rgba(255,255,255,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#FFFFFF;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:12px" style-hover="border-color:#F2A900">ig</a>
+        </div>
+      </div>
+      <nav aria-label="{{ t.f_quick }}" style="display:flex;flex-direction:column;gap:10px">
+        <h2 style="margin:0 0 4px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#F2A900;font-weight:500">{{ t.f_quick }}</h2>
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="8">
+          <a href="{{ n.href }}" style="color:#C4CFDA;text-decoration:none" style-hover="color:#FFFFFF">{{ n.label }}</a>
+        </sc-for>
+      </nav>
+      <nav aria-label="{{ t.f_cats }}" style="display:flex;flex-direction:column;gap:10px">
+        <h2 style="margin:0 0 4px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#F2A900;font-weight:500">{{ t.f_cats }}</h2>
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="10">
+          <a href="{{ c.href }}" style="color:#C4CFDA;text-decoration:none" style-hover="color:#FFFFFF">{{ c.title }}</a>
+        </sc-for>
+      </nav>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <h2 style="margin:0 0 4px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#F2A900;font-weight:500">{{ t.f_contact }}</h2>
+        <address style="font-style:normal">{{ t.addr }}</address>
+        <a href="tel:+971509259286" dir="ltr" style="color:#FFFFFF;text-decoration:none;unicode-bidi:isolate;text-align:start">+971 50 925 9286</a>
+        <a href="tel:+971509155899" dir="ltr" style="color:#FFFFFF;text-decoration:none;unicode-bidi:isolate;text-align:start">+971 50 915 5899</a>
+        <a href="mailto:info@velmachaerospace.com" dir="ltr" style="color:#FFFFFF;unicode-bidi:isolate;text-align:start">info@velmachaerospace.com</a>
+        <a href="mailto:AOG@velmachaerospace.com" dir="ltr" style="color:#FF8A8A;unicode-bidi:isolate;text-align:start;font-weight:600">AOG@velmachaerospace.com</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.1)">
+      <div style="max-width:1280px;margin:0 auto;padding:20px clamp(16px,4vw,40px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:#8FA3B6">
+        <span>{{ t.f_legal }}</span>
+        <span dir="ltr" style="font-family:'IBM Plex Mono',monospace">TRN 105160013600001</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Floating elements ===== -->
+  <sc-if value="{{ showFloat }}" hint-placeholder-val="{{ true }}">
+    <a href="mailto:AOG@velmachaerospace.com" onMouseEnter="{{ aogIn }}" onMouseLeave="{{ aogOut }}" onFocus="{{ aogIn }}" onBlur="{{ aogOut }}" aria-label="AOG 24/7 AOG@velmachaerospace.com" style="position:fixed;bottom:20px;left:20px;z-index:80;display:flex;align-items:center;gap:10px;background:#D62828;color:#FFFFFF;border-radius:30px;padding:0 18px;height:52px;text-decoration:none;box-shadow:0 8px 24px rgba(214,40,40,.35);font-weight:700;overflow:hidden" dir="ltr">
+      <span style="width:9px;height:9px;border-radius:50%;background:#FFFFFF;animation:vmPulse 1.8s infinite;flex-shrink:0"></span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.06em">AOG</span>
+      <sc-if value="{{ aogOpen }}" hint-placeholder-val="{{ false }}">
+        <span style="display:flex;flex-direction:column;line-height:1.25;font-size:12.5px;font-family:'IBM Plex Mono',monospace;font-weight:500;border-left:1px solid rgba(255,255,255,.4);padding-left:10px;animation:vmIn .15s ease">
+          <span>AOG@velmachaerospace.com</span><span>+971 50 925 9286</span>
+        </span>
+      </sc-if>
+    </a>
+    <sc-if value="{{ scrolled }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ toTop }}" aria-label="{{ t.float_top }}" style="position:fixed;bottom:88px;right:24px;z-index:80;width:48px;height:48px;border-radius:50%;border:1px solid #CBD2D9;background:#FFFFFF;color:#0B1B2B;cursor:pointer;box-shadow:0 6px 18px rgba(11,27,43,.15);display:flex;align-items:center;justify-content:center">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,10 8,5 13,10"></polyline></svg>
+      </button>
+    </sc-if>
+    <a href="https://wa.me/971509259286" target="_blank" rel="noopener" aria-label="{{ t.float_wa }}" style="position:fixed;bottom:20px;right:20px;z-index:80;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4)" style-hover="transform:scale(1.06)">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><path fill="#FFFFFF" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.9-3.9-1.9-6.1C4.9 9.8 9.9 4.9 16 4.9s11.1 4.9 11.1 10.9S22.1 26.4 16 26.4zm6.1-8.1c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1.1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"></path></svg>
+    </a>
+  </sc-if>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:130;background:#0B1B2B;color:#FFFFFF;padding:12px 18px;border-radius:4px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(11,27,43,.3);animation:vmIn .18s ease">
+      <span style="width:8px;height:8px;background:#F2A900"></span>{{ toast }}
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;en&quot;,&quot;ar&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto'|'en'|'ar'&quot;},&quot;showFloating&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const PAGES = ['home','about','products','industries','services','quality','rfq','contact'];
+const PER_PAGE = 12;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const EMPTY_FORM = { name:'', company:'', country:'', email:'', phone:'', aircraft:'', date:'', priority:'routine', notes:'' };
+const EMPTY_C = { name:'', email:'', subject:'', message:'' };
+const COND = { new:['#E3F1E8','#1E6B3A'], used:['#FFF1CC','#6E4E00'], surplus:['#E3EBF4','#1F4E7A'], any:['#EEF1F4','#3F4C59'] };
+const pad = i => String(i + 1).padStart(2, '0');
+const ls = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+const lg = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+
+class Component extends DCLogic {
+  state = { ready:false, page:'home', lang:'en', w:1280, scrolled:false, drawer:false, rfq:[], hq:'', q:'', cat:'all', cond:'all', pg:0, qtys:{}, modal:null,
+    form:{ ...EMPTY_FORM }, errors:{}, sent:null, mPn:'', mQty:1, cform:{ ...EMPTY_C }, cerr:{}, csent:false, aogOpen:false, toast:'' };
+  modalRef = React.createRef();
+
+  componentDidMount() {
+    const u = new URLSearchParams(location.search).get('lang');
+    const saved = lg('vm_lang'); const pl = this.props.startLang;
+    let lang;
+    if (u === 'en' || u === 'ar') lang = u;            // URL wins
+    else if (saved === 'en' || saved === 'ar') lang = saved;
+    else if (pl === 'en' || pl === 'ar') lang = pl;
+    else lang = (navigator.language || '').toLowerCase().startsWith('ar') ? 'ar' : 'en';
+    let rfq = []; try { rfq = JSON.parse(lg('vm_rfq') || '[]') || []; } catch (e) {}
+    this.setState({ lang, rfq, w: window.innerWidth });
+    this.route(false);
+    this.onHash = () => this.route(true);
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onScroll = () => { const s = window.scrollY > 120; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    this.onKey = e => this.handleKey(e);
+    window.addEventListener('hashchange', this.onHash);
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('keydown', this.onKey);
+    const wait = () => { if (window.VM_I18N && window.VM_PRODUCTS) this.setState({ ready: true }); else this.tw = setTimeout(wait, 40); };
+    wait();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this.onHash); window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('scroll', this.onScroll); window.removeEventListener('keydown', this.onKey);
+    clearTimeout(this.tw); clearTimeout(this.tt);
+  }
+  componentDidUpdate(pp, ps) {
+    const s = this.state, D = window.VM_I18N; if (!s.ready || !D) return;
+    const t = D[s.lang], de = document.documentElement;
+    de.lang = s.lang; de.dir = s.lang === 'ar' ? 'rtl' : 'ltr';
+    const m = t.meta[s.page] || t.meta.home; document.title = m[0];
+    let md = document.querySelector('meta[name="description"]');
+    if (!md) { md = document.createElement('meta'); md.name = 'description'; document.head.appendChild(md); }
+    md.content = m[1];
+    if (s.modal && !ps.modal) setTimeout(() => { const b = this.modalRef.current && this.modalRef.current.querySelector('button'); b && b.focus(); }, 30);
+  }
+  handleKey(e) {
+    if (e.key === 'Escape') { if (this.state.modal) this.setState({ modal: null }); else if (this.state.drawer) this.setState({ drawer: false }); }
+    if (e.key === 'Tab' && this.state.modal && this.modalRef.current) {   // modal focus trap
+      const f = [...this.modalRef.current.querySelectorAll('button,a[href],input')]; if (!f.length) return;
+      const a = f[0], z = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+      else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+    }
+  }
+  route(scroll) {
+    const h = decodeURIComponent(location.hash.replace(/^#/, ''));
+    if (h === 'main') return;
+    const [p, arg] = h.split('/');
+    const page = !p ? 'home' : (PAGES.includes(p) ? p : '404');
+    const upd = { page, drawer: false, modal: null };
+    if (page === 'products' && arg) Object.assign(upd, { cat: arg, pg: 0 });
+    this.setState(upd);
+    if (scroll) window.scrollTo(0, 0);
+  }
+  t() { return window.VM_I18N[this.state.lang]; }
+  saveRfq(rfq) { ls('vm_rfq', JSON.stringify(rfq)); this.setState({ rfq }); }
+  addRfq(item, qty) {
+    const r = this.state.rfq.slice(), i = r.findIndex(x => x.pn === item.pn);
+    if (i >= 0) r[i] = { ...r[i], qty: r[i].qty + qty }; else r.push({ ...item, qty });
+    this.saveRfq(r); this.setState({ errors: { ...this.state.errors, items: '' } }); this.flash(this.t().p_added);
+  }
+  flash(msg) { this.setState({ toast: msg }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 2200); }
+  goSearch(e) {
+    e && e.preventDefault();
+    this.setState({ q: this.state.hq.trim(), cat: 'all', cond: 'all', pg: 0, drawer: false });
+    if (location.hash !== '#products') location.hash = 'products'; else window.scrollTo(0, 0);
+  }
+  setQty(pn, v) { this.setState(st => ({ qtys: { ...st.qtys, [pn]: Math.max(1, Math.min(99999, v || 1)) } })); }
+
+  submitRfq(e) {
+    e.preventDefault();
+    const f = this.state.form, err = {};
+    ['name','company','country','email'].forEach(k => { if (!f[k].trim()) err[k] = 'req'; });
+    if (f.email.trim() && !EMAIL_RE.test(f.email.trim())) err.email = 'email';
+    if (!this.state.rfq.length) err.items = 'items';
+    if (Object.keys(err).length) { this.setState({ errors: err }); return; }
+    const aog = f.priority === 'aog';
+    const to = aog ? 'AOG@velmachaerospace.com' : 'sales@velmachaerospace.com';
+    const lines = [
+      'REQUEST FOR QUOTE - Velmach Aerospace', '',
+      'Priority: ' + f.priority.toUpperCase(),
+      'Name: ' + f.name, 'Company: ' + f.company, 'Country: ' + f.country, 'Email: ' + f.email,
+      'Phone: ' + (f.phone || '-'), 'Aircraft type / Application: ' + (f.aircraft || '-'), 'Required by: ' + (f.date || '-'), '',
+      'PARTS', ...this.state.rfq.map((x, i) => `${i + 1}. P/N ${x.pn} | ${x.name_en === '__manual' ? 'Manual entry' : x.name_en} | Qty ${x.qty} | Condition: ${x.cond}`), '',
+      'Notes:', f.notes || '-'
+    ];
+    const subject = `RFQ [${f.priority.toUpperCase()}] ${f.company}`;
+    const href = `mailto:${to}?subject=${encodeURIComponent(subject)}${aog ? '&cc=sales@velmachaerospace.com' : ''}&body=${encodeURIComponent(lines.join('\n'))}`;
+    window.location.href = href;
+    /* Alternative: Formspree (uncomment and set your form ID)
+    fetch('https://formspree.io/f/YOUR_FORM_ID', { method:'POST', headers:{ 'Content-Type':'application/json', Accept:'application/json' },
+      body: JSON.stringify({ _subject: subject, _cc: aog ? 'sales@velmachaerospace.com' : undefined, message: lines.join('\n'), email: f.email }) });
+    Alternative: EmailJS
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', { to_email: to, subject, message: lines.join('\n'), reply_to: f.email });
+    */
+    this.saveRfq([]);
+    this.setState({ sent: { to }, form: { ...EMPTY_FORM }, errors: {} });
+    window.scrollTo(0, 0);
+  }
+  submitContact(e) {
+    e.preventDefault();
+    const c = this.state.cform, err = {};
+    if (!c.name.trim()) err.name = 'req';
+    if (!c.email.trim()) err.email = 'req'; else if (!EMAIL_RE.test(c.email.trim())) err.email = 'email';
+    if (!c.message.trim()) err.message = 'req';
+    if (Object.keys(err).length) { this.setState({ cerr: err, csent: false }); return; }
+    const body = `Name: ${c.name}\nEmail: ${c.email}\n\n${c.message}`;
+    window.location.href = `mailto:info@velmachaerospace.com?subject=${encodeURIComponent(c.subject || 'Website enquiry')}&body=${encodeURIComponent(body)}`;
+    this.setState({ cform: { ...EMPTY_C }, cerr: {}, csent: true });
+  }
+
+  renderVals() {
+    const s = this.state, D = window.VM_I18N, P = window.VM_PRODUCTS || [];
+    if (!s.ready || !D) return { ready: false };
+    const t = D[s.lang], ar = s.lang === 'ar';
+    const mobile = s.w < 1100, narrow = s.w < 760;
+    const fAr = "'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif";
+    const catName = id => (t.cats.find(c => c.id === id) || {}).title || id;
+    const stop = e => e.stopPropagation();
+    const errTxt = c => c ? t.e[c] : '';
+
+    // products
+    const qq = s.q.trim().toLowerCase();
+    const filtered = P.filter(p => (s.cat === 'all' || p.category === s.cat) && (s.cond === 'all' || p.condition === s.cond) &&
+      (!qq || [p.partNumber, p.name_en, p.name_ar, p.desc_en].join(' ').toLowerCase().includes(qq)));
+    const pages = Math.max(1, Math.ceil(filtered.length / PER_PAGE)), pg = Math.min(s.pg, pages - 1);
+    const toItem = p => ({ pn: p.partNumber, name_en: p.name_en, name_ar: p.name_ar, cond: p.condition });
+    const cards = filtered.slice(pg * PER_PAGE, pg * PER_PAGE + PER_PAGE).map(p => {
+      const qty = s.qtys[p.partNumber] || 1, c = COND[p.condition] || COND.any;
+      return { pn: p.partNumber, name: ar ? p.name_ar : p.name_en, desc: ar ? p.desc_ar : p.desc_en, cat: catName(p.category),
+        cond: t.cond[p.condition], condBg: c[0], condFg: c[1], qty, stop,
+        dec: e => { stop(e); this.setQty(p.partNumber, qty - 1); }, inc: e => { stop(e); this.setQty(p.partNumber, qty + 1); },
+        onQty: e => this.setQty(p.partNumber, parseInt(e.target.value, 10)),
+        add: e => { stop(e); this.addRfq(toItem(p), qty); }, open: () => this.setState({ modal: p.partNumber }) };
+    });
+    const mprod = P.find(p => p.partNumber === s.modal);
+    let mp = {};
+    if (mprod) {
+      const qty = s.qtys[mprod.partNumber] || 1, c = COND[mprod.condition] || COND.any;
+      mp = { pn: mprod.partNumber, name: ar ? mprod.name_ar : mprod.name_en, desc: ar ? mprod.desc_ar : mprod.desc_en, cat: catName(mprod.category),
+        cond: t.cond[mprod.condition], condBg: c[0], condFg: c[1], qty,
+        dec: () => this.setQty(mprod.partNumber, qty - 1), inc: () => this.setQty(mprod.partNumber, qty + 1),
+        onQty: e => this.setQty(mprod.partNumber, parseInt(e.target.value, 10)),
+        add: () => { this.addRfq(toItem(mprod), qty); this.setState({ modal: null }); } };
+    }
+    const catItems = [{ id: 'all', title: t.p_all }, ...t.cats].map(c => {
+      const on = s.cat === c.id;
+      return { label: c.title, count: c.id === 'all' ? P.length : P.filter(p => p.category === c.id).length, active: on,
+        bg: on ? '#0B1B2B' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0B1B2B', border: on ? '#0B1B2B' : '#DDE2E7',
+        onClick: () => this.setState({ cat: c.id, pg: 0 }) };
+    });
+    const condChips = ['all', 'new', 'used', 'surplus'].map(k => ({ label: t.cond[k], active: s.cond === k,
+      bg: s.cond === k ? '#0B1B2B' : '#FFFFFF', fg: s.cond === k ? '#FFFFFF' : '#0B1B2B', onClick: () => this.setState({ cond: k, pg: 0 }) }));
+
+    // rfq
+    const condOpts = ['any', 'new', 'used', 'surplus'].map(v => ({ v, l: t.cond[v] }));
+    const rows = s.rfq.map((x, i) => ({ pn: x.pn, name: x.name_en === '__manual' ? t.r_manualName : (ar ? x.name_ar : x.name_en), qty: x.qty, cond: x.cond || 'any',
+      removeLabel: t.r_remove + ' ' + x.pn,
+      onQty: e => { const r = s.rfq.slice(); r[i] = { ...r[i], qty: Math.max(1, parseInt(e.target.value, 10) || 1) }; this.saveRfq(r); },
+      onCond: e => { const r = s.rfq.slice(); r[i] = { ...r[i], cond: e.target.value }; this.saveRfq(r); },
+      remove: () => this.saveRfq(s.rfq.filter((_, j) => j !== i)) }));
+    const setF = k => e => { const v = e.target.value; this.setState(st => ({ form: { ...st.form, [k]: v }, errors: { ...st.errors, [k]: '' } })); };
+    const fdef = [['name','text','name'],['company','text','organization'],['country','text','country-name'],['email','email','email'],['phone','tel','tel'],['aircraft','text','off'],['date','date','off']];
+    const rfqFields = fdef.map(([k, type, ac]) => ({ label: t.fl[k], type, ac, value: s.form[k], onChange: setF(k), err: errTxt(s.errors[k]),
+      invalid: !!s.errors[k], border: s.errors[k] ? '#D62828' : '#9AA7B3', dir: (type === 'email' || type === 'tel') ? 'ltr' : 'auto' }));
+    const priOpts = ['routine', 'urgent', 'aog'].map(k => { const on = s.form.priority === k, red = k === 'aog';
+      return { label: t.pri[k], active: on, bg: on ? (red ? '#D62828' : '#0B1B2B') : '#FFFFFF', fg: on ? '#FFFFFF' : (red ? '#B01E1E' : '#0B1B2B'),
+        border: on ? (red ? '#D62828' : '#0B1B2B') : (red ? '#E7A3A3' : '#CBD2D9'), onClick: () => this.setState(st => ({ form: { ...st.form, priority: k } })) }; });
+    const isAogPri = s.form.priority === 'aog';
+    const addManual = () => { const pn = s.mPn.trim(); if (!pn) return;
+      this.addRfq({ pn, name_en: '__manual', name_ar: '__manual', cond: 'any' }, Math.max(1, parseInt(s.mQty, 10) || 1)); this.setState({ mPn: '', mQty: 1 }); };
+
+    // contact
+    const setC = k => e => { const v = e.target.value; this.setState(st => ({ cform: { ...st.cform, [k]: v }, cerr: { ...st.cerr, [k]: '' }, csent: false })); };
+    const cFields = [['name','text'],['email','email'],['subject','text']].map(([k, type]) => ({ label: t.cf[k], type, value: s.cform[k], onChange: setC(k),
+      err: errTxt(s.cerr[k]), invalid: !!s.cerr[k], border: s.cerr[k] ? '#D62828' : '#9AA7B3', dir: type === 'email' ? 'ltr' : 'auto' }));
+    const depts = t.depts.map(d => { const a = d.id === 'aog';
+      return { ...d, isAog: a, mailto: 'mailto:' + d.email, bg: a ? '#D62828' : '#FFFFFF', fg: a ? '#FFFFFF' : '#0B1B2B', border: a ? '#D62828' : '#CBD2D9' }; });
+
+    const heads = { about: 'about', products: 'p', industries: 'ip', services: 's', quality: 'q', rfq: 'r', contact: 'c' };
+    const hk = heads[s.page];
+    const ph = hk ? { eyebrow: t[hk + '_eyebrow'], title: t[hk === 'about' ? 'about_title' : hk + '_title'], sub: t[hk === 'about' ? 'about_sub' : hk + '_sub'] } : {};
+
+    return {
+      ready: true, t, lang: s.lang, dir: ar ? 'rtl' : 'ltr',
+      fBody: ar ? fAr : "'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif",
+      fHead: ar ? fAr : "'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif",
+      fMono: ar ? fAr : "'IBM Plex Mono', ui-monospace, Menlo, monospace",
+      fAlt: ar ? "'Manrope', system-ui, sans-serif" : fAr,
+      lh: ar ? 1.85 : 1.6, lhHead: ar ? 1.35 : 1.08, ls: ar ? '0' : '.14em', lsHead: ar ? '0' : '-0.015em',
+      arrow: ar ? '←' : '→', tdAlign: ar ? 'right' : 'left',
+      logoAlt: ar ? 'شعار فيلماك إيروسبايس' : 'Velmach Aerospace logo',
+      logoH: s.scrolled ? '40px' : (narrow ? '44px' : '54px'), hdrPad: s.scrolled ? '6px' : '10px',
+      hdrShadow: s.scrolled ? '0 4px 18px rgba(11,27,43,.08)' : 'none',
+      showNav: !mobile, showBurger: mobile, showHdrSearch: s.w >= 1320, showPhones: !narrow,
+      navItems: PAGES.map(k => ({ href: '#' + k, label: t.nav[k], current: s.page === k ? 'page' : undefined,
+        color: s.page === k ? '#0B1B2B' : '#3F4C59', bar: s.page === k ? '#F2A900' : 'transparent' })),
+      toggleLang: () => { const l = ar ? 'en' : 'ar'; ls('vm_lang', l);
+        if (location.search.includes('lang=')) history.replaceState(null, '', location.pathname + location.hash);
+        this.setState({ lang: l }); },
+      drawerOpen: s.drawer, openDrawer: () => this.setState({ drawer: true }), closeDrawer: () => this.setState({ drawer: false }),
+      hq: s.hq, onHq: e => this.setState({ hq: e.target.value }), searchSubmit: e => this.goSearch(e),
+      rfqCount: s.rfq.length, scrolled: s.scrolled,
+      toTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+      isHome: s.page === 'home', isAbout: s.page === 'about', isProducts: s.page === 'products', isIndustries: s.page === 'industries',
+      isServices: s.page === 'services', isQuality: s.page === 'quality', isRfq: s.page === 'rfq', isContact: s.page === 'contact', is404: s.page === '404',
+      isInner: !!hk, ph, pageCode: pad(PAGES.indexOf(s.page) - 1),
+      cats: t.cats.map((c, i) => ({ ...c, code: pad(i), href: '#products/' + c.id })),
+      whys: t.whys.map((w, i) => ({ ...w, code: pad(i), email: w.email || '' })),
+      steps: t.steps.map((x, i) => ({ ...x, code: pad(i) })),
+      inds: t.industries.map((x, i) => ({ ...x, code: pad(i), hid: 'ind-' + x.id, order: (!narrow && i % 2) ? 2 : 0 })),
+      svcs: t.services.map((x, i) => { const a = x.id === 'aog';
+        return { ...x, code: pad(i), hid: 'svc-' + x.id, isAog: a, mailto: 'mailto:' + x.email, pts: x.points.map((p, j) => ({ n: pad(j), txt: p })),
+          border: a ? '#D62828' : '#DDE2E7', bg: a ? '#FFF7F7' : '#FFFFFF', codeColor: a ? '#B01E1E' : '#8A6200',
+          btnBg: a ? '#D62828' : '#0B1B2B', btnFg: '#FFFFFF' }; }),
+      commits: t.commits.map((x, i) => ({ ...x, code: pad(i) })),
+      // products
+      prodCols: mobile ? 'minmax(0,1fr)' : '260px minmax(0,1fr)', sidePos: mobile ? 'static' : 'sticky', catDir: mobile ? 'row' : 'column',
+      catItems, condChips, q: s.q, onQ: e => this.setState({ q: e.target.value, pg: 0 }),
+      resultsLabel: t.p_results.replace('{n}', filtered.length), cards, hasResults: filtered.length > 0, noResults: filtered.length === 0,
+      multiPage: pages > 1, pageLabel: t.p_page.replace('{a}', pg + 1).replace('{b}', pages),
+      prevDisabled: pg === 0, nextDisabled: pg >= pages - 1,
+      prevPg: () => this.setState({ pg: Math.max(0, pg - 1) }), nextPg: () => this.setState({ pg: Math.min(pages - 1, pg + 1) }),
+      requestMissing: () => { this.setState({ mPn: s.q.trim() }); location.hash = 'rfq'; },
+      modalOpen: !!mprod, mp, modalRef: this.modalRef, closeModal: () => this.setState({ modal: null }), stop,
+      // rfq
+      rfqSent: !!s.sent, rfqNotSent: !s.sent, sentMsg: s.sent ? t.r_ok_b.replace('{to}', s.sent.to) : '',
+      resetRfq: () => this.setState({ sent: null }),
+      rfqEmpty: !s.rfq.length, rfqHas: s.rfq.length > 0, rows, condOpts, errItems: errTxt(s.errors.items),
+      mPn: s.mPn, mQty: s.mQty, onMPn: e => this.setState({ mPn: e.target.value }), onMQty: e => this.setState({ mQty: e.target.value }),
+      mKey: e => { if (e.key === 'Enter') { e.preventDefault(); addManual(); } }, addManual,
+      form: s.form, rfqFields, priOpts, isAogPri, onNotes: setF('notes'),
+      submitBg: isAogPri ? '#D62828' : '#F2A900', submitFg: isAogPri ? '#FFFFFF' : '#0B1B2B',
+      rfqTo: isAogPri ? 'AOG@velmachaerospace.com · cc sales@velmachaerospace.com' : 'sales@velmachaerospace.com',
+      submitRfq: e => this.submitRfq(e),
+      // contact
+      depts, cFields, cform: s.cform, onCMsg: setC('message'), cMsgErr: errTxt(s.cerr.message), cMsgInvalid: !!s.cerr.message,
+      cMsgBorder: s.cerr.message ? '#D62828' : '#9AA7B3', csent: s.csent, submitContact: e => this.submitContact(e),
+      // floating
+      showFloat: this.props.showFloating !== false, aogOpen: s.aogOpen,
+      aogIn: () => this.setState({ aogOpen: true }), aogOut: () => this.setState({ aogOpen: false }),
+      toast: s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

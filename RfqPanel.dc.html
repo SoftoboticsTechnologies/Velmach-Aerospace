@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="js/i18n.js"></script>
+<script src="data/products.js"></script>
+<script src="js/vm-core.js"></script>
+</helmet>
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<div dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:1.55;color:#0B1B2B">
+  <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:48px 28px;display:flex;flex-direction:column;align-items:flex-start;gap:16px;animation:vmUp .4s ease">
+      <span style="width:48px;height:48px;border:1.5px solid #0759A5;display:flex;align-items:center;justify-content:center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0759A5" stroke-width="2"><polyline points="5,12 10,17 19,7"></polyline></svg>
+      </span>
+      <h2 style="margin:0;font-family:{{ fHead }};font-size:28px;font-weight:500;line-height:1.2">{{ t.r_ok_t }}</h2>
+      <p style="margin:0;color:#4B5563;max-width:52ch">{{ sentMsg }}</p>
+      <button type="button" onClick="{{ reset }}" style="height:46px;padding-inline:20px;background:#0B1B2B;color:#FFFFFF;border:0;font:inherit;font-weight:700;cursor:pointer">{{ t.r_ok_again }}</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+    <form onSubmit="{{ submit }}" noValidate="{{ true }}" style="display:grid;grid-template-columns:{{ cols }};align-items:start;gap:{{ gap }}">
+      <section aria-labelledby="rq-items" style="display:flex;flex-direction:column;padding:{{ pad }};gap:14px;border-bottom:{{ secBorder }}">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <h3 id="rq-items" style="margin:0;display:flex;align-items:baseline;gap:10px;font-family:{{ fHead }};font-size:18px;font-weight:500">
+            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#0759A5">01</span>{{ t.rq_items }}
+          </h3>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B7280">{{ count }}</span>
+        </div>
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ true }}">
+          <div style="border:1px dashed #B7C0C9;padding:18px;display:flex;flex-direction:column;gap:10px;align-items:flex-start;background:#F7F9FA">
+            <p style="margin:0;color:#4B5563;font-size:14.5px">{{ t.r_empty }}</p>
+            <a href="products.dc.html" style="font-weight:700;font-size:14.5px">{{ t.r_browse }} <span aria-hidden="true">{{ arrow }}</span></a>
+          </div>
+        </sc-if>
+        <sc-if value="{{ hasItems }}" hint-placeholder-val="{{ false }}">
+          <ul style="list-style:none;margin:0;padding:0;border-top:1px solid #E3E7EB">
+            <sc-for list="{{ rows }}" as="r" hint-placeholder-count="2">
+              <li style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 14px;padding-block:14px;border-bottom:1px solid #E3E7EB;animation:vmUp .3s ease">
+                <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                  <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;font-weight:500;unicode-bidi:isolate;text-align:{{ start }}">{{ r.pn }}</span>
+                  <span style="font-size:13.5px;color:#4B5563;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span>
+                </div>
+                <button type="button" onClick="{{ r.remove }}" aria-label="{{ r.removeLabel }}" style="width:32px;height:32px;border:1px solid #D3D9DF;background:#FFFFFF;color:#6B7280;cursor:pointer;font-size:16px;line-height:1" style-hover="border-color:#D62828;color:#D62828">×</button>
+                <div style="grid-column:1 / -1;display:flex;gap:10px;flex-wrap:wrap">
+                  <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#6B7280">{{ t.th.qty }}
+                    <input type="number" min="1" value="{{ r.qty }}" onChange="{{ r.onQty }}" style="width:72px;height:36px;padding-inline:8px;border:1px solid #B7C0C9;font-family:'IBM Plex Mono',monospace;font-size:13.5px">
+                  </label>
+                  <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#6B7280;flex:1;min-width:180px">{{ t.th.cond }}
+                    <select value="{{ r.cond }}" data-cond="{{ r.cond }}" onChange="{{ r.onCond }}" style="flex:1;height:36px;padding-inline:8px;border:1px solid #B7C0C9;font:inherit;font-size:13.5px;background:#FFFFFF;color:#0B1B2B">
+                      <sc-for list="{{ condOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+                    </select>
+                  </label>
+                </div>
+              </li>
+            </sc-for>
+          </ul>
+        </sc-if>
+        <sc-if value="{{ errItems }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;color:#B01E1E;font-size:13.5px;font-weight:600">{{ errItems }}</p></sc-if>
+        <div style="display:flex;flex-direction:column;gap:8px;padding-top:4px">
+          <span style="font-size:13px;font-weight:600;color:#4B5563">{{ t.r_manual_t }} · <span style="font-weight:400">{{ t.r_manual_sub }}</span></span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input value="{{ mPn }}" onChange="{{ onMPn }}" onKeyDown="{{ mKey }}" placeholder="{{ t.r_manual_pn }}" aria-label="{{ t.r_manual_pn }}" dir="ltr" style="flex:2 1 160px;min-width:0;height:42px;padding-inline:12px;border:1px solid #B7C0C9;font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:{{ start }}">
+            <input type="number" min="1" value="{{ mQty }}" onChange="{{ onMQty }}" aria-label="{{ t.r_manual_qty }}" style="flex:0 0 76px;height:42px;padding-inline:10px;border:1px solid #B7C0C9;font-family:'IBM Plex Mono',monospace;font-size:13.5px">
+            <button type="button" onClick="{{ addManual }}" style="flex:1 1 110px;height:42px;border:1px solid #0B1B2B;background:#FFFFFF;color:#0B1B2B;font:inherit;font-size:14px;font-weight:700;cursor:pointer" style-hover="background:#0B1B2B;color:#FFFFFF">+ {{ t.r_manual_add }}</button>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="rq-det" style="display:flex;flex-direction:column;gap:16px;padding:{{ pad }};background:{{ detBg }}">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <h3 id="rq-det" style="margin:0;display:flex;align-items:baseline;gap:10px;font-family:{{ fHead }};font-size:18px;font-weight:500">
+            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#0759A5">02</span>{{ t.rq_step2 }}
+          </h3>
+          <span style="font-size:12.5px;color:#6B7280">{{ t.r_req }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px">
+          <sc-for list="{{ fields }}" as="f" hint-placeholder-count="7">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#1F2933">
+              {{ f.label }}
+              <input type="{{ f.type }}" value="{{ f.value }}" onChange="{{ f.onChange }}" autoComplete="{{ f.ac }}" aria-invalid="{{ f.invalid }}" dir="{{ f.dir }}" style="width:100%;height:44px;padding-inline:12px;border:0;border-bottom:1.5px solid {{ f.border }};background:#FFFFFF;font:inherit;font-weight:400;font-size:15px;color:#0B1B2B;outline:none;text-align:{{ start }};transition:border-color .2s" style-focus="border-bottom-color:#0759A5">
+              <sc-if value="{{ f.err }}" hint-placeholder-val="{{ false }}"><span role="alert" style="color:#B01E1E;font-size:12.5px">{{ f.err }}</span></sc-if>
+            </label>
+          </sc-for>
+        </div>
+        <fieldset style="border:0;padding:0;margin:0">
+          <legend style="font-size:13px;font-weight:600;color:#1F2933;padding:0;margin-bottom:8px">{{ t.fl.priority }}</legend>
+          <div role="radiogroup" style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #B7C0C9">
+            <sc-for list="{{ pri }}" as="p" hint-placeholder-count="3">
+              <button type="button" role="radio" aria-checked="{{ p.active }}" onClick="{{ p.onClick }}" style="height:46px;border:0;border-inline-start:{{ p.sep }};background:{{ p.bg }};color:{{ p.fg }};font:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s,color .2s">
+                <sc-if value="{{ p.dot }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ p.dotColor }}"></span></sc-if>{{ p.label }}
+              </button>
+            </sc-for>
+          </div>
+        </fieldset>
+        <sc-if value="{{ isAog }}" hint-placeholder-val="{{ false }}">
+          <div role="note" style="background:#D62828;color:#FFFFFF;padding:16px 18px;display:flex;flex-direction:column;gap:8px;animation:vmUp .3s ease">
+            <span style="display:flex;align-items:center;gap:10px;font-family:{{ fMono }};font-size:13px;letter-spacing:{{ ls }};text-transform:uppercase;font-weight:500"><span style="width:8px;height:8px;border-radius:50%;background:#FFFFFF;animation:vmPulse 2.4s infinite"></span>{{ t.rq_aog_t }}</span>
+            <span style="font-size:14px">{{ t.rq_aog_b }}</span>
+            <span style="display:flex;flex-wrap:wrap;gap:6px 18px">
+              <a href="mailto:AOG@velmachaerospace.com" dir="ltr" style="color:#FFFFFF;font-family:'IBM Plex Mono',monospace;font-size:13.5px">AOG@velmachaerospace.com</a>
+              <a href="tel:+971509259286" dir="ltr" style="color:#FFFFFF;font-family:'IBM Plex Mono',monospace;font-size:13.5px">+971 50 925 9286</a>
+            </span>
+          </div>
+        </sc-if>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#1F2933">
+          {{ t.fl.notes }}
+          <textarea value="{{ notes }}" onChange="{{ onNotes }}" rows="3" style="width:100%;padding:10px 12px;border:1px solid #B7C0C9;background:#FFFFFF;font:inherit;font-weight:400;font-size:15px;resize:vertical"></textarea>
+        </label>
+        <button type="submit" style="height:54px;border:0;background:{{ subBg }};color:#FFFFFF;font:inherit;font-size:15.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding-inline:20px;transition:background .2s" style-hover="background:#0B1B2B">
+          <span>{{ subLabel }}</span><span aria-hidden="true">{{ arrow }}</span>
+        </button>
+        <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#6B7280;text-align:{{ start }}">TO: {{ to }}</span>
+        <sc-if value="{{ isModal }}" hint-placeholder-val="{{ true }}"><a href="rfq.dc.html" style="font-size:13.5px;font-weight:600">{{ t.rq_full }}</a></sc-if>
+      </section>
+    </form>
+  </sc-if>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:900},&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;modal&quot;,&quot;page&quot;],&quot;default&quot;:&quot;modal&quot;,&quot;tsType&quot;:&quot;'modal'|'page'&quot;}}">
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const EMPTY = { name:'', company:'', country:'', email:'', phone:'', aircraft:'', date:'', priority:'routine', notes:'' };
+class Component extends DCLogic {
+  state = { ready:false, form:{ ...EMPTY }, errors:{}, sent:null, mPn:'', mQty:1 };
+  componentDidMount() {
+    const pn = new URLSearchParams(location.search).get('pn');
+    if (pn && this.props.mode === 'page') this.setState({ mPn: pn });
+    const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready:true }); } else this.tw = setTimeout(go, 30); };
+    go();
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  componentDidUpdate() { setTimeout(() => document.querySelectorAll('select[data-cond]').forEach(el => { if (el.value !== el.dataset.cond) el.value = el.dataset.cond; }), 0); }
+  submit(e) {
+    e.preventDefault();
+    const VM = window.VM, f = this.state.form, err = {}, rfq = VM.rfq();
+    ['name','company','country','email'].forEach(k => { if (!f[k].trim()) err[k] = 'req'; });
+    if (f.email.trim() && !EMAIL_RE.test(f.email.trim())) err.email = 'email';
+    if (!rfq.length) err.items = 'items';
+    if (Object.keys(err).length) { this.setState({ errors: err }); return; }
+    const aog = f.priority === 'aog', to = aog ? 'AOG@velmachaerospace.com' : 'sales@velmachaerospace.com';
+    const lines = ['REQUEST FOR QUOTE - Velmach Aerospace', '', 'Priority: ' + f.priority.toUpperCase(),
+      'Name: ' + f.name, 'Company: ' + f.company, 'Country: ' + f.country, 'Email: ' + f.email, 'Phone: ' + (f.phone || '-'),
+      'Aircraft type / Application: ' + (f.aircraft || '-'), 'Required by: ' + (f.date || '-'), '', 'PARTS',
+      ...rfq.map((x, i) => `${i + 1}. P/N ${x.pn} | ${x.name_en === '__manual' ? 'Manual entry' : x.name_en} | Qty ${x.qty} | Condition: ${x.cond || 'any'}`),
+      '', 'Notes:', f.notes || '-'];
+    const subject = `RFQ [${f.priority.toUpperCase()}] ${f.company}`;
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}${aog ? '&cc=sales@velmachaerospace.com' : ''}&body=${encodeURIComponent(lines.join('\n'))}`;
+    /* Alternative: Formspree
+    fetch('https://formspree.io/f/YOUR_FORM_ID', { method:'POST', headers:{ 'Content-Type':'application/json', Accept:'application/json' },
+      body: JSON.stringify({ _subject: subject, _cc: aog ? 'sales@velmachaerospace.com' : undefined, email: f.email, message: lines.join('\n') }) });
+    Alternative: EmailJS
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', { to_email: to, subject, reply_to: f.email, message: lines.join('\n') }); */
+    VM.setRfq([]);
+    this.setState({ sent: { to }, form: { ...EMPTY }, errors: {} });
+  }
+  renderVals() {
+    if (!this.state.ready) return { ready:false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), s = this.state, rfq = VM.rfq(), modal = this.props.mode !== 'page';
+    const errTxt = c => c ? t.e[c] : '';
+    const setF = k => e => { const val = e.target.value; this.setState(st => ({ form: { ...st.form, [k]: val }, errors: { ...st.errors, [k]: '' } })); };
+    const defs = [['name','text','name'],['company','text','organization'],['country','text','country-name'],['email','email','email'],['phone','tel','tel'],['aircraft','text','off'],['date','date','off']];
+    const aog = s.form.priority === 'aog';
+    const addManual = () => { const pn = s.mPn.trim(); if (!pn) return;
+      VM.addRfq({ pn, name_en:'__manual', name_ar:'__manual', cond:'any' }, Math.max(1, parseInt(s.mQty, 10) || 1)); this.setState({ mPn:'', mQty:1, errors:{ ...s.errors, items:'' } }); };
+    const twoCol = !modal && v.lg;
+    return {
+      ...v, ready:true, t, isModal: modal,
+      cols: twoCol ? 'minmax(0,1fr) minmax(0,1.1fr)' : 'minmax(0,1fr)', gap: twoCol ? '0px' : '0px',
+      pad: modal ? '22px 24px' : (v.sm ? '24px 0' : '32px'), secBorder: twoCol ? '0' : '1px solid #E3E7EB',
+      detBg: modal ? '#F7F9FA' : (twoCol ? '#F7F9FA' : '#FFFFFF'),
+      sent: !!s.sent, notSent: !s.sent, sentMsg: s.sent ? t.r_ok_b.replace('{to}', s.sent.to) : '', reset: () => this.setState({ sent:null }),
+      count: String(rfq.length).padStart(2, '0'), empty: !rfq.length, hasItems: rfq.length > 0,
+      condOpts: ['any','new','used','surplus'].map(k => ({ v:k, l:t.cond[k] })),
+      rows: rfq.map((x, i) => ({ pn: x.pn, name: x.name_en === '__manual' ? t.r_manualName : (v.ar ? x.name_ar : x.name_en), qty: x.qty, cond: x.cond || 'any',
+        removeLabel: t.r_remove + ' ' + x.pn,
+        onQty: e => { const r = VM.rfq(); r[i].qty = Math.max(1, parseInt(e.target.value, 10) || 1); VM.setRfq(r); },
+        onCond: e => { const r = VM.rfq(); r[i].cond = e.target.value; VM.setRfq(r); },
+        remove: () => VM.setRfq(VM.rfq().filter((_, j) => j !== i)) })),
+      errItems: errTxt(s.errors.items),
+      mPn: s.mPn, mQty: s.mQty, onMPn: e => this.setState({ mPn: e.target.value }), onMQty: e => this.setState({ mQty: e.target.value }),
+      mKey: e => { if (e.key === 'Enter') { e.preventDefault(); addManual(); } }, addManual,
+      fields: defs.map(([k, type, ac]) => ({ label: t.fl[k], type, ac, value: s.form[k], onChange: setF(k), err: errTxt(s.errors[k]), invalid: !!s.errors[k],
+        border: s.errors[k] ? '#D62828' : '#B7C0C9', dir: (type === 'email' || type === 'tel') ? 'ltr' : 'auto' })),
+      pri: ['routine','urgent','aog'].map((k, i) => { const on = s.form.priority === k, red = k === 'aog';
+        return { label: t.pri[k], active: on, sep: i ? '1px solid #B7C0C9' : '0', dot: red || k === 'urgent', dotColor: on ? '#FFFFFF' : (red ? '#D62828' : '#0759A5'),
+          bg: on ? (red ? '#D62828' : '#0B1B2B') : '#FFFFFF', fg: on ? '#FFFFFF' : (red ? '#B01E1E' : '#0B1B2B'),
+          onClick: () => this.setState(st => ({ form: { ...st.form, priority: k } })) }; }),
+      isAog: aog, notes: s.form.notes, onNotes: setF('notes'),
+      subBg: aog ? '#D62828' : '#0759A5', subLabel: aog ? t.rq_aog_t + ' · ' + t.r_submit : t.r_submit,
+      to: aog ? 'AOG@velmachaerospace.com  CC: sales@velmachaerospace.com' : 'sales@velmachaerospace.com',
+      submit: e => this.submit(e)
+    };
+  }
+}
+</script>
+</body>
+</html>

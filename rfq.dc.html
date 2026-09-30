@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Send your parts list to Velmach Aerospace and receive a quotation.">
+<meta property="og:title" content="Request for Quote | Velmach Aerospace">
+<meta property="og:description" content="Request a quotation for aircraft parts and aerospace materials.">
+<meta property="og:type" content="website">
+<!-- TODO: replace canonical domain -->
+<link rel="canonical" href="https://www.velmachaerospace.com/rfq.html">
+<link rel="alternate" hreflang="en" href="https://www.velmachaerospace.com/rfq.html?lang=en">
+<link rel="alternate" hreflang="ar" href="https://www.velmachaerospace.com/rfq.html?lang=ar">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<script src="js/i18n.js"></script>
+<script src="data/products.js"></script>
+<script src="js/vm-core.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#0759A5;text-underline-offset:4px}
+a:hover{color:#0B1B2B}
+*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
+@keyframes vmUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}70%{box-shadow:0 0 0 7px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+
+<dc-import name="SiteHeader" page="rfq" hint-size="100%,122px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px">
+  <section style="background:#06111C;color:#FFFFFF;background-image:linear-gradient(rgba(120,170,220,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,220,.06) 1px,transparent 1px);background-size:48px 48px">
+    <div style="max-width:1360px;margin:0 auto;padding:clamp(48px,6vw,88px) clamp(16px,3.5vw,48px) clamp(36px,4vw,56px);display:grid;grid-template-columns:{{ headCols }};gap:20px 64px;align-items:end">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:center;gap:14px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#00AEEF;animation:vmUp .8s both"><span style="width:28px;height:1px;background:#00AEEF"></span>{{ t.rq_title }}</div>
+        <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(34px,4vw,58px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};animation:vmUp .8s .1s both">{{ t.r_title }}</h1>
+      </div>
+      <p style="margin:0;color:#AFC0D0;font-size:16.5px;max-width:48ch;animation:vmUp .8s .2s both">{{ t.r_sub }}</p>
+    </div>
+  </section>
+  <section style="max-width:1360px;margin:0 auto;padding:clamp(24px,3vw,48px) clamp(16px,3.5vw,48px) clamp(72px,8vw,120px)">
+    <div style="border:{{ panelBorder }}">
+      <dc-import name="RfqPanel" mode="page" hint-size="100%,760px"></dc-import>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { ready: false };
+  componentDidMount() {
+    const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    go();
+  }
+  componentDidUpdate() { if (this.state.ready) window.VM.meta('rfq'); }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv();
+    return { ...v, ready: true, t, headCols: v.lg ? 'minmax(0,1.2fr) minmax(0,1fr)' : 'minmax(0,1fr)', panelBorder: v.sm ? '0' : '1px solid #D3D9DF' };
+  }
+}
+</script>
+</body>
+</html>

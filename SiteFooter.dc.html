@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="js/i18n.js"></script>
+<script src="data/products.js"></script>
+<script src="js/vm-core.js"></script>
+</helmet>
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<footer dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:1.6;font-size:14.5px;color:#374151">
+  <div style="background-color:#F4F6F8;background-image:linear-gradient(#E6EAEE 1px,transparent 1px),linear-gradient(90deg,#E6EAEE 1px,transparent 1px);background-size:48px 48px;border-top:1px solid #D3D9DF">
+    <div style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,3.5vw,48px) 0">
+
+      <div style="display:grid;grid-template-columns:{{ topCols }};gap:40px 64px;align-items:center;padding-bottom:clamp(40px,5vw,64px)">
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <a href="index.html" aria-label="Velmach Aerospace, home" style="display:flex;align-self:flex-start">
+            <img src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" loading="lazy" style="height:clamp(96px,9vw,132px);width:auto;display:block">
+          </a>
+          <p style="margin:0;color:#4B5563;font-size:15.5px;max-width:40ch">{{ t.f_desc }}</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #D3D9DF;display:grid;grid-template-columns:{{ ctaCols }}">
+          <div style="padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:14px;border-inline-end:{{ ctaDivider }};border-bottom:{{ ctaDividerB }}">
+            <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5">{{ t.rq_title }}</span>
+            <span style="font-family:{{ fHead }};font-size:clamp(20px,1.9vw,26px);font-weight:500;line-height:1.25;color:#0B1B2B">{{ t.cta_title }}</span>
+            <button type="button" onClick="{{ openRfq }}" style="align-self:flex-start;height:46px;padding-inline:20px;white-space:nowrap;background:#0759A5;color:#FFFFFF;border:0;font:inherit;font-weight:700;font-size:14.5px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:background .25s" style-hover="background:#0B1B2B">{{ t.cta_quote }} <span aria-hidden="true">{{ arrow }}</span></button>
+          </div>
+          <div style="background:#D62828;color:#FFFFFF;display:flex;flex-direction:column;min-width:0">
+            <span style="display:flex;align-items:center;gap:10px;padding:clamp(20px,2.2vw,28px) clamp(20px,2.2vw,28px) 14px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;font-weight:500;line-height:1.4"><span style="width:8px;height:8px;border-radius:50%;background:#FFFFFF;animation:vmPulse 2.4s infinite;flex-shrink:0"></span>{{ t.aog_tag }}</span>
+            <a href="mailto:AOG@velmachaerospace.com?subject=AOG%20request" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px clamp(20px,2.2vw,28px);border-top:1px solid rgba(255,255,255,.28);color:#FFFFFF;text-decoration:none;transition:background .2s" style-hover="background:rgba(0,0,0,.12)">
+              <span style="display:flex;flex-direction:column;gap:1px;min-width:0">
+                <span style="font-size:12px;font-weight:600;opacity:.85">{{ t.aog_email }}</span>
+                <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;overflow-wrap:anywhere;text-align:{{ start }}">AOG@velmachaerospace.com</span>
+              </span>
+              <span aria-hidden="true" style="flex-shrink:0">{{ arrow }}</span>
+            </a>
+            <a href="tel:+971509259286" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px clamp(20px,2.2vw,28px) 16px;border-top:1px solid rgba(255,255,255,.28);color:#FFFFFF;text-decoration:none;transition:background .2s" style-hover="background:rgba(0,0,0,.12)">
+              <span style="display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:12px;font-weight:600;opacity:.85">{{ t.aog_call }}</span>
+                <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;text-align:{{ start }}">+971 50 925 9286</span>
+              </span>
+              <span aria-hidden="true" style="flex-shrink:0">{{ arrow }}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:{{ linkCols }};gap:36px 32px;border-top:1.5px solid #0B1B2B;padding-block:36px clamp(48px,6vw,72px)">
+        <nav aria-label="{{ t.f_quick }}" style="display:flex;flex-direction:column;gap:9px">
+          <h2 style="margin:0 0 8px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;font-weight:500">{{ t.f_quick }}</h2>
+          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7"><a href="{{ n.href }}" style="color:#1F2933;text-decoration:none;font-weight:500" style-hover="color:#0759A5">{{ n.label }}</a></sc-for>
+        </nav>
+        <nav aria-label="{{ t.f_cats }}" style="display:flex;flex-direction:column;gap:9px">
+          <h2 style="margin:0 0 8px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;font-weight:500">{{ t.f_cats }}</h2>
+          <sc-for list="{{ eco }}" as="c" hint-placeholder-count="7"><a href="{{ c.href }}" style="color:#1F2933;text-decoration:none;font-weight:500" style-hover="color:#0759A5">{{ c.t }}</a></sc-for>
+        </nav>
+        <nav aria-label="{{ t.f_services }}" style="display:flex;flex-direction:column;gap:9px">
+          <h2 style="margin:0 0 8px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;font-weight:500">{{ t.f_services }}</h2>
+          <sc-for list="{{ svcs }}" as="s" hint-placeholder-count="5"><a href="{{ s.href }}" style="color:#1F2933;text-decoration:none;font-weight:500" style-hover="color:#0759A5">{{ s.title }}</a></sc-for>
+        </nav>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <h2 style="margin:0 0 8px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;font-weight:500">{{ t.f_contact }}</h2>
+          <address style="font-style:normal;color:#374151;max-width:32ch">{{ t.addr }}</address>
+          <a href="tel:+971509259286" dir="ltr" style="color:#0B1B2B;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:{{ start }}">+971 50 925 9286</a>
+          <a href="tel:+971509155899" dir="ltr" style="color:#0B1B2B;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:{{ start }}">+971 50 915 5899</a>
+          <a href="mailto:info@velmachaerospace.com" dir="ltr" style="text-align:{{ start }}">info@velmachaerospace.com</a>
+          <a href="mailto:sales@velmachaerospace.com" dir="ltr" style="text-align:{{ start }}">sales@velmachaerospace.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#06111C;color:#8FA6BC;font-size:13px">
+    <div style="max-width:1360px;margin:0 auto;padding:18px clamp(16px,3.5vw,48px);display:flex;justify-content:space-between;align-items:center;gap:14px 24px;flex-wrap:wrap">
+      <span>{{ t.f_legal }}</span>
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+        <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12px">TRN 105160013600001</span>
+        <!-- TODO: replace social links -->
+        <div aria-label="{{ t.f_social }}" style="display:flex;gap:6px">
+          <a href="#" aria-label="LinkedIn" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#C9D3DD;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px" style-hover="border-color:#00AEEF;color:#FFFFFF">in</a>
+          <a href="#" aria-label="X" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#C9D3DD;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px" style-hover="border-color:#00AEEF;color:#FFFFFF">X</a>
+          <a href="#" aria-label="Instagram" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#C9D3DD;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px" style-hover="border-color:#00AEEF;color:#FFFFFF">ig</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { ready: false };
+  componentDidMount() {
+    const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    go();
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv();
+    return { ...v, ready: true, t,
+      logoAlt: v.ar ? 'شعار فيلماك إيروسبايس ش.م.ح' : 'Velmach Aerospace F.Z.C logo',
+      topCols: v.lg ? 'minmax(0,.9fr) minmax(0,1.4fr)' : 'minmax(0,1fr)',
+      ctaCols: v.sm ? 'minmax(0,1fr)' : 'minmax(0,1.15fr) minmax(0,1fr)',
+      ctaDivider: v.sm ? '0' : '1px solid #D3D9DF', ctaDividerB: v.sm ? '1px solid #D3D9DF' : '0',
+      linkCols: v.lg ? 'repeat(4,minmax(0,1fr))' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
+      openRfq: () => VM.openRfq(),
+      nav: VM.PAGES.map(k => ({ href: VM.HREF[k], label: t.nav[k] })),
+      eco: t.eco.map(c => ({ ...c, href: 'products.dc.html?cat=' + c.cat })),
+      svcs: t.services.map(s => ({ title: s.title, href: 'services.dc.html#svc-' + s.id })) };
+  }
+}
+</script>
+</body>
+</html>

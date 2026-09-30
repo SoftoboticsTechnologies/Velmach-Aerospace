@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Contact the AOG desk, sales, parts support and quality at Velmach Aerospace, Ajman Free Zone.">
+<meta property="og:title" content="Contact | Velmach Aerospace">
+<meta property="og:description" content="AOG desk, sales, parts support, quality and general contacts for Velmach Aerospace F.Z.C.">
+<meta property="og:type" content="website">
+<!-- TODO: replace canonical domain -->
+<link rel="canonical" href="https://www.velmachaerospace.com/contact.html">
+<link rel="alternate" hreflang="en" href="https://www.velmachaerospace.com/contact.html?lang=en">
+<link rel="alternate" hreflang="ar" href="https://www.velmachaerospace.com/contact.html?lang=ar">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<script src="js/i18n.js"></script>
+<script src="data/products.js"></script>
+<script src="js/vm-core.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#0759A5;text-underline-offset:4px}
+a:hover{color:#0B1B2B}
+*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
+@keyframes vmUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(214,40,40,.55)}70%{box-shadow:0 0 0 7px rgba(214,40,40,0)}100%{box-shadow:0 0 0 0 rgba(214,40,40,0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+
+<dc-import name="SiteHeader" page="contact" hint-size="100%,122px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px;display:grid;grid-template-columns:{{ cols }}">
+  <section aria-labelledby="c-h" style="background:#06111C;color:#FFFFFF;background-image:linear-gradient(rgba(120,170,220,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,220,.06) 1px,transparent 1px);background-size:48px 48px;padding:clamp(48px,6vw,96px) {{ padX }};display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:20px;animation:vmUp .8s both">
+      <div style="display:flex;align-items:center;gap:14px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#00AEEF"><span style="width:28px;height:1px;background:#00AEEF"></span>{{ t.c_eyebrow }}</div>
+      <h1 id="c-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(34px,4.2vw,60px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};max-width:14ch">{{ t.c_split_t }}</h1>
+      <p style="margin:0;color:#AFC0D0;max-width:44ch">{{ t.c_sub }}</p>
+    </div>
+    <ul style="list-style:none;margin:0;padding:0;border-top:1px solid rgba(255,255,255,.16)">
+      <sc-for list="{{ depts }}" as="d" hint-placeholder-count="5">
+        <li data-reveal="" data-reveal-delay="{{ d.delay }}">
+          <a href="{{ d.mailto }}" onMouseEnter="{{ d.enter }}" onMouseLeave="{{ d.leave }}" style="display:grid;grid-template-columns:{{ deptCols }};gap:4px 20px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);color:#FFFFFF;text-decoration:none;background:{{ d.bg }};padding-inline:{{ d.padIn }};transition:all .35s ease">
+            <span style="display:flex;flex-direction:column;gap:2px">
+              <span style="display:flex;align-items:center;gap:10px;font-weight:700;font-size:16.5px"><sc-if value="{{ d.isAog }}" hint-placeholder-val="{{ false }}"><span style="width:8px;height:8px;border-radius:50%;background:#D62828;animation:vmPulse 2.4s infinite"></span></sc-if>{{ d.t }}</span>
+              <span style="font-size:13.5px;color:#8FA6BC">{{ d.b }}</span>
+            </span>
+            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:{{ d.emailColor }};word-break:break-all;text-align:{{ start }}">{{ d.email }}</span>
+          </a>
+        </li>
+      </sc-for>
+    </ul>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:28px">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#7F93A7">{{ t.c_phones_t }}</span>
+        <a href="tel:+971509259286" dir="ltr" style="color:#FFFFFF;font-family:'IBM Plex Mono',monospace;font-size:17px;text-decoration:none;text-align:{{ start }}">+971 50 925 9286</a>
+        <a href="tel:+971509155899" dir="ltr" style="color:#FFFFFF;font-family:'IBM Plex Mono',monospace;font-size:17px;text-decoration:none;text-align:{{ start }}">+971 50 915 5899</a>
+        <a href="https://wa.me/971509259286" target="_blank" rel="noopener" style="margin-top:6px;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:#1F8A55;color:#FFFFFF;padding:10px 16px;text-decoration:none;font-weight:700;font-size:14px">{{ t.c_whatsapp }}</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#7F93A7">{{ t.c_hours_t }}</span>
+        <!-- TODO: replace business hours -->
+        <span style="font-weight:600">{{ t.c_hours }}</span>
+        <span style="display:flex;align-items:center;gap:8px;color:#FF9A9A;font-weight:700"><span style="width:7px;height:7px;border-radius:50%;background:#D62828"></span>{{ t.c_hours_aog }}</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#7F93A7">{{ t.c_addr_t }}</span>
+      <address style="font-style:normal;font-size:16px;max-width:44ch">{{ t.addr }}</address>
+      <!-- TODO: replace with Google Maps iframe embed for Ajman Free Zone -->
+      <div style="position:relative;aspect-ratio:16/8;border:1px solid rgba(255,255,255,.16);background-image:linear-gradient(rgba(120,170,220,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,220,.10) 1px,transparent 1px);background-size:24px 24px">
+        <span aria-hidden="true" style="position:absolute;left:58%;top:46%;width:14px;height:14px;background:#00AEEF;box-shadow:0 0 0 8px rgba(0,174,239,.18)"></span>
+        <span style="position:absolute;bottom:12px;inset-inline-start:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8FA6BC">{{ t.c_map }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="cf-h" style="padding:clamp(48px,6vw,96px) {{ padX }};display:flex;flex-direction:column;justify-content:flex-start">
+    <form onSubmit="{{ submit }}" noValidate="{{ true }}" data-reveal="" style="display:flex;flex-direction:column;gap:22px;max-width:560px;position:{{ sticky }};top:110px">
+      <h2 id="cf-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(26px,2.6vw,36px);font-weight:500">{{ t.c_form_t }}</h2>
+      <sc-for list="{{ fields }}" as="f" hint-placeholder-count="3">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#1F2933">{{ f.label }}
+          <input type="{{ f.type }}" value="{{ f.value }}" onChange="{{ f.onChange }}" aria-invalid="{{ f.invalid }}" dir="{{ f.dir }}" style="height:48px;border:0;border-bottom:1.5px solid {{ f.border }};font:inherit;font-weight:400;font-size:16px;outline:none;background:transparent;text-align:{{ start }}" style-focus="border-bottom-color:#0759A5">
+          <sc-if value="{{ f.err }}" hint-placeholder-val="{{ false }}"><span role="alert" style="color:#B01E1E;font-size:12.5px">{{ f.err }}</span></sc-if>
+        </label>
+      </sc-for>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#1F2933">{{ t.cf.message }}
+        <textarea value="{{ msg }}" onChange="{{ onMsg }}" rows="5" aria-invalid="{{ msgInvalid }}" style="border:1px solid {{ msgBorder }};padding:12px;font:inherit;font-weight:400;font-size:16px;resize:vertical;outline:none" style-focus="border-color:#0759A5"></textarea>
+        <sc-if value="{{ msgErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="color:#B01E1E;font-size:12.5px">{{ msgErr }}</span></sc-if>
+      </label>
+      <button type="submit" style="height:54px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-weight:700;font-size:15.5px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding-inline:20px" style-hover="background:#0B1B2B"><span>{{ t.c_send }}</span><span aria-hidden="true">{{ arrow }}</span></button>
+      <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#6B7280;text-align:{{ start }}">TO: info@velmachaerospace.com</span>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin:0;color:#1E7A46;font-weight:600">{{ t.c_ok }}</p></sc-if>
+    </form>
+  </section>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const EMPTY = { name: '', email: '', subject: '', message: '' };
+class Component extends DCLogic {
+  state = { ready: false, f: { ...EMPTY }, err: {}, sent: false, hover: -1 };
+  componentDidMount() {
+    const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    go();
+  }
+  componentDidUpdate() { if (this.state.ready) { window.VM.meta('contact'); window.VM.reveal(); } }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  submit(e) {
+    e.preventDefault();
+    const c = this.state.f, err = {};
+    if (!c.name.trim()) err.name = 'req';
+    if (!c.email.trim()) err.email = 'req'; else if (!EMAIL_RE.test(c.email.trim())) err.email = 'email';
+    if (!c.message.trim()) err.message = 'req';
+    if (Object.keys(err).length) { this.setState({ err, sent: false }); return; }
+    window.location.href = `mailto:info@velmachaerospace.com?subject=${encodeURIComponent(c.subject || 'Website enquiry')}&body=${encodeURIComponent(`Name: ${c.name}\nEmail: ${c.email}\n\n${c.message}`)}`;
+    this.setState({ f: { ...EMPTY }, err: {}, sent: true });
+  }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), s = this.state;
+    const txt = c => c ? t.e[c] : '';
+    const set = k => e => { const val = e.target.value; this.setState(st => ({ f: { ...st.f, [k]: val }, err: { ...st.err, [k]: '' }, sent: false })); };
+    return { ...v, ready: true, t,
+      cols: v.lg ? 'minmax(0,1.05fr) minmax(0,1fr)' : 'minmax(0,1fr)', padX: v.lg ? 'clamp(32px,4.5vw,72px)' : 'clamp(16px,4vw,40px)',
+      sticky: v.lg ? 'sticky' : 'static', deptCols: v.sm ? 'minmax(0,1fr)' : 'minmax(0,1fr) auto',
+      depts: t.depts.map((d, i) => { const on = s.hover === i, a = d.id === 'aog';
+        return { ...d, isAog: a, mailto: 'mailto:' + d.email, delay: i * 70, padIn: on ? '14px' : '0px',
+          bg: on ? (a ? 'rgba(214,40,40,.14)' : 'rgba(0,174,239,.07)') : 'transparent', emailColor: a ? '#FF9A9A' : (on ? '#00AEEF' : '#C9D3DD'),
+          enter: () => this.setState({ hover: i }), leave: () => this.setState(st => st.hover === i ? { hover: -1 } : null) }; }),
+      fields: [['name', 'text'], ['email', 'email'], ['subject', 'text']].map(([k, type]) => ({ label: t.cf[k], type, value: s.f[k], onChange: set(k),
+        err: txt(s.err[k]), invalid: !!s.err[k], border: s.err[k] ? '#D62828' : '#B7C0C9', dir: type === 'email' ? 'ltr' : 'auto' })),
+      msg: s.f.message, onMsg: set('message'), msgErr: txt(s.err.message), msgInvalid: !!s.err.message, msgBorder: s.err.message ? '#D62828' : '#B7C0C9',
+      sent: s.sent, submit: e => this.submit(e) };
+  }
+}
+</script>
+</body>
+</html>
