@@ -9,84 +9,88 @@
 <x-dc>
 <helmet>
 <script src="js/i18n.js"></script>
-<script src="data/products.js"></script>
 <script src="js/vm-core.js"></script>
 </helmet>
 <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
-<footer dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:1.6;font-size:14.5px;color:#374151">
-  <div style="background-color:#F4F6F8;background-image:linear-gradient(#E6EAEE 1px,transparent 1px),linear-gradient(90deg,#E6EAEE 1px,transparent 1px);background-size:48px 48px;border-top:1px solid #D3D9DF">
-    <div style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,3.5vw,48px) 0">
+<footer dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:1.5;font-size:15px;color:#1F2933">
+  <div style="position:relative;overflow:hidden;background:linear-gradient(180deg,#F5F8FC 0%,#E9F0F8 100%);border-top:1px solid #E1E8F0">
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 70% at 0% 100%,rgba(7,89,165,.07),transparent 60%),radial-gradient(90% 60% at 100% 0%,rgba(0,174,239,.06),transparent 60%)"></div>
+    <div aria-hidden="true" style="position:absolute;top:0;bottom:0;inset-inline-end:0;width:min(46%,640px);pointer-events:none;background-image:radial-gradient(rgba(7,89,165,.16) 1.2px,transparent 1.3px);background-size:11px 11px;-webkit-mask-image:radial-gradient(70% 60% at 70% 35%,#000 0%,transparent 75%);mask-image:radial-gradient(70% 60% at 70% 35%,#000 0%,transparent 75%)"></div>
+    <svg aria-hidden="true" viewBox="0 0 1440 400" preserveAspectRatio="none" style="position:absolute;left:0;right:0;bottom:0;width:100%;height:70%;pointer-events:none">
+      <path d="M0 260 C 360 120, 760 420, 1440 230 L1440 400 L0 400 Z" fill="rgba(255,255,255,.45)"></path>
+      <path d="M0 330 C 420 220, 900 420, 1440 300" fill="none" stroke="rgba(7,89,165,.08)" stroke-width="2"></path>
+    </svg>
 
-      <div style="display:grid;grid-template-columns:{{ topCols }};gap:40px 64px;align-items:center;padding-bottom:clamp(40px,5vw,64px)">
-        <div style="display:flex;flex-direction:column;gap:22px">
-          <a href="index.html" aria-label="Velmach Aerospace, home" style="display:flex;align-self:flex-start">
-            <img src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" loading="lazy" style="height:clamp(96px,9vw,132px);width:auto;display:block">
+    <div style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,3.5vw,48px) clamp(40px,5vw,64px);display:grid;grid-template-columns:{{ cols }};gap:{{ gap }}">
+
+      <nav aria-label="{{ t.f_quick }}" style="display:flex;flex-direction:column;padding-inline-end:{{ colPad }};border-inline-end:{{ divider }}">
+        <h2 style="margin:0 0 26px;font-size:13px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#0759A5">{{ t.f_quick }}<span style="display:block;width:34px;height:2px;background:#0759A5;margin-top:12px"></span></h2>
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+          <a href="{{ n.href }}" aria-current="{{ n.current }}" style="display:flex;align-items:center;gap:18px;padding:9px 14px;margin-inline:-14px;border-radius:6px;background:{{ n.bg }};color:#1F2933;text-decoration:none;transition:background .2s,color .2s" style-hover="background:rgba(7,89,165,.07);color:#0759A5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0759A5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="{{ n.icon }}"></path></svg>
+            <span>{{ n.label }}</span>
           </a>
-          <p style="margin:0;color:#4B5563;font-size:15.5px;max-width:40ch">{{ t.f_desc }}</p>
-        </div>
-        <div style="background:#FFFFFF;border:1px solid #D3D9DF;display:grid;grid-template-columns:{{ ctaCols }}">
-          <div style="padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:14px;border-inline-end:{{ ctaDivider }};border-bottom:{{ ctaDividerB }}">
-            <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5">{{ t.rq_title }}</span>
-            <span style="font-family:{{ fHead }};font-size:clamp(20px,1.9vw,26px);font-weight:500;line-height:1.25;color:#0B1B2B">{{ t.cta_title }}</span>
-            <button type="button" onClick="{{ openRfq }}" style="align-self:flex-start;height:46px;padding-inline:20px;white-space:nowrap;background:#0759A5;color:#FFFFFF;border:0;font:inherit;font-weight:700;font-size:14.5px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:background .25s" style-hover="background:#0B1B2B">{{ t.cta_quote }} <span aria-hidden="true">{{ arrow }}</span></button>
-          </div>
-          <div style="background:#D62828;color:#FFFFFF;display:flex;flex-direction:column;min-width:0">
-            <span style="display:flex;align-items:center;gap:10px;padding:clamp(20px,2.2vw,28px) clamp(20px,2.2vw,28px) 14px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;font-weight:500;line-height:1.4"><span style="width:8px;height:8px;border-radius:50%;background:#FFFFFF;animation:vmPulse 2.4s infinite;flex-shrink:0"></span>{{ t.aog_tag }}</span>
-            <a href="mailto:AOG@velmachaerospace.com?subject=AOG%20request" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px clamp(20px,2.2vw,28px);border-top:1px solid rgba(255,255,255,.28);color:#FFFFFF;text-decoration:none;transition:background .2s" style-hover="background:rgba(0,0,0,.12)">
-              <span style="display:flex;flex-direction:column;gap:1px;min-width:0">
-                <span style="font-size:12px;font-weight:600;opacity:.85">{{ t.aog_email }}</span>
-                <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;overflow-wrap:anywhere;text-align:{{ start }}">AOG@velmachaerospace.com</span>
-              </span>
-              <span aria-hidden="true" style="flex-shrink:0">{{ arrow }}</span>
-            </a>
-            <a href="tel:+971509259286" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px clamp(20px,2.2vw,28px) 16px;border-top:1px solid rgba(255,255,255,.28);color:#FFFFFF;text-decoration:none;transition:background .2s" style-hover="background:rgba(0,0,0,.12)">
-              <span style="display:flex;flex-direction:column;gap:1px">
-                <span style="font-size:12px;font-weight:600;opacity:.85">{{ t.aog_call }}</span>
-                <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;text-align:{{ start }}">+971 50 925 9286</span>
-              </span>
-              <span aria-hidden="true" style="flex-shrink:0">{{ arrow }}</span>
-            </a>
-          </div>
-        </div>
-      </div>
+        </sc-for>
+      </nav>
 
-      <div style="display:grid;grid-template-columns:{{ linkCols }};gap:36px 32px;border-top:1.5px solid #0B1B2B;padding-block:36px clamp(48px,6vw,72px)">
-        <nav aria-label="{{ t.f_quick }}" style="display:flex;flex-direction:column;gap:9px">
-          <h2 style="margin:0 0 8px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;font-weight:500">{{ t.f_quick }}</h2>
-          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7"><a href="{{ n.href }}" style="color:#1F2933;text-decoration:none;font-weight:500" style-hover="color:#0759A5">{{ n.label }}</a></sc-for>
-        </nav>
-        <nav aria-label="{{ t.f_cats }}" style="display:flex;flex-direction:column;gap:9px">
-          <h2 style="margin:0 0 8px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;font-weight:500">{{ t.f_cats }}</h2>
-          <sc-for list="{{ eco }}" as="c" hint-placeholder-count="7"><a href="{{ c.href }}" style="color:#1F2933;text-decoration:none;font-weight:500" style-hover="color:#0759A5">{{ c.t }}</a></sc-for>
-        </nav>
-        <nav aria-label="{{ t.f_services }}" style="display:flex;flex-direction:column;gap:9px">
-          <h2 style="margin:0 0 8px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;font-weight:500">{{ t.f_services }}</h2>
-          <sc-for list="{{ svcs }}" as="s" hint-placeholder-count="5"><a href="{{ s.href }}" style="color:#1F2933;text-decoration:none;font-weight:500" style-hover="color:#0759A5">{{ s.title }}</a></sc-for>
-        </nav>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <h2 style="margin:0 0 8px;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;font-weight:500">{{ t.f_contact }}</h2>
-          <address style="font-style:normal;color:#374151;max-width:32ch">{{ t.addr }}</address>
-          <a href="tel:+971509259286" dir="ltr" style="color:#0B1B2B;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:{{ start }}">+971 50 925 9286</a>
-          <a href="tel:+971509155899" dir="ltr" style="color:#0B1B2B;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:{{ start }}">+971 50 915 5899</a>
-          <a href="mailto:info@velmachaerospace.com" dir="ltr" style="text-align:{{ start }}">info@velmachaerospace.com</a>
-          <a href="mailto:sales@velmachaerospace.com" dir="ltr" style="text-align:{{ start }}">sales@velmachaerospace.com</a>
+      <nav aria-label="{{ t.f_cats }}" style="display:flex;flex-direction:column;padding-inline:{{ midPad }};border-inline-end:{{ divider }}">
+        <h2 style="margin:0 0 26px;font-size:13px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#0759A5">{{ t.f_cats }}<span style="display:block;width:34px;height:2px;background:#0759A5;margin-top:12px"></span></h2>
+        <sc-for list="{{ eco }}" as="c" hint-placeholder-count="7">
+          <a href="{{ c.href }}" style="display:flex;align-items:center;gap:18px;padding-block:9px;color:#1F2933;text-decoration:none;transition:color .2s" style-hover="color:#0759A5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0759A5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="{{ c.icon }}"></path></svg>
+            <span>{{ c.t }}</span>
+          </a>
+        </sc-for>
+      </nav>
+
+      <nav aria-label="{{ t.f_services }}" style="display:flex;flex-direction:column;padding-inline:{{ midPad }};border-inline-end:{{ divider }}">
+        <h2 style="margin:0 0 26px;font-size:13px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#0759A5">{{ t.f_services }}<span style="display:block;width:34px;height:2px;background:#0759A5;margin-top:12px"></span></h2>
+        <sc-for list="{{ svcs }}" as="sv" hint-placeholder-count="5">
+          <a href="{{ sv.href }}" style="display:flex;align-items:center;gap:18px;padding-block:10px;color:#1F2933;text-decoration:none;transition:color .2s" style-hover="color:#0759A5">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0759A5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="{{ sv.icon }}"></path></svg>
+            <span>{{ sv.title }}</span>
+          </a>
+        </sc-for>
+      </nav>
+
+      <div style="display:flex;flex-direction:column;padding-inline-start:{{ colPad }}">
+        <h2 style="margin:0 0 26px;font-size:13px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#0759A5">{{ t.f_contact }}<span style="display:block;width:34px;height:2px;background:#0759A5;margin-top:12px"></span></h2>
+        <div style="display:flex;align-items:flex-start;gap:18px;padding-bottom:20px;border-bottom:1px solid rgba(7,89,165,.14);margin-bottom:12px">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#0759A5" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><path d="M12 22s7-6.4 7-12.2A7 7 0 0 0 5 9.8C5 15.6 12 22 12 22Zm0-9.3a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6Z"></path></svg>
+          <address style="font-style:normal;line-height:1.65;max-width:34ch">{{ t.addr }}</address>
         </div>
+        <a href="tel:+971509259286" style="display:flex;align-items:center;gap:18px;padding-block:8px;color:#1F2933;text-decoration:none" style-hover="color:#0759A5">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#0759A5" aria-hidden="true" style="flex-shrink:0"><path d="{{ phone }}"></path></svg>
+          <span dir="ltr" style="unicode-bidi:isolate">+971 50 925 9286</span>
+        </a>
+        <a href="tel:+971509155899" style="display:flex;align-items:center;gap:18px;padding-block:8px;color:#1F2933;text-decoration:none" style-hover="color:#0759A5">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#0759A5" aria-hidden="true" style="flex-shrink:0"><path d="{{ phone }}"></path></svg>
+          <span dir="ltr" style="unicode-bidi:isolate">+971 50 915 5899</span>
+        </a>
+        <a href="mailto:info@velmachaerospace.com" style="display:flex;align-items:center;gap:18px;padding-block:8px;color:#0759A5;text-decoration:underline;text-underline-offset:4px" style-hover="color:#0B1B2B">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink:0"><rect x="2" y="4.5" width="20" height="15" rx="1.5" fill="#0759A5"></rect><path d="M4.5 7.5 12 13l7.5-5.5" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span dir="ltr" style="unicode-bidi:isolate;overflow-wrap:anywhere">info@velmachaerospace.com</span>
+        </a>
+        <a href="mailto:sales@velmachaerospace.com" style="display:flex;align-items:center;gap:18px;padding-block:8px;color:#0759A5;text-decoration:underline;text-underline-offset:4px" style-hover="color:#0B1B2B">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink:0"><rect x="2" y="4.5" width="20" height="15" rx="1.5" fill="#0759A5"></rect><path d="M4.5 7.5 12 13l7.5-5.5" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span dir="ltr" style="unicode-bidi:isolate;overflow-wrap:anywhere">sales@velmachaerospace.com</span>
+        </a>
       </div>
     </div>
   </div>
 
-  <div style="background:#06111C;color:#8FA6BC;font-size:13px">
-    <div style="max-width:1360px;margin:0 auto;padding:18px clamp(16px,3.5vw,48px);display:flex;justify-content:space-between;align-items:center;gap:14px 24px;flex-wrap:wrap">
+  <div style="background:linear-gradient(90deg,#0E3462 0%,#164A84 55%,#0E3462 100%);color:#C9D7E8;font-size:13px;border-top:1px solid rgba(255,255,255,.14)">
+    <div style="max-width:1360px;margin:0 auto;padding:12px clamp(16px,3.5vw,48px);min-height:40px;display:flex;justify-content:space-between;align-items:center;gap:10px 24px;flex-wrap:wrap">
       <span>{{ t.f_legal }}</span>
-      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-        <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12px">TRN 105160013600001</span>
-        <!-- TODO: replace social links -->
-        <div aria-label="{{ t.f_social }}" style="display:flex;gap:6px">
-          <a href="#" aria-label="LinkedIn" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#C9D3DD;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px" style-hover="border-color:#00AEEF;color:#FFFFFF">in</a>
-          <a href="#" aria-label="X" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#C9D3DD;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px" style-hover="border-color:#00AEEF;color:#FFFFFF">X</a>
-          <a href="#" aria-label="Instagram" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#C9D3DD;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px" style-hover="border-color:#00AEEF;color:#FFFFFF">ig</a>
-        </div>
-      </div>
+      <span dir="ltr" style="display:inline-flex;align-items:center;gap:10px;padding-inline-start:16px;border-inline-start:1px solid rgba(255,255,255,.28)">
+        <span style="color:#FFFFFF;font-size:12.5px;font-weight:600">Powered By</span>
+        <sc-if value="{{ pbImg }}" hint-placeholder-val="{{ true }}">
+          <img src="assets/dripfunnel/DRIPFUNNEL%20white%20logo.png" alt="DripFunnel" onError="{{ pbErr }}" style="height:22px;width:auto;display:block">
+        </sc-if>
+        <sc-if value="{{ pbText }}" hint-placeholder-val="{{ false }}">
+          <span style="color:#FFFFFF;font-size:17px;font-weight:800;letter-spacing:-.01em">DripFunnel</span>
+        </sc-if>
+      </span>
     </div>
   </div>
 </footer>
@@ -94,7 +98,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { ready: false };
+  state = { ready: false, pbFail: false };
   componentDidMount() {
     const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
     go();
@@ -103,16 +107,44 @@ class Component extends DCLogic {
   renderVals() {
     if (!this.state.ready) return { ready: false };
     const VM = window.VM, t = VM.t(), v = VM.sv();
+    const file = (typeof location !== 'undefined' ? location.pathname.split('/').pop() : '') || 'index.html';
+    const cur = VM.PAGES.find(k => VM.HREF[k] === file) || (file === 'product.dc.html' ? 'products' : '');
+    const recycle = 'M7 19H4.8a1.8 1.8 0 0 1-1.6-2.7l4-6.8M11 19h8.2a1.8 1.8 0 0 0 1.6-2.7l-1.2-2M14 16l-3 3 3 3M8.3 13.6 7.2 9.5l-4.1 1.1M9.3 5.6l1.1-1.9a1.8 1.8 0 0 1 3.1 0l3.9 6.7M13.4 10.4l3.9-1.1 1.1 4.1';
+    const box = 'M12 2 3 7v10l9 5 9-5V7l-9-5ZM3 7l9 5 9-5M12 12v10';
+    // Line icons, 24px grid
+    const I = {
+      home: 'M3 10.5 12 3l9 7.5M5 9v12h5v-6h4v6h5V9',
+      about: 'M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20ZM12 11v6M12 7.5v.01',
+      products: box,
+      industries: 'M3 21V10l5 3v-3l5 3v-3l5 3V3h3v18ZM7 17h1M11 17h1M15 17h1',
+      services: 'M12 8.5a3.5 3.5 0 1 0 0 7a3.5 3.5 0 1 0 0-7ZM12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8',
+      quality: 'M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3ZM8.5 12l2.5 2.5 4.5-5',
+      blog: 'M5 3h10l4 4v14H5ZM15 3v4h4M8 11h8M8 15h8M8 19h5',
+      contact: 'M3 5h18v14H3ZM3 6l9 7 9-7',
+      parts: 'M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2Z',
+      lubchem: 'M9 3h6M10 3v6L4.2 18.8A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.3-2.2L14 9V3M7 15h10',
+      materials: 'M12 3 2 8l10 5 10-5-10-5ZM2 12.5l10 5 10-5M2 17l10 5 10-5',
+      oilgas: 'M4 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17M3 21h12M7 7h4v4H7ZM14 9h2l3 3v6a1.5 1.5 0 0 0 3 0V9l-3-3',
+      used: recycle,
+      petro: 'M6 3h12M6 21h12M7 3c-1.3 3-1.3 15 0 18M17 3c1.3 3 1.3 15 0 18M6.5 8h11M6.5 16h11',
+      consult: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9Z',
+      s_aog: 'M3 14v-2a9 9 0 0 1 18 0v2M3 14h3v6H4a1 1 0 0 1-1-1ZM21 14h-3v6h2a1 1 0 0 0 1-1ZM18 20c0 1.2-1.2 2-3 2h-2',
+      s_sourcing: 'M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20ZM2 12h20M12 2c2.8 3 2.8 17 0 20M12 2c-2.8 3-2.8 17 0 20',
+      s_logistics: 'M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4',
+      s_used: recycle,
+      s_consult: 'M9 11a3.5 3.5 0 1 0 0-7a3.5 3.5 0 1 0 0 7ZM2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.2a3.5 3.5 0 0 1 0 6.6M18 14.3c2 .8 3.5 2.8 3.5 5.7'
+    };
     return { ...v, ready: true, t,
-      logoAlt: v.ar ? 'شعار فيلماك إيروسبايس ش.م.ح' : 'Velmach Aerospace F.Z.C logo',
-      topCols: v.lg ? 'minmax(0,.9fr) minmax(0,1.4fr)' : 'minmax(0,1fr)',
-      ctaCols: v.sm ? 'minmax(0,1fr)' : 'minmax(0,1.15fr) minmax(0,1fr)',
-      ctaDivider: v.sm ? '0' : '1px solid #D3D9DF', ctaDividerB: v.sm ? '1px solid #D3D9DF' : '0',
-      linkCols: v.lg ? 'repeat(4,minmax(0,1fr))' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
-      openRfq: () => VM.openRfq(),
-      nav: VM.PAGES.map(k => ({ href: VM.HREF[k], label: t.nav[k] })),
-      eco: t.eco.map(c => ({ ...c, href: 'products.dc.html?cat=' + c.cat })),
-      svcs: t.services.map(s => ({ title: s.title, href: 'services.dc.html#svc-' + s.id })) };
+      pbImg: !this.state.pbFail, pbText: this.state.pbFail, pbErr: () => this.setState({ pbFail: true }),
+      cols: v.lg ? 'minmax(0,.8fr) minmax(0,1.1fr) minmax(0,1.1fr) minmax(0,1.2fr)' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
+      gap: v.lg ? '0' : '40px 32px',
+      divider: v.lg ? '1px solid rgba(7,89,165,.12)' : '0',
+      colPad: v.lg ? 'clamp(24px,3vw,56px)' : '0', midPad: v.lg ? 'clamp(24px,3vw,56px)' : '0',
+      phone: 'M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z',
+      nav: VM.PAGES.filter(k => k !== 'blog').map(k => ({ href: VM.HREF[k], label: t.nav[k], icon: I[k] || box,
+        current: cur === k ? 'page' : undefined, bg: cur === k ? 'rgba(7,89,165,.08)' : 'transparent' })),
+      eco: t.eco.map(c => ({ ...c, href: 'products.dc.html?cat=' + c.cat, icon: I[c.id] || box })),
+      svcs: t.services.map(s => ({ title: s.title, href: 'services.dc.html#svc-' + s.id, icon: I['s_' + s.id] || box })) };
   }
 }
 </script>

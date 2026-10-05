@@ -29,8 +29,8 @@
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var VM = window.VM = {
-    PAGES: ['home', 'about', 'products', 'industries', 'services', 'quality', 'contact'],
-    HREF: { home: 'index.html', about: 'about.dc.html', products: 'products.dc.html', industries: 'industries.dc.html', services: 'services.dc.html', quality: 'quality.dc.html', contact: 'contact.dc.html', rfq: 'rfq.dc.html' },
+    PAGES: ['home', 'about', 'products', 'industries', 'services', 'quality', 'blog', 'contact'],
+    HREF: { home: 'index.html', about: 'about.dc.html', products: 'products.dc.html', industries: 'industries.dc.html', services: 'services.dc.html', quality: 'quality.dc.html', blog: 'blogs.dc.html', contact: 'contact.dc.html', rfq: 'rfq.dc.html' },
     reduced: reduced,
     get lang() { return lang; },
     get bp() { return bpOf(window.innerWidth); },

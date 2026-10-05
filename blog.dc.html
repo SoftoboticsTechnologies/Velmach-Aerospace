@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Velmach Aerospace blog article.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<script src="js/i18n.js"></script>
+<script src="data/blogs.js"></script>
+<script src="js/vm-core.js"></script>
+<script src="js/routes.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+*{box-sizing:border-box}
+a{color:#0759A5;text-underline-offset:4px}
+a:hover{color:#0B1B2B}
+*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
+@keyframes vmUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}html,body{scroll-behavior:auto}}
+</style>
+</helmet>
+
+<dc-import name="SiteHeader" page="blog" hint-size="100%,122px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px">
+  <div style="border-bottom:1px solid #E3E7EB;background:#F7F9FA">
+    <nav aria-label="Breadcrumb" style="max-width:1360px;margin:0 auto;padding:14px clamp(16px,3.5vw,48px);display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13.5px;color:#6B7280">
+      <a href="{{ homeHref }}" style="color:#4B5563;text-decoration:none" style-hover="color:#0759A5">{{ t.nav.home }}</a><span aria-hidden="true">/</span>
+      <a href="{{ listHref }}" style="color:#4B5563;text-decoration:none" style-hover="color:#0759A5">{{ t.nav.blog }}</a>
+      <sc-if value="{{ found }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true">/</span><a href="{{ catHref }}" style="color:#4B5563;text-decoration:none" style-hover="color:#0759A5">{{ cat }}</a></sc-if>
+    </nav>
+  </div>
+
+  <sc-if value="{{ found }}" hint-placeholder-val="{{ true }}">
+    <article>
+      <header style="max-width:1100px;margin:0 auto;padding:clamp(32px,5vw,72px) clamp(16px,3.5vw,48px) clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:18px;animation:vmUp .6s both">
+        <a href="{{ catHref }}" style="align-self:flex-start;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;text-decoration:none">{{ cat }}</a>
+        <h1 dir="ltr" style="margin:0;font-family:{{ fHead }};font-weight:500;font-size:clamp(30px,4vw,54px);line-height:1.1;letter-spacing:-0.015em;text-align:{{ start }};text-wrap:balance">{{ title }}</h1>
+        <p dir="ltr" style="margin:0;color:#4B5563;font-size:clamp(17px,1.4vw,19px);max-width:62ch;text-align:{{ start }}">{{ excerpt }}</p>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13.5px;color:#6B7280;border-top:1px solid #E3E7EB;padding-top:16px">
+          <span>{{ t.b_published }} <time datetime="{{ iso }}" style="color:#0B1B2B;font-weight:600">{{ date }}</time></span><span aria-hidden="true">·</span><span>{{ mins }}</span>
+          <sc-if value="{{ ar }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true">·</span><span>{{ t.b_en_only }}</span></sc-if>
+        </div>
+      </header>
+      <div style="max-width:1100px;margin:0 auto;padding-inline:clamp(16px,3.5vw,48px);animation:vmUp .6s .08s both">
+        <img src="{{ img }}" alt="{{ alt }}" decoding="async" width="1200" height="630" style="width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;display:block;background:#06111C">
+      </div>
+
+      <div style="max-width:1100px;margin:0 auto;padding:clamp(32px,4vw,56px) clamp(16px,3.5vw,48px) clamp(48px,6vw,88px);display:grid;grid-template-columns:{{ bodyCols }};gap:clamp(32px,5vw,72px);align-items:start">
+        <div dir="ltr" style="min-width:0;max-width:70ch;font-size:17px;line-height:1.75;color:#1F2933;text-align:left">
+          <sc-for list="{{ blocks }}" as="k" hint-placeholder-count="8">
+            <sc-if value="{{ k.h2 }}" hint-placeholder-val="{{ false }}"><h2 id="{{ k.id }}" style="margin:44px 0 14px;font-family:'Space Grotesk',system-ui,sans-serif;font-size:clamp(23px,2.2vw,29px);font-weight:500;line-height:1.25;color:#0B1B2B;scroll-margin-top:110px">{{ k.h2 }}</h2></sc-if>
+            <sc-if value="{{ k.h3 }}" hint-placeholder-val="{{ false }}"><h3 style="margin:28px 0 8px;font-family:'Space Grotesk',system-ui,sans-serif;font-size:19px;font-weight:500;line-height:1.3;color:#0B1B2B">{{ k.h3 }}</h3></sc-if>
+            <sc-if value="{{ k.p }}" hint-placeholder-val="{{ true }}"><p style="margin:0 0 18px">{{ k.p }}</p></sc-if>
+            <sc-if value="{{ k.isList }}" hint-placeholder-val="{{ false }}">
+              <ul style="margin:0 0 22px;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+                <sc-for list="{{ k.ul }}" as="li" hint-placeholder-count="3"><li style="position:relative;padding-left:26px"><span aria-hidden="true" style="position:absolute;left:2px;top:.75em;width:10px;height:1.5px;background:#0759A5"></span>{{ li }}</li></sc-for>
+              </ul>
+            </sc-if>
+          </sc-for>
+        </div>
+
+        <aside style="position:{{ stickyPos }};top:110px;display:flex;flex-direction:column;gap:28px">
+          <sc-if value="{{ lg }}" hint-placeholder-val="{{ true }}">
+            <nav aria-label="{{ t.b_toc }}" style="display:flex;flex-direction:column;gap:2px;border-inline-start:1px solid #E3E7EB">
+              <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#6B7280;padding-inline-start:16px;margin-bottom:8px">{{ t.b_toc }}</span>
+              <sc-for list="{{ toc }}" as="h" hint-placeholder-count="5">
+                <a href="{{ h.href }}" dir="ltr" style="display:block;padding:6px 16px;margin-inline-start:-1px;border-inline-start:2px solid transparent;font-size:14px;line-height:1.4;color:#374151;text-decoration:none;text-align:{{ start }};transition:border-color .2s,color .2s" style-hover="border-color:#0759A5;color:#0759A5">{{ h.label }}</a>
+              </sc-for>
+            </nav>
+          </sc-if>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#6B7280">{{ t.b_share }}</span>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ shares }}" as="s" hint-placeholder-count="4">
+                <a href="{{ s.href }}" target="_blank" rel="noopener" aria-label="{{ s.label }}" title="{{ s.label }}" style="width:42px;height:42px;border:1px solid #D3D9DF;display:flex;align-items:center;justify-content:center;color:#0B1B2B;transition:all .2s" style-hover="border-color:#0759A5;color:#0759A5">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="{{ s.d }}"></path></svg>
+                </a>
+              </sc-for>
+              <button type="button" onClick="{{ copy }}" style="height:42px;padding-inline:14px;border:1px solid #D3D9DF;background:#FFFFFF;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;color:#0B1B2B">{{ copyLabel }}</button>
+            </div>
+          </div>
+          <div style="background:#06111C;color:#FFFFFF;padding:22px;display:flex;flex-direction:column;gap:12px;background-image:linear-gradient(rgba(120,170,220,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,220,.07) 1px,transparent 1px);background-size:24px 24px">
+            <span style="font-family:{{ fHead }};font-size:19px;font-weight:500;line-height:1.25">{{ t.b_cta_t }}</span>
+            <span style="font-size:14px;color:#AFC0D0">{{ t.b_cta_b }}</span>
+            <a href="{{ rfqHref }}" style="align-self:flex-start;height:44px;padding-inline:16px;background:#0759A5;color:#FFFFFF;display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:14px;text-decoration:none" style-hover="background:#0A6BC4;color:#FFFFFF">{{ t.b_cta_btn }} <span aria-hidden="true">{{ arrow }}</span></a>
+          </div>
+        </aside>
+      </div>
+    </article>
+
+    <nav aria-label="{{ t.b_prev }} / {{ t.b_next }}" style="max-width:1100px;margin:0 auto;padding:0 clamp(16px,3.5vw,48px) clamp(48px,6vw,80px);display:grid;grid-template-columns:{{ pnCols }};gap:16px">
+      <sc-if value="{{ prev }}" hint-placeholder-val="{{ true }}">
+        <a href="{{ prev.href }}" style="display:flex;flex-direction:column;gap:6px;padding:20px;border:1px solid #E3E7EB;color:#0B1B2B;text-decoration:none;transition:border-color .3s" style-hover="border-color:#9FB4C8">
+          <span style="font-size:13px;color:#6B7280">{{ back }} {{ t.b_prev }}</span><span dir="ltr" style="font-family:{{ fHead }};font-size:17px;font-weight:500;line-height:1.3;text-align:{{ start }}">{{ prev.title }}</span>
+        </a>
+      </sc-if>
+      <sc-if value="{{ noPrev }}" hint-placeholder-val="{{ false }}"><span></span></sc-if>
+      <sc-if value="{{ next }}" hint-placeholder-val="{{ true }}">
+        <a href="{{ next.href }}" style="display:flex;flex-direction:column;gap:6px;padding:20px;border:1px solid #E3E7EB;color:#0B1B2B;text-decoration:none;text-align:{{ end }};transition:border-color .3s" style-hover="border-color:#9FB4C8">
+          <span style="font-size:13px;color:#6B7280">{{ t.b_next }} {{ arrow }}</span><span dir="ltr" style="font-family:{{ fHead }};font-size:17px;font-weight:500;line-height:1.3;text-align:{{ end }}">{{ next.title }}</span>
+        </a>
+      </sc-if>
+    </nav>
+
+    <section aria-labelledby="rel-h" style="background:#F4F6F8;border-top:1px solid #E3E7EB">
+      <div style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(16px,3.5vw,48px)">
+        <div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px">
+          <h2 id="rel-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(24px,2.4vw,32px);font-weight:500;line-height:1.2">{{ t.b_related }}</h2>
+          <a href="{{ listHref }}" style="font-weight:700;font-size:14.5px;text-decoration:none;display:inline-flex;gap:8px">{{ t.b_back }} <span aria-hidden="true">{{ arrow }}</span></a>
+        </div>
+        <div style="display:grid;grid-template-columns:{{ relCols }};gap:clamp(16px,2vw,24px)">
+          <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+            <a href="{{ r.href }}" style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E3E7EB;color:#0B1B2B;text-decoration:none;transition:border-color .3s,box-shadow .3s" style-hover="border-color:#9FB4C8;box-shadow:0 14px 36px rgba(11,27,43,.08)">
+              <span style="display:block;aspect-ratio:1200/630;overflow:hidden;background:#06111C"><img src="{{ r.img }}" alt="{{ r.alt }}" loading="lazy" decoding="async" width="1200" height="630" style="width:100%;height:100%;object-fit:cover;display:block"></span>
+              <span style="padding:18px;display:flex;flex-direction:column;gap:8px">
+                <span style="font-family:{{ fMono }};font-size:11px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5">{{ r.cat }}</span>
+                <span dir="ltr" style="font-family:{{ fHead }};font-size:18px;font-weight:500;line-height:1.3;text-align:{{ start }}">{{ r.title }}</span>
+                <span style="font-size:13px;color:#6B7280">{{ r.date }} · {{ r.mins }}</span>
+              </span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ missing }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,6vw,96px) clamp(16px,3.5vw,48px)">
+      <div style="border:1px solid #D3D9DF;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:14px;align-items:flex-start;max-width:720px">
+        <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(26px,2.6vw,36px);font-weight:500;line-height:1.2">{{ t.b_missing_t }}</h1>
+        <p style="margin:0;color:#4B5563;max-width:52ch">{{ t.b_missing_b }}</p>
+        <a href="{{ listHref }}" style="height:50px;padding-inline:22px;background:#0759A5;color:#FFFFFF;display:inline-flex;align-items:center;gap:10px;font-weight:700;text-decoration:none" style-hover="background:#0B1B2B;color:#FFFFFF">{{ t.b_back }} <span aria-hidden="true">{{ arrow }}</span></a>
+      </div>
+    </section>
+  </sc-if>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const words = a => a.body.reduce((n, b) => n + String(b.p || b.h2 || b.h3 || (b.ul || []).join(' ')).split(/\s+/).length, 0);
+const ICONS = {
+  linkedin: 'M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z',
+  x: 'M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.78zm-1.08 16.17h1.7L7.4 4.74H5.58z',
+  whatsapp: 'M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.24-1.37A9.9 9.9 0 1 0 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.94 1.35-.5.05-1.12.07-1.8-.11a16.4 16.4 0 0 1-1.64-.6c-2.88-1.25-4.76-4.15-4.9-4.34-.14-.2-1.17-1.55-1.17-2.97s.74-2.11 1-2.4c.27-.28.58-.35.78-.35h.56c.18 0 .42-.07.66.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.2-.14.31-.29.48l-.43.5c-.14.14-.29.3-.12.59.17.28.75 1.24 1.6 2 1.1.98 2.03 1.28 2.32 1.43.29.14.46.12.63-.07.17-.2.73-.85.92-1.14.2-.29.39-.24.65-.14.27.1 1.68.79 1.97.93.29.15.48.22.55.34.07.12.07.68-.17 1.35z',
+  mail: 'M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.2 7H4v.8l8 5.4 8-5.4V7h-.2z'
+};
+class Component extends DCLogic {
+  state = { ready: false, copied: false };
+  componentDidMount() {
+    const go = () => { if (window.VM && window.VM_I18N && window.VM_BLOGS && window.VM_ROUTES) { this.slug = window.VM_ROUTES.slugFrom('blog'); this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    go();
+  }
+  componentDidUpdate() {
+    if (!this.state.ready) return;
+    const R = window.VM_ROUTES, t = window.VM.t(), a = this.article();
+    if (!a) { R.head({ title: t.b_missing_t + ' | Velmach Aerospace', description: t.b_missing_b, noindex: true }); return; }
+    const url = R.canonical.blog(a.slug), image = R.abs(a.image);
+    R.head({ title: a.seoTitle, description: a.description, url, image, type: 'article', published: a.date, ld: {
+      '@context': 'https://schema.org', '@type': 'BlogPosting', headline: a.title, description: a.description, image, datePublished: a.date, dateModified: a.updated || a.date,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url }, articleSection: t.b_cats[a.category], keywords: a.tags.join(', '), wordCount: words(a), inLanguage: 'en',
+      author: { '@type': 'Organization', name: 'Velmach Aerospace F.Z.C', url: R.site },
+      publisher: { '@type': 'Organization', name: 'Velmach Aerospace F.Z.C', logo: { '@type': 'ImageObject', url: R.abs('assets/img/velmach-logo.png') } } } });
+  }
+  componentWillUnmount() { clearTimeout(this.tw); clearTimeout(this.tc); this.unsub && this.unsub(); }
+  article() { return window.VM_BLOGS.find(a => a.slug === this.slug); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, R = window.VM_ROUTES, t = VM.t(), v = VM.sv(), B = window.VM_BLOGS, a = this.article();
+    const base = { ...v, ready: true, t, homeHref: R.home(v.ar), listHref: R.blogs(v.ar), back: v.ar ? '→' : '←' };
+    if (!a) return { ...base, found: false, missing: true };
+    const fmt = d => new Intl.DateTimeFormat(v.ar ? 'ar' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(d + 'T00:00:00'));
+    const mins = x => t.b_min.replace('{n}', Math.max(1, Math.round(words(x) / 200)));
+    let h = 0;
+    const blocks = a.body.map(b => ({ h2: b.h2 || '', h3: b.h3 || '', p: b.p || '', ul: b.ul || [], isList: !!b.ul, id: b.h2 ? 'sec-' + (++h) : '' }));
+    const toc = blocks.filter(b => b.h2).map(b => ({ label: b.h2, href: '#' + b.id }));
+    const at = B.indexOf(a), link = x => x ? { href: R.blog(x.slug, v.ar), title: x.title } : null;
+    // related: shared tags weigh more than a shared category
+    const related = B.filter(x => x !== a).map(x => ({ x, score: x.tags.filter(g => a.tags.includes(g)).length * 2 + (x.category === a.category ? 3 : 0) - Math.abs(B.indexOf(x) - at) * 0.01 }))
+      .sort((p, q) => q.score - p.score).slice(0, 3)
+      .map(({ x }) => ({ href: R.blog(x.slug, v.ar), img: R.asset(x.image), alt: x.imageAlt, title: x.title, cat: t.b_cats[x.category], date: fmt(x.date), mins: mins(x) }));
+    const url = R.canonical.blog(a.slug), eu = encodeURIComponent(url), et = encodeURIComponent(a.title);
+    return {
+      ...base, found: true, missing: false, title: a.title, excerpt: a.excerpt, cat: t.b_cats[a.category], catHref: R.blogs(v.ar, a.category),
+      iso: a.date, date: fmt(a.date), mins: mins(a), img: R.asset(a.image), alt: a.imageAlt, blocks, toc,
+      bodyCols: v.lg ? 'minmax(0,1fr) 280px' : 'minmax(0,1fr)', stickyPos: v.lg ? 'sticky' : 'static',
+      shares: [
+        { label: 'LinkedIn', d: ICONS.linkedin, href: 'https://www.linkedin.com/sharing/share-offsite/?url=' + eu },
+        { label: 'X', d: ICONS.x, href: 'https://twitter.com/intent/tweet?url=' + eu + '&text=' + et },
+        { label: 'WhatsApp', d: ICONS.whatsapp, href: 'https://wa.me/?text=' + et + '%20' + eu },
+        { label: 'Email', d: ICONS.mail, href: 'mailto:?subject=' + et + '&body=' + eu }
+      ],
+      copyLabel: this.state.copied ? t.b_copied : t.b_copy,
+      copy: () => { const done = () => { this.setState({ copied: true }); clearTimeout(this.tc); this.tc = setTimeout(() => this.setState({ copied: false }), 2200); };
+        if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(done, done); else done(); },
+      rfqHref: 'rfq.dc.html' + (v.ar ? '?lang=ar' : ''),
+      prev: link(B[at - 1]), next: link(B[at + 1]), noPrev: !B[at - 1], pnCols: v.sm ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1fr)',
+      related, relCols: v.lg ? 'repeat(3,minmax(0,1fr))' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)'
+    };
+  }
+}
+</script>
+</body>
+</html>

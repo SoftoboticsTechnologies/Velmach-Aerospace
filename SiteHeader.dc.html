@@ -11,7 +11,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <script src="js/i18n.js"></script>
-<script src="data/products.js"></script>
 <script src="js/vm-core.js"></script>
 <style>
 html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
@@ -60,11 +59,24 @@ a:hover{color:#0B1B2B}
       </a>
       <sc-if value="{{ lg }}" hint-placeholder-val="{{ true }}">
         <nav aria-label="Main" style="display:flex;align-items:stretch;gap:4px;flex:1;height:100%;justify-content:center">
-          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
-            <a href="{{ n.href }}" aria-current="{{ n.current }}" style="position:relative;display:flex;align-items:center;padding-inline:12px;font-size:14.5px;font-weight:{{ n.weight }};color:{{ n.color }};text-decoration:none;white-space:nowrap;transition:color .2s" style-hover="color:#0B1B2B">
+          <sc-for list="{{ navMain }}" as="n" hint-placeholder-count="7">
+            <div onMouseEnter="{{ n.enter }}" onMouseLeave="{{ n.leave }}" onFocus="{{ n.enter }}" onBlur="{{ n.blur }}" style="position:relative;display:flex">
+            <a href="{{ n.href }}" aria-current="{{ n.current }}" aria-haspopup="{{ n.popup }}" aria-expanded="{{ n.expanded }}" style="position:relative;display:flex;align-items:center;padding-inline:12px;font-size:14.5px;font-weight:{{ n.weight }};color:{{ n.color }};text-decoration:none;white-space:nowrap;transition:color .2s" style-hover="color:#0B1B2B">
               {{ n.label }}
               <span style="position:absolute;bottom:0;inset-inline:12px;height:2px;background:#0759A5;transform:scaleX({{ n.bar }});transform-origin:center;transition:transform .35s ease"></span>
             </a>
+            <sc-if value="{{ n.showMenu }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:100%;inset-inline-start:0;padding-top:6px;z-index:120;animation:vmFade .18s ease">
+                <ul style="list-style:none;margin:0;padding:0;width:200px;background:#FFFFFF;border:1px solid #E3E7EB;box-shadow:0 16px 40px rgba(6,17,28,.14)">
+                  <sc-for list="{{ prodCats }}" as="c" hint-placeholder-count="9">
+                    <li style="border-bottom:1px solid #E3E7EB">
+                      <a href="{{ c.href }}" style="display:block;padding:11px 16px;border-inline-start:3px solid {{ c.edge }};font-size:14px;font-weight:700;color:#0B1B2B;text-decoration:none;transition:background .15s,border-color .15s" style-hover="background:#F2F6FA;border-inline-start-color:#0759A5;color:#0759A5">{{ c.label }}</a>
+                    </li>
+                  </sc-for>
+                </ul>
+              </div>
+            </sc-if>
+            </div>
           </sc-for>
         </nav>
       </sc-if>
@@ -75,12 +87,15 @@ a:hover{color:#0B1B2B}
           <input type="search" name="q" placeholder="{{ t.p_pn_label }}" aria-label="{{ t.search_aria }}" style="flex:1;min-width:0;border:0;background:transparent;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#0B1B2B;outline:none;height:100%">
         </form>
       </sc-if>
+      <button type="button" onClick="{{ openRfq }}" aria-haspopup="dialog" aria-label="{{ cartLabel }}" title="{{ cartLabel }}" style="position:relative;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;background:#FFFFFF;color:#0B1B2B;border:1px solid #D3D9DF;border-radius:2px;cursor:pointer;flex-shrink:0;transition:border-color .2s,color .2s" style-hover="border-color:#0759A5;color:#0759A5">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2.5 3.5h3l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1l1.7-6.8H6.6"></path></svg>
+        <sc-if value="{{ hasCount }}" hint-placeholder-val="{{ false }}">
+          <span aria-label="{{ t.rfq_aria }}" style="position:absolute;top:-8px;inset-inline-end:-8px;min-width:20px;height:20px;padding-inline:5px;background:#00AEEF;color:#06111C;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;border-radius:10px">{{ count }}</span>
+        </sc-if>
+      </button>
       <button type="button" onClick="{{ openRfq }}" aria-haspopup="dialog" style="position:relative;display:inline-flex;align-items:center;gap:10px;height:44px;padding-inline:{{ rqPad }};background:#0759A5;color:#FFFFFF;border:0;border-radius:2px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;flex-shrink:0;transition:background .2s" style-hover="background:#0B1B2B">
         <sc-if value="{{ notSm }}" hint-placeholder-val="{{ true }}"><span>{{ t.cta_quote }}</span></sc-if>
         <sc-if value="{{ sm }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.08em">RFQ</span></sc-if>
-        <sc-if value="{{ hasCount }}" hint-placeholder-val="{{ false }}">
-          <span aria-label="{{ t.rfq_aria }}" style="min-width:22px;height:22px;padding-inline:6px;background:#00AEEF;color:#06111C;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;border-radius:11px">{{ count }}</span>
-        </sc-if>
       </button>
       <sc-if value="{{ notLg }}" hint-placeholder-val="{{ false }}">
         <button type="button" onClick="{{ openDrawer }}" aria-label="{{ t.menu }}" aria-expanded="{{ drawer }}" style="width:44px;height:44px;border:1px solid #D3D9DF;background:#FFFFFF;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:6px;padding-inline:11px;cursor:pointer;flex-shrink:0">
@@ -136,30 +151,6 @@ a:hover{color:#0B1B2B}
   </sc-if>
 
   <sc-if value="{{ showFloat }}" hint-placeholder-val="{{ true }}">
-    <div onMouseEnter="{{ aogIn }}" onMouseLeave="{{ aogOut }}" onFocus="{{ aogIn }}" onBlur="{{ aogBlur }}" dir="{{ dir }}" style="position:fixed;bottom:{{ floatB }};left:{{ floatX }};z-index:90;display:flex;flex-direction:column;align-items:flex-start;gap:10px">
-      <sc-if value="{{ aogOpen }}" hint-placeholder-val="{{ false }}">
-        <div role="group" aria-label="{{ t.aog_tag }}" style="width:300px;background:#FFFFFF;color:#0B1B2B;box-shadow:0 20px 50px rgba(6,17,28,.22);border-top:3px solid #D62828;animation:vmUp .28s cubic-bezier(.2,.7,.2,1);font-family:{{ fBody }}">
-          <div style="padding:16px 18px 12px;display:flex;flex-direction:column;gap:4px;border-bottom:1px solid #F0D6D6">
-            <span style="display:flex;align-items:center;gap:8px;white-space:nowrap;line-height:1.4;font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#B01E1E;font-weight:500"><span style="flex-shrink:0;width:7px;height:7px;border-radius:50%;background:#D62828;animation:vmPulse 2.4s infinite"></span>{{ t.aog_tag }}</span>
-            <span style="font-size:14px;color:#4B5563;line-height:1.45">{{ aogDesc }}</span>
-          </div>
-          <a href="mailto:AOG@velmachaerospace.com?subject=AOG%20request" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid #F3E3E3;text-decoration:none;color:#0B1B2B;transition:background .2s" style-hover="background:#FFF5F5">
-            <span style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:12px;font-weight:600;color:#6B7280">{{ t.aog_email }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;white-space:nowrap;text-align:{{ start }}">AOG@velmachaerospace.com</span></span>
-            <span aria-hidden="true" style="color:#D62828;flex-shrink:0">{{ arrow }}</span>
-          </a>
-          <a href="tel:+971509259286" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;text-decoration:none;color:#0B1B2B;transition:background .2s" style-hover="background:#FFF5F5">
-            <span style="display:flex;flex-direction:column;gap:1px"><span style="font-size:12px;font-weight:600;color:#6B7280">{{ t.aog_call }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;white-space:nowrap;text-align:{{ start }}">+971 50 925 9286</span></span>
-            <span aria-hidden="true" style="color:#D62828;flex-shrink:0">{{ arrow }}</span>
-          </a>
-        </div>
-      </sc-if>
-      <a href="mailto:AOG@velmachaerospace.com" aria-label="AOG 24/7, AOG@velmachaerospace.com" aria-expanded="{{ aogOpen }}" dir="ltr" style="display:flex;align-items:center;gap:10px;height:52px;padding-inline:18px 20px;background:{{ aogPillBg }};color:#FFFFFF;text-decoration:none;box-shadow:0 10px 28px rgba(214,40,40,.3);border-radius:26px;transition:background .25s ease">
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink:0;transform:rotate(45deg)"><path fill="#FFFFFF" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"></path></svg>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;font-weight:500;letter-spacing:.12em">AOG</span>
-        <span style="width:1px;height:18px;background:rgba(255,255,255,.4)"></span>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;opacity:.9">24/7</span>
-      </a>
-    </div>
     <a href="https://wa.me/971509259286" target="_blank" rel="noopener" aria-label="{{ t.float_wa }}" onMouseEnter="{{ waIn }}" onMouseLeave="{{ waOut }}" onFocus="{{ waIn }}" onBlur="{{ waOut }}" dir="ltr" style="position:fixed;bottom:{{ floatB }};right:{{ floatX }};z-index:90;height:56px;min-width:56px;border-radius:28px;background:#25D366;display:flex;align-items:center;justify-content:flex-end;gap:{{ waGap }};padding-inline:{{ waPadL }} 15px;box-shadow:0 10px 28px rgba(18,140,70,.3);text-decoration:none;transition:padding .35s cubic-bezier(.2,.7,.2,1),gap .35s ease">
       <span style="display:block;overflow:hidden;white-space:nowrap;max-width:{{ waLabelW }};opacity:{{ waLabelOp }};color:#0B3D20;font-family:{{ fBody }};font-weight:700;font-size:15px;transition:max-width .35s cubic-bezier(.2,.7,.2,1),opacity .25s ease">{{ waLabel }}</span>
       <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" style="flex-shrink:0"><path fill="#FFFFFF" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.900-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.200-1.8-1.9-3.9-1.9-6.1C4.9 9.8 9.9 4.9 16 4.9s11.1 4.9 11.1 10.9S22.1 26.4 16 26.4zm6.1-8.1c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1.1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.500c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.300-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"></path></svg>
@@ -177,11 +168,11 @@ a:hover{color:#0B1B2B}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;products&quot;,&quot;industries&quot;,&quot;services&quot;,&quot;quality&quot;,&quot;contact&quot;,&quot;rfq&quot;,&quot;404&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showFloating&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 class Component extends DCLogic {
-  state = { ready: false, scrolled: false, drawer: false, rfqOpen: false, toast: '', aogOpen: false, waOpen: false };
+  state = { ready: false, scrolled: false, drawer: false, rfqOpen: false, toast: '', waOpen: false, dd: false };
   progRef = React.createRef(); rfqRef = React.createRef(); drawerRef = React.createRef();
   componentDidMount() {
     const go = () => {
-      if (window.VM && window.VM_I18N && window.VM_PRODUCTS) {
+      if (window.VM && window.VM_I18N) {
         this.unsub = window.VM.subscribe(() => this.forceUpdate());
         this.setState({ ready: true }); this.onScroll();
       } else this.tw = setTimeout(go, 30);
@@ -193,7 +184,7 @@ class Component extends DCLogic {
     this.onKey = e => {
       const box = this.state.rfqOpen ? this.rfqRef.current : this.state.drawer ? this.drawerRef.current : null;
       if (!box) return;
-      if (e.key === 'Escape') { this.setState({ rfqOpen: false, drawer: false }); return; }
+      if (e.key === 'Escape') { this.setState({ rfqOpen: false, drawer: false, dd: false }); return; }
       if (e.key === 'Tab') {
         const f = [...box.querySelectorAll('button,a[href],input,select,textarea')].filter(x => !x.disabled && x.offsetParent !== null);
         if (!f.length) return; const a = f[0], z = f[f.length - 1];
@@ -242,7 +233,18 @@ class Component extends DCLogic {
       nav: VM.PAGES.map((k, i) => ({ href: VM.HREF[k], label: t.nav[k], current: page === k ? 'page' : undefined,
         color: page === k ? '#0B1B2B' : '#4B5563', weight: page === k ? 700 : 600, bar: page === k ? 1 : 0,
         num: String(i + 1).padStart(2, '0'), numColor: page === k ? '#00AEEF' : '#6E8296', delay: (80 + i * 45) + 'ms' })),
-      count, hasCount: count > 0,
+      navMain: VM.PAGES.filter(k => k !== 'home').map(k => { const m = k === 'products';
+        return { href: VM.HREF[k], label: t.nav[k], current: page === k ? 'page' : undefined,
+          color: page === k ? '#0B1B2B' : '#4B5563', weight: page === k ? 700 : 600, bar: page === k ? 1 : 0,
+          popup: m ? 'true' : undefined, expanded: m ? String(s.dd) : undefined, showMenu: m && s.dd,
+          enter: m ? () => this.setState({ dd: true }) : undefined, leave: m ? () => this.setState({ dd: false }) : undefined,
+          blur: m ? e => { if (!e.currentTarget.contains(e.relatedTarget)) this.setState({ dd: false }); } : undefined }; }),
+      prodCats: [['parts', 'Spares', 'قطع الغيار'], ['chemicals', 'Chemical', 'كيماويات'], ['sealants', 'Sealant', 'مواد مانعة للتسرب'],
+        ['lubricants', 'Lubricant', 'مواد التشحيم'], ['paints', 'Paint', 'دهانات'], ['tapes', 'Tape', 'أشرطة'],
+        ['adhesives', 'Adhesive', 'مواد لاصقة'], ['cleaners', 'Cleaner', 'منظفات'], ['other', 'Other', 'أخرى']]
+        .map(([id, en, ar]) => ({ href: VM.HREF.products + '?cat=' + id, label: v.ar ? ar : en,
+          edge: page === 'products' && typeof location !== 'undefined' && new URLSearchParams(location.search).get('cat') === id ? '#0759A5' : 'transparent' })),
+      count, hasCount: count > 0, cartLabel: v.ar ? 'السلة' : 'Cart',
       toggleLang: () => VM.toggleLang(),
       drawer: s.drawer, openDrawer: () => this.setState({ drawer: true }), closeDrawer: () => this.setState({ drawer: false }),
       drawerAnim: v.ar ? 'vmFromL' : 'vmFromR',
@@ -250,10 +252,7 @@ class Component extends DCLogic {
       openRfqFromDrawer: () => this.setState({ drawer: false, rfqOpen: true }),
       rqTop: v.sm ? 'auto' : '0px', rqL: v.sm ? '0px' : (v.ar ? '0px' : 'auto'), rqR: v.sm ? '0px' : (v.ar ? 'auto' : '0px'), rqW: v.sm ? 'auto' : 'min(600px,100vw)', rqHt: v.sm ? '92vh' : '100%',
       rqAnim: v.sm ? 'vmSheet' : (v.ar ? 'vmFromL' : 'vmFromR'), rqRad: v.sm ? '8px' : '0px',
-      showFloat: this.props.showFloating !== false, aogOpen: s.aogOpen && !v.sm,
-      aogIn: () => this.setState({ aogOpen: true }), aogOut: () => this.setState({ aogOpen: false }),
-      aogBlur: e => { if (!e.currentTarget.contains(e.relatedTarget)) this.setState({ aogOpen: false }); },
-      aogDesc: t.depts[0].b, aogPillBg: s.aogOpen && !v.sm ? '#B81F1F' : '#D62828',
+      showFloat: this.props.showFloating !== false,
       floatB: v.sm ? '14px' : '22px', floatX: v.sm ? '14px' : '22px',
       toast: s.toast,
       waLabel: v.ar ? 'تحدث معنا' : 'Chat with us', waOpen: s.waOpen,

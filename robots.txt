@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://www.velmachaerospace.com/sitemap.xml
+Sitemap: https://www.velmachaerospace.com/sitemap-products.xml
