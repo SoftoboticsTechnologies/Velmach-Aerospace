@@ -66,7 +66,7 @@ a:hover{color:#0B1B2B}
 
     <!-- main bar -->
     <div style="max-width:1320px;margin:0 auto;height:{{ barH }};padding-inline:clamp(16px,4vw,56px);display:flex;align-items:center;gap:24px;transition:height .4s ease">
-      <a href="index.html" aria-label="Velmach Aerospace, home" style="display:flex;flex-shrink:0;padding-block:6px">
+      <a href="index.html" aria-label="Velmach Aerospace, home" style="display:flex;flex-shrink:0;margin:0;padding:0">
         <img src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" width="1432" height="800" style="height:{{ logoH }};width:auto;display:block;filter:{{ logoFilter }};transition:height .4s ease,filter .45s ease">
       </a>
       <sc-if value="{{ lg }}" hint-placeholder-val="{{ true }}">
@@ -270,7 +270,7 @@ class Component extends DCLogic {
       hdrLine: over ? 'rgba(255,255,255,.12)' : '#DADBD8',
       utilBg: over ? 'transparent' : '#07111D', utilFg: over ? 'rgba(255,255,255,.62)' : '#C9D2DB', utilLine: over ? 'rgba(255,255,255,.1)' : 'transparent',
       btnLine: over ? 'rgba(255,255,255,.3)' : '#C3C7C9',
-      utilH: sc ? '0px' : '32px', barH: sc ? '64px' : (v.sm ? '72px' : '80px'), logoH: sc ? '38px' : (v.sm ? '44px' : '52px'),
+      utilH: sc ? '0px' : '32px', barH: sc ? '64px' : (v.sm ? '72px' : '80px'), logoH: sc ? '64px' : (v.sm ? '72px' : '80px'),
       spacerH: page === 'home' ? '0px' : (v.sm ? '104px' : '112px'),
       showSearch: v.lg && typeof window !== 'undefined' && window.innerWidth >= 1340,
       rqPad: v.sm ? '12px' : '20px',
