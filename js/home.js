@@ -67,6 +67,83 @@
   }
 
   /* ---------- hero: open-rotor engine (js/hero-engine.js) + layered pointer parallax ---------- */
+  /* part callouts, in the order of the [data-tag] labels. a: anchor in engine space (x along the axis, y up);
+     d: elbow offset from the anchor in canvas heights (x, up); s: side the label shelf runs to (1 = right) */
+  var CALLOUTS = [
+    { a: [-1.22, 0.03, 0.05], d: [-0.12, 0.3], s: -1 },    // spinner
+    { a: [-0.52, 1.08, 0], d: [-0.16, 0.08], s: -1 },     // fan rotor (tip of the blade disc)
+    { a: [0.1, 0.16, 0.28], d: [0.08, 0.36], s: 1 },      // compressor (seen through the cowl)
+    { a: [0.53, 0.05, 0.27], d: [0.22, 0.24], s: 1 },     // combustor band
+    { a: [0.8, -0.12, 0.24], d: [0.17, 0.08], s: 1 },      // HP turbine
+    { a: [1.3, -0.03, 0.05], d: [0.12, -0.3], s: 1 },     // exhaust cone
+    { a: [-0.22, -0.9, 0], d: [-0.16, -0.06], s: -1 }     // aft blade row
+  ];
+  var callouts = null;
+  function heroCallouts() {
+    var root = $('[data-callouts]');
+    if (!root) return null;
+    var NS = 'http://www.w3.org/2000/svg', g = $('[data-leads]', root), tags = $$('[data-tag]', root), sizes = null, lim = null, blocks = [], active = -1;
+    function el(n, c) { var e = doc.createElementNS(NS, n); e.setAttribute('class', c); g.appendChild(e); return e; }
+    var leads = CALLOUTS.map(function (c, i) {
+      tags[i].style.setProperty('--i', i);
+      return { tag: tags[i], path: el('path', 'hv-lead'), ring: el('circle', 'hv-ring'), dot: el('circle', 'hv-dot') };
+    });
+    leads.forEach(function (l, i) {
+      l.path.setAttribute('pathLength', 1); l.path.style.setProperty('--i', i);
+      l.dot.setAttribute('r', 2.2); l.ring.setAttribute('r', 7); l.dot.style.setProperty('--i', i); l.ring.style.setProperty('--i', i);
+    });
+    function f(n) { return n.toFixed(1); }
+    function frame(p, w, h) {
+      var rtl = doc.documentElement.dir === 'rtl', X = function (x) { return rtl ? w - x : x; };
+      if (!sizes) {
+        sizes = tags.map(function (t) { return [t.offsetWidth, t.offsetHeight]; });
+        // labels stay on screen and, beside the copy on wide screens, clear of the hero text blocks at their height
+        var r = root.getBoundingClientRect();
+        lim = [Math.max(0, -r.left) + 16, Math.min(r.width, window.innerWidth - r.left) - 16];
+        blocks = [];
+        if (getComputedStyle($('.hero-viz')).position === 'absolute') $$('.hero-copy > *').forEach(function (b) {   // per text line, not the block box
+          var rg = doc.createRange(); rg.selectNodeContents(b);
+          Array.prototype.forEach.call(rg.getClientRects(), function (q) { if (q.width) blocks.push([q.top - r.top, q.bottom - r.top, q.left - r.left, q.right - r.left]); });
+        });
+      }
+      CALLOUTS.forEach(function (c, i) {
+        var a = p[i], s = rtl ? -c.s : c.s, ax = X(a[0]), ex = ax + (rtl ? -c.d[0] : c.d[0]) * h, ey = a[1] - c.d[1] * h,
+          sz = sizes[i];
+        var lo = lim[0], hi = lim[1], top = ey - sz[1] - 5;
+        blocks.forEach(function (b) { if (b[0] < ey && b[1] > top) { if (rtl) hi = Math.min(hi, b[2] - 20); else lo = Math.max(lo, b[3] + 20); } });
+        ex = s > 0 ? Math.min(ex, hi - sz[0] - 10) : Math.max(ex, lo + sz[0] + 10);
+        var end = ex + s * (sz[0] + 10), l = leads[i], off = sz[0] ? '' : 'none';   // label hidden at this breakpoint
+        l.path.style.display = l.dot.style.display = l.ring.style.display = off;
+        l.path.setAttribute('d', 'M' + f(ax) + ' ' + f(a[1]) + 'L' + f(ex) + ' ' + f(ey) + 'L' + f(end) + ' ' + f(ey));
+        l.dot.setAttribute('cx', f(ax)); l.dot.setAttribute('cy', f(a[1]));
+        l.ring.setAttribute('cx', f(ax)); l.ring.setAttribute('cy', f(a[1]));
+        l.tag.classList.toggle('is-end', s < 0);
+        l.tag.style.transform = 'translate(' + f(s > 0 ? ex + 5 : ex - 5 - sz[0]) + 'px,' + f(ey - sz[1] - 5) + 'px)';
+      });
+      root.classList.add('is-ready');
+    }
+    function highlight(i) {
+      leads.forEach(function (l, j) { var on = j === i; l.tag.classList.toggle('is-on', on); [l.path, l.dot, l.ring].forEach(function (e) { e.classList.toggle('is-on', on); }); });
+    }
+    // hovering a label focuses its callout and holds the tour there; the tour resumes from it on leave
+    var hover = -1;
+    function setHover(i) {
+      hover = i;
+      leads.forEach(function (l, j) { [l.tag, l.path, l.dot, l.ring].forEach(function (e) { e.classList.toggle('is-hover', j === i); }); });
+    }
+    tags.forEach(function (t, i) {
+      t.addEventListener('pointerenter', function () { active = i; highlight(i); setHover(i); });
+      t.addEventListener('pointerleave', function () { setHover(-1); });
+    });
+    // after the intro, step a highlight through the callouts
+    if (!reduced) setTimeout(function () {
+      setInterval(function () { if (hover < 0 && !doc.hidden) { active = (active + 1) % leads.length; highlight(active); } }, 2600);
+    }, 3200);
+    VM.subscribe(function () { sizes = null; });   // language or breakpoint changed: label sizes change
+    window.addEventListener('resize', function () { sizes = null; });
+    return { anchors: CALLOUTS.map(function (c) { return c.a; }), frame: frame };
+  }
+
   var engine = null;
   function mountEngine() {
     var c = $('[data-engine]');
@@ -74,11 +151,13 @@
     var lite = VM.bp === 'sm';                       // phones: lighter mesh, capped pixel ratio, ~30 fps
     if (engine && engine.lite === lite) return;
     engine && engine.destroy();
-    engine = window.VMHeroEngine.mount(c, { reduced: reduced, lite: lite });
+    engine = window.VMHeroEngine.mount(c, { reduced: reduced, lite: lite,
+      anchors: callouts ? callouts.anchors : [], onFrame: callouts ? callouts.frame : null });
   }
   function hero() {
     var h = $('.hero');
     if (!h) return;
+    callouts = heroCallouts();
     mountEngine();
     VM.subscribe(mountEngine);
     if (reduced || !window.matchMedia('(pointer:fine)').matches) return;

@@ -155,10 +155,27 @@
           </svg>
         </div>
         <div class="hv-layer hv-glow"></div>
-        <div class="hv-layer hv-main"><div class="hv-float"><canvas class="hv-engine" data-engine width="900" height="700"></canvas></div></div>
+        <div class="hv-layer hv-main"><div class="hv-float"><div class="hv-bob">
+          <canvas class="hv-engine" data-engine width="900" height="700"></canvas>
+          <span class="hv-scan"></span>
+          <!-- schematic overlay: part callouts, re-projected onto the engine every frame by js/home.js -->
+          <div class="hv-callouts" data-callouts>
+            <svg class="hv-lines" fill="none">
+              <g data-leads></g>
+            </svg>
+            <div class="hv-tags" dir="ltr">
+              <div class="hv-tag" data-tag><b class="hv-tag-n">01</b><span class="hv-tag-t"><span data-t="hv_c1">Spinner</span><small data-t="hv_c1s">Composite nose cap</small></span></div>
+              <div class="hv-tag" data-tag><b class="hv-tag-n">02</b><span class="hv-tag-t"><span data-t="hv_c2">Fan rotor</span><small data-t="hv_c2s">12 blades · Ø 2 360</small></span></div>
+              <div class="hv-tag" data-tag><b class="hv-tag-n">03</b><span class="hv-tag-t"><span data-t="hv_c3">Compressor</span><small data-t="hv_c3s">9 stages</small></span></div>
+              <div class="hv-tag" data-tag><b class="hv-tag-n">04</b><span class="hv-tag-t"><span data-t="hv_c4">Combustor</span><small data-t="hv_c4s">Annular</small></span></div>
+              <div class="hv-tag" data-tag><b class="hv-tag-n">05</b><span class="hv-tag-t"><span data-t="hv_c5">HP turbine</span><small data-t="hv_c5s">5 stages</small></span></div>
+              <div class="hv-tag" data-tag><b class="hv-tag-n">06</b><span class="hv-tag-t"><span data-t="hv_c6">Exhaust cone</span><small data-t="hv_c6s">Inconel 625</small></span></div>
+              <div class="hv-tag" data-tag><b class="hv-tag-n">07</b><span class="hv-tag-t"><span data-t="hv_c7">Aft blade row</span><small data-t="hv_c7s">10 blades</small></span></div>
+            </div>
+          </div>
+        </div></div></div>
         <div class="hv-layer hv-front">
           <span class="hv-corner hv-corner--tl"></span><span class="hv-corner hv-corner--tr"></span><span class="hv-corner hv-corner--bl"></span><span class="hv-corner hv-corner--br"></span>
-<div class="hv-cap" dir="ltr"><span class="hv-cap-rule"></span><span><b class="hv-cap-code">VA / REF-01</b> · <span data-t="viz_ref">Reference drawing</span> · <span data-t="viz_scale">Not to scale</span></span></div>
         </div>
       </div>
     </div>

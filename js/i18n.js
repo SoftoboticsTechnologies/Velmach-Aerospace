@@ -356,6 +356,8 @@ ar: {
     hero2_sub: "We source aircraft spare parts, components and technical materials for aviation, MRO, oil and gas and industrial buyers, with a dedicated AOG desk and import and export handled from Ajman Free Zone.",
     hero_cta_search: "Search parts", hero_cta_aog: "AOG support",
     viz_ref: "Reference drawing", viz_scale: "Not to scale", viz_origin: "Origin · Ajman Free Zone", viz_track: "Track",
+    hv_c1: "Spinner", hv_c1s: "Composite nose cap", hv_c2: "Fan rotor", hv_c2s: "12 blades · Ø 2 360", hv_c3: "Compressor", hv_c3s: "9 stages",
+    hv_c4: "Combustor", hv_c4s: "Annular", hv_c5: "HP turbine", hv_c5s: "5 stages", hv_c6: "Exhaust cone", hv_c6s: "Inconel 625", hv_c7: "Aft blade row", hv_c7s: "10 blades",
     scroll_hint: "Scroll",
     eco_eyebrow: "Product ecosystem", eco_title: "One source for aircraft parts and the materials around them", eco_view: "View in catalogue",
     eco: [
@@ -423,6 +425,8 @@ ar: {
     hero2_sub: "نوفّر قطع غيار الطائرات ومكوناتها والمواد الفنية لقطاعات الطيران والصيانة والنفط والغاز والصناعة، مع مكتب مخصص لطلبات AOG، ونتولى الاستيراد والتصدير من منطقة عجمان الحرة.",
     hero_cta_search: "ابحث عن القطع", hero_cta_aog: "دعم الطائرات المتوقفة",
     viz_ref: "رسم مرجعي", viz_scale: "ليس وفق المقياس", viz_origin: "نقطة الانطلاق · منطقة عجمان الحرة", viz_track: "المسار",
+    hv_c1: "مخروط المقدمة", hv_c1s: "غطاء مركّب", hv_c2: "دوّار المروحة", hv_c2s: "12 شفرة · Ø 2 360", hv_c3: "الضاغط", hv_c3s: "9 مراحل",
+    hv_c4: "غرفة الاحتراق", hv_c4s: "حلقية", hv_c5: "توربين الضغط العالي", hv_c5s: "5 مراحل", hv_c6: "مخروط العادم", hv_c6s: "إنكونيل 625", hv_c7: "صف الشفرات الخلفي", hv_c7s: "10 شفرات",
     scroll_hint: "مرّر للأسفل",
     eco_eyebrow: "منظومة المنتجات", eco_title: "مصدر واحد لقطع الطائرات والمواد المرتبطة بها", eco_view: "عرض في الكتالوج",
     eco: [

@@ -1,6 +1,7 @@
 /* Velmach Aerospace: home hero visual. Dependency-free WebGL renderer for a shaded open-rotor engine
    (spinner, front rotor, aft blade row, glass core cowl with turning stages, exhaust cone).
-   VMHeroEngine.mount(canvas, { reduced, lite }) -> { canvas, lite, setPointer(x, y), destroy() } */
+   VMHeroEngine.mount(canvas, { reduced, lite, anchors, onFrame }) -> { canvas, lite, setPointer(x, y), destroy() }
+   anchors: static body-space points [x, y, z]; onFrame(pts, w, h, t) gets their projected CSS-pixel positions [x, y] each frame. */
 (function () {
   if (window.VMHeroEngine) return;
   var TAU = Math.PI * 2, D2R = Math.PI / 180, CAM = 7;
@@ -127,7 +128,7 @@
   function ease(x) { return 1 - Math.pow(1 - x, 3); }
 
   function mount(canvas, opts) {
-    var reduced = !!opts.reduced, lite = !!opts.lite, alive = true;
+    var reduced = !!opts.reduced, lite = !!opts.lite, alive = true, anchors = opts.anchors || [];
     var gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: true, depth: true, powerPreference: 'low-power' });
     var api = { canvas: canvas, lite: lite, setPointer: function () {}, destroy: function () { alive = false; } };
     if (!gl) return api;   // no WebGL: the blueprint plate and callouts still carry the visual
@@ -193,6 +194,13 @@
         } else { gl.uniform1f(U.uSide, 0); gl.uniform1f(U.uDim, 1); gl.drawArrays(gl.TRIANGLES, 0, g.n); }
       });
       gl.depthMask(true);
+      if (anchors.length && opts.onFrame) {   // project callout anchors with the static body's view (same maths as the vertex shader)
+        var kx = 2 * S * CAM / w, ky = 2 * S * CAM / h, pts = anchors.map(function (a) {
+          var x = V0[0] * a[0] + V1[0] * a[1] + V2[0] * a[2], y = V0[1] * a[0] + V1[1] * a[1] + V2[1] * a[2], z = V0[2] * a[0] + V1[2] * a[1] + V2[2] * a[2], q = CAM - z;
+          return [(x * kx / q + 1) * w / 2, (1 - (y * ky / q - 0.04)) * h / 2];
+        });
+        opts.onFrame(pts, w, h, t);
+      }
     }
 
     function tick(now) {
