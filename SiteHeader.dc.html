@@ -9,7 +9,7 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
 <link rel="icon" href="assets/favicon_io/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
@@ -154,8 +154,8 @@ a:hover{color:#0B1B2B}
     <div ref="{{ rfqRef }}" role="dialog" aria-modal="true" aria-labelledby="rq-title" style="position:fixed;z-index:211;background:#FFFFFF;display:flex;flex-direction:column;top:{{ rqTop }};bottom:0;left:{{ rqL }};right:{{ rqR }};width:{{ rqW }};height:{{ rqHt }};animation:{{ rqAnim }} .5s cubic-bezier(.2,.7,.2,1);box-shadow:0 20px 60px rgba(7,17,29,.35)">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px;background:#07111D;color:#FFFFFF;flex-shrink:0;border-top-left-radius:{{ rqRad }};border-top-right-radius:{{ rqRad }}">
         <div style="display:flex;flex-direction:column;gap:2px">
-          <span id="rq-title" style="font-family:{{ fMono }};font-size:13px;letter-spacing:{{ ls }};text-transform:uppercase;color:#FFFFFF">{{ t.rq_title }}</span>
-          <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#8A96A3;text-align:{{ start }}">RFQ · {{ count }} · VELMACH AEROSPACE</span>
+          <span id="rq-title" style="font-family:{{ fHead }};font-stretch:106%;font-size:15px;font-weight:600;letter-spacing:{{ lsTitle }};text-transform:uppercase;color:#FFFFFF;-webkit-font-smoothing:antialiased">{{ t.rq_title }}</span>
+          <span dir="ltr" style="font-family:'Archivo',system-ui,sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;color:#7F8C99;text-align:{{ start }}">RFQ · {{ count }} · VELMACH AEROSPACE</span>
         </div>
         <button type="button" onClick="{{ closeRfq }}" aria-label="{{ t.rq_close }}" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"></path></svg>
@@ -291,6 +291,7 @@ class Component extends DCLogic {
       toggleLang: () => VM.toggleLang(),
       drawer: s.drawer, openDrawer: () => this.setState({ drawer: true }), closeDrawer: () => this.setState({ drawer: false }),
       drawerAnim: v.ar ? 'vmFromL' : 'vmFromR',
+      lsTitle: v.ar ? '0' : '.06em',
       rfqOpen: s.rfqOpen, openRfq: () => this.setState({ rfqOpen: true, toast: '' }), closeRfq: () => this.setState({ rfqOpen: false }),
       openRfqFromDrawer: () => this.setState({ drawer: false, rfqOpen: true }),
       rqTop: v.sm ? 'auto' : '0px', rqL: v.sm ? '0px' : (v.ar ? '0px' : 'auto'), rqR: v.sm ? '0px' : (v.ar ? 'auto' : '0px'), rqW: v.sm ? 'auto' : 'min(600px,100vw)', rqHt: v.sm ? '92vh' : '100%',
