@@ -60,8 +60,8 @@
       var ar = lang === 'ar', bp = bpOf(window.innerWidth);
       return {
         lang: lang, dir: ar ? 'rtl' : 'ltr', ar: ar,
-        fBody: ar ? FAR : "'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif",
-        fHead: ar ? FAR : "'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif",
+        fBody: ar ? FAR : "'VMAmp', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif",
+        fHead: ar ? FAR : "'VMAmp', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif",
         fMono: ar ? FAR : "'IBM Plex Mono', ui-monospace, Menlo, monospace",
         lh: ar ? 1.85 : 1.6, lhHead: ar ? 1.35 : 1.06, ls: ar ? '0' : '.16em', lsHead: ar ? '0' : '-0.02em',
         arrow: ar ? '←' : '→', flip: ar ? 'scaleX(-1)' : 'none', start: ar ? 'right' : 'left', end: ar ? 'left' : 'right',

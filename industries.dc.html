@@ -17,16 +17,17 @@
 <link rel="alternate" hreflang="en" href="https://www.velmachaerospace.com/industries.html?lang=en">
 <link rel="alternate" hreflang="ar" href="https://www.velmachaerospace.com/industries.html?lang=ar">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <script src="js/i18n.js"></script>
 <script src="js/vm-core.js"></script>
 <style>
-html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+html,body{margin:0;padding:0;background:#FBFBF9;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
 a{color:#0759A5;text-underline-offset:4px}
-a:hover{color:#0B1B2B}
-*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
-@keyframes vmUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+*:focus-visible{outline:2px solid #3D8BE0;outline-offset:3px}
+@keyframes vmUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes vmFade{from{opacity:0}to{opacity:1}}
+@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(224,68,46,.6)}70%{box-shadow:0 0 0 9px rgba(224,68,46,0)}100%{box-shadow:0 0 0 0 rgba(224,68,46,0)}}
 @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 </style>
 </helmet>
@@ -34,52 +35,135 @@ a:hover{color:#0B1B2B}
 <dc-import name="SiteHeader" page="industries" hint-size="100%,122px"></dc-import>
 
 <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
-<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px">
-  <section style="background:#06111C;color:#FFFFFF;background-image:linear-gradient(rgba(120,170,220,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,220,.06) 1px,transparent 1px);background-size:48px 48px">
-    <div style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(16px,3.5vw,48px) 0;display:flex;flex-direction:column;gap:24px">
-      <div style="display:flex;align-items:center;gap:14px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#00AEEF;animation:vmUp .8s both"><span style="width:28px;height:1px;background:#00AEEF"></span>{{ t.ip_eyebrow }}</div>
-      <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(36px,5vw,72px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};animation:vmUp .8s .1s both">{{ t.ip_title }}</h1>
-      <p style="margin:0;color:#AFC0D0;font-size:17px;max-width:52ch;animation:vmUp .8s .2s both">{{ t.ip_sub }}</p>
-      <nav aria-label="{{ t.ip_title }}" style="display:flex;flex-wrap:wrap;margin-top:28px;border-top:1px solid rgba(255,255,255,.14)">
-        <sc-for list="{{ inds }}" as="i" hint-placeholder-count="6">
-          <a href="{{ i.anchor }}" style="flex:1 1 180px;display:flex;flex-direction:column;gap:4px;padding:18px 16px 22px 0;padding-inline-end:16px;color:#FFFFFF;text-decoration:none;border-inline-end:1px solid rgba(255,255,255,.08)" style-hover="color:#00AEEF">
-            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#6E8296;text-align:{{ start }}">{{ i.code }}</span>
-            <span style="font-size:14.5px;font-weight:600">{{ i.title }}</span>
-          </a>
+<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px;background:#FBFBF9">
+
+  <!-- HERO: photo mosaic behind a dark scrim -->
+  <section aria-labelledby="i-h1" style="position:relative;overflow:hidden;background:#07111D;color:#FFFFFF;isolation:isolate">
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:-2;display:grid;grid-template-columns:{{ mosaicCols }};grid-auto-rows:1fr;gap:2px">
+      <sc-for list="{{ mosaic }}" as="m" hint-placeholder-count="6">
+        <span style="position:relative;overflow:hidden;animation:vmFade 1.2s both;animation-delay:{{ m.d }}"><img src="{{ m.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></span>
+      </sc-for>
+    </div>
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:-1;background:{{ heroShade }}"></div>
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,10vw,144px) clamp(16px,4vw,56px) clamp(40px,5vw,64px)">
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:700px">
+        <span style="display:inline-flex;align-items:center;gap:12px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#9FC6EE;animation:vmUp .8s both"><span style="width:28px;height:1px;background:#6AA6E8"></span>{{ t.ip_eyebrow }}</span>
+        <h1 id="i-h1" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(40px,5.6vw,80px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};text-wrap:balance;animation:vmUp .8s .08s both">{{ heroTitle }}</h1>
+        <p style="margin:0;font-size:clamp(16px,1.4vw,19px);line-height:1.65;color:#C9D2DB;max-width:52ch;animation:vmUp .8s .16s both">{{ t.ip_sub }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;animation:vmUp .8s .24s both">
+          <button type="button" onClick="{{ openRfq }}" style="display:inline-flex;align-items:center;gap:10px;height:52px;padding-inline:24px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:background .3s" style-hover="background:#0A6BC4">{{ t.ip_cta }} <span aria-hidden="true">{{ arrow }}</span></button>
+          <a href="services.dc.html" style="display:inline-flex;align-items:center;height:52px;padding-inline:22px;border:1px solid rgba(255,255,255,.35);color:#FFFFFF;text-decoration:none;font-weight:600;font-size:15px;transition:background .3s" style-hover="background:rgba(255,255,255,.08)">{{ t.nav.services }}</a>
+        </div>
+      </div>
+      <dl style="margin:clamp(48px,7vw,88px) 0 0;display:grid;grid-template-columns:{{ statCols }};gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);animation:vmUp .8s .32s both">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:6px;padding:20px 22px;background:rgba(7,17,29,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)">
+            <dt dir="ltr" style="font-family:{{ fHead }};font-stretch:112%;font-size:clamp(28px,2.8vw,40px);font-weight:600;line-height:1;color:{{ s.c }};text-align:{{ start }}">{{ s.k }}</dt>
+            <dd style="margin:0;font-size:14px;color:#C9D2DB">{{ s.v }}</dd>
+          </div>
         </sc-for>
-      </nav>
+      </dl>
     </div>
   </section>
 
+  <!-- OVERVIEW CARDS -->
+  <section aria-labelledby="i-ov" style="background:#FBFBF9">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(16px,4vw,56px)">
+      <div data-reveal="" style="display:grid;grid-template-columns:{{ headCols }};gap:16px 64px;align-items:end;margin-bottom:clamp(36px,4vw,56px)">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5">{{ t.ind_eyebrow }}</span>
+          <h2 id="i-ov" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3.2vw,46px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};max-width:18ch;text-wrap:balance">{{ t.ind_title }}</h2>
+        </div>
+        <p style="margin:0;font-size:17px;line-height:1.65;color:#4A5561;max-width:46ch">{{ ovSub }}</p>
+      </div>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ cardCols }};gap:16px">
+        <sc-for list="{{ inds }}" as="i" hint-placeholder-count="6">
+          <li data-reveal="" data-reveal-delay="{{ i.d }}">
+            <a href="{{ i.anchor }}" onMouseEnter="{{ i.enter }}" onMouseLeave="{{ i.leave }}" style="position:relative;display:block;aspect-ratio:{{ cardRatio }};overflow:hidden;color:#FFFFFF;text-decoration:none;background:#07111D">
+              <img src="{{ i.img }}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale({{ i.zoom }});transition:transform 1.1s cubic-bezier(.2,.7,.2,1)">
+              <span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,17,29,.1) 0%,rgba(7,17,29,.35) 45%,rgba(7,17,29,.92) 100%);opacity:{{ i.shade }};transition:opacity .5s"></span>
+              <span dir="ltr" style="position:absolute;top:18px;inset-inline-start:18px;font-family:'IBM Plex Mono',monospace;font-size:12px;padding:5px 9px;background:{{ i.tagBg }};transition:background .4s">{{ i.code }}</span>
+              <span style="position:absolute;inset-inline:22px;bottom:22px;display:flex;flex-direction:column;gap:8px">
+                <span style="font-family:{{ fHead }};font-stretch:106%;font-size:clamp(20px,1.8vw,26px);font-weight:500;line-height:1.2">{{ i.title }}</span>
+                <span style="font-size:14.5px;line-height:1.5;color:#D5DDE5;max-height:{{ i.shortH }};opacity:{{ i.shortOp }};overflow:hidden;transition:max-height .5s,opacity .5s">{{ i.short }}</span>
+                <span style="display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:#9FC6EE">{{ viewLabel }} <span aria-hidden="true" style="transform:translateX({{ i.arrowX }});transition:transform .35s">{{ arrow }}</span></span>
+              </span>
+            </a>
+          </li>
+        </sc-for>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DETAIL SECTIONS -->
   <sc-for list="{{ inds }}" as="i" hint-placeholder-count="6">
-    <section id="{{ i.id2 }}" aria-labelledby="{{ i.hid }}" onMouseEnter="{{ i.enter }}" onMouseLeave="{{ i.leave }}" style="background:{{ i.bg }};border-bottom:1px solid #E3E7EB;scroll-margin-top:80px">
-      <div style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(16px,3.5vw,48px);display:grid;grid-template-columns:{{ cols }};gap:32px clamp(32px,5vw,80px);align-items:start">
-        <div data-reveal="" dir="ltr" aria-hidden="true" style="font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:clamp(88px,11vw,176px);line-height:.85;letter-spacing:-.04em;color:{{ i.numFill }};-webkit-text-stroke:1.5px {{ i.numStroke }};transition:color .6s ease;position:{{ sticky }};top:120px;text-align:{{ start }}">{{ i.code }}</div>
-        <div data-reveal="" data-reveal-delay="100" style="display:flex;flex-direction:column;gap:22px">
-          <h2 id="{{ i.hid }}" style="margin:0;font-family:{{ fHead }};font-size:clamp(28px,3.2vw,48px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ i.title }}</h2>
-          <p style="margin:0;font-size:18px;color:#374151;max-width:52ch;text-wrap:pretty">{{ i.body }}</p>
-          <div style="border-top:1px solid #0B1B2B;padding-top:16px;display:flex;flex-direction:column;gap:12px">
-            <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5">{{ t.ip_needs }}</span>
-            <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ needCols }};gap:0 24px">
+    <section id="{{ i.id2 }}" aria-labelledby="{{ i.hid }}" style="background:{{ i.bg }};border-top:1px solid #E6E4DE;scroll-margin-top:80px">
+      <div style="max-width:1320px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(16px,4vw,56px);display:grid;grid-template-columns:{{ splitCols }};gap:40px clamp(40px,6vw,96px);align-items:center">
+        <figure data-reveal="" style="position:relative;margin:0;aspect-ratio:5/4;overflow:hidden;order:{{ i.imgOrder }};background:#EAE7E0">
+          <img src="{{ i.img }}" alt="{{ i.title }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <span aria-hidden="true" style="position:absolute;inset:14px;border:1px solid rgba(255,255,255,.55)"></span>
+          <span dir="ltr" aria-hidden="true" style="position:absolute;bottom:-0.12em;inset-inline-end:18px;font-family:'Archivo',sans-serif;font-stretch:112%;font-weight:600;font-size:clamp(88px,10vw,150px);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.8)">{{ i.code }}</span>
+        </figure>
+        <div data-reveal="" data-reveal-delay="120" style="display:flex;flex-direction:column;gap:20px">
+          <span style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5"><span dir="ltr">{{ i.code }}</span> · {{ i.short }}</span>
+          <h2 id="{{ i.hid }}" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3.2vw,46px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};text-wrap:balance">{{ i.title }}</h2>
+          <p style="margin:0;font-size:17px;line-height:1.65;color:#4A5561;max-width:50ch">{{ i.body }}</p>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px">
+            <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#56626E">{{ t.ip_needs }}</span>
+            <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ needCols }};gap:10px">
               <sc-for list="{{ i.needs }}" as="n" hint-placeholder-count="4">
-                <li style="display:flex;align-items:center;gap:12px;padding-block:11px;border-bottom:1px solid #E3E7EB;font-weight:600;font-size:15.5px">
-                  <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7280;font-weight:400">{{ n.k }}</span>{{ n.txt }}
+                <li style="display:flex;align-items:center;gap:12px;padding:13px 16px;background:#FFFFFF;border:1px solid #DADBD8;font-size:15px;font-weight:500;transition:border-color .3s" style-hover="border-color:#0759A5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0759A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="M4 12.5l5 5L20 6.5"></path></svg>{{ n.txt }}
                 </li>
               </sc-for>
             </ul>
           </div>
-          <a href="rfq.dc.html" style="align-self:flex-start;display:inline-flex;align-items:center;gap:12px;font-weight:700;color:#0759A5;text-decoration:none;border-bottom:1px solid #0759A5;padding-bottom:4px">{{ t.ip_cta }} <span aria-hidden="true" style="transform:translateX({{ i.arrowX }});transition:transform .35s">{{ arrow }}</span></a>
-        </div>
-        <!-- TODO: replace industry image -->
-        <div data-reveal="" data-reveal-delay="200" style="position:relative;aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#EDF0F3 0 12px,#F5F7F9 12px 24px);border:1px solid #E3E7EB;overflow:hidden">
-          <span aria-hidden="true" style="position:absolute;inset:14px;border:1px solid {{ i.frame }};transition:border-color .5s"></span>
-          <span aria-hidden="true" style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(7,89,165,.25);transform:translateX({{ i.cross }});transition:transform .9s cubic-bezier(.2,.7,.2,1)"></span>
-          <span aria-hidden="true" style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(7,89,165,.25)"></span>
-          <span style="position:absolute;bottom:22px;inset-inline-start:22px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4B5563;background:#FFFFFF;padding:4px 8px">{{ t.ip_img }}</span>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px">
+            <button type="button" onClick="{{ openRfq }}" style="display:inline-flex;align-items:center;gap:10px;height:50px;padding-inline:22px;border:0;background:#0B1B2B;color:#FFFFFF;font:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:background .3s" style-hover="background:#0759A5">{{ t.ip_cta }} <span aria-hidden="true">{{ arrow }}</span></button>
+            <a href="products.dc.html" style="display:inline-flex;align-items:center;height:50px;padding-inline:20px;border:1px solid #0B1B2B;color:#0B1B2B;text-decoration:none;font-weight:600;font-size:15px;transition:background .3s,color .3s" style-hover="background:#0B1B2B;color:#FFFFFF">{{ t.cats_link }}</a>
+          </div>
         </div>
       </div>
     </section>
   </sc-for>
+
+  <!-- SERVICES ACROSS EVERY INDUSTRY -->
+  <section aria-labelledby="i-svc" style="background:#07111D;color:#FFFFFF;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(16px,4vw,56px)">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(36px,4vw,56px)">
+        <span style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#6AA6E8">{{ t.s_eyebrow }}</span>
+        <h2 id="i-svc" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3.2vw,46px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};max-width:22ch;text-wrap:balance">{{ svcTitle }}</h2>
+      </div>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ svcCols }};gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12)">
+        <sc-for list="{{ svcs }}" as="sv" hint-placeholder-count="5">
+          <li data-reveal="" data-reveal-delay="{{ sv.d }}">
+            <a href="{{ sv.href }}" style="height:100%;display:flex;flex-direction:column;gap:20px;padding:26px 22px 28px;background:#07111D;color:#FFFFFF;text-decoration:none;transition:background .3s" style-hover="background:#0B2A4A">
+              <span style="display:flex;justify-content:space-between;align-items:center">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="{{ sv.c }}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ sv.icon }}"></path></svg>
+                <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#8A96A3">{{ sv.n }}</span>
+              </span>
+              <span style="font-size:16px;font-weight:600;line-height:1.35">{{ sv.title }}</span>
+              <span aria-hidden="true" style="margin-top:auto;color:#6AA6E8">{{ arrow }}</span>
+            </a>
+          </li>
+        </sc-for>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section aria-labelledby="i-cta" style="background:#F3F1EC">
+    <div data-reveal="" style="max-width:1320px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,56px);display:grid;grid-template-columns:{{ ctaCols }};gap:28px 64px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <h2 id="i-cta" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3vw,44px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};max-width:22ch;text-wrap:balance">{{ t.cta_title }}</h2>
+        <p style="margin:0;font-size:17px;line-height:1.65;color:#4A5561;max-width:56ch">{{ t.cta_body }}</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:{{ ctaJustify }}">
+        <button type="button" onClick="{{ openRfq }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding-inline:26px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:background .3s" style-hover="background:#0B1B2B">{{ t.cta_btn }} <span aria-hidden="true">{{ arrow }}</span></button>
+        <a href="mailto:sales@velmachaerospace.com" style="display:inline-flex;align-items:center;height:54px;padding-inline:24px;border:1px solid #0B1B2B;color:#0B1B2B;text-decoration:none;font-weight:600;font-size:15px;transition:background .3s,color .3s" style-hover="background:#0B1B2B;color:#FFFFFF">{{ t.cta_btn2 }}</a>
+      </div>
+    </div>
+  </section>
 </main>
 </sc-if>
 
@@ -87,30 +171,66 @@ a:hover{color:#0B1B2B}
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 const pad = i => String(i + 1).padStart(2, '0');
+const SVC_ICON = {
+  aog: 'M3 14v-2a9 9 0 0 1 18 0v2M3 14h3v6H4a1 1 0 0 1-1-1ZM21 14h-3v6h2a1 1 0 0 0 1-1ZM18 20c0 1.2-1.2 2-3 2h-2',
+  sourcing: 'M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20ZM2 12h20M12 2c2.8 3 2.8 17 0 20M12 2c-2.8 3-2.8 17 0 20',
+  logistics: 'M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4',
+  used: 'M7 19H4.8a1.8 1.8 0 0 1-1.6-2.7l4-6.8M11 19h8.2a1.8 1.8 0 0 0 1.6-2.7l-1.2-2M14 16l-3 3 3 3M8.3 13.6 7.2 9.5l-4.1 1.1M9.3 5.6l1.1-1.9a1.8 1.8 0 0 1 3.1 0l3.9 6.7M13.4 10.4l3.9-1.1 1.1 4.1',
+  consult: 'M9 11a3.5 3.5 0 1 0 0-7a3.5 3.5 0 1 0 0 7ZM2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.2a3.5 3.5 0 0 1 0 6.6M18 14.3c2 .8 3.5 2.8 3.5 5.7'
+};
 class Component extends DCLogic {
   state = { ready: false, hover: -1 };
   componentDidMount() {
     const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
     go();
   }
-  componentDidUpdate(pp, ps) {
+  // The runtime passes only prevProps here, so the first ready render is tracked on the instance.
+  componentDidUpdate() {
     if (!this.state.ready) return;
+    const first = !this.didReady; this.didReady = true;
     window.VM.meta('industries'); window.VM.reveal();
-    if (!ps.ready && location.hash) setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70 }); }, 300);
+    if (first && location.hash) setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90 }); }, 300);
   }
   componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
   renderVals() {
     if (!this.state.ready) return { ready: false };
-    const VM = window.VM, t = VM.t(), v = VM.sv(), h = this.state.hover;
+    const VM = window.VM, t = VM.t(), v = VM.sv(), h = this.state.hover, ar = v.ar;
+    const I = t.industries;
     return { ...v, ready: true, t,
-      cols: v.lg ? 'minmax(0,.7fr) minmax(0,1.5fr) minmax(0,.9fr)' : v.md ? 'minmax(0,.6fr) minmax(0,1.4fr)' : 'minmax(0,1fr)',
-      sticky: v.lg ? 'sticky' : 'static', needCols: v.sm ? 'minmax(0,1fr)' : 'repeat(2,minmax(0,1fr))',
-      inds: t.industries.map((x, i) => { const on = h === i;
-        return { ...x, code: pad(i), id2: 'ind-' + x.id, anchor: '#ind-' + x.id, hid: 'ih-' + x.id,
-          needs: x.needs.map((n, j) => ({ k: pad(i) + '.' + (j + 1), txt: n })),
-          bg: i % 2 ? '#F7F9FA' : '#FFFFFF', numFill: on ? '#0759A5' : 'transparent', numStroke: on ? '#0759A5' : '#9FB0C0',
-          frame: on ? '#0759A5' : 'rgba(11,27,43,.12)', cross: on ? '-40px' : '0px', arrowX: on ? (v.ar ? '-5px' : '5px') : '0px',
-          enter: () => this.setState({ hover: i }), leave: () => this.setState(st => st.hover === i ? { hover: -1 } : null) }; }) };
+      heroTitle: ar ? 'نخدم القطاعات التي تُبقي الطائرات والمعدات في الخدمة' : 'Supplying the industries that keep aircraft and equipment running',
+      heroShade: ar
+        ? 'linear-gradient(270deg,rgba(7,17,29,.96) 0%,rgba(7,17,29,.86) 50%,rgba(7,17,29,.55) 100%)'
+        : 'linear-gradient(90deg,rgba(7,17,29,.96) 0%,rgba(7,17,29,.86) 50%,rgba(7,17,29,.55) 100%)',
+      mosaic: I.map((x, i) => ({ img: 'assets/industries/' + x.id + '.jpg', d: (i * 90) + 'ms' })),
+      mosaicCols: v.sm ? 'repeat(2,1fr)' : 'repeat(3,1fr)',
+      stats: [
+        { k: String(I.length).padStart(2, '0'), v: ar ? 'قطاعات نخدمها' : 'Industries served', c: '#FFFFFF' },
+        { k: '24/7', v: ar ? 'مكتب AOG للحالات العاجلة' : 'AOG desk for urgent requests', c: '#FF8A73' },
+        { k: '1', v: ar ? 'جهة تواصل لكل طلبية' : 'Point of contact per order', c: '#FFFFFF' },
+        { k: 'AFZ', v: ar ? 'من منطقة عجمان الحرة، الإمارات' : 'Ajman Free Zone, UAE', c: '#6AA6E8' }
+      ],
+      statCols: v.lg ? 'repeat(4,minmax(0,1fr))' : 'repeat(2,minmax(0,1fr))',
+      openRfq: () => VM.openRfq(),
+      ovSub: ar ? 'من شركات الطيران إلى المصانع، نوفّر القطع والمواد بجهة تواصل واحدة وعرض سعر موحّد.' : 'From airlines to factories, we supply parts and materials through one point of contact and a single consolidated quotation.',
+      viewLabel: t.ind_view || (ar ? 'عرض القطاع' : 'View industry'),
+      headCols: v.lg ? 'minmax(0,1.2fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+      cardCols: v.lg ? 'repeat(3,minmax(0,1fr))' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
+      cardRatio: v.sm ? '4/3' : '4/5',
+      splitCols: v.lg ? 'minmax(0,1fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+      needCols: v.sm ? 'minmax(0,1fr)' : 'repeat(2,minmax(0,1fr))',
+      inds: I.map((x, i) => { const on = h === i;
+        return { ...x, code: pad(i), id2: 'ind-' + x.id, anchor: '#ind-' + x.id, hid: 'ih-' + x.id, d: (i % 3) * 100,
+          img: 'assets/industries/' + x.id + '.jpg', needs: x.needs.map(n => ({ txt: n })),
+          bg: i % 2 ? '#F3F1EC' : '#FBFBF9', imgOrder: v.lg && i % 2 ? 1 : 0,
+          zoom: on ? 1.07 : 1, shade: on ? 1 : .9, tagBg: on ? '#0759A5' : 'rgba(7,17,29,.7)',
+          shortH: on || !v.lg ? '80px' : '0px', shortOp: on || !v.lg ? 1 : 0, arrowX: on ? (ar ? '-5px' : '5px') : '0px',
+          enter: () => this.setState({ hover: i }), leave: () => this.setState(st => st.hover === i ? { hover: -1 } : null) }; }),
+      svcTitle: ar ? 'خدمات تدعم كل قطاع' : 'Services that support every industry',
+      svcs: t.services.map((x, i) => ({ n: pad(i), title: x.title, href: 'services.dc.html#svc-' + x.id, icon: SVC_ICON[x.id], c: x.id === 'aog' ? '#FF8A73' : '#6AA6E8', d: i * 80 })),
+      svcCols: v.lg ? 'repeat(5,minmax(0,1fr))' : v.md ? 'repeat(3,minmax(0,1fr))' : 'repeat(2,minmax(0,1fr))',
+      ctaCols: v.lg ? 'minmax(0,1.4fr) auto' : 'minmax(0,1fr)',
+      ctaJustify: v.lg ? 'flex-end' : 'flex-start'
+    };
   }
 }
 </script>

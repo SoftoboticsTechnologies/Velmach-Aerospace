@@ -17,18 +17,18 @@
 <link rel="alternate" hreflang="en" href="https://www.velmachaerospace.com/services.html?lang=en">
 <link rel="alternate" hreflang="ar" href="https://www.velmachaerospace.com/services.html?lang=ar">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <script src="js/i18n.js"></script>
 <script src="js/vm-core.js"></script>
 <style>
-html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+html,body{margin:0;padding:0;background:#FBFBF9;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
 a{color:#0759A5;text-underline-offset:4px}
-a:hover{color:#0B1B2B}
-*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
-@keyframes vmUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}70%{box-shadow:0 0 0 7px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+*:focus-visible{outline:2px solid #3D8BE0;outline-offset:3px}
+@keyframes vmUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(224,68,46,.6)}70%{box-shadow:0 0 0 9px rgba(224,68,46,0)}100%{box-shadow:0 0 0 0 rgba(224,68,46,0)}}
 @keyframes vmDash{to{stroke-dashoffset:-320}}
+@keyframes vmZoom{from{transform:scale(1.08)}to{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 </style>
 </helmet>
@@ -36,144 +36,142 @@ a:hover{color:#0B1B2B}
 <dc-import name="SiteHeader" page="services" hint-size="100%,122px"></dc-import>
 
 <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
-<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px">
-  <section style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(16px,3.5vw,48px) clamp(40px,5vw,72px);display:grid;grid-template-columns:{{ headCols }};gap:24px 64px;align-items:end">
-    <div style="display:flex;flex-direction:column;gap:22px">
-      <div style="display:flex;align-items:center;gap:14px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;animation:vmUp .8s both"><span style="width:28px;height:1px;background:#0759A5"></span>{{ t.s_eyebrow }}</div>
-      <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(36px,5vw,72px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};animation:vmUp .8s .1s both">{{ t.s_title }}</h1>
+<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px;background:#FBFBF9">
+
+  <!-- HERO -->
+  <section aria-labelledby="s-h1" style="position:relative;overflow:hidden;background:#07111D;color:#FFFFFF;isolation:isolate">
+    <img src="assets/services/hero.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;z-index:-2;animation:vmZoom 2.4s cubic-bezier(.2,.7,.2,1) both">
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:-1;background:{{ heroShade }}"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:56px 56px"></div>
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,9vw,128px) clamp(16px,4vw,56px) clamp(32px,4vw,48px)">
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:680px">
+        <span style="display:inline-flex;align-items:center;gap:12px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#9FC6EE;animation:vmUp .8s both"><span style="width:28px;height:1px;background:#6AA6E8"></span>{{ t.s_eyebrow }}</span>
+        <h1 id="s-h1" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(40px,5.6vw,80px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};text-wrap:balance;animation:vmUp .8s .08s both">{{ heroTitle }}</h1>
+        <p style="margin:0;font-size:clamp(16px,1.4vw,19px);line-height:1.65;color:#C9D2DB;max-width:52ch;animation:vmUp .8s .16s both">{{ heroSub }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;animation:vmUp .8s .24s both">
+          <button type="button" onClick="{{ openRfq }}" style="display:inline-flex;align-items:center;gap:10px;height:52px;padding-inline:24px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:background .3s" style-hover="background:#0A6BC4">{{ t.cta_btn }} <span aria-hidden="true">{{ arrow }}</span></button>
+          <a href="mailto:AOG@velmachaerospace.com?subject=AOG%20request" style="display:inline-flex;align-items:center;gap:12px;height:52px;padding-inline:22px;border:1px solid rgba(255,255,255,.35);color:#FFFFFF;text-decoration:none;font-weight:600;font-size:15px;transition:background .3s,border-color .3s" style-hover="background:rgba(224,68,46,.16);border-color:#E0442E"><span style="width:8px;height:8px;border-radius:50%;background:#E0442E;animation:vmPulse 2.4s infinite"></span>{{ t.aog_tag }}</a>
+        </div>
+      </div>
+
+      <nav aria-label="{{ t.s_eyebrow }}" style="margin-top:clamp(48px,7vw,96px);display:grid;grid-template-columns:{{ idxCols }};gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);animation:vmUp .8s .32s both">
+        <sc-for list="{{ idx }}" as="x" hint-placeholder-count="5">
+          <a href="{{ x.href }}" style="display:flex;flex-direction:column;gap:18px;padding:22px 20px;background:rgba(7,17,29,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#FFFFFF;text-decoration:none;transition:background .3s" style-hover="background:rgba(7,89,165,.55)">
+            <span style="display:flex;justify-content:space-between;align-items:center">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ x.c }}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ x.icon }}"></path></svg>
+            </span>
+            <span style="font-weight:600;font-size:15px;line-height:1.35">{{ x.title }}</span>
+          </a>
+        </sc-for>
+      </nav>
     </div>
-    <ol style="list-style:none;margin:0;padding:0;border-top:1px solid #0B1B2B;animation:vmUp .8s .2s both">
-      <sc-for list="{{ index }}" as="x" hint-placeholder-count="5">
-        <li><a href="{{ x.href }}" style="display:flex;gap:16px;align-items:baseline;padding-block:10px;border-bottom:1px solid #E3E7EB;color:#0B1B2B;text-decoration:none;font-weight:600;font-size:15px" style-hover="color:#0759A5"><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:{{ x.c }};font-weight:400">{{ x.n }}</span>{{ x.title }}</a></li>
-      </sc-for>
-    </ol>
   </section>
 
-  <!-- AOG -->
-  <section id="svc-aog" aria-labelledby="h-aog" style="background:#D62828;color:#FFFFFF;scroll-margin-top:70px;position:relative;overflow:hidden">
-    <div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:48px 48px"></div>
-    <div style="position:relative;max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(16px,3.5vw,48px)">
-      <div data-reveal="" style="display:grid;grid-template-columns:{{ splitCols }};gap:32px 80px;align-items:end;margin-bottom:clamp(40px,5vw,72px)">
-        <div style="display:flex;flex-direction:column;gap:20px">
-          <span style="display:flex;align-items:center;gap:12px;font-family:{{ fMono }};font-size:12.5px;letter-spacing:{{ ls }};text-transform:uppercase;font-weight:500"><span style="width:9px;height:9px;border-radius:50%;background:#FFFFFF;animation:vmPulse 2.4s infinite;flex-shrink:0"></span><span dir="ltr">01</span> · 24/7</span>
-          <h2 id="h-aog" style="margin:0;font-family:{{ fHead }};font-size:clamp(34px,4.4vw,64px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ s0.title }}</h2>
+  <!-- 01 AOG -->
+  <section id="svc-aog" aria-labelledby="h-aog" style="position:relative;overflow:hidden;background:#0A0E14;color:#FFFFFF;border-top:2px solid #E0442E;scroll-margin-top:70px">
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(60% 80% at 0% 0%,rgba(224,68,46,.16),transparent 60%)"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(16px,4vw,56px);display:grid;grid-template-columns:{{ splitCols }};gap:48px clamp(40px,6vw,96px);align-items:center">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:22px">
+        <span style="display:inline-flex;align-items:center;gap:12px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#FF8A73"><span style="width:9px;height:9px;border-radius:50%;background:#E0442E;animation:vmPulse 2.4s infinite"></span>{{ t.aog_tag }}</span>
+        <h2 id="h-aog" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(32px,4vw,58px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ s0.title }}</h2>
+        <p style="margin:0;font-size:17.5px;line-height:1.65;color:#C9D2DB;max-width:50ch">{{ s0.body }}</p>
+        <ol style="list-style:none;margin:8px 0 0;padding:0;position:relative">
+          <sc-for list="{{ s0.pts }}" as="p" hint-placeholder-count="4">
+            <li style="position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding-bottom:20px">
+              <span dir="ltr" style="position:relative;z-index:1;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(224,68,46,.6);background:#0A0E14;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#FF8A73"><span aria-hidden="true" style="width:7px;height:7px;background:#FF8A73"></span></span>
+              <span style="position:absolute;inset-inline-start:21.5px;top:44px;bottom:0;width:1px;background:{{ p.line }}"></span>
+              <span style="padding-top:10px;font-size:16px;font-weight:500;line-height:1.5;color:#E6EBF0">{{ p.txt }}</span>
+            </li>
+          </sc-for>
+        </ol>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="mailto:AOG@velmachaerospace.com?subject=AOG%20request" style="display:inline-flex;flex-direction:column;gap:2px;background:#E0442E;color:#FFFFFF;padding:13px 22px;text-decoration:none;font-weight:700;transition:background .3s" style-hover="background:#C23722">
+            <span style="font-size:13px">{{ s0.cta }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:14.5px;font-weight:500">AOG@velmachaerospace.com</span>
+          </a>
+          <a href="tel:+971509259286" style="display:inline-flex;flex-direction:column;gap:2px;border:1px solid rgba(255,255,255,.3);color:#FFFFFF;padding:13px 22px;text-decoration:none;font-weight:700;transition:background .3s" style-hover="background:rgba(255,255,255,.08)">
+            <span style="font-size:13px">{{ t.aog_call }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:14.5px;font-weight:500">+971 50 925 9286</span>
+          </a>
         </div>
-        <p style="margin:0;font-size:18px;max-width:52ch">{{ s0.body }}</p>
       </div>
-      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ aogSteps }};border-top:1px solid rgba(255,255,255,.5)">
-        <sc-for list="{{ s0.pts }}" as="p" hint-placeholder-count="4">
-          <li data-reveal="" data-reveal-delay="{{ p.d }}" style="display:flex;flex-direction:column;gap:14px;padding:22px 20px 22px 0;padding-inline-end:20px;border-bottom:1px solid rgba(255,255,255,.25)">
-            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:{{ start }}">{{ p.n }}</span>
-            <span style="font-size:16.5px;font-weight:600;line-height:1.45">{{ p.txt }}</span>
+      <figure data-reveal="" data-reveal-delay="120" style="position:relative;margin:0;aspect-ratio:{{ aogRatio }};overflow:hidden;order:{{ aogOrder }}">
+        <img src="assets/services/aog.jpg" alt="{{ s0.title }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,20,0) 50%,rgba(10,14,20,.75) 100%)"></span>
+        <span aria-hidden="true" style="position:absolute;inset:16px;border:1px solid rgba(255,255,255,.3)"></span>
+        <figcaption style="position:absolute;inset-inline:32px;bottom:30px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
+          <span style="display:flex;flex-direction:column;gap:4px">
+            <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#FF8A73">{{ t.aog_tag }}</span>
+            <span dir="ltr" style="font-family:{{ fHead }};font-stretch:112%;font-size:clamp(44px,5vw,72px);font-weight:600;line-height:1;text-align:{{ start }}">24/7</span>
+          </span>
+          <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#C9D2DB;text-align:end">AOG · PRIORITY</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 02-05 -->
+  <sc-for list="{{ rows }}" as="r" hint-placeholder-count="4">
+    <section id="{{ r.anchor }}" aria-labelledby="{{ r.hid }}" style="background:{{ r.bg }};scroll-margin-top:70px;border-bottom:1px solid #E6E4DE">
+      <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(16px,4vw,56px);display:grid;grid-template-columns:{{ splitCols }};gap:40px clamp(40px,6vw,96px);align-items:center">
+        <figure data-reveal="" style="position:relative;margin:0;aspect-ratio:4/3;overflow:hidden;order:{{ r.imgOrder }};background:#EAE7E0" onMouseEnter="{{ r.enter }}" onMouseLeave="{{ r.leave }}">
+          <img src="{{ r.img }}" alt="{{ r.title }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ r.pos }};transform:scale({{ r.zoom }});transition:transform 1.2s cubic-bezier(.2,.7,.2,1)">
+          <span aria-hidden="true" style="position:absolute;inset:14px;border:1px solid rgba(255,255,255,.55)"></span>
+          <span style="position:absolute;top:0;inset-inline-start:0;display:flex;align-items:center;gap:10px;padding:12px 16px;background:#07111D;color:#FFFFFF">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6AA6E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ r.icon }}"></path></svg>
+          </span>
+        </figure>
+        <div data-reveal="" data-reveal-delay="120" style="display:flex;flex-direction:column;gap:20px">
+          <span style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5">{{ r.kicker }}</span>
+          <h2 id="{{ r.hid }}" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3.2vw,46px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};text-wrap:balance">{{ r.title }}</h2>
+          <p style="margin:0;font-size:17px;line-height:1.65;color:#4A5561;max-width:50ch">{{ r.body }}</p>
+          <ul style="list-style:none;margin:4px 0 0;padding:0;border-top:1px solid #DADBD8">
+            <sc-for list="{{ r.pts }}" as="p" hint-placeholder-count="3">
+              <li style="display:flex;align-items:flex-start;gap:14px;padding-block:14px;border-bottom:1px solid #DADBD8;font-size:16px;font-weight:500">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0759A5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+                <span>{{ p.txt }}</span>
+              </li>
+            </sc-for>
+          </ul>
+          <a href="{{ r.mail }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:16px;margin-top:6px;padding:12px 20px;background:#0B1B2B;color:#FFFFFF;text-decoration:none;transition:background .3s" style-hover="background:#0759A5">
+            <span style="display:flex;flex-direction:column;gap:1px"><span style="font-size:13px;font-weight:700">{{ r.cta }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#C9D2DB">{{ r.email }}</span></span>
+            <span aria-hidden="true">{{ arrow }}</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </sc-for>
+
+  <!-- HOW IT WORKS -->
+  <section aria-labelledby="h-how" style="background:#07111D;color:#FFFFFF;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(16px,4vw,56px)">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:16px;margin-bottom:clamp(40px,5vw,64px)">
+        <span style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#6AA6E8">{{ t.how_eyebrow }}</span>
+        <h2 id="h-how" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3.2vw,46px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};max-width:20ch;text-wrap:balance">{{ t.how_title }}</h2>
+      </div>
+      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ stepCols }};gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12)">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+          <li data-reveal="" data-reveal-delay="{{ st.d }}" style="display:flex;flex-direction:column;gap:14px;padding:28px 24px 32px;background:#07111D;transition:background .3s" style-hover="background:#0B1928">
+            <span style="display:flex;align-items:center;gap:12px">
+              <span dir="ltr" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#0759A5;font-family:'IBM Plex Mono',monospace;font-size:13px"><span aria-hidden="true" style="width:7px;height:7px;background:#FFFFFF"></span></span>
+              <span aria-hidden="true" style="flex:1;height:1px;background:linear-gradient(90deg,rgba(106,166,232,.6),transparent)"></span>
+            </span>
+            <span style="font-size:18px;font-weight:600;line-height:1.35">{{ st.t }}</span>
+            <span style="font-size:15px;line-height:1.6;color:#9FB0C1">{{ st.b }}</span>
           </li>
         </sc-for>
       </ol>
-      <div data-reveal="" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:40px">
-        <a href="mailto:AOG@velmachaerospace.com?subject=AOG%20request" style="display:inline-flex;flex-direction:column;gap:2px;background:#FFFFFF;color:#8E1414;padding:14px 22px;text-decoration:none;font-weight:700" style-hover="background:#FFF1F1">
-          <span style="font-size:13px">{{ s0.cta }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500">AOG@velmachaerospace.com</span>
-        </a>
-        <a href="tel:+971509259286" style="display:inline-flex;flex-direction:column;gap:2px;border:1px solid rgba(255,255,255,.7);color:#FFFFFF;padding:14px 22px;text-decoration:none;font-weight:700" style-hover="background:rgba(255,255,255,.1)">
-          <span style="font-size:13px">{{ t.aog_call }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500">+971 50 925 9286</span>
-        </a>
-      </div>
     </div>
   </section>
 
-  <!-- SOURCING -->
-  <section id="svc-sourcing" aria-labelledby="h-src" style="scroll-margin-top:70px">
-    <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(16px,3.5vw,48px);display:grid;grid-template-columns:{{ splitCols }};gap:40px 80px;align-items:start">
-      <div data-reveal="" style="display:flex;flex-direction:column;gap:20px">
-        <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#0759A5;text-align:{{ start }}">02</span>
-        <h2 id="h-src" style="margin:0;font-family:{{ fHead }};font-size:clamp(30px,3.6vw,52px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ s1.title }}</h2>
-        <p style="margin:0;font-size:17.5px;color:#374151;max-width:48ch">{{ s1.body }}</p>
-        <a href="mailto:sales@velmachaerospace.com" style="align-self:flex-start;display:inline-flex;flex-direction:column;gap:2px;background:#0759A5;color:#FFFFFF;padding:13px 20px;text-decoration:none;font-weight:700;margin-top:8px" style-hover="background:#0B1B2B"><span style="font-size:13.5px">{{ s1.cta }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500">sales@velmachaerospace.com</span></a>
+  <!-- CTA -->
+  <section aria-labelledby="h-cta" style="background:#F3F1EC">
+    <div data-reveal="" style="max-width:1320px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,56px);display:grid;grid-template-columns:{{ ctaCols }};gap:28px 64px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <h2 id="h-cta" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3vw,44px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};max-width:22ch;text-wrap:balance">{{ t.cta_title }}</h2>
+        <p style="margin:0;font-size:17px;line-height:1.65;color:#4A5561;max-width:56ch">{{ t.cta_body }}</p>
       </div>
-      <div data-reveal="" data-reveal-delay="120" style="display:flex;flex-direction:column">
-        <div aria-hidden="true" style="display:grid;grid-template-columns:repeat(3,1fr) auto repeat(1,1.2fr);align-items:center;gap:0;margin-bottom:28px;height:120px;position:relative">
-          <svg viewBox="0 0 520 120" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%" fill="none">
-            <path d="M20 20 C 200 20, 260 60, 440 60" stroke="#B7C0C9" stroke-dasharray="3 5"></path>
-            <path d="M20 60 L 440 60" stroke="#0759A5" stroke-dasharray="5 7" style="animation:vmDash 20s linear infinite"></path>
-            <path d="M20 100 C 200 100, 260 60, 440 60" stroke="#B7C0C9" stroke-dasharray="3 5"></path>
-            <circle cx="20" cy="20" r="5" fill="#FFFFFF" stroke="#0B1B2B"></circle><circle cx="20" cy="60" r="5" fill="#FFFFFF" stroke="#0B1B2B"></circle><circle cx="20" cy="100" r="5" fill="#FFFFFF" stroke="#0B1B2B"></circle>
-            <rect x="440" y="44" width="60" height="32" fill="#0759A5"></rect>
-          </svg>
-          <span dir="ltr" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:52px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#FFFFFF">RFQ</span>
-        </div>
-        <ul style="list-style:none;margin:0;padding:0;border-top:1px solid #0B1B2B">
-          <sc-for list="{{ s1.pts }}" as="p" hint-placeholder-count="3">
-            <li style="display:flex;gap:18px;align-items:baseline;padding-block:18px;border-bottom:1px solid #E3E7EB;font-size:17px;font-weight:600"><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#0759A5;font-weight:400">{{ p.n }}</span>{{ p.txt }}</li>
-          </sc-for>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOGISTICS -->
-  <section id="svc-logistics" aria-labelledby="h-log" style="background:#06111C;color:#FFFFFF;scroll-margin-top:70px;background-image:linear-gradient(rgba(120,170,220,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,220,.06) 1px,transparent 1px);background-size:48px 48px">
-    <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(16px,3.5vw,48px)">
-      <div data-reveal="" style="display:flex;flex-direction:column;gap:20px;max-width:760px">
-        <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#00AEEF;text-align:{{ start }}">03</span>
-        <h2 id="h-log" style="margin:0;font-family:{{ fHead }};font-size:clamp(30px,3.6vw,52px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ s2.title }}</h2>
-        <p style="margin:0;font-size:17.5px;color:#AFC0D0;max-width:52ch">{{ s2.body }}</p>
-      </div>
-      <div data-reveal="" dir="ltr" aria-hidden="true" style="position:relative;margin-block:clamp(40px,5vw,64px);height:90px">
-        <svg viewBox="0 0 1000 90" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%" fill="none">
-          <line x1="10" y1="45" x2="990" y2="45" stroke="rgba(255,255,255,.14)"></line>
-          <line x1="10" y1="45" x2="990" y2="45" stroke="#00AEEF" stroke-width="1.5" stroke-dasharray="8 10" style="animation:vmDash 12s linear infinite"></line>
-        </svg>
-        <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:14px;height:14px;background:#00AEEF"></span>
-        <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border:1.5px solid #FFFFFF;background:#06111C"></span>
-        <span style="position:absolute;right:0;top:50%;transform:translateY(-50%);width:14px;height:14px;border:1.5px solid #FFFFFF;background:#06111C"></span>
-        <span style="position:absolute;left:0;top:0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#00AEEF">AJM · AFZ</span>
-        <span style="position:absolute;right:0;bottom:0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8FA6BC">DEST</span>
-      </div>
-      <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ three }};gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14)">
-        <sc-for list="{{ s2.pts }}" as="p" hint-placeholder-count="3">
-          <li data-reveal="" data-reveal-delay="{{ p.d }}" style="background:#06111C;padding:24px;display:flex;flex-direction:column;gap:12px"><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#00AEEF;text-align:{{ start }}">{{ p.n }}</span><span style="font-size:17px;font-weight:600">{{ p.txt }}</span></li>
-        </sc-for>
-      </ul>
-      <a href="mailto:partsupport@velmachaerospace.com" data-reveal="" style="display:inline-flex;flex-direction:column;gap:2px;margin-top:32px;border:1px solid #00AEEF;color:#FFFFFF;padding:13px 20px;text-decoration:none;font-weight:700" style-hover="background:rgba(0,174,239,.12)"><span style="font-size:13.5px">{{ s2.cta }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;color:#00AEEF">partsupport@velmachaerospace.com</span></a>
-    </div>
-  </section>
-
-  <!-- USED / SCRAP -->
-  <section id="svc-used" aria-labelledby="h-used" style="background:#F4F6F8;scroll-margin-top:70px">
-    <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(16px,3.5vw,48px);display:grid;grid-template-columns:{{ splitCols }};gap:40px 80px;align-items:center">
-      <div data-reveal="" style="display:flex;flex-direction:column;gap:12px">
-        <sc-for list="{{ usedTags }}" as="u" hint-placeholder-count="3">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 24px;background:{{ u.bg }};color:{{ u.fg }};border:1px solid #0B1B2B;margin-inline-start:{{ u.indent }}">
-            <span style="font-family:{{ fHead }};font-size:clamp(22px,2.4vw,32px);font-weight:500">{{ u.label }}</span>
-            <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px">{{ u.code }}</span>
-          </div>
-        </sc-for>
-      </div>
-      <div data-reveal="" data-reveal-delay="120" style="display:flex;flex-direction:column;gap:20px">
-        <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#0759A5;text-align:{{ start }}">04</span>
-        <h2 id="h-used" style="margin:0;font-family:{{ fHead }};font-size:clamp(30px,3.6vw,52px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ s3.title }}</h2>
-        <p style="margin:0;font-size:17.5px;color:#374151;max-width:48ch">{{ s3.body }}</p>
-        <ul style="list-style:none;margin:0;padding:0;border-top:1px solid #B7C0C9">
-          <sc-for list="{{ s3.pts }}" as="p" hint-placeholder-count="3"><li style="padding-block:12px;border-bottom:1px solid #D3D9DF;font-weight:600">{{ p.txt }}</li></sc-for>
-        </ul>
-        <a href="mailto:sales@velmachaerospace.com" style="align-self:flex-start;display:inline-flex;flex-direction:column;gap:2px;background:#0B1B2B;color:#FFFFFF;padding:13px 20px;text-decoration:none;font-weight:700" style-hover="background:#0759A5"><span style="font-size:13.5px">{{ s3.cta }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500">sales@velmachaerospace.com</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONSULTANCY -->
-  <section id="svc-consult" aria-labelledby="h-con" style="scroll-margin-top:70px">
-    <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(16px,3.5vw,48px)">
-      <div data-reveal="" style="display:grid;grid-template-columns:{{ conCols }};gap:24px 48px;border-top:2px solid #0B1B2B;padding-top:28px">
-        <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#0759A5;text-align:{{ start }}">05</span>
-        <div style="display:flex;flex-direction:column;gap:24px">
-          <h2 id="h-con" style="margin:0;font-family:{{ fHead }};font-size:clamp(30px,3.6vw,52px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ s4.title }}</h2>
-          <p style="margin:0;font-family:{{ fHead }};font-size:clamp(20px,2vw,28px);font-weight:400;line-height:1.35;color:#374151;max-width:36ch">{{ s4.body }}</p>
-          <div style="display:grid;grid-template-columns:{{ three }};gap:20px">
-            <sc-for list="{{ s4.pts }}" as="p" hint-placeholder-count="3">
-              <div style="border-top:1px solid #B7C0C9;padding-top:14px;display:flex;flex-direction:column;gap:8px"><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#6B7280;text-align:{{ start }}">{{ p.n }}</span><span style="font-weight:600;font-size:16px">{{ p.txt }}</span></div>
-            </sc-for>
-          </div>
-          <a href="mailto:info@velmachaerospace.com" style="align-self:flex-start;display:inline-flex;flex-direction:column;gap:2px;background:#0759A5;color:#FFFFFF;padding:13px 20px;text-decoration:none;font-weight:700" style-hover="background:#0B1B2B"><span style="font-size:13.5px">{{ s4.cta }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500">info@velmachaerospace.com</span></a>
-        </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:{{ ctaJustify }}">
+        <button type="button" onClick="{{ openRfq }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding-inline:26px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:background .3s" style-hover="background:#0B1B2B">{{ t.cta_btn }} <span aria-hidden="true">{{ arrow }}</span></button>
+        <a href="mailto:sales@velmachaerospace.com" style="display:inline-flex;align-items:center;height:54px;padding-inline:24px;border:1px solid #0B1B2B;color:#0B1B2B;text-decoration:none;font-weight:600;font-size:15px;transition:background .3s,color .3s" style-hover="background:#0B1B2B;color:#FFFFFF">{{ t.cta_btn2 }}</a>
       </div>
     </div>
   </section>
@@ -184,34 +182,64 @@ a:hover{color:#0B1B2B}
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 const pad = i => String(i + 1).padStart(2, '0');
+const ICON = {
+  aog: 'M3 14v-2a9 9 0 0 1 18 0v2M3 14h3v6H4a1 1 0 0 1-1-1ZM21 14h-3v6h2a1 1 0 0 0 1-1ZM18 20c0 1.2-1.2 2-3 2h-2',
+  sourcing: 'M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20ZM2 12h20M12 2c2.8 3 2.8 17 0 20M12 2c-2.8 3-2.8 17 0 20',
+  logistics: 'M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4',
+  used: 'M7 19H4.8a1.8 1.8 0 0 1-1.6-2.7l4-6.8M11 19h8.2a1.8 1.8 0 0 0 1.6-2.7l-1.2-2M14 16l-3 3 3 3M8.3 13.6 7.2 9.5l-4.1 1.1M9.3 5.6l1.1-1.9a1.8 1.8 0 0 1 3.1 0l3.9 6.7M13.4 10.4l3.9-1.1 1.1 4.1',
+  consult: 'M9 11a3.5 3.5 0 1 0 0-7a3.5 3.5 0 1 0 0 7ZM2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.2a3.5 3.5 0 0 1 0 6.6M18 14.3c2 .8 3.5 2.8 3.5 5.7'
+};
+// short kicker per service, shown above each heading
+const KICK = {
+  en: { sourcing: 'Procurement', logistics: 'Free-zone trade', used: 'Cost-effective material', consult: 'Advisory' },
+  ar: { sourcing: 'المشتريات', logistics: 'تجارة المنطقة الحرة', used: 'مواد اقتصادية', consult: 'الاستشارات' }
+};
 class Component extends DCLogic {
-  state = { ready: false };
+  state = { ready: false, hover: -1 };
   componentDidMount() {
     const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
     go();
   }
-  componentDidUpdate(pp, ps) {
+  // The runtime passes only prevProps here, so the first ready render is tracked on the instance.
+  componentDidUpdate() {
     if (!this.state.ready) return;
+    const first = !this.didReady; this.didReady = true;
     window.VM.meta('services'); window.VM.reveal();
-    if (!ps.ready && location.hash) setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70 }); }, 300);
+    if (first && location.hash) setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90 }); }, 300);
   }
   componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
   renderVals() {
     if (!this.state.ready) return { ready: false };
-    const VM = window.VM, t = VM.t(), v = VM.sv();
-    const S = t.services.map(s => ({ ...s, pts: s.points.map((p, j) => ({ n: pad(j), txt: p, d: j * 110 })) }));
-    return { ...v, ready: true, t, s0: S[0], s1: S[1], s2: S[2], s3: S[3], s4: S[4],
-      index: t.services.map((s, i) => ({ n: pad(i), title: s.title, href: '#svc-' + s.id, c: s.id === 'aog' ? '#D62828' : '#0759A5' })),
-      headCols: v.lg ? 'minmax(0,1.2fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+    const VM = window.VM, t = VM.t(), v = VM.sv(), s = this.state;
+    const S = t.services;
+    const s0 = { ...S[0], pts: S[0].points.map((p, j, a) => ({ n: pad(j), txt: p, line: j < a.length - 1 ? 'rgba(224,68,46,.35)' : 'transparent' })) };
+    const kick = v.ar ? KICK.ar : KICK.en;
+    return { ...v, ready: true, t, s0,
+      heroTitle: v.ar ? 'خدمات تدعم كل طلبية، من رقم القطعة حتى الشحن' : 'Services built around every part number',
+      heroSub: t.s_sub,
+      heroShade: v.ar
+        ? 'linear-gradient(270deg,rgba(7,17,29,.95) 0%,rgba(7,17,29,.82) 45%,rgba(7,17,29,.35) 100%)'
+        : 'linear-gradient(90deg,rgba(7,17,29,.95) 0%,rgba(7,17,29,.82) 45%,rgba(7,17,29,.35) 100%)',
+      openRfq: () => VM.openRfq(),
+      idx: S.map((x, i) => ({ n: pad(i), title: x.title, href: '#svc-' + x.id, icon: ICON[x.id], c: x.id === 'aog' ? '#FF8A73' : '#6AA6E8' })),
+      idxCols: v.lg ? 'repeat(5,minmax(0,1fr))' : v.md ? 'repeat(3,minmax(0,1fr))' : 'repeat(2,minmax(0,1fr))',
       splitCols: v.lg ? 'minmax(0,1fr) minmax(0,1fr)' : 'minmax(0,1fr)',
-      aogSteps: v.lg ? 'repeat(4,minmax(0,1fr))' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
-      three: v.sm ? 'minmax(0,1fr)' : 'repeat(3,minmax(0,1fr))',
-      conCols: v.sm ? 'minmax(0,1fr)' : '120px minmax(0,1fr)',
-      usedTags: [
-        { label: t.cond.used, code: 'USED-SVC', bg: '#FFFFFF', fg: '#0B1B2B', indent: '0px' },
-        { label: t.cond.surplus, code: 'SURPLUS', bg: '#FFFFFF', fg: '#0B1B2B', indent: v.sm ? '0px' : '40px' },
-        { label: v.ar ? 'خردة الطائرات' : 'Aircraft scrap', code: 'SCRAP', bg: '#0B1B2B', fg: '#FFFFFF', indent: v.sm ? '0px' : '80px' }
-      ] };
+      aogOrder: v.lg ? 0 : -1, aogRatio: v.lg ? '4/5' : v.sm ? '4/3' : '16/9',
+      rows: S.slice(1).map((x, k) => {
+        const i = k + 1, flip = k % 2 === 1;
+        return { anchor: 'svc-' + x.id, hid: 'h-' + x.id, n: pad(i), title: x.title, body: x.body, cta: x.cta, email: x.email,
+          mail: 'mailto:' + x.email, kicker: kick[x.id] || '', icon: ICON[x.id],
+          img: 'assets/services/' + x.id + '.jpg', pos: x.id === 'used' ? 'center 35%' : 'center',
+          bg: k % 2 ? '#F3F1EC' : '#FBFBF9', imgOrder: v.lg && flip ? 1 : 0,
+          zoom: s.hover === i ? 1.05 : 1,
+          enter: () => this.setState({ hover: i }), leave: () => this.setState({ hover: -1 }),
+          pts: x.points.map(p => ({ txt: p })) };
+      }),
+      steps: t.steps.map((x, j) => ({ n: pad(j), t: x.t, b: x.b, d: j * 100 })),
+      stepCols: v.lg ? 'repeat(4,minmax(0,1fr))' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
+      ctaCols: v.lg ? 'minmax(0,1.4fr) auto' : 'minmax(0,1fr)',
+      ctaJustify: v.lg ? 'flex-end' : 'flex-start'
+    };
   }
 }
 </script>

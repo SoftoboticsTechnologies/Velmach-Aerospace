@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product | Velmach Aerospace</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -11,101 +12,111 @@
 <meta name="description" content="Aircraft part and aerospace material details with request for quote.">
 <meta property="og:type" content="product">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="css/catalogue.css">
 <script src="js/i18n.js"></script>
 <script src="data/products.js"></script>
 <script src="js/routes.js"></script>
 <script src="js/vm-core.js"></script>
-<style>
-html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
-*{box-sizing:border-box}
-a{color:#0759A5;text-underline-offset:4px}
-a:hover{color:#0B1B2B}
-*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
-input[type=number]::-webkit-inner-spin-button{opacity:.4}
-@keyframes vmUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
-</style>
 </helmet>
 
-<dc-import name="SiteHeader" page="products" hint-size="100%,122px"></dc-import>
+<dc-import name="SiteHeader" page="products" hint-size="100%,112px"></dc-import>
 
 <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
-<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px">
-  <div style="border-bottom:1px solid #E3E7EB;background:#F7F9FA">
-    <nav aria-label="Breadcrumb" style="max-width:1360px;margin:0 auto;padding:14px clamp(16px,3.5vw,48px);display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13.5px;color:#6B7280">
-      <a href="{{ homeHref }}" style="color:#4B5563;text-decoration:none" style-hover="color:#0759A5">{{ t.nav.home }}</a><span aria-hidden="true">/</span>
-      <a href="{{ listHref }}" style="color:#4B5563;text-decoration:none" style-hover="color:#0759A5">{{ t.nav.products }}</a>
-      <sc-if value="{{ found }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true">/</span><a href="{{ catHref }}" style="color:#4B5563;text-decoration:none" style-hover="color:#0759A5">{{ catName }}</a><span aria-hidden="true">/</span><span aria-current="page" dir="ltr" style="color:#0B1B2B;font-family:'IBM Plex Mono',monospace;font-size:13px">{{ pn }}</span></sc-if>
+<main id="main" class="cx" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }}">
+  <div class="pd-crumbs">
+    <nav class="cx-wrap" aria-label="Breadcrumb">
+      <a href="{{ homeHref }}">{{ t.nav.home }}</a><i aria-hidden="true"></i>
+      <a href="{{ listHref }}">{{ t.nav.products }}</a>
+      <sc-if value="{{ found }}" hint-placeholder-val="{{ true }}"><i aria-hidden="true"></i><a href="{{ catHref }}">{{ catName }}</a><i aria-hidden="true"></i><span aria-current="page" dir="ltr">{{ pn }}</span></sc-if>
     </nav>
   </div>
 
   <sc-if value="{{ found }}" hint-placeholder-val="{{ true }}">
-    <section style="max-width:1360px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(16px,3.5vw,48px);display:grid;grid-template-columns:{{ cols }};gap:clamp(28px,4vw,64px);align-items:start">
-      <div style="position:{{ stickyPos }};top:110px;animation:vmUp .6s both">
-        <div style="position:relative;aspect-ratio:4/3;border:1px solid #E3E7EB;background:#FFFFFF;display:flex;align-items:center;justify-content:center;overflow:hidden">
-          <span aria-hidden="true" style="position:absolute;top:-1px;left:-1px;width:22px;height:22px;border-top:2px solid #0759A5;border-left:2px solid #0759A5"></span>
-          <span aria-hidden="true" style="position:absolute;bottom:-1px;right:-1px;width:22px;height:22px;border-bottom:2px solid #0759A5;border-right:2px solid #0759A5"></span>
-          <sc-if value="{{ img }}" hint-placeholder-val="{{ true }}">
-            <a href="{{ img }}" target="_blank" rel="noopener" title="{{ t.pd_full_img }}" style="display:block;width:100%;height:100%;padding:clamp(12px,2vw,28px)">
-              <img src="{{ img }}" alt="{{ imgAlt }}" decoding="async" onError="{{ imgErr }}" style="width:100%;height:100%;object-fit:contain;display:block">
+    <section class="cx-wrap pd-top">
+      <!-- specimen plate -->
+      <div class="pd-media">
+        <div class="pd-plate">
+          <span class="pd-corner pd-corner--tl" aria-hidden="true"></span><span class="pd-corner pd-corner--tr" aria-hidden="true"></span>
+          <span class="pd-corner pd-corner--bl" aria-hidden="true"></span><span class="pd-corner pd-corner--br" aria-hidden="true"></span>
+          <sc-if value="{{ hasImg }}" hint-placeholder-val="{{ true }}">
+            <a href="{{ img }}" target="_blank" rel="noopener" title="{{ t.pd_full_img }}" aria-label="{{ t.pd_full_img }}">
+              <img data-src="{{ img }}" alt="{{ imgAlt }}" decoding="async" width="800" height="800">
             </a>
           </sc-if>
           <sc-if value="{{ noImg }}" hint-placeholder-val="{{ false }}">
-            <img src="{{ ph }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
-            <span style="position:absolute;left:0;right:0;bottom:22px;text-align:center;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#6B7A89"><span style="background:rgba(245,247,249,.94);padding:3px 8px">{{ t.p_noimg }}</span></span>
+            <img data-src="{{ ph }}" class="is-ph" alt="" width="800" height="800">
+            <span class="pd-plate-cap">{{ t.p_noimg }}</span>
           </sc-if>
+          <span class="pd-plate-pn" dir="ltr">PN {{ pn }}</span>
+        </div>
+        <div class="pd-cap">
+          <span>{{ catName }}</span>
+          <sc-if value="{{ hasImg }}" hint-placeholder-val="{{ true }}"><a href="{{ img }}" target="_blank" rel="noopener">{{ t.pd_full_img }}<svg class="cx-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:13px;height:13px"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"></path></svg></a></sc-if>
         </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:22px;min-width:0;animation:vmUp .6s .08s both">
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <a href="{{ catHref }}" style="align-self:flex-start;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5;text-decoration:none">{{ catName }}</a>
-          <h1 dir="ltr" style="margin:0;font-family:{{ fHead }};font-weight:500;font-size:clamp(28px,3.2vw,44px);line-height:1.12;letter-spacing:-0.01em;word-break:break-word;text-align:{{ start }}">{{ name }}</h1>
-          <sc-if value="{{ desc }}" hint-placeholder-val="{{ true }}"><p dir="ltr" style="margin:0;color:#4B5563;font-size:17px;text-align:{{ start }}">{{ desc }}</p></sc-if>
-          <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;background:#F1F4F7;color:#374151;font-size:13px;font-weight:600"><span style="width:7px;height:7px;border:1px solid #6B7280"></span>{{ t.p_avail_req }}</span>
-          <sc-if value="{{ enOnly }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#6B7280">{{ t.pd_en_only }}</span></sc-if>
-        </div>
-
-        <dl style="margin:0;border-top:1px solid #E3E7EB">
-          <sc-for list="{{ specs }}" as="r" hint-placeholder-count="4">
-            <div style="display:grid;grid-template-columns:minmax(120px,.6fr) minmax(0,1.4fr);gap:16px;padding-block:13px;border-bottom:1px solid #E3E7EB;font-size:14.5px">
-              <dt style="color:#6B7280">{{ r.k }}</dt><dd dir="{{ r.dir }}" style="margin:0;font-weight:600;font-family:{{ r.font }};word-break:break-word;text-align:{{ start }}">{{ r.v }}</dd>
-            </div>
-          </sc-for>
-        </dl>
-
-        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-          <div dir="ltr" style="display:flex;align-items:center;border:1px solid #B7C0C9;height:52px">
-            <button type="button" onClick="{{ dec }}" aria-label="{{ t.p_dec }}" style="width:42px;height:100%;border:0;background:transparent;font-size:18px;cursor:pointer;color:#0B1B2B">−</button>
-            <input type="number" min="1" value="{{ qty }}" onChange="{{ onQty }}" aria-label="{{ t.p_qty }}" style="width:58px;height:100%;border:0;border-inline:1px solid #E3E7EB;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:15px;outline:none">
-            <button type="button" onClick="{{ inc }}" aria-label="{{ t.p_inc }}" style="width:42px;height:100%;border:0;background:transparent;font-size:18px;cursor:pointer;color:#0B1B2B">+</button>
+      <div class="pd-info">
+        <div class="pd-head">
+          <a class="pd-cat" href="{{ catHref }}"><span class="cx-sq" aria-hidden="true"></span>{{ catName }}</a>
+          <h1 class="pd-h1" dir="ltr" style="text-align:{{ start }}">{{ name }}</h1>
+          <sc-if value="{{ desc }}" hint-placeholder-val="{{ true }}"><p class="pd-desc" dir="ltr" style="text-align:{{ start }}">{{ desc }}</p></sc-if>
+          <div class="pd-badges">
+            <span class="pd-badge">{{ t.p_avail_req }}</span>
           </div>
-          <button type="button" onClick="{{ add }}" style="flex:1;min-width:180px;height:52px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-weight:700;font-size:15px;cursor:pointer;transition:background .25s" style-hover="background:#0B1B2B">+ {{ t.p_add }}</button>
-          <button type="button" onClick="{{ openRfq }}" style="height:52px;padding-inline:18px;border:1px solid #0B1B2B;background:#FFFFFF;color:#0B1B2B;font:inherit;font-weight:700;font-size:14.5px;cursor:pointer">{{ t.pd_rfq_list }}</button>
+          <sc-if value="{{ enOnly }}" hint-placeholder-val="{{ false }}"><span class="pd-note-en">{{ t.pd_en_only }}</span></sc-if>
         </div>
-        <p style="margin:0;font-size:13.5px;color:#6B7280">{{ t.m_note }}</p>
-        <a href="{{ listHref }}" style="align-self:flex-start;font-weight:700;font-size:14.5px;text-decoration:none;display:inline-flex;gap:8px"><span aria-hidden="true">{{ back }}</span>{{ t.pd_back }}</a>
+
+        <div class="pd-spec">
+          <div class="pd-spec-hd"><span class="cx-k" style="color:#0B1B2B">{{ t.p_spec }}</span></div>
+          <dl>
+            <sc-for list="{{ specs }}" as="r" hint-placeholder-count="4">
+              <div><dt>{{ r.k }}</dt><dd dir="{{ r.dir }}" style="font-family:{{ r.font }};text-align:{{ start }}">{{ r.v }}</dd></div>
+            </sc-for>
+          </dl>
+        </div>
+
+        <div class="pd-rfq">
+          <div class="pd-rfq-in">
+            <span class="cx-k">{{ t.p_qty }}</span>
+            <div class="pd-rfq-row">
+              <div class="qty qty--lg" dir="ltr">
+                <button type="button" onClick="{{ dec }}" aria-label="{{ t.p_dec }}">−</button>
+                <input type="number" min="1" value="{{ qty }}" onChange="{{ onQty }}" aria-label="{{ t.p_qty }}">
+                <button type="button" onClick="{{ inc }}" aria-label="{{ t.p_inc }}">+</button>
+              </div>
+              <button type="button" class="cx-btn cx-btn--blue" onClick="{{ add }}"><svg class="cx-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:15px;height:15px"><path d="M12 4v16M4 12h16"></path></svg>{{ t.p_add }}</button>
+              <button type="button" class="cx-btn cx-btn--line" onClick="{{ openRfq }}">{{ t.pd_rfq_list }}</button>
+            </div>
+            <p class="pd-rfq-note">{{ t.m_note }}</p>
+          </div>
+          <div class="pd-contact">
+            <a href="{{ salesHref }}"><span>{{ t.pd_ask }}</span><b dir="ltr">sales@velmachaerospace.com</b></a>
+            <a class="is-aog" href="{{ aogHref }}"><span>{{ t.aog_email }} · 24/7</span><b dir="ltr">AOG@velmachaerospace.com</b></a>
+          </div>
+        </div>
+
+        <a class="cx-link pd-back" href="{{ listHref }}"><svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true" style="transform:scaleX(calc(-1 * var(--dir)))"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg>{{ t.pd_back }}</a>
       </div>
     </section>
 
     <sc-if value="{{ hasRelated }}" hint-placeholder-val="{{ true }}">
-      <section aria-labelledby="rel-h" style="background:#F4F6F8;border-top:1px solid #E3E7EB">
-        <div style="max-width:1360px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(16px,3.5vw,48px)">
-          <div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px">
-            <h2 id="rel-h" style="margin:0;font-family:{{ fHead }};font-size:clamp(24px,2.4vw,32px);font-weight:500;line-height:1.2">{{ t.pd_related }}</h2>
-            <a href="{{ catHref }}" style="font-weight:700;font-size:14.5px;text-decoration:none;display:inline-flex;gap:8px">{{ viewCat }} <span aria-hidden="true">{{ arrow }}</span></a>
+      <section class="pd-rel" aria-labelledby="rel-h">
+        <div class="cx-wrap">
+          <div class="pd-rel-hd">
+            <h2 id="rel-h">{{ t.pd_related }}</h2>
+            <a class="cx-link" href="{{ catHref }}">{{ viewCat }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></a>
           </div>
-          <div style="display:grid;grid-template-columns:{{ relCols }};gap:16px">
+          <div class="cx-grid">
             <sc-for list="{{ related }}" as="r" hint-placeholder-count="4">
-              <a href="{{ r.href }}" style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E3E7EB;color:#0B1B2B;text-decoration:none;transition:border-color .3s,box-shadow .3s" style-hover="border-color:#9FB4C8;box-shadow:0 14px 36px rgba(11,27,43,.08)">
-                <span style="display:block;aspect-ratio:2/1;border-bottom:1px solid #E3E7EB;overflow:hidden;background:#FFFFFF">
-                  <sc-if value="{{ r.img }}" hint-placeholder-val="{{ true }}"><img src="{{ r.img }}" alt="" loading="lazy" decoding="async" width="300" height="150" onError="{{ imgErr }}" style="width:100%;height:100%;object-fit:contain;display:block"></sc-if>
-                  <sc-if value="{{ r.noImg }}" hint-placeholder-val="{{ false }}"><span style="position:relative;display:block;width:100%;height:100%"><img src="{{ ph }}" alt="" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;left:0;right:0;bottom:8px;text-align:center;font-family:{{ fMono }};font-size:10px;letter-spacing:{{ ls }};text-transform:uppercase;color:#6B7A89"><span style="background:rgba(245,247,249,.94);padding:3px 8px">{{ t.p_noimg }}</span></span></span></sc-if>
+              <a class="rc" href="{{ r.href }}">
+                <span class="pc-media">
+                  <img data-src="{{ r.img }}" class="{{ r.imgCls }}" alt="" loading="lazy" decoding="async" width="400" height="300">
+                  <span class="pc-pn" dir="ltr">{{ r.pn }}</span>
                 </span>
-                <span style="padding:14px 16px;display:flex;flex-direction:column;gap:6px">
-                  <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;text-align:{{ start }};word-break:break-word">{{ r.pn }}</span>
-                  <span dir="ltr" style="font-size:13.5px;color:#6B7280;line-height:1.5;text-align:{{ start }}">{{ r.desc }}</span>
+                <span class="pc-body">
+                  <span class="pc-cat">{{ catName }}</span>
+                  <span class="pc-t" dir="ltr" style="text-align:{{ start }}">{{ r.desc }}</span>
                 </span>
               </a>
             </sc-for>
@@ -116,11 +127,11 @@ input[type=number]::-webkit-inner-spin-button{opacity:.4}
   </sc-if>
 
   <sc-if value="{{ missing }}" hint-placeholder-val="{{ false }}">
-    <section style="max-width:1360px;margin:0 auto;padding:clamp(48px,6vw,96px) clamp(16px,3.5vw,48px)">
-      <div style="border:1px solid #D3D9DF;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:14px;align-items:flex-start;max-width:720px">
-        <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(26px,2.6vw,36px);font-weight:500;line-height:1.2">{{ t.pd_missing_t }}</h1>
-        <p style="margin:0;color:#4B5563;max-width:52ch">{{ t.pd_missing_b }}</p>
-        <a href="{{ listHref }}" style="height:50px;padding-inline:22px;background:#0759A5;color:#FFFFFF;display:inline-flex;align-items:center;gap:10px;font-weight:700;text-decoration:none" style-hover="background:#0B1B2B;color:#FFFFFF">{{ t.pd_back }} <span aria-hidden="true">{{ arrow }}</span></a>
+    <section class="cx-wrap pd-missing">
+      <div class="pd-missing-box">
+        <h1>{{ t.pd_missing_t }}</h1>
+        <p>{{ t.pd_missing_b }}</p>
+        <a class="cx-btn cx-btn--blue" href="{{ listHref }}">{{ t.pd_back }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></a>
       </div>
     </section>
   </sc-if>
@@ -130,13 +141,24 @@ input[type=number]::-webkit-inner-spin-button{opacity:.4}
 <dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
+// Images are rendered from data-src and set here after render, so the browser never requests a "{{ }}" URL
+// while it parses the raw template. A failed image falls back to the placeholder.
+function hydrateImages(ph) {
+  document.querySelectorAll('main img[data-src]').forEach(i => {
+    const src = i.getAttribute('data-src');
+    if (!src || src.indexOf('{{') > -1 || i.dataset.cur === src) return;
+    i.dataset.cur = src;
+    i.onerror = () => { i.onerror = null; i.src = ph; i.classList.add('is-ph'); };
+    i.src = src;
+  });
+}
 class Component extends DCLogic {
   state = { ready: false, qty: 1 };
   componentDidMount() {
     const go = () => { if (window.VM && window.VM_I18N && window.VM_PRODUCTS && window.VM_ROUTES) { this.id = window.VM_ROUTES.slugFrom('product'); this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
     go();
   }
-  componentDidUpdate() { if (this.state.ready) this.writeHead(); }
+  componentDidUpdate() { if (this.state.ready) { this.writeHead(); hydrateImages(window.VM_ROUTES.placeholder); } }
   componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
   product() { return this.id ? window.VM_PRODUCTS.find(p => p.id === this.id) : null; }
   // per-product title, description, canonical, Open Graph and Product schema
@@ -156,8 +178,7 @@ class Component extends DCLogic {
   renderVals() {
     if (!this.state.ready) return { ready: false };
     const VM = window.VM, t = VM.t(), v = VM.sv(), p = this.product(), R = window.VM_ROUTES;
-    const base = { ...v, ready: true, t, homeHref: R.home(v.ar), listHref: R.products(v.ar), back: v.ar ? '→' : '←', ph: R.placeholder,
-      imgErr: e => { const i = e.currentTarget; if (!i.dataset.fallback) { i.dataset.fallback = '1'; i.src = R.placeholder; i.style.objectFit = 'cover'; } } };
+    const base = { ...v, ready: true, t, homeHref: R.home(v.ar), listHref: R.products(v.ar), ph: R.placeholder };
     if (!p) return { ...base, found: false, missing: true };
     const catName = (t.cats.find(c => c.id === p.category) || {}).title || p.category, qty = this.state.qty;
     const setQty = n => this.setState({ qty: Math.max(1, Math.min(99999, n || 1)) });
@@ -169,19 +190,20 @@ class Component extends DCLogic {
     if (p.condition) specs.push({ k: t.m_cond, v: t.cond[p.condition], dir: v.dir, font: 'inherit' });
     // related: neighbours in the same category, in catalogue order
     const same = window.VM_PRODUCTS.filter(x => x.category === p.category), at = same.indexOf(p);
-    const related = [...same.slice(at + 1), ...same.slice(0, at)].slice(0, 4).map(r => ({ pn: r.partNumber, desc: r.desc_en || r.name_en, img: R.asset(r.image), noImg: !r.image,
-      href: R.product(r.id, v.ar) }));
+    const related = [...same.slice(at + 1), ...same.slice(0, at)].slice(0, 4).map(r => ({ pn: r.partNumber, desc: r.desc_en || r.name_en,
+      img: r.image ? R.asset(r.image) : R.placeholder, imgCls: r.image ? '' : 'is-ph', href: R.product(r.id, v.ar) }));
     const name = (v.ar && p.name_ar) || p.name_en, desc = (v.ar && p.desc_ar) || p.desc_en;
+    const subject = encodeURIComponent('RFQ: ' + p.partNumber);
     return {
       ...base, found: true, missing: false, pn: p.partNumber, name, desc: desc && desc !== name ? desc : '', catName,
-      catHref: R.products(v.ar, p.category), img: R.asset(p.image), noImg: !p.image, imgAlt: [p.partNumber, p.desc_en].filter(Boolean).join(', '),
+      catHref: R.products(v.ar, p.category), img: R.asset(p.image), hasImg: !!p.image, noImg: !p.image, imgAlt: [p.partNumber, p.desc_en].filter(Boolean).join(', '),
       enOnly: v.ar && !p.name_ar, specs,
-      cols: v.lg ? 'minmax(0,1fr) minmax(0,1.1fr)' : 'minmax(0,1fr)', stickyPos: v.lg ? 'sticky' : 'static',
       qty, dec: () => setQty(qty - 1), inc: () => setQty(qty + 1), onQty: e => setQty(parseInt(e.target.value, 10)),
       add: () => VM.addRfq({ pn: p.partNumber, name_en: p.name_en, name_ar: p.name_ar || p.name_en, cond: p.condition || 'any', image: p.image || '' }, qty),
       openRfq: () => VM.openRfq(),
-      related, hasRelated: related.length > 0, viewCat: t.pd_view_cat.replace('{cat}', catName),
-      relCols: v.lg ? 'repeat(4,minmax(0,1fr))' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)'
+      salesHref: 'mailto:sales@velmachaerospace.com?subject=' + subject,
+      aogHref: 'mailto:AOG@velmachaerospace.com?subject=' + encodeURIComponent('AOG request: ' + p.partNumber),
+      related, hasRelated: related.length > 0, viewCat: t.pd_view_cat.replace('{cat}', catName)
     };
   }
 }

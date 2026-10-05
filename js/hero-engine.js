@@ -163,7 +163,8 @@
       var yaw = (27 + 3 * Math.sin(t * TAU / 26) + px * 6 + (1 - intro) * 16) * D2R,
         pitch = (8 + 1.5 * Math.sin(t * TAU / 19 + 1) - py * 4) * D2R,
         roll = (-1.5 + 0.8 * Math.sin(t * TAU / 31 + 2)) * D2R;
-      var spins = { rotor: -t * TAU / 14 - (1 - intro) * 1.4, aft: t * TAU / 70, core: -t * TAU / 5, body: 0 };
+      // constant angular velocity on every stage (no intro offset, which made the rotor appear to slow down)
+      var spins = { rotor: -t * TAU / 14, aft: t * TAU / 70, core: -t * TAU / 5, body: 0 };
       var cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), cr = Math.cos(roll), sr = Math.sin(roll);
       // view = Rz(roll) * Rx(pitch) * Ry(yaw), as columns
       var b0 = sp * sy, b2 = -sp * cy,

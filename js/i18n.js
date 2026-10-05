@@ -64,7 +64,7 @@ en: {
 
   aog_tag: "AOG desk · 24/7", aog_title: "Aircraft on Ground? Contact our AOG desk",
   aog_body: "Priority handling around the clock. Include the part number, quantity, aircraft type and delivery location.",
-  aog_email: "Email AOG desk", aog_call: "Call",
+  aog_email: "Email AOG desk", aog_info: "For info", aog_call: "Call",
 
   cta_title: "Have a part number? Get a quote.", cta_body: "Add parts to your RFQ list or send us a part number directly. Our sales team will reply with pricing, condition and availability.",
   cta_btn: "Start an RFQ", cta_btn2: "Contact sales",
@@ -72,7 +72,7 @@ en: {
   f_desc: "Aircraft parts and aerospace materials trading from Ajman Free Zone, UAE.",
   f_quick: "Company", f_cats: "Products", f_contact: "Contact", f_social: "Social links",
   f_legal: "© 2026 Velmach Aerospace F.Z.C · Ajman Free Zone License No. 45584",
-  f_addr_short: "Ajman Free Zone C1 Building, Ajman, UAE",
+  f_addr_short: "Ajman Free Zone, U.A.E",
 
   about_eyebrow: "About", about_title: "About Velmach Aerospace", about_sub: "A UAE free-zone company trading aircraft parts, technical materials and aviation expertise.",
   about_intro1: "Velmach Aerospace F.Z.C is a newly established free-zone company licensed by the Ajman Free Zone Authority in the United Arab Emirates. We trade aircraft spare parts and components, and supply the technical materials that aviation and industry depend on: lubricants, chemicals, paints, adhesives, self-adhesive materials, petrochemicals and oil and gas well equipment.",
@@ -155,7 +155,7 @@ en: {
     { id: "info", t: "General information", b: "Company and general enquiries.", email: "info@velmachaerospace.com" }
   ],
   c_phones_t: "Phone", c_whatsapp: "Chat on WhatsApp", c_addr_t: "Address",
-  addr: "Office C1-1F-SF20786, Ajman Free Zone C1 Building, Ajman Free Zone, United Arab Emirates",
+  addr: "Office - C1 - 1F – SF20786, Ajman Free Zone, U.A.E",
   c_map: "Google Maps embed · Ajman Free Zone", c_hours_t: "Business hours", c_hours: "Business hours to be confirmed", c_hours_aog: "AOG desk available 24/7",
   c_form_t: "Send a message", cf: { name: "Full name *", email: "Email *", subject: "Subject", message: "Message *" }, c_send: "Send message", c_ok: "Your email app has opened. Send the message to reach us.",
 
@@ -238,7 +238,7 @@ ar: {
 
   aog_tag: "مكتب AOG · على مدار الساعة", aog_title: "طائرتك متوقفة عن الخدمة؟ تواصل مع مكتب AOG",
   aog_body: "معالجة ذات أولوية على مدار الساعة. يُرجى ذكر رقم القطعة والكمية ونوع الطائرة وموقع التسليم.",
-  aog_email: "راسل مكتب AOG", aog_call: "اتصل",
+  aog_email: "راسل مكتب AOG", aog_info: "للاستفسارات العامة", aog_call: "اتصل",
 
   cta_title: "لديك رقم قطعة؟ اطلب عرض سعر.", cta_body: "أضف القطع إلى قائمة طلب الأسعار أو أرسل إلينا رقم القطعة مباشرة، وسيرد فريق المبيعات بالسعر والحالة ومدى التوفر.",
   cta_btn: "ابدأ طلب عرض سعر", cta_btn2: "تواصل مع المبيعات",
@@ -246,7 +246,7 @@ ar: {
   f_desc: "تجارة قطع غيار الطائرات ومواد الطيران من منطقة عجمان الحرة، الإمارات.",
   f_quick: "الشركة", f_cats: "المنتجات", f_contact: "التواصل", f_social: "روابط التواصل الاجتماعي",
   f_legal: "© 2026 فيلماك إيروسبايس ش.م.ح · رخصة منطقة عجمان الحرة رقم 45584",
-  f_addr_short: "مبنى منطقة عجمان الحرة C1، عجمان، الإمارات",
+  f_addr_short: "منطقة عجمان الحرة، الإمارات",
 
   about_eyebrow: "من نحن", about_title: "عن فيلماك إيروسبايس", about_sub: "شركة منطقة حرة إماراتية تتاجر في قطع غيار الطائرات والمواد الفنية وتقدّم خبرات الطيران.",
   about_intro1: "فيلماك إيروسبايس ش.م.ح شركة حديثة التأسيس في المنطقة الحرة، مرخّصة من هيئة منطقة عجمان الحرة في دولة الإمارات العربية المتحدة. نتاجر في قطع غيار الطائرات ومكوناتها، ونورّد المواد الفنية التي يعتمد عليها قطاعا الطيران والصناعة، ومنها الزيوت والكيماويات والدهانات واللواصق والمواد ذاتية اللصق والمواد البتروكيماوية ومعدات آبار النفط والغاز.",
@@ -329,7 +329,7 @@ ar: {
     { id: "info", t: "الاستفسارات العامة", b: "استفسارات عن الشركة واستفسارات عامة.", email: "info@velmachaerospace.com" }
   ],
   c_phones_t: "الهاتف", c_whatsapp: "راسلنا عبر واتساب", c_addr_t: "العنوان",
-  addr: "مكتب C1-1F-SF20786، مبنى منطقة عجمان الحرة C1، منطقة عجمان الحرة، الإمارات العربية المتحدة",
+  addr: "مكتب C1 - 1F – SF20786، منطقة عجمان الحرة، الإمارات العربية المتحدة",
   c_map: "خريطة Google · منطقة عجمان الحرة", c_hours_t: "ساعات العمل", c_hours: "ساعات العمل قيد التأكيد", c_hours_aog: "مكتب AOG متاح على مدار الساعة",
   c_form_t: "أرسل رسالة", cf: { name: "الاسم الكامل *", email: "البريد الإلكتروني *", subject: "الموضوع", message: "الرسالة *" }, c_send: "إرسال الرسالة", c_ok: "فُتح تطبيق البريد لديك. أرسل الرسالة للتواصل معنا.",
 
@@ -484,5 +484,35 @@ ar: {
       { t: "دعم المشتريات على مدار الساعة", b: "خبراء توريد طيران متخصصون متاحون على مدار الساعة للطلبات العاجلة." },
       { t: "سلسلة إمداد موثوقة", b: "تحظى بثقة شركات الطيران ومراكز الصيانة والمصنّعين الأصليين وجهات الدفاع حول العالم." }
     ]
+  });
+})(window.VM_I18N);
+
+/* ---- v3 home redesign: UI labels only (no new business claims) ---- */
+(function (D) {
+  Object.assign(D.en, {
+    hs_label: "Looking for a part?", hs_ph: "Enter part number or keyword",
+    loc_regions: "Regions within reach", loc_origin: "Origin",
+    aog_full: "Aircraft on Ground", aog_req_label: "Include in your request",
+    aog_req: ["Part number", "Quantity", "Aircraft type", "Delivery location"],
+    ind_view: "View industry", cta_hint: "Leave it blank to open your RFQ list instead.",
+    f_ind: "Industries", f_aog: "AOG desk, 24/7", f_sales: "Sales", f_email: "General enquiries",
+    pd_ask: "Ask sales about this part", p_remove: "Remove filter", p_parts: "parts", p_spec: "Specification",
+    to_top: "Back to top", c_depts: "Departments", c_open_map: "Open in Google Maps", c_form_sub: "We reply by email. For an aircraft on ground, use the AOG desk.",
+    car_label: "Featured", car_prev: "Previous slide", car_next: "Next slide", car_pause: "Pause slideshow", car_play: "Play slideshow", car_goto: "Show slide",
+    car_alt: ["Aerospace: precision materials powering aerospace innovation", "MRO and aircraft maintenance: keeping fleets safe, ready and operational",
+      "Commercial aviation: reliable supply solutions for every flight", "Jetliner nose landing gear on the apron at sunset"]
+  });
+  Object.assign(D.ar, {
+    hs_label: "تبحث عن قطعة؟", hs_ph: "أدخل رقم القطعة أو كلمة مفتاحية",
+    loc_regions: "مناطق في متناولنا", loc_origin: "نقطة الانطلاق",
+    aog_full: "طائرة متوقفة على الأرض", aog_req_label: "اذكر في طلبك",
+    aog_req: ["رقم القطعة", "الكمية", "نوع الطائرة", "موقع التسليم"],
+    ind_view: "عرض القطاع", cta_hint: "اتركه فارغًا لفتح قائمة طلب التسعير بدلًا من ذلك.",
+    f_ind: "القطاعات", f_aog: "مكتب AOG على مدار الساعة", f_sales: "المبيعات", f_email: "الاستفسارات العامة",
+    pd_ask: "اسأل المبيعات عن هذه القطعة", p_remove: "إزالة عامل التصفية", p_parts: "قطعة", p_spec: "المواصفات",
+    to_top: "العودة إلى الأعلى", c_depts: "الأقسام", c_open_map: "افتح في خرائط Google", c_form_sub: "نرد عبر البريد الإلكتروني. للطائرات المتوقفة على الأرض، تواصل مع مكتب AOG.",
+    car_label: "مختارات", car_prev: "الشريحة السابقة", car_next: "الشريحة التالية", car_pause: "إيقاف العرض", car_play: "تشغيل العرض", car_goto: "عرض الشريحة",
+    car_alt: ["الطيران والفضاء: مواد دقيقة تدعم الابتكار في صناعة الطيران", "الصيانة والإصلاح والعَمرة: أساطيل آمنة وجاهزة للتشغيل",
+      "الطيران التجاري: حلول إمداد موثوقة لكل رحلة", "عجلات الهبوط الأمامية لطائرة ركاب على المدرج عند الغروب"]
   });
 })(window.VM_I18N);

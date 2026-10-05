@@ -6,6 +6,12 @@ Bilingual (EN / AR) site for VELMACH AEROSPACE F.Z.C. Pages in this project are 
 - index.html (Home), about.dc.html, products.dc.html, industries.dc.html, services.dc.html, quality.dc.html, rfq.dc.html, contact.dc.html, 404.dc.html
 - Shared parts: SiteHeader.dc.html (utility bar, nav, drawer, RFQ panel, AOG + WhatsApp buttons), SiteFooter.dc.html, RfqPanel.dc.html (RFQ list + form, used in the header panel and on rfq.dc.html)
 - Previous version kept as `Velmach Website.dc.html`
+- Other pages are still client-rendered Design Components. Without JavaScript they show nothing useful, and the browser briefly parses their raw template (console 404s for `{{ img }}` URLs on product/blog pages). Converting them like index.html removes this.
+
+## Home page (index.html)
+- index.html is plain, complete HTML (English), so it reads correctly before or without JavaScript, in link previews and for crawlers. Only the shared header (with the RFQ panel) and footer are rendered by the DC runtime.
+- Text comes from js/i18n.js: elements carry `data-t="key.path"` (text) or `data-t-attr="attr:key"` (attributes). js/home.js applies the visitor's language at runtime; `node tools/prerender-home.mjs` writes the English strings into index.html. Run it after changing home strings (`--check` reports missing keys, out-of-date text, or list items in i18n.js that the page does not show yet).
+- Styles: css/home.css (design tokens at the top). Images: assets/home/ (catalogue product photos and the region map). `python tools/build-home-map.py` regenerates assets/home/region-map.svg from Natural Earth land data.
 
 ## Run locally
 Serve the folder with any static server (for example `npx serve .` or `python -m http.server`) and open index.html.

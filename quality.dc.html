@@ -17,16 +17,16 @@
 <link rel="alternate" hreflang="en" href="https://www.velmachaerospace.com/quality.html?lang=en">
 <link rel="alternate" hreflang="ar" href="https://www.velmachaerospace.com/quality.html?lang=ar">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <script src="js/i18n.js"></script>
 <script src="js/vm-core.js"></script>
 <style>
-html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased}
+html,body{margin:0;padding:0;background:#FBFBF9;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
 a{color:#0759A5;text-underline-offset:4px}
-a:hover{color:#0B1B2B}
-*:focus-visible{outline:2px solid #00AEEF;outline-offset:3px}
-@keyframes vmUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+*:focus-visible{outline:2px solid #3D8BE0;outline-offset:3px}
+@keyframes vmUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes vmZoom{from{transform:scale(1.08)}to{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 </style>
 </helmet>
@@ -34,38 +34,82 @@ a:hover{color:#0B1B2B}
 <dc-import name="SiteHeader" page="quality" hint-size="100%,122px"></dc-import>
 
 <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
-<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px">
-  <section style="background:#06111C;color:#FFFFFF;background-image:linear-gradient(rgba(120,170,220,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,220,.06) 1px,transparent 1px);background-size:48px 48px">
-    <div style="max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,112px) clamp(16px,3.5vw,48px) clamp(48px,6vw,88px);display:grid;grid-template-columns:{{ headCols }};gap:24px 64px;align-items:end">
-      <div style="display:flex;flex-direction:column;gap:22px">
-        <div style="display:flex;align-items:center;gap:14px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#00AEEF;animation:vmUp .8s both"><span style="width:28px;height:1px;background:#00AEEF"></span>{{ t.q_eyebrow }}</div>
-        <h1 style="margin:0;font-family:{{ fHead }};font-size:clamp(36px,5vw,72px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};animation:vmUp .8s .1s both">{{ t.q_title }}</h1>
-      </div>
-      <p style="margin:0;color:#AFC0D0;font-size:17px;max-width:48ch;animation:vmUp .8s .2s both">{{ t.q_sub }}</p>
-    </div>
-  </section>
+<main id="main" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }};color:#0B1B2B;font-size:16px;background:#FBFBF9">
 
-  <section aria-labelledby="qp-h" style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(16px,3.5vw,48px)">
-    <h2 id="qp-h" data-reveal="" style="margin:0 0 clamp(40px,5vw,64px);font-family:{{ fHead }};font-size:clamp(30px,3.4vw,50px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ t.q_process_t }}</h2>
-    <div style="position:relative">
-      <sc-if value="{{ lg }}" hint-placeholder-val="{{ true }}">
-        <div aria-hidden="true" style="position:absolute;top:27px;left:0;right:0;height:1px;background:#E3E7EB"></div>
-        <div data-reveal="line" aria-hidden="true" style="position:absolute;top:27px;left:0;right:0;height:1px;background:#0759A5;transform-origin:{{ start }}"></div>
-      </sc-if>
-      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ stepCols }};gap:36px 24px;position:relative">
-        <sc-for list="{{ qsteps }}" as="q" hint-placeholder-count="5">
-          <li data-reveal="" data-reveal-delay="{{ q.d }}" onMouseEnter="{{ q.enter }}" onMouseLeave="{{ q.leave }}" style="display:flex;flex-direction:column;gap:14px">
-            <span dir="ltr" style="width:54px;height:54px;display:flex;align-items:center;justify-content:center;border:1px solid #0759A5;background:{{ q.bg }};color:{{ q.fg }};font-family:'IBM Plex Mono',monospace;font-size:14px;transition:all .3s">{{ q.n }}</span>
-            <h3 style="margin:0;font-family:{{ fHead }};font-size:21px;font-weight:500">{{ q.t }}</h3>
-            <p style="margin:0;color:#4B5563;font-size:15px">{{ q.b }}</p>
-            <sc-if value="{{ q.last }}" hint-placeholder-val="{{ false }}"><a href="mailto:QC@velmachaerospace.com" dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;align-self:flex-start">QC@velmachaerospace.com</a></sc-if>
+  <!-- HERO -->
+  <section aria-labelledby="q-h1" style="position:relative;overflow:hidden;background:#07111D;color:#FFFFFF;isolation:isolate">
+    <img src="assets/industries/mro.jpg" alt="" aria-hidden="true" style="position:absolute;top:0;bottom:0;inset-inline-end:0;width:{{ heroImgW }};height:100%;object-fit:cover;z-index:-2;animation:vmZoom 2.4s cubic-bezier(.2,.7,.2,1) both">
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:-1;background:{{ heroShade }}"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:56px 56px"></div>
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(72px,10vw,136px) clamp(16px,4vw,56px) clamp(40px,5vw,64px)">
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:640px">
+        <span style="display:inline-flex;align-items:center;gap:12px;font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#9FC6EE;animation:vmUp .8s both"><span style="width:28px;height:1px;background:#6AA6E8"></span>{{ t.q_eyebrow }}</span>
+        <h1 id="q-h1" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(40px,5.6vw,80px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};text-wrap:balance;animation:vmUp .8s .08s both">{{ t.q_title }}</h1>
+        <p style="margin:0;font-size:clamp(16px,1.4vw,19px);line-height:1.65;color:#C9D2DB;max-width:50ch;animation:vmUp .8s .16s both">{{ t.q_sub }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;animation:vmUp .8s .24s both">
+          <a href="#docs" style="display:inline-flex;align-items:center;gap:10px;height:52px;padding-inline:24px;background:#0759A5;color:#FFFFFF;text-decoration:none;font-weight:600;font-size:15px;transition:background .3s" style-hover="background:#0A6BC4">{{ t.q_docs_t }} <span aria-hidden="true">{{ arrow }}</span></a>
+          <a href="mailto:QC@velmachaerospace.com" style="display:inline-flex;align-items:center;height:52px;padding-inline:22px;border:1px solid rgba(255,255,255,.35);color:#FFFFFF;text-decoration:none;font-weight:600;font-size:15px;transition:background .3s" style-hover="background:rgba(255,255,255,.08)">{{ t.q_contact_btn }}</a>
+        </div>
+      </div>
+      <ul style="list-style:none;margin:clamp(48px,7vw,88px) 0 0;padding:0;display:grid;grid-template-columns:{{ badgeCols }};gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);animation:vmUp .8s .32s both">
+        <sc-for list="{{ badges }}" as="b" hint-placeholder-count="4">
+          <li style="display:flex;align-items:center;gap:14px;padding:18px 20px;background:rgba(7,17,29,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6AA6E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0"><path d="{{ b.icon }}"></path></svg>
+            <span style="font-size:15px;font-weight:600">{{ b.t }}</span>
           </li>
         </sc-for>
-      </ol>
+      </ul>
     </div>
   </section>
 
-  <section aria-labelledby="qd-h" style="background:#F4F6F8;border-block:1px solid #E3E7EB">
+  <!-- COMMITMENTS -->
+  <section aria-labelledby="qc-h" style="background:#FBFBF9">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(16px,4vw,56px)">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(36px,4vw,56px)">
+        <span style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#0759A5">{{ t.q_eyebrow }}</span>
+        <h2 id="qc-h" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3.2vw,46px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};max-width:20ch;text-wrap:balance">{{ t.q_commit_t }}</h2>
+      </div>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ commitCols }};gap:16px">
+        <sc-for list="{{ commits }}" as="c" hint-placeholder-count="4">
+          <li data-reveal="" data-reveal-delay="{{ c.d }}" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="position:relative;display:flex;flex-direction:column;gap:16px;padding:28px 24px 30px;background:#FFFFFF;border:1px solid {{ c.border }};box-shadow:{{ c.shadow }};transform:translateY({{ c.lift }});transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s,border-color .4s">
+            <span style="display:flex;justify-content:space-between;align-items:center">
+              <span style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:{{ c.iconBg }};transition:background .4s">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ c.iconFg }}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ c.icon }}"></path></svg>
+              </span>
+              <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A96A3">{{ c.n }}</span>
+            </span>
+            <h3 style="margin:0;font-family:{{ fHead }};font-size:20px;font-weight:500;line-height:1.25">{{ c.t }}</h3>
+            <p style="margin:0;color:#4A5561;font-size:15px;line-height:1.6">{{ c.b }}</p>
+          </li>
+        </sc-for>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section aria-labelledby="qp-h" style="background:#07111D;color:#FFFFFF;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(64px,8vw,112px) clamp(16px,4vw,56px)">
+      <h2 id="qp-h" data-reveal="" style="margin:0 0 clamp(40px,5vw,64px);font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3.2vw,46px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ t.q_process_t }}</h2>
+      <div style="position:relative">
+        <sc-if value="{{ lg }}" hint-placeholder-val="{{ true }}">
+          <div aria-hidden="true" style="position:absolute;top:27px;left:0;right:0;height:1px;background:rgba(255,255,255,.14)"></div>
+          <div data-reveal="line" aria-hidden="true" style="position:absolute;top:27px;left:0;right:0;height:1px;background:#6AA6E8;transform-origin:{{ start }}"></div>
+        </sc-if>
+        <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:{{ stepCols }};gap:36px 24px;position:relative">
+          <sc-for list="{{ qsteps }}" as="q" hint-placeholder-count="5">
+            <li data-reveal="" data-reveal-delay="{{ q.d }}" onMouseEnter="{{ q.enter }}" onMouseLeave="{{ q.leave }}" style="display:flex;flex-direction:column;gap:14px">
+              <span dir="ltr" style="width:54px;height:54px;display:flex;align-items:center;justify-content:center;border:1px solid #6AA6E8;background:{{ q.bg }};color:{{ q.fg }};font-family:'IBM Plex Mono',monospace;font-size:14px;transition:all .3s">{{ q.n }}</span>
+              <h3 style="margin:0;font-family:{{ fHead }};font-size:20px;font-weight:500">{{ q.t }}</h3>
+              <p style="margin:0;color:#9FB0C1;font-size:15px;line-height:1.6">{{ q.b }}</p>
+              <sc-if value="{{ q.last }}" hint-placeholder-val="{{ false }}"><a href="mailto:QC@velmachaerospace.com" dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;align-self:flex-start;color:#9FC6EE">QC@velmachaerospace.com</a></sc-if>
+            </li>
+          </sc-for>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="docs" aria-labelledby="qd-h" style="scroll-margin-top:80px;background:#F4F6F8;border-block:1px solid #E3E7EB">
     <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,8vw,120px) clamp(16px,3.5vw,48px)">
       <div data-reveal="" style="display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(36px,4vw,56px)">
         <div style="display:flex;flex-direction:column;gap:12px">
@@ -79,16 +123,18 @@ a:hover{color:#0B1B2B}
           <article data-reveal="" data-reveal-delay="{{ d.delay }}" onMouseEnter="{{ d.enter }}" onMouseLeave="{{ d.leave }}" style="display:flex;flex-direction:column;gap:18px">
             <!-- TODO: replace preview with a thumbnail of the real PDF -->
             <div aria-hidden="true" style="position:relative;aspect-ratio:1/1.3;background:#FFFFFF;border:1px solid #D3D9DF;box-shadow:{{ d.shadow }};transform:translateY({{ d.lift }}) rotate({{ d.rot }});transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;padding:10% 11%;display:flex;flex-direction:column;gap:9px;overflow:hidden">
-              <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #0B1B2B;padding-bottom:10px;margin-bottom:6px">
-                <span style="width:34%;height:8px;background:#0B1B2B"></span><span style="width:22px;height:22px;border:1.5px solid #0759A5;border-radius:50%"></span>
+              <div style="display:flex;flex-direction:column;gap:7px;border-bottom:1.5px solid #0B1B2B;padding-bottom:12px">
+                <span style="width:46%;height:7px;background:#0B1B2B"></span><span style="width:30%;height:5px;background:#D3D9DF"></span>
               </div>
-              <span style="width:70%;height:6px;background:#D3D9DF"></span><span style="width:88%;height:6px;background:#E3E7EB"></span><span style="width:80%;height:6px;background:#E3E7EB"></span>
-              <span style="width:92%;height:6px;background:#E3E7EB"></span><span style="width:60%;height:6px;background:#E3E7EB"></span>
-              <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:end">
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding-block:8px">
+                <span style="display:flex;align-items:center;justify-content:center;padding:{{ d.logoPad }};background:{{ d.logoBg }};max-width:100%"><img src="{{ d.logo }}" alt="" style="height:{{ d.logoH }};width:auto;max-width:100%;display:block"></span>
+                <span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:100%"><span style="width:72%;height:6px;background:#E3E7EB"></span><span style="width:56%;height:6px;background:#E3E7EB"></span></span>
+              </div>
+              <span style="width:88%;height:6px;background:#E3E7EB"></span><span style="width:64%;height:6px;background:#E3E7EB"></span>
+              <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:end">
                 <span style="display:flex;flex-direction:column;gap:6px;width:40%"><span style="height:6px;background:#E3E7EB"></span><span style="height:6px;width:70%;background:#E3E7EB"></span></span>
-                <span style="width:54px;height:54px;border:1.5px dashed #9FB4C8;border-radius:50%"></span>
+                <span style="width:58px;height:58px;border:1.5px dashed #9FB4C8;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;background:{{ d.sealBg }}"><img src="{{ d.seal }}" alt="" style="width:{{ d.sealW }};height:auto;display:block;opacity:.9"></span>
               </div>
-              <span style="position:absolute;top:12px;inset-inline-end:12px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#9AA5B1;letter-spacing:.08em">{{ t.q_preview }}</span>
               <span style="position:absolute;left:0;right:0;height:30%;top:{{ d.scan }};background:linear-gradient(180deg,transparent,rgba(0,174,239,.10),transparent);transition:top 1.2s ease"></span>
             </div>
             <div style="display:flex;flex-direction:column;gap:6px">
@@ -99,22 +145,42 @@ a:hover{color:#0B1B2B}
               <span style="color:#6B7280">{{ d.k }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-weight:500">{{ d.no }}</span>
             </div>
             <!-- TODO: replace with the real PDF file in /docs -->
-            <a href="{{ d.href }}" target="_blank" rel="noopener" style="align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;border-bottom:1px solid #0759A5;padding-bottom:3px">{{ t.q_view }} <span aria-hidden="true">{{ arrow }}</span></a>
+            <a href="{{ d.href }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:10px 10px 10px 14px;padding-inline-start:14px;padding-inline-end:10px;background:{{ d.btnBg }};border:1px solid {{ d.btnLine }};color:{{ d.btnFg }};text-decoration:none;transition:background .3s,color .3s,border-color .3s">
+              <span style="width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:{{ d.pdfBg }};color:{{ d.pdfFg }};transition:background .3s,color .3s">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6ZM15 3v4h4"></path><path d="M9 13.5h1.5a1.25 1.25 0 0 0 0-2.5H9v5M13 11v5h1a2.5 2.5 0 0 0 0-5Z"></path></svg>
+              </span>
+              <span style="flex:1;display:flex;flex-direction:column;gap:1px;min-width:0">
+                <span style="font-size:15px;font-weight:700">{{ t.q_view }}</span>
+                <span style="font-size:12px;color:{{ d.subFg }};transition:color .3s">{{ d.t }} · PDF</span>
+              </span>
+              <span aria-hidden="true" style="width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid {{ d.arwLine }};transform:translateX({{ d.ax }});transition:transform .35s,border-color .3s">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transform:{{ flip }}"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+              </span>
+            </a>
           </article>
         </sc-for>
       </div>
     </div>
   </section>
 
-  <section style="background:#0B1B2B;color:#FFFFFF">
-    <div data-reveal="" style="max-width:1360px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,3.5vw,48px);display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:center">
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <h2 style="margin:0;font-family:{{ fHead }};font-size:clamp(26px,2.8vw,38px);font-weight:500">{{ t.q_contact_t }}</h2>
-        <p style="margin:0;color:#AFC0D0;max-width:48ch">{{ t.q_contact_b }}</p>
+  <!-- QC CONTACT -->
+  <section aria-labelledby="qq-h" style="background:#F3F1EC">
+    <div data-reveal="" style="max-width:1320px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,56px);display:grid;grid-template-columns:{{ ctaCols }};gap:28px 64px;align-items:center">
+      <div style="display:flex;align-items:flex-start;gap:20px">
+        <span style="width:56px;height:56px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#0759A5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3ZM8.5 12l2.5 2.5 4.5-5"></path></svg>
+        </span>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <h2 id="qq-h" style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(26px,2.8vw,40px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }}">{{ t.q_contact_t }}</h2>
+          <p style="margin:0;font-size:17px;line-height:1.65;color:#4A5561;max-width:52ch">{{ t.q_contact_b }}</p>
+        </div>
       </div>
-      <a href="mailto:QC@velmachaerospace.com" style="display:inline-flex;flex-direction:column;gap:2px;background:#0759A5;color:#FFFFFF;padding:14px 22px;text-decoration:none;font-weight:700" style-hover="background:#0A6BC4">
-        <span style="font-size:13.5px">{{ t.q_contact_btn }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:500">QC@velmachaerospace.com</span>
-      </a>
+      <div style="display:flex;justify-content:{{ ctaJustify }}">
+        <a href="mailto:QC@velmachaerospace.com" style="display:inline-flex;align-items:center;gap:18px;background:#0B1B2B;color:#FFFFFF;padding:14px 22px;text-decoration:none;transition:background .3s" style-hover="background:#0759A5">
+          <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13.5px;font-weight:700">{{ t.q_contact_btn }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:15px;color:#C9D2DB">QC@velmachaerospace.com</span></span>
+          <span aria-hidden="true">{{ arrow }}</span>
+        </a>
+      </div>
     </div>
   </section>
 </main>
@@ -124,8 +190,15 @@ a:hover{color:#0B1B2B}
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 const pad = i => String(i + 1).padStart(2, '0');
+const IC = {
+  trace: 'M4 6h4v4H4ZM16 14h4v4h-4ZM8 8h4a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2',
+  doc: 'M6 3h9l4 4v14H6ZM15 3v4h4M9 12h7M9 16h7',
+  check: 'M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3ZM8.5 12l2.5 2.5 4.5-5',
+  talk: 'M4 5h16v11H9l-5 4ZM8 9.5h8M8 12.5h5'
+};
+const ICONS = [IC.trace, IC.doc, IC.check, IC.talk];
 class Component extends DCLogic {
-  state = { ready: false, step: -1, doc: -1 };
+  state = { ready: false, step: -1, doc: -1, commit: -1 };
   componentDidMount() {
     const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
     go();
@@ -137,16 +210,38 @@ class Component extends DCLogic {
     const VM = window.VM, t = VM.t(), v = VM.sv(), s = this.state;
     const rots = ['-1.2deg', '0.6deg', '-0.4deg'];
     return { ...v, ready: true, t,
-      headCols: v.lg ? 'minmax(0,1.2fr) minmax(0,1fr)' : 'minmax(0,1fr)',
+      heroImgW: v.lg ? '55%' : '100%',
+      heroShade: v.lg
+        ? (v.ar ? 'linear-gradient(270deg,#07111D 0%,#07111D 42%,rgba(7,17,29,.55) 70%,rgba(7,17,29,.25) 100%)' : 'linear-gradient(90deg,#07111D 0%,#07111D 42%,rgba(7,17,29,.55) 70%,rgba(7,17,29,.25) 100%)')
+        : 'rgba(7,17,29,.86)',
+      badges: t.commits.map((c, i) => ({ t: c.t, icon: ICONS[i] || IC.check })),
+      badgeCols: v.lg ? 'repeat(4,minmax(0,1fr))' : 'repeat(2,minmax(0,1fr))',
+      commits: t.commits.map((c, i) => { const on = s.commit === i;
+        return { ...c, n: pad(i), d: i * 100, icon: ICONS[i] || IC.check,
+          iconBg: on ? '#0759A5' : '#EAF2FB', iconFg: on ? '#FFFFFF' : '#0759A5', border: on ? '#0759A5' : '#DADBD8',
+          shadow: on ? '0 22px 48px rgba(11,27,43,.12)' : 'none', lift: on ? '-6px' : '0px',
+          enter: () => this.setState({ commit: i }), leave: () => this.setState(st => st.commit === i ? { commit: -1 } : null) }; }),
+      commitCols: v.lg ? 'repeat(4,minmax(0,1fr))' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
       stepCols: v.lg ? 'repeat(5,minmax(0,1fr))' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
       docCols: v.sm ? 'minmax(0,1fr)' : v.md ? 'repeat(2,minmax(0,1fr))' : 'repeat(3,minmax(0,1fr))',
       qsteps: t.qsteps.map((q, i) => { const on = s.step === i;
-        return { ...q, n: pad(i), d: 200 + i * 140, last: i === t.qsteps.length - 1, bg: on ? '#0759A5' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0759A5',
+        return { ...q, n: pad(i), d: 200 + i * 140, last: i === t.qsteps.length - 1, bg: on ? '#0759A5' : '#07111D', fg: on ? '#FFFFFF' : '#9FC6EE',
           enter: () => this.setState({ step: i }), leave: () => this.setState(st => st.step === i ? { step: -1 } : null) }; }),
-      docs: t.docs.map((d, i) => { const on = s.doc === i;
+      // Issuer logos on the preview: Ajman Free Zone (white artwork, shown on navy) or the Federal Tax Authority.
+      docs: t.docs.map((d, i) => { const on = s.doc === i, afz = !/tax/i.test(d.href);
         return { ...d, delay: i * 120, rot: on ? '0deg' : rots[i], lift: on ? '-8px' : '0px', scan: on ? '75%' : '-30%',
           shadow: on ? '0 28px 60px rgba(11,27,43,.16)' : '0 10px 30px rgba(11,27,43,.07)',
-          enter: () => this.setState({ doc: i }), leave: () => this.setState(st => st.doc === i ? { doc: -1 } : null) }; }) };
+          logo: afz ? 'assets/quality/afz-logo.svg' : 'assets/quality/fta-logo.png',
+          logoBg: afz ? '#0B1B2B' : 'transparent', logoPad: afz ? '10px 14px' : '0', logoH: afz ? '30px' : '46px',
+          btnBg: on ? '#0B1B2B' : '#FFFFFF', btnFg: on ? '#FFFFFF' : '#0B1B2B', btnLine: on ? '#0B1B2B' : '#D3D9DF',
+          pdfBg: on ? '#E0442E' : '#FDECE9', pdfFg: on ? '#FFFFFF' : '#E0442E', subFg: on ? '#9FB0C1' : '#6B7280',
+          arwLine: on ? 'rgba(255,255,255,.35)' : '#D3D9DF', ax: on ? (v.ar ? '-3px' : '3px') : '0px',
+          seal: afz ? 'assets/quality/afz-emblem.svg' : 'assets/quality/fta-emblem.png',
+          sealBg: afz ? '#0B1B2B' : '#FFFFFF', sealW: afz ? '26px' : '40px',
+          enter: () => this.setState({ doc: i }), leave: () => this.setState(st => st.doc === i ? { doc: -1 } : null) }; }),
+      ctaCols: v.lg ? 'minmax(0,1.4fr) auto' : 'minmax(0,1fr)',
+      ctaJustify: v.lg ? 'flex-end' : 'flex-start'
+    };
   }
 }
 </script>
