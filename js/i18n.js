@@ -127,7 +127,7 @@ en: {
     { t: "Supplier checks", b: "We assess suppliers before purchasing and keep records of the source of every item we trade." },
     { t: "Direct communication", b: "Quality questions and document requests go straight to our quality contact." }
   ],
-  q_docs_t: "Company Certifications", q_docs_sub: "These documents confirm our legal registration in the United Arab Emirates.",
+  q_docs_t: "Company License & Certifications", q_docs_sub: "These documents confirm our legal registration in the United Arab Emirates.",
   docs: [
     { t: "Trade License", k: "License No.", no: "45584", href: "assets/company/trade-license.pdf", issuer: "Ajman Free Zone Authority" },
     { t: "Certificate of Incorporation", k: "Incorporated", no: "19 September 2025", href: "assets/company/certificate-of-incorporation.pdf", issuer: "Ajman Free Zone Authority" },
@@ -301,7 +301,7 @@ ar: {
     { t: "التحقق من الموردين", b: "نقيّم الموردين قبل الشراء ونحتفظ بسجلات مصدر كل صنف نتاجر فيه." },
     { t: "تواصل مباشر", b: "تُحال استفسارات الجودة وطلبات الوثائق مباشرة إلى مسؤول الجودة." }
   ],
-  q_docs_t: "شهادات الشركة", q_docs_sub: "تؤكد هذه الوثائق تسجيلنا القانوني في دولة الإمارات العربية المتحدة.",
+  q_docs_t: "رخصة الشركة وشهاداتها", q_docs_sub: "تؤكد هذه الوثائق تسجيلنا القانوني في دولة الإمارات العربية المتحدة.",
   docs: [
     { t: "الرخصة التجارية", k: "رقم الرخصة", no: "45584", href: "assets/company/trade-license.pdf", issuer: "هيئة منطقة عجمان الحرة" },
     { t: "شهادة التأسيس", k: "تاريخ التأسيس", no: "19 سبتمبر 2025", href: "assets/company/certificate-of-incorporation.pdf", issuer: "هيئة منطقة عجمان الحرة" },
