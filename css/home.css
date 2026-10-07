@@ -484,21 +484,22 @@ main { display: block; background: var(--white); }
 
 /* ========== 09 REQUEST ========== */
 .sec.rfq { padding-bottom: clamp(32px, 4vw, 56px); }
-.rfq-grid { display: grid; grid-template-columns: minmax(0, 4.6fr) minmax(0, 7.4fr); gap: clamp(40px, 6vw, 112px); align-items: start; }
+.sec.rfq { padding-block: clamp(48px, 5.5vw, 80px); }   /* slimmer than other sections */
+.rfq-grid { display: grid; grid-template-columns: minmax(0, 4.6fr) minmax(0, 7.4fr); gap: clamp(32px, 4.5vw, 80px); align-items: center; }
 .rfq-grid .rfq-co { order: -1; }   /* company card sits left of the request on wide screens; the form stays first on small ones */
 .rfq-h { font-size: clamp(32px, 3.8vw, 56px); max-width: 16ch; }
-.rfq-main .lead { margin-top: 20px; }
-.rfq-form { margin-top: clamp(32px, 4vw, 48px); max-width: 720px; }
+.rfq-main .lead { margin-top: 14px; }
+.rfq-form { margin-top: clamp(20px, 2.4vw, 32px); max-width: 720px; }
 .rfq-form .mono-k { display: block; margin-bottom: 8px; }
 .rfq-form:focus-within .mono-k { color: var(--blue); }
-.rfq-field { display: flex; align-items: center; gap: 12px; height: 72px; border-bottom: 2px solid var(--navy); transition: border-color .3s; }
+.rfq-field { display: flex; align-items: center; gap: 12px; height: 60px; border-bottom: 2px solid var(--navy); transition: border-color .3s; }
 .rfq-field:focus-within { border-color: var(--blue); }
 .rfq-field input { flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; font: 400 clamp(17px, 1.6vw, 22px) var(--fm); color: var(--ink); outline: none; }
 [dir="rtl"] .rfq-field input { text-align: right; }
 .rfq-field input::placeholder { color: #9AA3AC; opacity: 1; }
 .rfq-field input:focus-visible { outline: none; }
 .rfq-hint { margin-top: 10px; font-size: 13.5px; color: var(--steel); }
-.rfq-links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; margin-top: 28px; }
+.rfq-links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; margin-top: 18px; }
 .rfq-mail { display: inline-flex; align-items: center; gap: 10px; font: 400 13.5px var(--fm); color: var(--navy); }
 .rfq-mail .ic { width: 18px; height: 18px; color: var(--blue); }
 .rfq-mail:hover { color: var(--blue); }
