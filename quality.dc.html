@@ -121,30 +121,27 @@ a{color:#0759A5;text-underline-offset:4px}
       <div style="display:grid;grid-template-columns:{{ docCols }};gap:clamp(20px,2.5vw,36px)">
         <sc-for list="{{ docs }}" as="d" hint-placeholder-count="3">
           <article data-reveal="" data-reveal-delay="{{ d.delay }}" onMouseEnter="{{ d.enter }}" onMouseLeave="{{ d.leave }}" style="display:flex;flex-direction:column;gap:18px">
-            <!-- TODO: replace preview with a thumbnail of the real PDF -->
-            <div aria-hidden="true" style="position:relative;aspect-ratio:1/1.3;background:#FFFFFF;border:1px solid #D3D9DF;box-shadow:{{ d.shadow }};transform:translateY({{ d.lift }}) rotate({{ d.rot }});transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;padding:10% 11%;display:flex;flex-direction:column;gap:9px;overflow:hidden">
-              <div style="display:flex;flex-direction:column;gap:7px;border-bottom:1.5px solid #0B1B2B;padding-bottom:12px">
-                <span style="width:46%;height:7px;background:#0B1B2B"></span><span style="width:30%;height:5px;background:#D3D9DF"></span>
+            <!-- Preview mirrors the real PDF: issuer header logos and footer seal/mark taken from the document itself -->
+            <div aria-hidden="true" style="position:relative;aspect-ratio:1/1.3;background:#FFFFFF;border:1px solid #D3D9DF;box-shadow:{{ d.shadow }};transform:translateY({{ d.lift }}) rotate({{ d.rot }});transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;padding:9% 10%;display:flex;flex-direction:column;gap:9px;overflow:hidden">
+              <div dir="ltr" style="display:flex;justify-content:{{ d.headJustify }};align-items:center;gap:12px;border-bottom:1.5px solid {{ d.rule }};padding-bottom:12px">
+                <sc-if value="{{ d.logoL }}"><img src="{{ d.logoL }}" alt="" style="height:{{ d.logoLH }};width:auto;max-width:{{ d.logoLMax }};min-width:0;display:block"></sc-if>
+                <img src="{{ d.logoR }}" alt="" style="height:{{ d.logoRH }};width:auto;max-width:{{ d.logoRMax }};display:block">
               </div>
-              <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding-block:8px">
-                <span style="display:flex;align-items:center;justify-content:center;padding:{{ d.logoPad }};background:{{ d.logoBg }};max-width:100%"><img src="{{ d.logo }}" alt="" style="height:{{ d.logoH }};width:auto;max-width:100%;display:block"></span>
-                <span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:100%"><span style="width:72%;height:6px;background:#E3E7EB"></span><span style="width:56%;height:6px;background:#E3E7EB"></span></span>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding-block:8px;text-align:center">
+                <span style="font-family:{{ fHead }};font-size:clamp(15px,1.5vw,19px);font-weight:600;line-height:1.2;color:#0B1B2B;text-transform:uppercase;letter-spacing:.04em">{{ d.t }}</span>
+                <span style="width:28%;height:1.5px;background:{{ d.rule }}"></span>
+                <span style="font-size:clamp(11px,1vw,13px);line-height:1.4;color:#6B7280">{{ d.issuer }}</span>
               </div>
               <span style="width:88%;height:6px;background:#E3E7EB"></span><span style="width:64%;height:6px;background:#E3E7EB"></span>
-              <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:end">
+              <div dir="ltr" style="margin-top:14px;display:flex;justify-content:space-between;align-items:end;gap:12px">
                 <span style="display:flex;flex-direction:column;gap:6px;width:40%"><span style="height:6px;background:#E3E7EB"></span><span style="height:6px;width:70%;background:#E3E7EB"></span></span>
-                <span style="width:58px;height:58px;border:1.5px dashed #9FB4C8;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;background:{{ d.sealBg }}"><img src="{{ d.seal }}" alt="" style="width:{{ d.sealW }};height:auto;display:block;opacity:.9"></span>
+                <sc-if value="{{ d.seal }}"><img src="{{ d.seal }}" alt="" style="height:{{ d.sealH }};width:auto;max-width:50%;display:block"></sc-if>
               </div>
               <span style="position:absolute;left:0;right:0;height:30%;top:{{ d.scan }};background:linear-gradient(180deg,transparent,rgba(0,174,239,.10),transparent);transition:top 1.2s ease"></span>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <h3 style="margin:0;font-family:{{ fHead }};font-size:21px;font-weight:500">{{ d.t }}</h3>
-              <span style="font-size:14px;color:#6B7280">{{ d.issuer }}</span>
             </div>
             <div style="display:flex;justify-content:space-between;gap:12px;border-block:1px solid #D3D9DF;padding-block:10px;font-size:14px">
               <span style="color:#6B7280">{{ d.k }}</span><span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-weight:500">{{ d.no }}</span>
             </div>
-            <!-- TODO: replace with the real PDF file in /docs -->
             <a href="{{ d.href }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:10px 10px 10px 14px;padding-inline-start:14px;padding-inline-end:10px;background:{{ d.btnBg }};border:1px solid {{ d.btnLine }};color:{{ d.btnFg }};text-decoration:none;transition:background .3s,color .3s,border-color .3s">
               <span style="width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:{{ d.pdfBg }};color:{{ d.pdfFg }};transition:background .3s,color .3s">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6ZM15 3v4h4"></path><path d="M9 13.5h1.5a1.25 1.25 0 0 0 0-2.5H9v5M13 11v5h1a2.5 2.5 0 0 0 0-5Z"></path></svg>
@@ -197,6 +194,13 @@ const IC = {
   talk: 'M4 5h16v11H9l-5 4ZM8 9.5h8M8 12.5h5'
 };
 const ICONS = [IC.trace, IC.doc, IC.check, IC.talk];
+const L = 'assets/company/logos/';
+const AFZ_HEAD = { headJustify: 'space-between', rule: '#B9A77A', logoL: L + 'ajman-gov-logo.png', logoLH: '30px', logoLMax: '45%', logoR: L + 'fza-logo.png', logoRH: '30px', logoRMax: '50%' };
+const DOC_ART = {
+  'trade-license': { ...AFZ_HEAD, seal: L + 'afz-logo.png', sealH: '30px' },
+  'certificate-of-incorporation': { ...AFZ_HEAD, seal: L + 'fza-seal.png', sealH: '58px' },
+  'corporate-tax-certificate': { headJustify: 'flex-end', rule: '#0B1B2B', logoL: L + 'fta-logo.png', logoLH: '24px', logoLMax: '76%', logoR: L + 'uae-emblem.png', logoRH: '44px', logoRMax: '20%', seal: '', sealH: '0' }
+};
 class Component extends DCLogic {
   state = { ready: false, step: -1, doc: -1, commit: -1 };
   componentDidMount() {
@@ -227,17 +231,13 @@ class Component extends DCLogic {
       qsteps: t.qsteps.map((q, i) => { const on = s.step === i;
         return { ...q, n: pad(i), d: 200 + i * 140, last: i === t.qsteps.length - 1, bg: on ? '#0759A5' : '#07111D', fg: on ? '#FFFFFF' : '#9FC6EE',
           enter: () => this.setState({ step: i }), leave: () => this.setState(st => st.step === i ? { step: -1 } : null) }; }),
-      // Issuer logos on the preview: Ajman Free Zone (white artwork, shown on navy) or the Federal Tax Authority.
-      docs: t.docs.map((d, i) => { const on = s.doc === i, afz = !/tax/i.test(d.href);
-        return { ...d, delay: i * 120, rot: on ? '0deg' : rots[i], lift: on ? '-8px' : '0px', scan: on ? '75%' : '-30%',
+      // Preview logos are cropped from each PDF in assets/company, keyed by the document's file name.
+      docs: t.docs.map((d, i) => { const on = s.doc === i, art = DOC_ART[d.href.split('/').pop().replace('.pdf', '')] || DOC_ART['trade-license'];
+        return { ...d, ...art, delay: i * 120, rot: on ? '0deg' : rots[i], lift: on ? '-8px' : '0px', scan: on ? '75%' : '-30%',
           shadow: on ? '0 28px 60px rgba(11,27,43,.16)' : '0 10px 30px rgba(11,27,43,.07)',
-          logo: afz ? 'assets/quality/afz-logo.svg' : 'assets/quality/fta-logo.png',
-          logoBg: afz ? '#0B1B2B' : 'transparent', logoPad: afz ? '10px 14px' : '0', logoH: afz ? '30px' : '46px',
           btnBg: on ? '#0B1B2B' : '#FFFFFF', btnFg: on ? '#FFFFFF' : '#0B1B2B', btnLine: on ? '#0B1B2B' : '#D3D9DF',
           pdfBg: on ? '#E0442E' : '#FDECE9', pdfFg: on ? '#FFFFFF' : '#E0442E', subFg: on ? '#9FB0C1' : '#6B7280',
           arwLine: on ? 'rgba(255,255,255,.35)' : '#D3D9DF', ax: on ? (v.ar ? '-3px' : '3px') : '0px',
-          seal: afz ? 'assets/quality/afz-emblem.svg' : 'assets/quality/fta-emblem.png',
-          sealBg: afz ? '#0B1B2B' : '#FFFFFF', sealW: afz ? '26px' : '40px',
           enter: () => this.setState({ doc: i }), leave: () => this.setState(st => st.doc === i ? { doc: -1 } : null) }; }),
       ctaCols: v.lg ? 'minmax(0,1.4fr) auto' : 'minmax(0,1fr)',
       ctaJustify: v.lg ? 'flex-end' : 'flex-start'

@@ -127,11 +127,11 @@ en: {
     { t: "Supplier checks", b: "We assess suppliers before purchasing and keep records of the source of every item we trade." },
     { t: "Direct communication", b: "Quality questions and document requests go straight to our quality contact." }
   ],
-  q_docs_t: "Company documents", q_docs_sub: "These documents confirm our legal registration in the United Arab Emirates.",
+  q_docs_t: "Company Certifications", q_docs_sub: "These documents confirm our legal registration in the United Arab Emirates.",
   docs: [
-    { t: "Trade License", k: "License No.", no: "45584", href: "docs/trade-license.pdf", issuer: "Ajman Free Zone Authority" },
-    { t: "Certificate of Incorporation", k: "Incorporated", no: "19 September 2025", href: "docs/certificate-of-incorporation.pdf", issuer: "Ajman Free Zone Authority" },
-    { t: "UAE Corporate Tax Registration", k: "TRN", no: "105160013600001", href: "docs/corporate-tax-certificate.pdf", issuer: "Federal Tax Authority, UAE" }
+    { t: "Trade License", k: "License No.", no: "45584", href: "assets/company/trade-license.pdf", issuer: "Ajman Free Zone Authority" },
+    { t: "Certificate of Incorporation", k: "Incorporated", no: "19 September 2025", href: "assets/company/certificate-of-incorporation.pdf", issuer: "Ajman Free Zone Authority" },
+    { t: "UAE Corporate Tax Registration", k: "TRN", no: "105160013600001", href: "assets/company/corporate-tax-certificate.pdf", issuer: "Federal Tax Authority, UAE" }
   ],
   q_view: "View PDF", q_contact_t: "Quality contact", q_contact_b: "Send documentation requests and quality queries to our QC desk.", q_contact_btn: "Email QC desk",
 
@@ -301,11 +301,11 @@ ar: {
     { t: "التحقق من الموردين", b: "نقيّم الموردين قبل الشراء ونحتفظ بسجلات مصدر كل صنف نتاجر فيه." },
     { t: "تواصل مباشر", b: "تُحال استفسارات الجودة وطلبات الوثائق مباشرة إلى مسؤول الجودة." }
   ],
-  q_docs_t: "وثائق الشركة", q_docs_sub: "تؤكد هذه الوثائق تسجيلنا القانوني في دولة الإمارات العربية المتحدة.",
+  q_docs_t: "شهادات الشركة", q_docs_sub: "تؤكد هذه الوثائق تسجيلنا القانوني في دولة الإمارات العربية المتحدة.",
   docs: [
-    { t: "الرخصة التجارية", k: "رقم الرخصة", no: "45584", href: "docs/trade-license.pdf", issuer: "هيئة منطقة عجمان الحرة" },
-    { t: "شهادة التأسيس", k: "تاريخ التأسيس", no: "19 سبتمبر 2025", href: "docs/certificate-of-incorporation.pdf", issuer: "هيئة منطقة عجمان الحرة" },
-    { t: "شهادة التسجيل في ضريبة الشركات", k: "الرقم الضريبي", no: "105160013600001", href: "docs/corporate-tax-certificate.pdf", issuer: "الهيئة الاتحادية للضرائب، الإمارات" }
+    { t: "الرخصة التجارية", k: "رقم الرخصة", no: "45584", href: "assets/company/trade-license.pdf", issuer: "هيئة منطقة عجمان الحرة" },
+    { t: "شهادة التأسيس", k: "تاريخ التأسيس", no: "19 سبتمبر 2025", href: "assets/company/certificate-of-incorporation.pdf", issuer: "هيئة منطقة عجمان الحرة" },
+    { t: "شهادة التسجيل في ضريبة الشركات", k: "الرقم الضريبي", no: "105160013600001", href: "assets/company/corporate-tax-certificate.pdf", issuer: "الهيئة الاتحادية للضرائب، الإمارات" }
   ],
   q_view: "عرض ملف PDF", q_contact_t: "مسؤول الجودة", q_contact_b: "أرسل طلبات الوثائق واستفسارات الجودة إلى قسم مراقبة الجودة.", q_contact_btn: "راسل قسم الجودة",
 
@@ -389,7 +389,7 @@ ar: {
       { t: "Order documentation", b: "Supporting documents travel with the goods and are kept on file for each order." },
       { t: "Quality contact", b: "Document requests and quality queries go directly to our QC desk." }
     ],
-    q_preview: "Preview placeholder", q_docs_note: "PDF copies are available on request.",
+    q_preview: "Preview placeholder", q_docs_note: "Select a certificate to open the original PDF.",
     c_split_t: "Reach the right desk directly", f_services: "Services", f_aog: "AOG desk, 24/7",
     menu_contact: "Contact",
     p_sap: "SAP code", p_view: "View details", p_noimg: "Product image unavailable", p_avail_req: "Availability on request",
@@ -458,7 +458,7 @@ ar: {
       { t: "وثائق الطلبية", b: "ترافق الوثائق الداعمة البضاعة وتُحفظ في ملف كل طلبية." },
       { t: "مسؤول الجودة", b: "تُحال طلبات الوثائق واستفسارات الجودة مباشرة إلى قسم مراقبة الجودة." }
     ],
-    q_preview: "معاينة مؤقتة", q_docs_note: "تتوفر نسخ PDF عند الطلب.",
+    q_preview: "معاينة مؤقتة", q_docs_note: "اختر شهادة لفتح ملف PDF الأصلي.",
     c_split_t: "تواصل مباشرة مع القسم المعني", f_services: "الخدمات", f_aog: "مكتب AOG، على مدار الساعة",
     menu_contact: "التواصل",
     p_sap: "رمز SAP", p_view: "عرض التفاصيل", p_noimg: "صورة المنتج غير متوفرة", p_avail_req: "التوفر عند الطلب",
