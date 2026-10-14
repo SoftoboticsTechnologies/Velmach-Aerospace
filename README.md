@@ -95,6 +95,9 @@ All strings live in `js/i18n.js` under `en` and `ar`. The v2 block at the end of
 ## RFQ / contact submission
 By default both quote forms open the visitor's email app (mailto) with the request filled in, including product links; AOG priority goes to AOG@ with sales@ in CC. To send from the page instead, create a form at a form service such as Formspree that delivers to sales@velmachaerospace.com and paste its URL as `rfq.endpoint` in js/site-config.js. Then requests are posted directly, the Request for Quote form accepts an attachment (up to 10 MB), and the service can send the customer an automatic reply (set up in the service). There is no server, so requests are not stored in a database; the form service keeps a copy of each submission.
 
+## Image credits
+- assets/header/svc-financing.webp (Services menu, Financing): "Hawker 4000 cabin interior facing forward" by JetRequest.com, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Hawker_4000_cabin_interior_facing_forward.jpg (cropped and resized). The license asks for this credit; keep it, or replace the photo with one the company owns. The previous image is in backup/svc-financing-old.webp.
+
 ## TODO checklist (search the code for "TODO: replace")
 - Official white / reversed logo for the footer
 - Office, team, manager, industry and product photographs

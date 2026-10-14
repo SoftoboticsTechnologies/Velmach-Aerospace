@@ -24,6 +24,7 @@ window.VM_CONFIG = {
     { id: "mobile-service-team", href: "page.dc.html?p=mobile-service-team", img: "assets/header/svc-mobile-team.webp" },
     { id: "calibration", href: "page.dc.html?p=calibration", img: "assets/header/svc-calibration.webp" },
     { id: "rentals", href: "page.dc.html?p=rentals", img: "assets/header/svc-rentals.webp" },
+    { id: "sell-trade", href: "page.dc.html?p=sell-trade", img: "assets/header/svc-sell-trade.webp" },
     { id: "financing", href: "page.dc.html?p=financing", img: "assets/header/svc-financing.webp" },
     { id: "about", href: "about.dc.html", img: "assets/header/svc-about.webp" }
   ]

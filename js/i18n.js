@@ -540,7 +540,7 @@ ar: {
     hd_nav: { brands: "Shop by Brand", services: "Services", blog: "Blog", all: "Shop All" },
     hd_shop_all: "Shop all {c}", hd_n_cats: "{n} categories", hd_view_brands: "View all brands", hd_see_services: "See All Services",
     hd_brands_t: "Brands we supply", hd_services_t: "Services",
-    hd_svc: { "gse-service-repair": "GSE Service & Repair", "mobile-service-team": "Mobile Service Team", calibration: "Calibration", rentals: "Rentals", financing: "Financing", about: "About Us" },
+    hd_svc: { "gse-service-repair": "GSE Service & Repair", "mobile-service-team": "Mobile Service Team", calibration: "Calibration", rentals: "Rentals", "sell-trade": "Sell / Trade", financing: "Financing", about: "About Us" },
     hd_d: { home: "Home", cats: "Shop by Category", brands: "Shop by Brand", aircraft: "Shop by Aircraft", services: "Services", calibration: "Calibration", rentals: "Rentals", contact: "Contact Us" },
 
     sh_home: "Home", sh_all_cats: "All categories", sh_rfq: "Request a quote", sh_contact: "Contact sales",
@@ -584,7 +584,7 @@ ar: {
     hd_nav: { brands: "تسوّق حسب العلامة", services: "الخدمات", blog: "المدونة", all: "كل المنتجات" },
     hd_shop_all: "تسوّق كل {c}", hd_n_cats: "{n} فئة", hd_view_brands: "عرض كل العلامات التجارية", hd_see_services: "عرض كل الخدمات",
     hd_brands_t: "العلامات التي نوردها", hd_services_t: "الخدمات",
-    hd_svc: { "gse-service-repair": "صيانة وإصلاح معدات الدعم الأرضي", "mobile-service-team": "فريق الخدمة المتنقل", calibration: "المعايرة", rentals: "الاستئجار", financing: "التمويل", about: "من نحن" },
+    hd_svc: { "gse-service-repair": "صيانة وإصلاح معدات الدعم الأرضي", "mobile-service-team": "فريق الخدمة المتنقل", calibration: "المعايرة", rentals: "الاستئجار", "sell-trade": "البيع / المقايضة", financing: "التمويل", about: "من نحن" },
     hd_d: { home: "الرئيسية", cats: "تسوّق حسب الفئة", brands: "تسوّق حسب العلامة", aircraft: "تسوّق حسب الطائرة", services: "الخدمات", calibration: "المعايرة", rentals: "الاستئجار", contact: "اتصل بنا" },
 
     sh_home: "الرئيسية", sh_all_cats: "كل الفئات", sh_rfq: "اطلب عرض سعر", sh_contact: "تواصل مع المبيعات",
