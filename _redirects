@@ -1,0 +1,25 @@
+# Netlify: clean URLs for the catalogue (served from the site root). See README "URLs".
+# Old shop routes go to the quote list.
+/cart              /quote   301
+/cart/*            /quote   301
+/checkout          /quote   301
+/checkout/*        /quote   301
+
+/quote             /rfq.dc.html          200
+/categories        /categories.dc.html   200
+/c/:parent/:child  /category.dc.html?c=:parent/:child  200
+/c/:parent         /category.dc.html?c=:parent         200
+/p/:slug           /product.dc.html?p=:slug            200
+/brands            /brands.dc.html       200
+/brand/:slug       /brand.dc.html?b=:slug              200
+/aircraft          /aircraft.dc.html     200
+/search            /search.dc.html       200
+/contact           /contact.dc.html      200
+/calibration          /page.dc.html?p=calibration          200
+/gse-service-repair   /page.dc.html?p=gse-service-repair   200
+/mobile-service-team  /page.dc.html?p=mobile-service-team  200
+/rentals              /page.dc.html?p=rentals              200
+/rent                 /page.dc.html?p=rentals              200
+/sell-trade           /page.dc.html?p=sell-trade           200
+/financing            /page.dc.html?p=financing            200
+/account              /page.dc.html?p=account              200

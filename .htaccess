@@ -1,0 +1,18 @@
+# Apache (cPanel and similar): clean URLs for the catalogue, served from the site root. See README "URLs".
+RewriteEngine On
+
+# old shop routes go to the quote list
+RewriteRule ^(cart|checkout)(/.*)?$ /quote [R=301,L]
+
+RewriteRule ^quote/?$ rfq.dc.html [L,QSA]
+RewriteRule ^categories/?$ categories.dc.html [L,QSA]
+RewriteRule ^c/([^/]+)/([^/]+)/?$ category.dc.html?c=$1/$2 [L,QSA]
+RewriteRule ^c/([^/]+)/?$ category.dc.html?c=$1 [L,QSA]
+RewriteRule ^p/([^/]+)/?$ product.dc.html?p=$1 [L,QSA]
+RewriteRule ^brands/?$ brands.dc.html [L,QSA]
+RewriteRule ^brand/([^/]+)/?$ brand.dc.html?b=$1 [L,QSA]
+RewriteRule ^aircraft/?$ aircraft.dc.html [L,QSA]
+RewriteRule ^search/?$ search.dc.html [L,QSA]
+RewriteRule ^contact/?$ contact.dc.html [L,QSA]
+RewriteRule ^rent/?$ page.dc.html?p=rentals [L,QSA]
+RewriteRule ^(calibration|gse-service-repair|mobile-service-team|rentals|sell-trade|financing|account)/?$ page.dc.html?p=$1 [L,QSA]

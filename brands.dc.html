@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop by Brand | Velmach Aerospace</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Ground support equipment, tooling, aircraft parts and consumables by brand, from Velmach Aerospace.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="css/catalogue.css">
+<link rel="stylesheet" href="css/shop.css">
+<script src="js/i18n.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/vm-core.js"></script>
+<script src="data/brands.js"></script>
+<script src="js/catalog.js"></script>
+</helmet>
+
+<dc-import name="SiteHeader" page="brands" hint-size="100%,158px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" class="cx" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }}">
+  <section class="cx-hero" aria-labelledby="sx-h">
+    <div class="cx-wrap cx-hero-in">
+      <ol class="sx-crumbs" aria-label="{{ crumbsAria }}">
+        <li><a href="index.html">{{ t.sh_home }}</a></li>
+        <li><span aria-current="page">{{ t.sh_all_brands }}</span></li>
+      </ol>
+      <span class="cx-tag">{{ t.sh_brands_eyebrow }}</span>
+      <div class="cx-hero-grid">
+        <h1 id="sx-h" class="cx-h1">{{ t.sh_brands_title }}</h1>
+        <p class="cx-sub">{{ t.sh_brands_sub }}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cx-wrap sx-body">
+    <section class="sx-sec" aria-label="{{ t.sh_brands_title }}">
+      <ul class="sx-letters" aria-label="{{ t.sh_letters }}">
+        <li><button type="button" class="sx-letter sx-letter--all" onClick="{{ showAll }}" aria-pressed="{{ allOn }}">{{ t.sh_all }}</button></li>
+        <sc-for list="{{ letters }}" as="l" hint-placeholder-count="26">
+          <li><button type="button" class="sx-letter" onClick="{{ l.pick }}" aria-pressed="{{ l.on }}" disabled="{{ l.off }}">{{ l.ch }}</button></li>
+        </sc-for>
+      </ul>
+      <p role="status" class="cx-k" style="margin:0">{{ status }}</p>
+      <sc-if value="{{ hasBrands }}" hint-placeholder-val="{{ true }}">
+        <ul class="sx-brands">
+          <sc-for list="{{ brands }}" as="b" hint-placeholder-count="12">
+            <li>
+              <a class="sx-brand" href="{{ b.href }}">
+                <sc-if value="{{ b.logo }}" hint-placeholder-val="{{ false }}"><img class="{{ b.logoCls }}" src="{{ b.logo }}" alt="{{ b.alt }}" loading="lazy" onError="{{ b.fail }}"></sc-if>
+                <span class="sx-brand-n" dir="ltr">{{ b.name }}</span>
+                <sc-if value="{{ b.count }}" hint-placeholder-val="{{ true }}"><span class="sx-brand-k">{{ b.count }}</span></sc-if>
+              </a>
+            </li>
+          </sc-for>
+        </ul>
+      </sc-if>
+    </section>
+  </div>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+const first = b => { const c = b.name.trim().charAt(0).toUpperCase(); return AZ.includes(c) ? c : '#'; };
+class Component extends DCLogic {
+  // the chosen letter is kept in the URL (?l=T) so a filtered view can be shared
+  state = { ready: false, letter: '', meta: null };
+  componentDidMount() {
+    const go = () => {
+      if (window.VM && window.VM_I18N && window.VM_I18N.en.sh_home && window.VM_BRANDS && window.VM_ROUTES) {
+        this.unsub = window.VM.subscribe(() => this.forceUpdate());
+        const l = (new URLSearchParams(location.search).get('l') || '').toUpperCase();
+        this.setState({ ready: true, letter: AZ.includes(l) || l === '#' ? l : '' });
+        if (window.VM_CATALOG) window.VM_CATALOG.meta().then(meta => this.setState({ meta }));
+      } else this.tw = setTimeout(go, 30);
+    };
+    go();
+  }
+  componentDidUpdate() {
+    if (!this.state.ready) return;
+    const t = window.VM.t(), R = window.VM_ROUTES;
+    R.head({ title: t.sh_brands_title + ' | Velmach Aerospace', description: t.sh_brands_sub, url: R.canonical.brands() });
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  pick(l) {
+    this.setState({ letter: l });
+    const u = new URL(location.href); if (l) u.searchParams.set('l', l); else u.searchParams.delete('l');
+    history.replaceState(null, '', u.pathname + u.search + u.hash);
+  }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), s = this.state;
+    const all = [...window.VM_BRANDS].sort((a, b) => a.name.localeCompare(b.name));
+    const has = new Set(all.map(first));
+    const shown = s.letter ? all.filter(b => first(b) === s.letter) : all;
+    const brands = shown.map(b => { const logo = VM.brandLogo(b.slug);
+      const n = s.meta && s.meta.brands ? s.meta.brands[b.slug] || 0 : null;
+      return { name: b.name, href: VM.brandHref(b.slug), logo, logoCls: VM.brandLogoDark(b.slug) ? 'is-dark' : '', alt: b.name + ' logo', fail: () => VM.logoFailed(b.slug), count: n == null ? '' : n === 1 ? t.br_n1 : fmt(t.br_n, { n }) }; });
+    return { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb',
+      allOn: String(!s.letter), showAll: () => this.pick(''),
+      letters: AZ.map(ch => ({ ch, on: String(s.letter === ch), off: !has.has(ch), pick: () => this.pick(ch) })),
+      status: shown.length ? (v.ar ? shown.length + ' علامة' : shown.length + (shown.length === 1 ? ' brand' : ' brands')) : fmt(t.sh_brands_none, { l: s.letter }),
+      brands, hasBrands: brands.length > 0 };
+  }
+}
+</script>
+</body>
+</html>

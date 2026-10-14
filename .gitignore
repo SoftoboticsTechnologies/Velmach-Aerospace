@@ -1,0 +1,8 @@
+# Working files of scripts/extract-documents.py (cache and intermediate images; rebuilt on every run)
+data/velmach-staging/
+# Import progress file (scripts/import-products.py)
+data/catalog/.import-state.json
+__pycache__/
+*.pyc
+
+assets/velmach product/Aviall Product Catalog & Source Book/Aviall Product Catalog & Source Book.pdf

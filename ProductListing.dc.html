@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="js/site-config.js"></script>
+<script src="data/categories.js"></script>
+<script src="data/brands.js"></script>
+<script src="data/aircraft.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/search.js"></script>
+</helmet>
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<section ref="{{ topRef }}" class="cx lx" dir="{{ dir }}" lang="{{ lang }}" aria-label="{{ t.hd_sugg_products }}" style="font-family:{{ fBody }};line-height:{{ lh }};scroll-margin-top:var(--hdr,160px)">
+  <div class="cx-wrap cx-body">
+    <!-- filters: a side rail on desktop, a drawer below 1100px -->
+    <sc-if value="{{ showRail }}" hint-placeholder-val="{{ true }}">
+      <aside class="cx-rail" aria-label="{{ t.ls_filters }}">
+        <sc-for list="{{ facets }}" as="f" hint-placeholder-count="3">
+          <fieldset class="lx-facet">
+            <legend class="cx-k">{{ f.legend }}</legend>
+            <sc-if value="{{ f.searchable }}" hint-placeholder-val="{{ false }}"><input class="lx-bsearch" type="search" value="{{ f.q }}" onChange="{{ f.onQ }}" placeholder="{{ t.ls_brand_search }}" aria-label="{{ t.ls_brand_search }}"></sc-if>
+            <sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="5">
+              <label class="lx-opt"><input type="checkbox" checked="{{ o.checked }}" disabled="{{ o.disabled }}" onChange="{{ o.toggle }}"><span class="lx-opt-l" dir="auto">{{ o.label }}</span><span class="lx-n">{{ o.n }}</span></label>
+            </sc-for>
+            <sc-if value="{{ f.empty }}" hint-placeholder-val="{{ false }}"><span class="lx-none">{{ t.ls_no_brands }}</span></sc-if>
+            <sc-if value="{{ f.hasMore }}" hint-placeholder-val="{{ false }}"><button type="button" class="lx-more" onClick="{{ f.toggleMore }}" aria-expanded="{{ f.expanded }}">{{ f.moreLabel }}</button></sc-if>
+          </fieldset>
+        </sc-for>
+        <sc-if value="{{ filtered }}" hint-placeholder-val="{{ false }}"><button type="button" class="cx-clear" onClick="{{ clearAll }}">{{ t.ls_clear }}</button></sc-if>
+      </aside>
+    </sc-if>
+
+    <div class="cx-main">
+      <sc-if value="{{ fitsOn }}" hint-placeholder-val="{{ false }}">
+        <p class="lx-fits" role="status"><span>{{ fitsLabel }}</span><button type="button" onClick="{{ showAllAc }}">{{ t.ls_fits_all }}</button></p>
+      </sc-if>
+      <div class="cx-bar">
+        <div class="cx-bar-l">
+          <sc-if value="{{ showFilterBtn }}" hint-placeholder-val="{{ false }}">
+            <button type="button" class="cx-filterbtn" onClick="{{ openDrawer }}" aria-haspopup="dialog">
+              <svg class="cx-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"></path></svg>{{ t.ls_filters }}
+              <sc-if value="{{ filtered }}" hint-placeholder-val="{{ false }}"><i aria-hidden="true"></i></sc-if>
+            </button>
+          </sc-if>
+          <span role="status" class="cx-status">{{ resultsLabel }}</span>
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="2">
+            <button type="button" class="cx-chip" onClick="{{ c.remove }}" aria-label="{{ c.aria }}"><span dir="auto">{{ c.label }}</span><svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7"></path></svg></button>
+          </sc-for>
+          <sc-if value="{{ filtered }}" hint-placeholder-val="{{ false }}"><button type="button" class="cx-clear" onClick="{{ clearAll }}">{{ t.ls_clear }}</button></sc-if>
+        </div>
+        <div class="lx-tools">
+          <label class="cx-sort"><span class="cx-k">{{ t.ls_sort }}</span>
+            <select data-v="{{ sort }}" value="{{ sort }}" onChange="{{ onSort }}" aria-label="{{ t.ls_sort }}">
+              <sc-for list="{{ sortOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+            </select>
+          </label>
+          <label class="cx-sort"><span class="cx-k">{{ t.ls_per }}</span>
+            <select data-v="{{ perStr }}" value="{{ perStr }}" onChange="{{ onPer }}" aria-label="{{ t.ls_per }}">
+              <option value="24">24</option><option value="48">48</option><option value="96">96</option>
+            </select>
+          </label>
+          <div class="lx-view" role="group" aria-label="{{ t.ls_grid }} / {{ t.ls_list }}">
+            <button type="button" onClick="{{ toGrid }}" aria-pressed="{{ isGrid }}" aria-label="{{ t.ls_grid }}" title="{{ t.ls_grid }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg></button>
+            <button type="button" onClick="{{ toList }}" aria-pressed="{{ isList }}" aria-label="{{ t.ls_list }}" title="{{ t.ls_list }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h4v4H4zM11 7h9M4 15h4v4H4zM11 17h9"></path></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}"><p class="lx-status" role="status">{{ t.ls_loading }}</p></sc-if>
+
+      <sc-if value="{{ hasCards }}" hint-placeholder-val="{{ true }}">
+        <ul class="{{ gridCls }}">
+          <sc-for list="{{ cards }}" as="p" hint-placeholder-count="8">
+            <li>
+              <article class="pcx">
+                <div class="pcx-media">
+                  <sc-if value="{{ p.img }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.title }}" loading="lazy" decoding="async" width="400" height="400"></sc-if><sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><span class="pcx-noimg" dir="auto">{{ p.title }}</span></sc-if>
+                </div>
+                <div class="pcx-body">
+                  <span class="pcx-brand" dir="auto">{{ p.brand }}</span>
+                  <h3 class="pcx-t"><a href="{{ p.href }}">{{ p.title }}</a></h3>
+                  <sc-if value="{{ p.pn }}" hint-placeholder-val="{{ true }}"><span class="pcx-pn">{{ t.pc_pn }} <b dir="ltr">{{ p.pn }}</b></span></sc-if>
+                </div>
+                <div class="pcx-foot">
+                  <button type="button" class="pcx-rfq" onClick="{{ p.rfq }}" aria-label="{{ p.enqLabel }}">{{ t.pc_enquire }}</button>
+                </div>
+              </article>
+            </li>
+          </sc-for>
+        </ul>
+      </sc-if>
+
+      <sc-if value="{{ noMatch }}" hint-placeholder-val="{{ false }}">
+        <div class="sx-empty">
+          <span class="sx-empty-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M10 18h4"></path></svg></span>
+          <div>
+            <h2>{{ t.ls_none_t }}</h2>
+            <p>{{ t.ls_none_b }}</p>
+            <div class="sx-actions">
+              <button type="button" class="cx-btn cx-btn--blue" onClick="{{ clearAll }}">{{ t.ls_clear }}</button>
+              <button type="button" class="cx-btn cx-btn--line" onClick="{{ openRfq }}">{{ t.sh_rfq }}</button>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+        <div class="sx-empty">
+          <span class="sx-empty-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5ZM3 7.5l9 4.5 9-4.5M12 12v9"></path></svg></span>
+          <div>
+            <h2>{{ emptyT }}</h2>
+            <p>{{ emptyB }}</p>
+            <div class="sx-actions">
+              <button type="button" class="cx-btn cx-btn--blue" onClick="{{ emptyAct }}">{{ emptyBtn }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></button>
+              <a class="cx-btn cx-btn--line" href="contact.dc.html">{{ t.sh_contact }}</a>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hasPages }}" hint-placeholder-val="{{ false }}">
+        <nav class="cx-pages" aria-label="{{ t.ls_pages }}">
+          <button type="button" class="cx-btn cx-btn--line" onClick="{{ prev }}" disabled="{{ atFirst }}">{{ t.ls_prev }}</button>
+          <div class="cx-pnums">
+            <sc-for list="{{ pageNums }}" as="n" hint-placeholder-count="5">
+              <sc-if value="{{ n.gap }}" hint-placeholder-val="{{ false }}"><span class="cx-gap" aria-hidden="true">…</span></sc-if>
+              <sc-if value="{{ n.num }}" hint-placeholder-val="{{ true }}"><button type="button" class="cx-pnum" onClick="{{ n.go }}" aria-current="{{ n.cur }}" aria-label="{{ n.aria }}">{{ n.label }}</button></sc-if>
+            </sc-for>
+          </div>
+          <button type="button" class="cx-btn cx-btn--line" onClick="{{ next }}" disabled="{{ atLast }}">{{ t.ls_next }}</button>
+        </nav>
+      </sc-if>
+    </div>
+  </div>
+
+  <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
+    <div class="cx-scrim" onClick="{{ closeDrawer }}"></div>
+    <div ref="{{ drawerRef }}" class="cx-drawer" role="dialog" aria-modal="true" aria-label="{{ t.ls_filters }}">
+      <div class="cx-drawer-hd">
+        <span class="cx-k">{{ t.ls_filters }}</span>
+        <button type="button" class="cx-x" onClick="{{ closeDrawer }}" aria-label="{{ t.ls_close }}"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"></path></svg></button>
+      </div>
+      <div class="cx-drawer-bd">
+        <sc-for list="{{ facets }}" as="f" hint-placeholder-count="3">
+          <fieldset class="lx-facet">
+            <legend class="cx-k">{{ f.legend }}</legend>
+            <sc-if value="{{ f.searchable }}" hint-placeholder-val="{{ false }}"><input class="lx-bsearch" type="search" value="{{ f.q }}" onChange="{{ f.onQ }}" placeholder="{{ t.ls_brand_search }}" aria-label="{{ t.ls_brand_search }}"></sc-if>
+            <sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="5">
+              <label class="lx-opt"><input type="checkbox" checked="{{ o.checked }}" disabled="{{ o.disabled }}" onChange="{{ o.toggle }}"><span class="lx-opt-l" dir="auto">{{ o.label }}</span><span class="lx-n">{{ o.n }}</span></label>
+            </sc-for>
+            <sc-if value="{{ f.empty }}" hint-placeholder-val="{{ false }}"><span class="lx-none">{{ t.ls_no_brands }}</span></sc-if>
+            <sc-if value="{{ f.hasMore }}" hint-placeholder-val="{{ false }}"><button type="button" class="lx-more" onClick="{{ f.toggleMore }}" aria-expanded="{{ f.expanded }}">{{ f.moreLabel }}</button></sc-if>
+          </fieldset>
+        </sc-for>
+      </div>
+      <div class="cx-drawer-ft">
+        <button type="button" class="cx-btn cx-btn--line" onClick="{{ clearAll }}">{{ t.ls_clear }}</button>
+        <button type="button" class="cx-btn cx-btn--blue" onClick="{{ closeDrawer }}">{{ showLabel }}</button>
+      </div>
+    </div>
+  </sc-if>
+</section>
+</sc-if>
+<dc-import name="RfqModal" hint-size="0,0"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;category&quot;,&quot;brand&quot;,&quot;search&quot;],&quot;default&quot;:&quot;category&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+// Product listing shared by category.dc.html (mode="category"), brand.dc.html ("brand") and search.dc.html ("search").
+// Products come from js/catalog.js (one card file per category or brand) or the search index; filtering, sorting and
+// paging happen here, and the view is kept in the URL (?sub= &cat= &brand= &cond= &ac= &sort= &per= &view= &page=).
+const PER = [24, 48, 96], SORTS = ['rel', 'az', 'za', 'new'], FACET_ROWS = 8;
+const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+const list = v => (v ? v.split(',').filter(Boolean) : []);
+// one entry per filter: which card field it reads (aircraft is a list on the card)
+const DIMS = {
+  sub: { get: c => c.c }, cat: { get: c => c.p }, brand: { get: c => c.bs }, cond: { get: c => c.k },
+  ac: { get: c => c.a || [], multi: true }
+};
+
+class Component extends DCLogic {
+  state = { ready: false, cards: null, f: { sub: [], cat: [], brand: [], cond: [], ac: [] }, sort: 'rel', per: 24, view: 'grid', page: 1,
+    drawer: false, bq: '', more: {} };
+  topRef = React.createRef(); drawerRef = React.createRef();
+
+  componentDidMount() {
+    const qs = new URLSearchParams(location.search);
+    const f = {}; Object.keys(DIMS).forEach(k => { f[k] = list(qs.get(k)); });
+    const per = parseInt(qs.get('per'), 10), page = parseInt(qs.get('page'), 10);
+    this.setState({ f, sort: SORTS.includes(qs.get('sort')) ? qs.get('sort') : 'rel', per: PER.includes(per) ? per : 24,
+      view: qs.get('view') === 'list' ? 'list' : 'grid', page: page > 0 ? page : 1 });
+    const go = () => {
+      if (window.VM && window.VM_I18N && window.VM_I18N.en.ls_filters && window.VM_CATALOG && window.VM_SEARCH && window.VM_CATS && window.VM_AIRCRAFT) {
+        this.unsub = window.VM.subscribe(() => this.forceUpdate());
+        this.setState({ ready: true }); this.load();
+      } else this.tw = setTimeout(go, 30);
+    };
+    go();
+    this.onKey = e => { if (e.key === 'Escape' && this.state.drawer) this.setState({ drawer: false }); };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); window.removeEventListener('keydown', this.onKey); document.body.style.overflow = ''; }
+  componentDidUpdate() {
+    // selects keep their value through re-renders
+    if (this.topRef.current) this.topRef.current.querySelectorAll('select[data-v]').forEach(el => { if (el.value !== el.dataset.v) el.value = el.dataset.v; });
+    if (this.state.drawer !== this.wasDrawer) {
+      this.wasDrawer = this.state.drawer;
+      document.body.style.overflow = this.state.drawer ? 'hidden' : '';
+      if (this.state.drawer) setTimeout(() => { const b = this.drawerRef.current && this.drawerRef.current.querySelector('button'); b && b.focus(); }, 50);
+    }
+  }
+  load() {
+    const C = window.VM_CATALOG, qs = new URLSearchParams(location.search), mode = this.props.mode || 'category';
+    let p;
+    if (mode === 'brand') p = C.brand(qs.get('b') || (location.pathname.match(/\/brand\/([^\/?#]+)/) || [])[1] || '');
+    else if (mode === 'search') p = window.VM_SEARCH.index().then(all => window.VM_SEARCH.rank(all, (qs.get('q') || '').trim()));
+    else {
+      const path = (qs.get('c') || (location.pathname.match(/\/c\/([^?#]+?)\/?$/) || [])[1] || '').split('/');
+      p = window.VM.findCat(path.join('/')) ? C.list(path[0], path[1]) : Promise.resolve([]);
+    }
+    p.then(cards => this.setState({ cards: cards || [] }));
+  }
+  // write the current view into the URL without reloading
+  sync(next) {
+    const s = { ...this.state, ...next }, u = new URL(location.href);
+    Object.keys(DIMS).forEach(k => { if (s.f[k].length) u.searchParams.set(k, s.f[k].join(',')); else u.searchParams.delete(k); });
+    [['sort', s.sort, 'rel'], ['per', String(s.per), '24'], ['view', s.view, 'grid'], ['page', String(s.page), '1']]
+      .forEach(([k, v, d]) => { if (v !== d) u.searchParams.set(k, v); else u.searchParams.delete(k); });
+    history.replaceState(null, '', u.pathname + u.search + u.hash);
+    this.setState(next);
+  }
+  setFilter(dim, value, on) {
+    const f = { ...this.state.f, [dim]: on ? [...this.state.f[dim], value] : this.state.f[dim].filter(x => x !== value) };
+    this.sync({ f, page: 1 });
+  }
+  toPage(n) {
+    this.sync({ page: n });
+    const el = this.topRef.current; el && el.scrollIntoView({ behavior: window.VM.reduced ? 'auto' : 'smooth', block: 'start' });
+  }
+  match(c, dim, values) {
+    if (!values.length) return true;
+    const v = DIMS[dim].get(c);
+    return DIMS[dim].multi ? v.some(x => values.includes(x)) : values.includes(v);
+  }
+
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), s = this.state, mode = this.props.mode || 'category';
+    const qs = new URLSearchParams(location.search), catPath = (qs.get('c') || (location.pathname.match(/\/c\/([^?#]+?)\/?$/) || [])[1] || '').split('/');
+    const ac = VM.currentAircraft();
+    // the aircraft chosen in the header narrows every listing (products with no aircraft listed fit all)
+    const base = (s.cards || []).filter(c => VM.fitsAircraft({ compatibleAircraft: c.a }));
+    const dims = mode === 'category' ? (catPath[1] ? ['brand', 'cond', 'ac'] : ['sub', 'brand', 'cond', 'ac'])
+      : mode === 'brand' ? ['cat', 'cond', 'ac'] : ['cat', 'brand', 'cond', 'ac'];
+    const passes = (c, skip) => dims.every(d => d === skip || this.match(c, d, s.f[d]));
+    const rows = base.filter(c => passes(c, null));
+
+    // facet options: every value present in the base list, counted against the other active filters
+    const label = (dim, key, c) => {
+      if (dim === 'sub') { const f = VM.findCat(catPath[0] + '/' + key); return f && f.child ? VM.label(f.child) : key; }
+      if (dim === 'cat') { const f = VM.findCat(key); return f ? VM.label(f.parent) : key; }
+      if (dim === 'brand') return c ? c.b : key;
+      if (dim === 'cond') return key === 'used' ? t.ls_cond_used : t.ls_cond_new;
+      return VM.acLabel(key);
+    };
+    const facets = dims.map(dim => {
+      const seen = new Map(), counts = new Map();
+      base.forEach(c => { const val = DIMS[dim].get(c); (DIMS[dim].multi ? val : [val]).forEach(k => { if (k && !seen.has(k)) seen.set(k, c); }); });
+      base.filter(c => passes(c, dim)).forEach(c => { const val = DIMS[dim].get(c); (DIMS[dim].multi ? val : [val]).forEach(k => { if (k) counts.set(k, (counts.get(k) || 0) + 1); }); });
+      let opts = [...seen.keys()].map(k => ({ k, label: label(dim, k, seen.get(k)), n: counts.get(k) || 0, checked: s.f[dim].includes(k) }));
+      opts.sort((a, b) => (dim === 'cond' ? (a.k === 'new' ? -1 : 1) : a.label.localeCompare(b.label)));
+      const searchable = dim === 'brand' && opts.length > FACET_ROWS;
+      if (searchable && s.bq.trim()) { const q = s.bq.trim().toLowerCase(); opts = opts.filter(o => o.checked || o.label.toLowerCase().includes(q)); }
+      const total = opts.length, open = !!s.more[dim];
+      if (!open && total > FACET_ROWS) opts = opts.filter((o, i) => i < FACET_ROWS || o.checked);
+      return { dim, legend: { sub: t.ls_sub, cat: t.ls_cat, brand: t.ls_brand, cond: t.ls_cond, ac: t.ls_ac }[dim], searchable, q: s.bq,
+        onQ: e => this.setState({ bq: e.target.value }), empty: searchable && !opts.length,
+        hasMore: total > FACET_ROWS, expanded: String(open), moreLabel: open ? t.ls_less : fmt(t.ls_more, { n: total - FACET_ROWS }),
+        toggleMore: () => this.setState(st => ({ more: { ...st.more, [dim]: !st.more[dim] } })),
+        visible: seen.size > 0,
+        opts: opts.map(o => ({ label: o.label, n: String(o.n), checked: o.checked, disabled: !o.checked && !o.n, toggle: e => this.setFilter(dim, o.k, e.target.checked) })) };
+    }).filter(f => f.visible);
+
+    const chips = [];
+    dims.forEach(dim => s.f[dim].forEach(k => {
+      const c = base.find(x => (DIMS[dim].multi ? DIMS[dim].get(x).includes(k) : DIMS[dim].get(x) === k));
+      const l = label(dim, k, c);
+      chips.push({ label: l, aria: fmt(t.ls_remove, { f: l }), remove: () => this.setFilter(dim, k, false) });
+    }));
+
+    // sort and page
+    const sorted = rows.slice();
+    if (s.sort === 'az') sorted.sort((a, b) => a.t.localeCompare(b.t));
+    else if (s.sort === 'za') sorted.sort((a, b) => b.t.localeCompare(a.t));
+    else if (s.sort === 'new') sorted.sort((a, b) => (b.d || '').localeCompare(a.d || ''));
+    const pages = Math.max(1, Math.ceil(sorted.length / s.per)), page = Math.min(s.page, pages);
+    const shown = sorted.slice((page - 1) * s.per, page * s.per);
+    const nums = [];
+    for (let n = 1; n <= pages; n++) if (n === 1 || n === pages || Math.abs(n - page) <= 1) nums.push(n);
+    const pageNums = [];
+    nums.forEach((n, i) => {
+      if (i && n - nums[i - 1] > 1) pageNums.push({ gap: true, num: false });
+      pageNums.push({ gap: false, num: true, label: String(n), cur: n === page ? 'page' : undefined, aria: fmt(t.ls_page, { n }), go: () => this.toPage(n) });
+    });
+
+    const n = sorted.length, filtered = dims.some(d => s.f[d].length);
+    const resultsLabel = n === 1 ? t.ls_result1 : fmt(t.ls_results, { n });
+    const q = (qs.get('q') || '').trim();
+    const empty = !!s.cards && !base.length;
+    return {
+      ...v, ready: true, t, topRef: this.topRef, drawerRef: this.drawerRef,
+      showRail: v.lg, showFilterBtn: !v.lg, facets, filtered, chips, resultsLabel, showLabel: t.ls_show + ' (' + n + ')',
+      fitsOn: !!ac, fitsLabel: ac ? fmt(t.ls_fits, { a: ac.make + ' ' + ac.model }) : '', showAllAc: () => VM.selectAircraft(null),
+      sort: s.sort, onSort: e => this.sync({ sort: e.target.value, page: 1 }),
+      sortOpts: [['rel', t.ls_sort_rel], ['az', t.ls_sort_az], ['za', t.ls_sort_za], ['new', t.ls_sort_new]].map(([vv, l]) => ({ v: vv, l })),
+      perStr: String(s.per), onPer: e => this.sync({ per: parseInt(e.target.value, 10), page: 1 }),
+      isGrid: String(s.view === 'grid'), isList: String(s.view === 'list'),
+      toGrid: () => this.sync({ view: 'grid' }), toList: () => this.sync({ view: 'list' }),
+      gridCls: 'lx-grid' + (s.view === 'list' ? ' lx-grid--list' : ''),
+      loading: !s.cards, hasCards: shown.length > 0, noMatch: !!s.cards && !!base.length && !n, isEmpty: empty,
+      emptyT: mode === 'search' && q ? fmt(t.sh_search_none_t, { q }) : t.ls_empty_t,
+      emptyB: mode === 'search' && q ? t.sh_search_none_b : t.ls_empty_b,
+      emptyBtn: mode === 'search' && q ? fmt(t.sh_add_q, { q }) : t.sh_rfq,
+      emptyAct: () => { if (mode === 'search' && q) VM.addRfq({ pn: q, name_en: '__manual', name_ar: '__manual', cond: 'any' }, 1); VM.openRfq(); },
+      openRfq: () => VM.openRfq(),
+      cards: shown.map(c => {
+        const prod = { title: c.t, pn: c.pn, brand: c.b, slug: c.s, image: c.i };
+        return { title: c.t, brand: c.b, pn: c.pn, img: c.i || '', noImg: !c.i, sample: !!c.x, href: VM.productHref(c.s),
+          enqLabel: t.pc_enquire + ': ' + c.t, rfq: () => VM.requestQuote(prod), add: () => VM.addToQuote(prod, 1) };
+      }),
+      hasPages: pages > 1, pageNums, atFirst: page <= 1, atLast: page >= pages,
+      prev: () => this.toPage(page - 1), next: () => this.toPage(page + 1),
+      clearAll: () => { const f = {}; Object.keys(DIMS).forEach(k => { f[k] = []; }); this.sync({ f, page: 1 }); this.setState({ bq: '' }); },
+      drawer: s.drawer && !v.lg, openDrawer: () => this.setState({ drawer: true }), closeDrawer: () => this.setState({ drawer: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

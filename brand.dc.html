@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand | Velmach Aerospace</title>
+<script>/* on a clean nested URL (/c/..., /p/..., /brand/...) resolve page assets from the site root */if(/^\/(c|p|brand)\//.test(location.pathname))document.write('<base href="/">')</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Products by brand from Velmach Aerospace, with quotations on request.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="css/catalogue.css">
+<link rel="stylesheet" href="css/shop.css">
+<script src="js/i18n.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/vm-core.js"></script>
+<script src="data/brands.js"></script>
+<script src="data/categories.js"></script>
+<script src="js/catalog.js"></script>
+</helmet>
+
+<dc-import name="SiteHeader" page="brands" hint-size="100%,158px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" class="cx" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }}">
+  <section class="cx-hero" aria-labelledby="sx-h">
+    <div class="cx-wrap cx-hero-in">
+      <ol class="sx-crumbs" aria-label="{{ crumbsAria }}">
+        <li><a href="index.html">{{ t.sh_home }}</a></li>
+        <li><a href="brands.dc.html">{{ t.sh_all_brands }}</a></li>
+        <li><span aria-current="page" dir="auto">{{ title }}</span></li>
+      </ol>
+      <span class="cx-tag">{{ t.sh_brands_eyebrow }}</span>
+      <div class="cx-hero-grid">
+        <h1 id="sx-h" class="cx-h1" dir="auto">{{ title }}</h1>
+        <sc-if value="{{ logo }}" hint-placeholder-val="{{ false }}"><span class="sx-logo {{ logoCls }}"><img src="{{ logo }}" alt="{{ logoAlt }}"></span></sc-if>
+      </div>
+      <sc-if value="{{ desc }}" hint-placeholder-val="{{ true }}"><p class="cx-sub" style="margin-top:18px">{{ desc }}</p></sc-if>
+    </div>
+  </section>
+
+  <sc-if value="{{ found }}" hint-placeholder-val="{{ true }}">
+    <div style="height:clamp(28px,3vw,44px)"></div>
+    <!-- products of this brand with the same filters as category pages (ProductListing.dc.html) -->
+    <dc-import name="ProductListing" mode="brand" hint-size="100%,900px"></dc-import>
+  </sc-if>
+  <div class="cx-wrap sx-body">
+    <sc-if value="{{ missing }}" hint-placeholder-val="{{ false }}">
+      <section class="sx-empty">
+        <span class="sx-empty-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg></span>
+        <div>
+          <p>{{ t.sh_brand_missing_b }}</p>
+          <div class="sx-actions"><a class="cx-btn cx-btn--blue" href="brands.dc.html">{{ t.sh_all_brands }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></a></div>
+        </div>
+      </section>
+    </sc-if>
+  </div>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+// ?b=<slug>; a clean /brand/<slug> path also resolves (see js/routes.js)
+function brandSlug() {
+  const q = new URLSearchParams(location.search).get('b');
+  if (q) return q;
+  const m = location.pathname.match(/\/brand\/([^\/?#]+)\/?$/);
+  return m ? decodeURIComponent(m[1]) : '';
+}
+class Component extends DCLogic {
+  state = { ready: false, cards: null };
+  componentDidMount() {
+    const go = () => {
+      if (window.VM && window.VM_I18N && window.VM_I18N.en.sh_home && window.VM_BRANDS && window.VM_ROUTES && window.VM_CATALOG) {
+        this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true });
+        const b = this.brand(); if (b) window.VM_CATALOG.brand(b.slug).then(cards => this.setState({ cards }));
+      } else this.tw = setTimeout(go, 30);
+    };
+    go();
+  }
+  // short description: desc_en / desc_ar in data/brands.js, otherwise built from the categories the brand's products are in
+  desc(b, t, v) {
+    const own = v.ar ? b.desc_ar : b.desc_en;
+    if (own) return own;
+    const cards = this.state.cards || [], seen = [];
+    cards.forEach(c => { if (!seen.includes(c.p)) seen.push(c.p); });
+    const names = seen.map(p => { const f = window.VM.findCat(p); return f ? window.VM.label(f.parent) : p; });
+    if (!names.length) return fmt(t.br_desc0, { b: b.name });
+    const join = names.length > 1 ? names.slice(0, -1).join(v.ar ? '، ' : ', ') + (v.ar ? ' و' : ' and ') + names[names.length - 1] : names[0];
+    return fmt(t.br_desc, { b: b.name, cats: join });
+  }
+  brand() { const s = brandSlug(); return window.VM_BRANDS.find(b => b.slug === s) || null; }
+  componentDidUpdate() {
+    if (!this.state.ready) return;
+    const t = window.VM.t(), R = window.VM_ROUTES, b = this.brand();
+    if (!b) { R.head({ title: t.sh_brand_missing_t + ' | Velmach Aerospace', description: t.sh_brand_missing_b, noindex: true }); return; }
+    R.head({ title: b.name + ' | Velmach Aerospace', description: fmt(t.sh_brand_products, { b: b.name }) + '. ' + t.sh_empty_b, url: R.canonical.brand(b.slug) });
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), b = this.brand();
+    const base = { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb', openRfq: () => VM.openRfq() };
+    if (!b) return { ...base, found: false, missing: true, title: t.sh_brand_missing_t, logo: '' };
+    return { ...base, found: true, missing: false, title: b.name, logo: VM.brandLogo(b.slug), logoCls: VM.brandLogoDark(b.slug) ? 'is-dark' : '', logoAlt: b.name + ' logo',
+      desc: this.desc(b, t, v) };
+  }
+}
+</script>
+</body>
+</html>

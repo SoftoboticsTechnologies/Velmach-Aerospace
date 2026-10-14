@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop by Aircraft | Velmach Aerospace</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Choose your aircraft and browse parts, tooling and equipment that fit it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="css/catalogue.css">
+<link rel="stylesheet" href="css/shop.css">
+<script src="js/i18n.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/vm-core.js"></script>
+<script src="data/aircraft.js"></script>
+</helmet>
+
+<dc-import name="SiteHeader" page="aircraft" hint-size="100%,158px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" class="cx" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }}">
+  <section class="cx-hero" aria-labelledby="sx-h">
+    <div class="cx-wrap cx-hero-in">
+      <ol class="sx-crumbs" aria-label="{{ crumbsAria }}">
+        <li><a href="index.html">{{ t.sh_home }}</a></li>
+        <li><span aria-current="page">{{ t.ac_eyebrow }}</span></li>
+      </ol>
+      <span class="cx-tag">{{ t.ac_eyebrow }}</span>
+      <div class="cx-hero-grid">
+        <h1 id="sx-h" class="cx-h1">{{ t.ac_title }}</h1>
+        <p class="cx-sub">{{ t.ac_sub }}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cx-wrap sx-body">
+    <sc-if value="{{ hasAc }}" hint-placeholder-val="{{ false }}">
+      <div class="lx-fits" role="status">
+        <span>{{ curLabel }}</span>
+        <span style="display:flex;gap:18px;flex-wrap:wrap"><a class="cx-link" href="categories.dc.html">{{ t.ac_go }}</a><button type="button" onClick="{{ clear }}">{{ t.ac_clear }}</button></span>
+      </div>
+    </sc-if>
+    <div class="sx-groups">
+      <sc-for list="{{ makes }}" as="m" hint-placeholder-count="6">
+        <section class="sx-group" aria-labelledby="{{ m.hid }}">
+          <div class="sx-group-h"><h2 id="{{ m.hid }}" class="sx-group-t" dir="ltr">{{ m.make }}</h2></div>
+          <ul class="sx-chips">
+            <sc-for list="{{ m.models }}" as="x" hint-placeholder-count="4">
+              <li><button type="button" class="sx-chip" onClick="{{ x.pick }}" aria-pressed="{{ x.on }}" aria-label="{{ x.aria }}" style="cursor:pointer;font:inherit;font-weight:600;{{ x.style }}"><span dir="ltr">{{ x.model }}</span></button></li>
+            </sc-for>
+          </ul>
+        </section>
+      </sc-for>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+// Shop by Aircraft page (/aircraft): picking a model saves it with VM.addAircraft (js/vm-core.js), the same as the header panel.
+const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+class Component extends DCLogic {
+  state = { ready: false };
+  componentDidMount() {
+    const go = () => { if (window.VM && window.VM_I18N && window.VM_I18N.en.ac_title && window.VM_AIRCRAFT && window.VM_ROUTES) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    go();
+  }
+  componentDidUpdate() {
+    if (!this.state.ready) return;
+    const t = window.VM.t(), R = window.VM_ROUTES;
+    R.head({ title: t.ac_eyebrow + ' | Velmach Aerospace', description: t.ac_sub, url: R.abs('aircraft.html') });
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), cur = VM.currentAircraft();
+    return { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb',
+      hasAc: !!cur, curLabel: cur ? fmt(t.ac_current, { a: cur.make + ' ' + cur.model }) : '', clear: () => VM.selectAircraft(null),
+      makes: window.VM_AIRCRAFT.map((m, i) => ({ make: m.make, hid: 'ac-m-' + i,
+        models: m.models.map(model => { const on = !!cur && cur.id === VM.acId(m.make, model);
+          return { model, on: String(on), aria: fmt(t.ac_pick, { a: m.make + ' ' + model }),
+            style: on ? 'background:#0B1B2B;border-color:#0B1B2B;color:#FFFFFF' : '', pick: () => VM.addAircraft(m.make, model) }; }) })) };
+  }
+}
+</script>
+</body>
+</html>

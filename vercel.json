@@ -1,0 +1,22 @@
+{
+  "redirects": [
+    { "source": "/cart", "destination": "/quote", "permanent": true },
+    { "source": "/cart/:path*", "destination": "/quote", "permanent": true },
+    { "source": "/checkout", "destination": "/quote", "permanent": true },
+    { "source": "/checkout/:path*", "destination": "/quote", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/quote", "destination": "/rfq.dc.html" },
+    { "source": "/categories", "destination": "/categories.dc.html" },
+    { "source": "/c/:parent/:child", "destination": "/category.dc.html?c=:parent/:child" },
+    { "source": "/c/:parent", "destination": "/category.dc.html?c=:parent" },
+    { "source": "/p/:slug", "destination": "/product.dc.html?p=:slug" },
+    { "source": "/brands", "destination": "/brands.dc.html" },
+    { "source": "/brand/:slug", "destination": "/brand.dc.html?b=:slug" },
+    { "source": "/aircraft", "destination": "/aircraft.dc.html" },
+    { "source": "/search", "destination": "/search.dc.html" },
+    { "source": "/contact", "destination": "/contact.dc.html" },
+    { "source": "/rent", "destination": "/page.dc.html?p=rentals" },
+    { "source": "/:page(calibration|gse-service-repair|mobile-service-team|rentals|sell-trade|financing|account)", "destination": "/page.dc.html?p=:page" }
+  ]
+}

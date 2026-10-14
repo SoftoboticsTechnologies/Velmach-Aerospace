@@ -1,0 +1,12 @@
+shell.com https://www.shell.com/business-customers/aviation/aeroshell/jcr: HTTP 404
+shell.com https://www.shell.com/business-customers/aviation/aeroshell/piston-engine-oils/aeroshell-oil-.html: HTTP 404
+shell.com: 10 categories, 37 product pages
+shell.com: 36 AeroShell product pages read
+henkel-adhesives.com: 2750 pages in the sitemap
+eastman.com: 977 pages in the sitemap
+hexcel.com: 120 pages in the sitemap
+zipchem.com: 422 pages in the sitemap
+shop.boeing.com: site did not answer (The read operation timed out); skipped
+shop.boeing.com sitemap: site did not answer (The read operation timed out); skipped
+ppg.com: 732 pages in the sitemap
+{} | blocked sites: {'shop.boeing.com': 'site did not answer (The read operation timed out); skipped'}

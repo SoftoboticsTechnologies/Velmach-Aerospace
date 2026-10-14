@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Catalogue | Velmach Aerospace</title>
+<!-- The previous catalogue page (backup: backup/old-products.json). Old links keep working:
+     ?q= / ?pn= / ?kw= open the search, ?cat= opens the closest new category, anything else opens all categories. -->
+<script src="js/vm-core.js"></script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), term = (q.get('q') || q.get('pn') || q.get('kw') || '').trim(), cat = q.get('cat'), lang = q.get('lang');
+  var to = term ? VM.searchHref(term) : cat ? VM.legacyCatHref(cat) : VM.HREF.categories;
+  if (lang === 'en' || lang === 'ar') to += (to.indexOf('?') > -1 ? '&' : '?') + 'lang=' + lang;
+  location.replace(to);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=categories.dc.html"></noscript>
+</head>
+<body>
+<p style="font-family:system-ui,sans-serif;padding:24px"><a href="categories.dc.html">Browse all categories</a></p>
+</body>
+</html>

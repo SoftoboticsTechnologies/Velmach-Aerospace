@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" fill="none">
+  <!-- Product image placeholder: blueprint drawing of a generic flanged fitting. The caption is added by the page (translatable). -->
+  <defs>
+    <pattern id="g" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" stroke="#DCE3EA" stroke-width=".6"/></pattern>
+    <pattern id="G" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M80 0H0V80" stroke="#CFD8E1" stroke-width=".8"/></pattern>
+  </defs>
+  <rect width="400" height="300" fill="#F5F7F9"/>
+  <rect width="400" height="300" fill="url(#g)"/>
+  <rect width="400" height="300" fill="url(#G)"/>
+  <g stroke="#9FB0C2" stroke-width="1.4" stroke-linejoin="round">
+    <!-- flange -->
+    <ellipse cx="170" cy="168" rx="62" ry="22"/>
+    <path d="M108 168v14M232 168v14"/>
+    <path d="M108 182c0 12 28 22 62 22s62-10 62-22"/>
+    <!-- body -->
+    <path d="M140 160V108M200 160V108"/>
+    <ellipse cx="170" cy="108" rx="30" ry="10"/>
+    <ellipse cx="170" cy="108" rx="14" ry="4.6" stroke="#B7C4D1"/>
+    <!-- bolt holes -->
+    <ellipse cx="122" cy="166" rx="5" ry="2.4" stroke="#B7C4D1"/><ellipse cx="218" cy="166" rx="5" ry="2.4" stroke="#B7C4D1"/>
+    <ellipse cx="170" cy="184" rx="5" ry="2.4" stroke="#B7C4D1"/>
+  </g>
+  <!-- centre line and dimensions -->
+  <g stroke="#0759A5" stroke-width="1" opacity=".55">
+    <path d="M170 74V222" stroke-dasharray="10 4 2 4"/>
+    <path d="M108 236H232M108 230v12M232 230v12"/>
+    <path d="M252 108V160M246 108h12M246 160h12"/>
+  </g>
+  <g stroke="#9FB0C2" stroke-width="1" opacity=".8">
+    <circle cx="300" cy="96" r="26"/><circle cx="300" cy="96" r="9"/>
+    <path d="M300 62v68M266 96h68" stroke-dasharray="3 4"/>
+  </g>
+  <!-- corner brackets -->
+  <g stroke="#0759A5" stroke-width="2">
+    <path d="M14 34V14h20M386 266v20h-20M366 14h20v20M14 266v20h20"/>
+  </g>
+</svg>

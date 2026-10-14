@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services | Velmach Aerospace</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Velmach Aerospace services: GSE service and repair, calibration, rentals, sell or trade, and financing enquiries.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="css/catalogue.css">
+<link rel="stylesheet" href="css/shop.css">
+<script src="js/i18n.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/vm-core.js"></script>
+<script src="js/site-config.js"></script>
+</helmet>
+
+<dc-import name="SiteHeader" page="page" hint-size="100%,158px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" class="cx" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }}">
+  <section class="cx-hero" aria-labelledby="sx-h">
+    <div class="cx-wrap cx-hero-in">
+      <ol class="sx-crumbs" aria-label="{{ crumbsAria }}">
+        <li><a href="index.html">{{ t.sh_home }}</a></li>
+        <sc-if value="{{ isService }}" hint-placeholder-val="{{ true }}"><li><a href="services.dc.html">{{ t.hd_nav.services }}</a></li></sc-if>
+        <li><span aria-current="page">{{ pg.t }}</span></li>
+      </ol>
+      <span class="cx-tag">{{ pg.e }}</span>
+      <div class="cx-hero-grid">
+        <h1 id="sx-h" class="cx-h1">{{ pg.t }}</h1>
+        <p class="cx-sub">{{ pg.b }}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cx-wrap sx-body">
+    <div class="sx-split">
+      <ol class="sx-steps">
+        <sc-for list="{{ pg.pts }}" as="p" hint-placeholder-count="3"><li>{{ p }}</li></sc-for>
+      </ol>
+      <aside class="sx-cta" aria-labelledby="sx-cta-h">
+        <h2 id="sx-cta-h">{{ t.pg_cta_t }}</h2>
+        <p>{{ t.pg_cta_b }}</p>
+        <div class="sx-actions" style="margin-top:6px">
+          <button type="button" class="cx-btn cx-btn--blue" onClick="{{ openRfq }}">{{ t.sh_rfq }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></button>
+          <a class="cx-btn cx-btn--line" href="{{ mailHref }}">{{ t.sh_contact }}</a>
+        </div>
+        <a class="sx-cta-tel" href="{{ telHref }}" dir="ltr"><svg class="cx-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z"></path></svg>{{ phone }}</a>
+      </aside>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+// ?p=<slug> picks the page text from VM_I18N (pg.<slug>); a clean /<slug> path also resolves. Unknown slugs fall back to the first service.
+function pageSlug() {
+  const q = new URLSearchParams(location.search).get('p');
+  if (q) return q;
+  const m = location.pathname.match(/\/([a-z0-9-]+)\/?$/);
+  return m ? m[1] : '';
+}
+class Component extends DCLogic {
+  state = { ready: false };
+  componentDidMount() {
+    const go = () => { if (window.VM && window.VM_I18N && window.VM_I18N.en.pg && window.VM_CONFIG && window.VM_ROUTES) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    go();
+  }
+  slug() { const s = pageSlug(), pg = window.VM.t().pg; return pg[s] ? s : Object.keys(pg)[0]; }
+  componentDidUpdate() {
+    if (!this.state.ready) return;
+    const R = window.VM_ROUTES, slug = this.slug(), pg = window.VM.t().pg[slug];
+    R.head({ title: pg.t + ' | Velmach Aerospace', description: pg.b, url: R.canonical.page(slug), noindex: slug === 'account' });
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), C = window.VM_CONFIG, slug = this.slug(), pg = t.pg[slug];
+    return { ...v, ready: true, t, pg, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb', isService: slug !== 'account',
+      openRfq: () => VM.openRfq(),
+      mailHref: 'mailto:' + C.email.sales + '?subject=' + encodeURIComponent(window.VM_I18N.en.pg[slug].t + " enquiry"),
+      phone: C.phone.display, telHref: 'tel:' + C.phone.tel };
+  }
+}
+</script>
+</body>
+</html>

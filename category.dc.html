@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Category | Velmach Aerospace</title>
+<script>/* on a clean nested URL (/c/..., /p/..., /brand/...) resolve page assets from the site root */if(/^\/(c|p|brand)\//.test(location.pathname))document.write('<base href="/">')</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Browse Velmach Aerospace products by category and request a quotation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="css/catalogue.css">
+<link rel="stylesheet" href="css/shop.css">
+<script src="js/i18n.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/vm-core.js"></script>
+<script src="data/categories.js"></script>
+<script src="js/catalog.js"></script>
+</helmet>
+
+<dc-import name="SiteHeader" page="category" hint-size="100%,158px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" class="cx" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }}">
+  <section class="cx-hero" aria-labelledby="sx-h">
+    <div class="cx-wrap cx-hero-in">
+      <ol class="sx-crumbs" aria-label="{{ crumbsAria }}">
+        <sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="3">
+          <li>
+            <sc-if value="{{ c.href }}" hint-placeholder-val="{{ true }}"><a href="{{ c.href }}">{{ c.label }}</a></sc-if>
+            <sc-if value="{{ c.last }}" hint-placeholder-val="{{ false }}"><span aria-current="page">{{ c.label }}</span></sc-if>
+          </li>
+        </sc-for>
+      </ol>
+      <span class="cx-tag">{{ tag }}</span>
+      <div class="cx-hero-grid">
+        <h1 id="sx-h" class="cx-h1">{{ title }}</h1>
+        <p class="cx-sub">{{ sub }}</p>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ found }}" hint-placeholder-val="{{ true }}">
+    <!-- subcategory tabs: "All" shows every product of the parent, a subcategory tab shows only its products -->
+    <div class="cx-wrap sx-tabs-wrap">
+      <nav class="sx-tabs" aria-label="{{ t.sh_sub_tabs }}">
+        <sc-for list="{{ tabs }}" as="b" hint-placeholder-count="6">
+          <a class="sx-tab" href="{{ b.href }}" aria-current="{{ b.current }}">{{ b.label }}<sc-if value="{{ b.count }}" hint-placeholder-val="{{ true }}"><span class="sx-tab-n">{{ b.count }}</span></sc-if></a>
+        </sc-for>
+      </nav>
+    </div>
+
+    <!-- products first: filters, sort, grid or list, pages (ProductListing.dc.html) -->
+    <dc-import name="ProductListing" mode="category" hint-size="100%,900px"></dc-import>
+
+    <!-- then the subcategories (on a subcategory page: the rest of its parent) -->
+    <sc-if value="{{ hasTiles }}" hint-placeholder-val="{{ true }}">
+      <div class="cx-wrap sx-body" style="padding-top:0">
+        <section class="sx-sec" aria-labelledby="sx-sib">
+          <div class="sx-sec-h"><h2 id="sx-sib" class="sx-h2"><a href="{{ parentHref }}">{{ browseLabel }}</a></h2><span class="cx-k" dir="auto">{{ subCount }}</span></div>
+          <ul class="sx-tiles">
+            <sc-for list="{{ tiles }}" as="c" hint-placeholder-count="8">
+              <li><a class="sx-tile" href="{{ c.href }}"><sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}"><span class="sx-tile-img" aria-hidden="true"><img src="{{ c.img }}" alt="" loading="lazy" width="400" height="300"></span></sc-if><span class="sx-tile-t">{{ c.label }}</span><span class="sx-tile-f"><span class="cx-k" style="color:inherit">{{ c.count }}</span><svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></span></a></li>
+            </sc-for>
+          </ul>
+        </section>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <div class="cx-wrap sx-body">
+    <sc-if value="{{ missing }}" hint-placeholder-val="{{ false }}">
+      <section class="sx-empty">
+        <span class="sx-empty-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg></span>
+        <div>
+          <p>{{ t.sh_cat_missing_b }}</p>
+          <div class="sx-actions"><a class="cx-btn cx-btn--blue" href="categories.dc.html">{{ t.sh_all_cats }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></a></div>
+        </div>
+      </section>
+    </sc-if>
+  </div>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+// ?c=<parent> or ?c=<parent>/<child>; a clean /c/<parent>/<child> path also resolves (see js/routes.js)
+function catPath() {
+  const q = new URLSearchParams(location.search).get('c');
+  if (q) return q.replace(/^\/+|\/+$/g, '');
+  const m = location.pathname.match(/\/c\/([^?#]+?)\/?$/);
+  return m ? decodeURIComponent(m[1]) : '';
+}
+class Component extends DCLogic {
+  state = { ready: false, meta: null };
+  componentDidMount() {
+    const go = () => {
+      if (window.VM && window.VM_I18N && window.VM_I18N.en.sh_home && window.VM_CATS && window.VM_ROUTES && window.VM_CATALOG) {
+        this.unsub = window.VM.subscribe(() => this.forceUpdate());
+        this.setState({ ready: true });
+        const f = window.VM.findCat(catPath());
+        if (f) {
+          window.VM_CATALOG.meta().then(meta => this.setState({ meta }));
+        }
+      } else this.tw = setTimeout(go, 30);
+    };
+    go();
+  }
+  componentDidUpdate() {
+    if (!this.state.ready) return;
+    const VM = window.VM, t = VM.t(), R = window.VM_ROUTES, f = VM.findCat(catPath());
+    const ok = f && (f.child || !catPath().includes('/'));
+    if (!ok) { R.head({ title: t.sh_cat_missing_t + ' | Velmach Aerospace', description: t.sh_cat_missing_b, noindex: true }); return; }
+    const node = f.child || f.parent, name = VM.label(node);
+    const title = (f.child ? name + ' | ' + VM.label(f.parent) : name) + ' | Velmach Aerospace';
+    const desc = (VM.lang === 'ar' ? node.desc_ar : node.desc_en) || fmt(t.sh_browse, { c: name });
+    R.head({ title, description: desc, url: R.canonical.category(f.parent.slug + (f.child ? '/' + f.child.slug : '')) });
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), path = catPath(), f = VM.findCat(path);
+    const base = { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb', openRfq: () => VM.openRfq() };
+    const home = { label: t.sh_home, href: 'index.html' }, all = { label: t.sh_all_cats, href: 'categories.dc.html' };
+    if (!f || (path.includes('/') && !f.child)) {
+      return { ...base, found: false, missing: true, tag: t.sh_cats_eyebrow, title: t.sh_cat_missing_t, sub: '',
+        crumbs: [home, all, { label: t.sh_cat_missing_t, last: true }] };
+    }
+    const p = f.parent, c = f.child, pName = VM.label(p), node = c || p, s = this.state;
+    const counts = s.meta && s.meta.categories[p.slug];
+    const nProducts = n => (n === 1 ? t.sh_one_product : fmt(t.sh_n_products, { n }));
+    const tile = x => { const img = counts && counts.i ? counts.i[x.slug] : '';
+      return { label: VM.label(x), href: VM.catHref(p.slug, x.slug), count: counts ? nProducts(counts.c[x.slug] || 0) : t.sh_view_cat, img, noImg: !img }; };
+    const tiles = (c ? p.children.filter(x => x.slug !== c.slug) : p.children).map(tile);
+    const tabs = [{ label: t.sh_all, href: VM.catHref(p.slug), current: c ? undefined : 'page', count: counts ? String(counts.n) : '' }]
+      .concat(p.children.map(x => ({ label: VM.label(x), href: VM.catHref(p.slug, x.slug), current: c && c.slug === x.slug ? 'page' : undefined,
+        count: counts ? String(counts.c[x.slug] || 0) : '' })));
+    return { ...base, found: true, missing: false, isParent: !c, isChild: !!c, tabs, hasTiles: tiles.length > 0,
+      tag: c ? pName : fmt(t.sh_n_sub, { n: p.children.length }) + (counts ? ' · ' + nProducts(counts.n) : ''),
+      title: c ? VM.label(c) : pName,
+      sub: (v.ar ? node.desc_ar : node.desc_en) || '',
+      crumbs: c ? [home, all, { label: pName, href: VM.catHref(p.slug) }, { label: VM.label(c), last: true }] : [home, all, { label: pName, last: true }],
+      browseLabel: fmt(t.sh_browse, { c: pName }), parentHref: VM.catHref(p.slug), subCount: fmt(t.sh_n_sub, { n: p.children.length }),
+      tiles };
+  }
+}
+</script>
+</body>
+</html>

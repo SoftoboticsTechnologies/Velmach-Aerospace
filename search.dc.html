@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search | Velmach Aerospace</title>
+<meta name="robots" content="noindex">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="css/catalogue.css">
+<link rel="stylesheet" href="css/shop.css">
+<script src="js/i18n.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/vm-core.js"></script>
+<script src="js/site-config.js"></script>
+<script src="data/categories.js"></script>
+<script src="data/brands.js"></script>
+<script src="js/search.js"></script>
+</helmet>
+
+<dc-import name="SiteHeader" page="search" hint-size="100%,158px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" class="cx" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }}">
+  <section class="cx-hero" aria-labelledby="sx-h">
+    <div class="cx-wrap cx-hero-in">
+      <ol class="sx-crumbs" aria-label="{{ crumbsAria }}">
+        <li><a href="index.html">{{ t.sh_home }}</a></li>
+        <li><span aria-current="page">{{ t.sh_search_title }}</span></li>
+      </ol>
+      <span class="cx-tag">{{ t.sh_search_title }}</span>
+      <div class="cx-hero-grid">
+        <h1 id="sx-h" class="cx-h1" dir="auto">{{ title }}</h1>
+        <p class="cx-sub">{{ sub }}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cx-wrap sx-body" style="padding-bottom:clamp(20px,2.5vw,36px)">
+    <sc-if value="{{ hasCats }}" hint-placeholder-val="{{ false }}">
+      <section class="sx-sec" aria-labelledby="sx-mc">
+        <div class="sx-sec-h"><h2 id="sx-mc" class="sx-h2">{{ t.sh_match_cats }}</h2></div>
+        <ul class="sx-chips">
+          <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4"><li><a class="sx-chip" href="{{ c.href }}">{{ c.label }}<sc-if value="{{ c.parentLabel }}" hint-placeholder-val="{{ true }}"><small>{{ c.parentLabel }}</small></sc-if></a></li></sc-for>
+        </ul>
+      </section>
+    </sc-if>
+    <sc-if value="{{ hasBrands }}" hint-placeholder-val="{{ false }}">
+      <section class="sx-sec" aria-labelledby="sx-mb">
+        <div class="sx-sec-h"><h2 id="sx-mb" class="sx-h2">{{ t.sh_match_brands }}</h2></div>
+        <ul class="sx-chips">
+          <sc-for list="{{ brands }}" as="b" hint-placeholder-count="3"><li><a class="sx-chip" href="{{ b.href }}" dir="ltr">{{ b.label }}</a></li></sc-for>
+        </ul>
+      </section>
+    </sc-if>
+  </div>
+  <!-- products: filters, sort, grid or list, pages (ProductListing.dc.html) -->
+  <dc-import name="ProductListing" mode="search" hint-size="100%,900px"></dc-import>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+class Component extends DCLogic {
+  state = { ready: false, res: null, lang: '' };
+  componentDidMount() {
+    this.q = (new URLSearchParams(location.search).get('q') || '').trim().slice(0, 120);
+    const go = () => {
+      if (window.VM && window.VM_I18N && window.VM_I18N.en.sh_home && window.VM_CATS && window.VM_BRANDS && window.VM_SEARCH && window.VM_ROUTES) {
+        this.unsub = window.VM.subscribe(() => this.forceUpdate());
+        this.setState({ ready: true }); this.run();
+      } else this.tw = setTimeout(go, 30);
+    };
+    go();
+  }
+  run() { const lang = window.VM.lang; window.VM_SEARCH.search(this.q, lang === 'ar').then(res => this.setState({ res, lang })); }
+  componentDidUpdate() {
+    if (!this.state.ready) return;
+    if (this.state.res && this.state.lang !== window.VM.lang) this.run();     // category names follow the language
+    const t = window.VM.t();
+    window.VM_ROUTES.head({ title: (this.q ? fmt(t.sh_search_for, { q: this.q }) : t.sh_search_title) + ' | Velmach Aerospace', description: t.sh_search_empty, noindex: true });
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), q = this.q, r = this.state.res || { products: [], cats: [], brands: [] };
+    const products = r.products.map(p => ({ ...p, meta: [p.brand, p.pn ? t.hd_pn + ' ' + p.pn : ''].filter(Boolean).join(' · ') }));
+    return { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb',
+      title: q ? fmt(t.sh_search_for, { q }) : t.sh_search_title, sub: q ? '' : t.sh_search_empty,
+      cats: r.cats, brands: r.brands, products, hasCats: r.cats.length > 0, hasBrands: r.brands.length > 0, hasProducts: products.length > 0,
+      productCount: String(products.length),
+      showNone: !!q && !!this.state.res && !products.length, noneTitle: fmt(t.sh_search_none_t, { q }), addLabel: fmt(t.sh_add_q, { q }),
+      addQ: () => { VM.addRfq({ pn: q, name_en: '__manual', name_ar: '__manual', cond: 'any' }, 1); VM.openRfq(); } };
+  }
+}
+</script>
+</body>
+</html>

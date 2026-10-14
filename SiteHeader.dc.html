@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="icon" href="assets/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="assets/favicon_io/site.webmanifest">
+<script src="js/i18n.js"></script>
+<script src="js/vm-core.js"></script>
+<script src="js/site-config.js"></script>
+<script src="data/categories.js"></script>
+<script src="data/brands.js"></script>
+<script src="data/aircraft.js"></script>
+<script src="js/search.js"></script>
+<style>
+@font-face{font-family:'VMAmp';src:local('Helvetica Neue'),local('HelveticaNeue'),local('Arial'),local('Liberation Sans');unicode-range:U+0026}
+html,body{margin:0;padding:0;-webkit-font-smoothing:antialiased}
+body:not(.home){background:#FFFFFF}
+*{box-sizing:border-box}
+a{color:#0759A5;text-underline-offset:4px}
+a:hover{color:#0B1B2B}
+*:focus-visible{outline:2px solid #3D8BE0;outline-offset:3px}
+@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(224,68,46,.55)}70%{box-shadow:0 0 0 7px rgba(224,68,46,0)}100%{box-shadow:0 0 0 0 rgba(224,68,46,0)}}
+@keyframes vmFade{from{opacity:0}to{opacity:1}}
+@keyframes vmUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes vmFromR{from{transform:translateX(100%)}to{transform:none}}
+@keyframes vmFromL{from{transform:translateX(-100%)}to{transform:none}}
+@keyframes vmSheet{from{transform:translateY(100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+
+/* ---- shop header: same tokens as css/home.css; desktop layout from 1200px ---- */
+.vh{--ink:#07111D;--navy:#0B1B2B;--blue:#0759A5;--blue-2:#0A6BC4;--sig:#6AA6E8;--aog:#E0442E;--aog-2:#FF8A73;--paper:#F3F1EC;--white:#FBFBF9;--line:#DADBD8;--line-2:#C3C7C9;--steel:#56626E;--steel-2:#8A96A3;--mist:#C9D2DB;--dim:#9FB0C1;--hover:#F1EFEA;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;--gut:clamp(16px,4vw,56px);--ease:cubic-bezier(.2,.7,.2,1)}
+/* resets carry no specificity, so the component classes below always win */
+:where(.vh) :where(ul,ol){margin:0;padding:0;list-style:none}
+:where(.vh) :where(p,h2,h3){margin:0}
+:where(.vh) :where(button,input,select){font:inherit;color:inherit}
+.vh-wrap{max-width:1320px;margin:0 auto;padding-inline:var(--gut)}
+.vh-ic{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:square;stroke-linejoin:miter}
+.vh[dir="rtl"] .vh-flip{transform:scaleX(-1)}
+.vh-k{font:500 11.5px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+.vh[dir="rtl"] .vh-k{font-family:inherit;letter-spacing:0;font-size:13px}
+.vh-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.vh-hdr{position:fixed;top:0;left:0;right:0;z-index:100;--h-fg:#0B1B2B;--h-fg2:#3A4652;--h-line:#DADBD8;--h-btn:#C3C7C9;--h-acc:#0759A5;--h-field:#FFFFFF;
+  color:var(--h-fg);background:rgba(251,251,249,.96);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--h-line);transition:background .45s ease,border-color .45s ease,color .45s ease}
+.vh-hdr--over{--h-fg:#FFFFFF;--h-fg2:rgba(255,255,255,.8);--h-line:rgba(255,255,255,.12);--h-btn:rgba(255,255,255,.3);--h-acc:#6AA6E8;--h-field:rgba(255,255,255,.08);background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.vh-prog{position:absolute;bottom:-1px;inset-inline-start:0;height:1px;width:0;background:#6AA6E8;transition:width .1s linear}
+
+/* utility bar (desktop) */
+.vh-util{display:none;max-height:34px;overflow:hidden;background:var(--paper);color:var(--steel);transition:max-height .4s ease,background .45s ease}
+.vh-hdr--over .vh-util{background:transparent;color:rgba(255,255,255,.66)}
+.vh-hdr--scrolled .vh-util{max-height:0}
+.vh-util-in{height:34px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:13px}
+.vh-aog{display:inline-flex;align-items:center;gap:9px;color:inherit;text-decoration:none;white-space:nowrap}
+.vh-aog:hover{color:var(--h-fg)}
+.vh-aog-dot{width:6px;height:6px;border-radius:50%;background:var(--aog);animation:vmPulse 2.6s infinite}
+.vh-aog-k{font:500 11px/1 var(--mono);letter-spacing:.12em;color:var(--aog)}
+.vh-hdr--over .vh-aog-k{color:var(--aog-2)}
+.vh-util-nav{display:flex;align-items:center}
+.vh-util-a{padding-inline:14px;color:inherit;text-decoration:none;white-space:nowrap;line-height:1;transition:color .2s}
+.vh-util-a + .vh-util-a{border-inline-start:1px solid var(--h-btn)}
+.vh-util-a:hover{color:var(--h-fg)}
+.vh-util-tel{display:inline-flex;align-items:center;gap:8px;font:500 12.5px/1 var(--mono);color:var(--h-fg)}
+.vh-util-tel .vh-ic{width:15px;height:15px}
+
+/* main row */
+.vh-main-in{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;grid-template-areas:"burger logo . actions" "search search search search";column-gap:12px;align-items:center}
+.vh-burger{grid-area:burger;width:44px;height:44px;border:1px solid var(--h-btn);background:transparent;color:inherit;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding-inline:11px;cursor:pointer}
+.vh-burger span{width:22px;height:1.5px;background:currentColor}
+.vh-burger span + span{width:14px}
+.vh-logo{grid-area:logo;display:flex;align-items:center;height:64px;margin:0;padding:0}
+.vh-logo-full{height:56px;width:auto;display:block;transition:filter .45s ease}
+.vh-logo-mark{display:none;width:36px;height:36px}
+.vh-hdr--over .vh-logo-full{filter:brightness(0) invert(1)}
+.vh-actions{grid-area:actions;display:flex;align-items:center;gap:8px}
+.vh-search{grid-area:search;position:relative;padding-bottom:12px}
+.vh-sform{display:flex;height:46px}
+.vh-sinput{flex:1;min-width:0;height:100%;border:1px solid var(--h-btn);border-inline-end:0;background:var(--h-field);color:inherit;padding-inline:16px;font-size:15px;outline:none;border-radius:0;-webkit-appearance:none;appearance:none;transition:border-color .2s,background .3s}
+.vh-sinput::placeholder{color:var(--steel-2);opacity:1}
+.vh-hdr--over .vh-sinput::placeholder{color:rgba(255,255,255,.6)}
+.vh-sinput:focus{border-color:var(--blue)}
+.vh-sinput::-webkit-search-cancel-button{cursor:pointer}
+.vh-sbtn{width:50px;flex-shrink:0;border:0;background:var(--blue);color:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.vh-sbtn:hover{background:var(--blue-2)}
+.vh-cart{position:relative;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border:1px solid var(--h-btn);background:transparent;color:inherit;cursor:pointer;transition:border-color .2s}
+.vh-cart:hover{border-color:var(--h-acc)}
+.vh-rq{display:inline-flex;align-items:center;gap:10px;height:44px;padding-inline:20px;flex-shrink:0;border:0;background:var(--blue);color:#FFFFFF;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer;transition:background .2s}
+.vh-rq:hover{background:var(--blue-2)}
+.vh-rq-s{display:none;font:500 12.5px/1 var(--mono);letter-spacing:.08em}
+.vh-badge{position:absolute;top:-8px;inset-inline-end:-8px;min-width:20px;height:20px;padding-inline:5px;border-radius:10px;background:var(--sig);color:var(--ink);font:500 11px/20px var(--mono);text-align:center}
+.vh-acbtn{display:none;align-items:center;gap:10px;height:46px;max-width:240px;padding-inline:14px;border:1px solid var(--h-btn);background:transparent;color:inherit;cursor:pointer;text-align:start;transition:border-color .2s}
+.vh-acbtn:hover,.vh-acbtn[aria-expanded="true"]{border-color:var(--h-acc)}
+.vh-acbtn-t{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+.vh-acbtn-l{font-size:14px;font-weight:600;white-space:nowrap}
+.vh-acbtn-k{font:500 10.5px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--h-acc)}
+.vh[dir="rtl"] .vh-acbtn-k{font-family:inherit;letter-spacing:0;font-size:12px}
+.vh-acbtn-v{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* search suggestions */
+.vh-sugg{position:absolute;top:calc(100% - 6px);inset-inline:0;z-index:130;max-height:min(70vh,560px);overflow-y:auto;background:var(--white);color:var(--navy);border:1px solid var(--line);box-shadow:0 18px 40px rgba(7,17,29,.16);animation:vmFade .15s ease}
+.vh-sugg-sec{padding:10px 0;border-bottom:1px solid var(--line)}
+.vh-sugg-sec .vh-k{display:block;padding:4px 16px 6px}
+.vh-opt{display:flex;align-items:center;gap:14px;padding:9px 16px;border-inline-start:2px solid transparent;color:var(--navy);text-decoration:none}
+.vh-opt:hover,.vh-opt[aria-selected="true"]{background:var(--hover);border-inline-start-color:var(--blue);color:var(--blue)}
+.vh-opt-img{width:48px;height:48px;flex-shrink:0;background:var(--paper);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.vh-opt-img img{width:100%;height:100%;object-fit:contain}
+.vh-opt-t{display:flex;flex-direction:column;gap:3px;min-width:0}
+.vh-opt-title{font-size:14px;font-weight:500;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vh-opt-meta{font:400 12px/1.3 var(--mono);color:var(--steel)}
+.vh-opt-sub{font-size:12.5px;color:var(--steel)}
+.vh-opt--all{font-weight:600;padding-block:13px}
+.vh-sugg-none{padding:14px 16px;font-size:14px;color:var(--steel)}
+
+/* desktop navigation and mega menus */
+.vh-nav{display:none;position:relative;border-top:1px solid var(--h-line)}
+.vh-nav-list{display:flex;justify-content:space-between;height:46px}
+.vh-ni{display:flex}
+.vh-nl{position:relative;display:flex;align-items:center;height:100%;padding-inline:clamp(6px,.65vw,12px);font-size:clamp(13px,1.02vw,14.5px);font-weight:500;color:var(--h-fg2);text-decoration:none;white-space:nowrap;transition:color .2s}
+.vh-nl:hover,.vh-nl[aria-expanded="true"],.vh-nl[aria-current="page"]{color:var(--h-fg)}
+.vh-nl[aria-current="page"]{font-weight:600}
+.vh-ni:first-child .vh-nl{padding-inline-start:0}
+.vh-ni:last-child .vh-nl{padding-inline-end:0}
+.vh-nl-bar{position:absolute;bottom:-1px;inset-inline:clamp(6px,.65vw,12px);height:2px;background:var(--h-acc);transform:scaleX(0);transition:transform .3s ease}
+.vh-ni:first-child .vh-nl-bar{inset-inline-start:0}
+.vh-ni:last-child .vh-nl-bar{inset-inline-end:0}
+.vh-nl:hover .vh-nl-bar,.vh-nl[aria-expanded="true"] .vh-nl-bar,.vh-nl[aria-current="page"] .vh-nl-bar{transform:scaleX(1)}
+.vh-mega{position:absolute;top:100%;left:0;right:0;z-index:120;max-height:calc(100vh - var(--hdr,180px) + 8px);overflow-y:auto;background:var(--white);color:var(--navy);border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 24px 48px rgba(7,17,29,.16);animation:vmFade .18s ease}
+.vh-mega-in{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:28px 34px}
+.vh-mega-side{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.vh-mega-h{font-size:24px;font-weight:500;font-stretch:108%;line-height:1.15;letter-spacing:-.02em;color:var(--navy)}
+.vh[dir="rtl"] .vh-mega-h{letter-spacing:0;line-height:1.4}
+.vh-mega-d{font-size:14px;line-height:1.55;color:var(--steel)}
+.vh-more{display:inline-flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid currentColor;font-size:14.5px;font-weight:600;color:var(--blue);text-decoration:none}
+.vh-more:hover{color:var(--navy)}
+.vh-more .vh-ic{width:16px;height:16px}
+.vh-subs{column-gap:28px}
+.vh-subs li{break-inside:avoid}
+.vh-sub{display:block;padding:6px 10px;margin-inline-start:-10px;border-inline-start:2px solid transparent;font-size:14px;line-height:1.35;color:var(--navy);text-decoration:none;transition:background .15s,border-color .15s,color .15s}
+.vh-sub:hover,.vh-sub:focus-visible{background:var(--hover);border-inline-start-color:var(--blue);color:var(--blue)}
+.vh-brands{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));max-height:min(56vh,520px);overflow-y:auto;overscroll-behavior:contain;border-top:1px solid var(--line);border-inline-start:1px solid var(--line)}
+.vh-brand{display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;height:88px;padding:10px 12px;background:#FFFFFF;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--navy);text-decoration:none;font-size:15px;font-weight:600;letter-spacing:-.005em;text-align:center;transition:color .2s,box-shadow .2s}
+.vh-brand:hover{color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue)}
+.vh-brand img{max-width:80%;height:36px;width:auto;object-fit:contain;display:block}
+.vh-brand img.is-dark{background:var(--navy,#0B1B2B);padding:6px 10px;box-sizing:content-box;height:28px}
+.vh-brand img + span{font-size:12px;font-weight:500;color:#5A6B7B}
+.vh-svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 24px}
+.vh-svc{display:flex;flex-direction:column;gap:10px;color:var(--navy);text-decoration:none}
+.vh-svc-img{aspect-ratio:16/10;overflow:hidden;background:var(--paper)}
+.vh-svc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease)}
+.vh-svc:hover .vh-svc-img img{transform:scale(1.04)}
+.vh-svc-t{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:15px;font-weight:600}
+.vh-svc:hover .vh-svc-t{color:var(--blue)}
+.vh-svc-t .vh-ic{width:16px;height:16px}
+
+/* drawer (below 1200px) */
+.vh-ov{position:fixed;inset:0;z-index:199;background:rgba(7,17,29,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:vmFade .3s ease}
+.vh-drawer{position:fixed;top:0;bottom:0;inset-inline-start:0;z-index:200;width:min(400px,88vw);display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;background:var(--ink);color:#FFFFFF;animation:vmFromL .4s var(--ease);
+  background-image:linear-gradient(rgba(150,180,210,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(150,180,210,.05) 1px,transparent 1px);background-size:40px 40px}
+.vh[dir="rtl"] .vh-drawer{animation-name:vmFromR}
+.vh-dhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+.vh-dbtn{height:40px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding-inline:14px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#FFFFFF;font-weight:600;cursor:pointer;text-decoration:none}
+.vh-dbtn--sq{width:40px;padding:0}
+.vh-dnav{display:flex;flex-direction:column}
+.vh-dl{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:15px 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);background:transparent;color:#FFFFFF;font-size:17px;font-weight:500;text-align:start;text-decoration:none;cursor:pointer}
+.vh-dl:hover{color:var(--sig)}
+.vh-dl .vh-ic{width:18px;height:18px;opacity:.7;transition:transform .25s ease}
+.vh-dl[aria-expanded="true"] .vh-ic{transform:rotate(180deg)}
+.vh-dl2{padding:13px 20px;padding-inline-start:32px;font-size:15.5px;color:#E2E9F0;background:rgba(255,255,255,.02)}
+.vh-dsubs{background:rgba(0,0,0,.18);padding-block:6px}
+.vh-dsub{display:block;padding:9px 20px;padding-inline-start:46px;font-size:14.5px;color:var(--dim);text-decoration:none}
+.vh-dsub:hover{color:#FFFFFF}
+.vh-dsub--all{color:var(--sig);font-weight:600}
+.vh-dfoot{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding:20px 20px 28px}
+.vh-dcta{height:50px;display:flex;align-items:center;justify-content:center;gap:10px;border:0;background:var(--blue);color:#FFFFFF;font-weight:600;font-size:16px;cursor:pointer}
+.vh-dcta:hover{background:var(--blue-2)}
+.vh-dtel{display:flex;align-items:center;gap:10px;color:var(--mist);text-decoration:none;font:500 14px/1 var(--mono)}
+.vh-dtel:hover{color:#FFFFFF}
+.vh-daog{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid rgba(224,68,46,.7);color:#FFFFFF;padding:13px 16px;text-decoration:none;font-weight:600}
+.vh-daog:hover{color:#FFFFFF;border-color:var(--aog)}
+
+/* Shop by Aircraft panel: dropdown on desktop, full screen below 1200px */
+.vh-acp{position:fixed;z-index:205;display:flex;flex-direction:column;background:var(--white);color:var(--navy);animation:vmFade .18s ease}
+.vh-acp--drop{width:380px;max-height:calc(100vh - 120px);border:1px solid var(--line);box-shadow:0 24px 48px rgba(7,17,29,.18)}
+.vh-acp--full{inset:0;animation:vmSheet .4s var(--ease)}
+.vh-acp-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:var(--ink);color:#FFFFFF;flex-shrink:0}
+.vh-acp-title{display:inline-flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;font-stretch:106%;letter-spacing:.06em;text-transform:uppercase}
+.vh[dir="rtl"] .vh-acp-title{letter-spacing:0}
+.vh-acp-x{width:36px;height:36px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.vh-acp-body{flex:1;overflow-y:auto;overscroll-behavior:contain}
+.vh-acp-sec{display:flex;flex-direction:column;gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.vh-acp--full .vh-acp-sec{padding-inline:max(18px,calc((100% - 560px)/2))}
+.vh-field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--steel)}
+.vh-select{height:46px;width:100%;border:1px solid var(--line-2);border-radius:0;background:#FFFFFF;color:var(--navy);padding-inline:12px;font-size:15px;cursor:pointer}
+.vh-select:disabled{background:var(--paper);color:var(--steel-2);cursor:not-allowed}
+.vh-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:46px;padding-inline:20px;border:0;font-weight:600;font-size:14.5px;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.vh-btn--blue{background:var(--blue);color:#FFFFFF}
+.vh-btn--blue:hover{background:var(--blue-2)}
+.vh-btn--blue:disabled{background:var(--line-2);color:#FFFFFF;cursor:not-allowed}
+.vh-btn--line{background:transparent;color:var(--navy);border:1px solid var(--line-2)}
+.vh-btn--line:hover{border-color:var(--navy)}
+.vh-cur{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(7,89,165,.08);color:var(--navy);font-weight:600}
+.vh-cur .vh-ic{color:var(--blue)}
+.vh-cur--none{background:var(--paper);color:var(--steel);font-weight:500}
+.vh-saved{display:flex;flex-direction:column;border:1px solid var(--line)}
+.vh-saved li{display:flex;align-items:stretch}
+.vh-saved li + li{border-top:1px solid var(--line)}
+.vh-saved-pick{flex:1;display:flex;align-items:center;gap:10px;min-height:46px;padding:10px 14px;border:0;background:#FFFFFF;color:var(--navy);font-size:14.5px;font-weight:500;text-align:start;cursor:pointer}
+.vh-saved-pick:hover{background:var(--hover);color:var(--blue)}
+.vh-saved-pick[aria-pressed="true"]{color:var(--blue);font-weight:600;box-shadow:inset 2px 0 0 var(--blue)}
+.vh[dir="rtl"] .vh-saved-pick[aria-pressed="true"]{box-shadow:inset -2px 0 0 var(--blue)}
+.vh-saved-dot{width:8px;height:8px;border:1.5px solid currentColor;flex-shrink:0}
+.vh-saved-pick[aria-pressed="true"] .vh-saved-dot{background:currentColor}
+.vh-saved-rm{width:46px;flex-shrink:0;border:0;border-inline-start:1px solid var(--line);background:#FFFFFF;color:var(--steel);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.vh-saved-rm:hover{color:var(--aog)}
+.vh-saved-rm .vh-ic{width:16px;height:16px}
+.vh-empty{padding:14px;border:1px dashed var(--line-2);color:var(--steel);font-size:14px;text-align:center}
+.vh-rmall{align-self:flex-start;border:0;padding:0 0 3px;background:transparent;border-bottom:1px solid currentColor;color:var(--steel);font-size:13.5px;font-weight:600;cursor:pointer}
+.vh-rmall:hover{color:var(--aog)}
+.vh-acp-foot{display:flex;flex-direction:column;gap:10px;padding:18px}
+.vh-acp--full .vh-acp-foot{padding-inline:max(18px,calc((100% - 560px)/2))}
+.vh-acp-hint{font-size:12.5px;line-height:1.5;color:var(--steel)}
+
+@media (min-width:760px){
+  .vh-main-in{column-gap:16px}
+}
+@media (max-width:759px){
+  .vh-logo-full{display:none}
+  .vh-logo-mark{display:block}
+  .vh-logo{height:60px}
+  .vh-sform{height:44px}
+  .vh-rq{padding-inline:12px}
+  .vh-rq .vh-rq-l{display:none}
+  .vh-rq-s{display:inline}
+}
+@media (min-width:1200px){
+  .vh-util{display:block}
+  .vh-nav{display:block}
+  .vh-burger{display:none}
+  .vh-main-in{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"logo search actions";column-gap:clamp(20px,2.4vw,36px);height:78px}
+  .vh-logo{height:78px}
+  .vh-search{padding-bottom:0}
+  .vh-acbtn{display:inline-flex}
+  .vh-cart,.vh-rq{height:46px}
+  .vh-cart{width:46px}
+}
+</style>
+</helmet>
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<div class="vh" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:1.5">
+  <a href="#main" style="position:fixed;top:8px;inset-inline-start:-9999px;z-index:300;background:#0759A5;color:#FFFFFF;padding:10px 16px;font-weight:600" style-focus="inset-inline-start:8px">{{ t.skip }}</a>
+
+  <header ref="{{ hdrRef }}" class="{{ hdrCls }}">
+    <div ref="{{ progRef }}" class="vh-prog" aria-hidden="true"></div>
+
+    <!-- utility bar (desktop): AOG desk on the start side, service links and phone on the end side -->
+    <div ref="{{ utilRef }}" class="vh-util">
+      <div class="vh-wrap vh-util-in">
+        <a class="vh-aog" href="mailto:AOG@velmachaerospace.com">
+          <span class="vh-aog-dot"></span><span class="vh-aog-k" dir="ltr">AOG 24/7</span><span dir="ltr" style="unicode-bidi:isolate">AOG@velmachaerospace.com</span>
+        </a>
+        <nav class="vh-util-nav" aria-label="{{ t.hd_services_t }}">
+          <sc-for list="{{ utilLinks }}" as="u" hint-placeholder-count="5">
+            <a class="vh-util-a" href="{{ u.href }}">{{ u.label }}</a>
+          </sc-for>
+          <a class="vh-util-a vh-util-tel" href="{{ telHref }}" dir="ltr">
+            <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z"></path></svg>{{ phone }}
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- main row: logo, search, Shop by Aircraft, account, quote list (below 1200px the search moves to its own row) -->
+    <div ref="{{ mainRef }}" class="vh-main">
+      <div class="vh-wrap vh-main-in">
+        <button type="button" class="vh-burger" onClick="{{ openDrawer }}" aria-label="{{ t.hd_menu }}" aria-expanded="{{ drawerExp }}" aria-haspopup="dialog"><span></span><span></span></button>
+        <a href="index.html" class="vh-logo" aria-label="{{ t.hd_home }}">
+          <img class="vh-logo-full" src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" width="1432" height="800">
+          <img class="vh-logo-mark" src="assets/img/favicon.svg" alt="{{ logoAlt }}" width="36" height="36">
+        </a>
+
+        <div class="vh-search">
+          <form class="vh-sform" role="search" action="search.dc.html" method="get" onSubmit="{{ onSubmit }}">
+            <label for="vh-q" class="vh-sr">{{ t.hd_search_aria }}</label>
+            <input id="vh-q" class="vh-sinput" type="search" name="q" value="{{ q }}" onChange="{{ onQ }}" onKeyDown="{{ onQKey }}" onFocus="{{ onQFocus }}" onBlur="{{ onQBlur }}"
+              placeholder="{{ searchPh }}" autoComplete="off" spellCheck="false" maxLength="120"
+              role="combobox" aria-autocomplete="list" aria-expanded="{{ suggExp }}" aria-controls="vh-sugg" aria-activedescendant="{{ activeId }}">
+            <button type="submit" class="vh-sbtn" aria-label="{{ t.hd_search_btn }}">
+              <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg>
+            </button>
+          </form>
+          <sc-if value="{{ showSugg }}" hint-placeholder-val="{{ false }}">
+            <div id="vh-sugg" class="vh-sugg" role="listbox" aria-label="{{ t.hd_search_aria }}" onMouseDown="{{ keepFocus }}">
+              <sc-if value="{{ hasProducts }}" hint-placeholder-val="{{ false }}">
+                <div class="vh-sugg-sec" role="group" aria-label="{{ t.hd_sugg_products }}">
+                  <span class="vh-k" aria-hidden="true">{{ t.hd_sugg_products }}</span>
+                  <sc-for list="{{ sProducts }}" as="o" hint-placeholder-count="3">
+                    <a id="{{ o.id }}" class="vh-opt" href="{{ o.href }}" role="option" aria-selected="{{ o.sel }}" tabIndex="-1">
+                      <span class="vh-opt-img"><sc-if value="{{ o.img }}" hint-placeholder-val="{{ true }}"><img src="{{ o.img }}" alt="" loading="lazy" width="48" height="48"></sc-if></span>
+                      <span class="vh-opt-t"><span class="vh-opt-title">{{ o.title }}</span><span class="vh-opt-meta" dir="ltr">{{ o.meta }}</span></span>
+                    </a>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ hasCats }}" hint-placeholder-val="{{ true }}">
+                <div class="vh-sugg-sec" role="group" aria-label="{{ t.hd_sugg_cats }}">
+                  <span class="vh-k" aria-hidden="true">{{ t.hd_sugg_cats }}</span>
+                  <sc-for list="{{ sCats }}" as="o" hint-placeholder-count="3">
+                    <a id="{{ o.id }}" class="vh-opt" href="{{ o.href }}" role="option" aria-selected="{{ o.sel }}" tabIndex="-1">
+                      <span class="vh-opt-t"><span class="vh-opt-title">{{ o.label }}</span><sc-if value="{{ o.parentLabel }}" hint-placeholder-val="{{ true }}"><span class="vh-opt-sub">{{ o.parentLabel }}</span></sc-if></span>
+                    </a>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ hasBrands }}" hint-placeholder-val="{{ false }}">
+                <div class="vh-sugg-sec" role="group" aria-label="{{ t.hd_sugg_brands }}">
+                  <span class="vh-k" aria-hidden="true">{{ t.hd_sugg_brands }}</span>
+                  <sc-for list="{{ sBrands }}" as="o" hint-placeholder-count="2">
+                    <a id="{{ o.id }}" class="vh-opt" href="{{ o.href }}" role="option" aria-selected="{{ o.sel }}" tabIndex="-1"><span class="vh-opt-title">{{ o.label }}</span></a>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ noMatch }}" hint-placeholder-val="{{ false }}"><p class="vh-sugg-none">{{ t.hd_sugg_none }}</p></sc-if>
+              <a id="{{ sAll.id }}" class="vh-opt vh-opt--all" href="{{ sAll.href }}" role="option" aria-selected="{{ sAll.sel }}" tabIndex="-1">
+                <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg>{{ sAll.label }}
+              </a>
+            </div>
+          </sc-if>
+        </div>
+
+        <div class="vh-actions">
+          <button ref="{{ acBtnRef }}" type="button" class="vh-acbtn" onClick="{{ toggleAc }}" aria-haspopup="dialog" aria-expanded="{{ acExp }}" aria-controls="vh-acp">
+            <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"></path></svg>
+            <span class="vh-acbtn-t">
+              <sc-if value="{{ hasAc }}" hint-placeholder-val="{{ false }}"><span class="vh-acbtn-k">{{ t.hd_ac_for }}</span><span class="vh-acbtn-v">{{ acName }}</span></sc-if>
+              <sc-if value="{{ noAc }}" hint-placeholder-val="{{ true }}"><span class="vh-acbtn-l">{{ t.hd_ac_btn }}</span></sc-if>
+            </span>
+            <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px;opacity:.7"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <button type="button" class="vh-cart" onClick="{{ openRfq }}" aria-haspopup="dialog" aria-label="{{ quoteAria }}" title="{{ t.hd_quote }}">
+            <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:21px;height:21px"><path d="M9 3.5h6v3H9ZM7 5H5v16h14V5h-2M8.5 11h7M8.5 14.5h7M8.5 18h4"></path></svg>
+            <sc-if value="{{ hasCount }}" hint-placeholder-val="{{ false }}"><span class="vh-badge" aria-hidden="true">{{ count }}</span></sc-if>
+          </button>
+          <button type="button" class="vh-rq" onClick="{{ openRfq }}" aria-haspopup="dialog">
+            <span class="vh-rq-l">{{ t.cta_quote }}</span>
+            <span class="vh-rq-s" aria-hidden="true">RFQ</span>
+            <svg class="vh-ic vh-flip vh-rq-l" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;stroke-width:1.8"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- desktop navigation: hover opens after 150ms; ArrowDown or Space opens from the keyboard, Esc closes -->
+    <nav ref="{{ navRef }}" class="vh-nav" aria-label="{{ navAria }}">
+      <div class="vh-wrap">
+        <ul class="vh-nav-list">
+          <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="11">
+            <li class="vh-ni" onMouseEnter="{{ n.enter }}" onMouseLeave="{{ n.leave }}" onBlur="{{ n.blur }}">
+              <a class="vh-nl" href="{{ n.href }}" data-nav="{{ n.i }}" aria-current="{{ n.current }}" aria-expanded="{{ n.expanded }}" aria-controls="{{ n.pid }}" onKeyDown="{{ n.key }}">{{ n.label }}<span class="vh-nl-bar" aria-hidden="true"></span></a>
+              <sc-if value="{{ n.open }}" hint-placeholder-val="{{ false }}">
+                <div id="{{ n.pid }}" class="vh-mega" onKeyDown="{{ n.megaKey }}">
+                  <div class="vh-wrap vh-mega-in">
+                    <div class="vh-mega-side">
+                      <span class="vh-k">{{ n.eyebrow }}</span>
+                      <p class="vh-mega-h">{{ n.title }}</p>
+                      <sc-if value="{{ n.desc }}" hint-placeholder-val="{{ true }}"><p class="vh-mega-d">{{ n.desc }}</p></sc-if>
+                      <a class="vh-more" href="{{ n.moreHref }}">{{ n.moreLabel }}<svg class="vh-ic vh-flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></a>
+                    </div>
+                    <sc-if value="{{ n.isCat }}" hint-placeholder-val="{{ true }}">
+                      <ul class="vh-subs" style="column-count:{{ n.cols }}">
+                        <sc-for list="{{ n.subs }}" as="c" hint-placeholder-count="12"><li><a class="vh-sub" href="{{ c.href }}">{{ c.label }}</a></li></sc-for>
+                      </ul>
+                    </sc-if>
+                    <sc-if value="{{ n.isBrand }}" hint-placeholder-val="{{ false }}">
+                      <div class="vh-brands">
+                        <sc-for list="{{ n.brands }}" as="b" hint-placeholder-count="12">
+                          <a class="vh-brand" href="{{ b.href }}">
+                            <sc-if value="{{ b.logo }}" hint-placeholder-val="{{ false }}"><img class="{{ b.logoCls }}" src="{{ b.logo }}" alt="{{ b.alt }}" loading="lazy" onError="{{ b.fail }}"></sc-if>
+                            <span>{{ b.name }}</span>
+                          </a>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ n.isSvc }}" hint-placeholder-val="{{ false }}">
+                      <div class="vh-svcs">
+                        <sc-for list="{{ n.svcs }}" as="s" hint-placeholder-count="6">
+                          <a class="vh-svc" href="{{ s.href }}">
+                            <span class="vh-svc-img"><img src="{{ s.img }}" alt="" loading="lazy" width="480" height="300"></span>
+                            <span class="vh-svc-t">{{ s.label }}<svg class="vh-ic vh-flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></span>
+                          </a>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </li>
+          </sc-for>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div aria-hidden="true" style="height:{{ spacerH }}"></div>
+
+  <!-- mobile and tablet drawer -->
+  <sc-if value="{{ drawer }}" hint-placeholder-val="{{ false }}">
+    <div class="vh-ov" onClick="{{ closeDrawer }}"></div>
+    <div ref="{{ drawerRef }}" class="vh-drawer" role="dialog" aria-modal="true" aria-label="{{ t.menu }}">
+      <div class="vh-dhead">
+        <button type="button" class="vh-dbtn" onClick="{{ toggleLang }}" style="font-family:{{ fAlt }}">{{ t.lang_btn }}</button>
+        <button type="button" class="vh-dbtn vh-dbtn--sq" onClick="{{ closeDrawer }}" aria-label="{{ t.close }}">
+          <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><path d="M5 5l14 14M19 5 5 19"></path></svg>
+        </button>
+      </div>
+      <nav class="vh-dnav" aria-label="{{ navAria }}">
+        <a class="vh-dl" href="index.html" aria-current="{{ homeCurrent }}">{{ t.hd_d.home }}</a>
+        <button type="button" class="vh-dl" onClick="{{ toggleDCats }}" aria-expanded="{{ dCatsExp }}" aria-controls="vh-dcats">
+          {{ t.hd_d.cats }}<svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+        </button>
+        <sc-if value="{{ dCatsOpen }}" hint-placeholder-val="{{ false }}">
+          <div id="vh-dcats">
+            <sc-for list="{{ dCats }}" as="c" hint-placeholder-count="7">
+              <button type="button" class="vh-dl vh-dl2" onClick="{{ c.toggle }}" aria-expanded="{{ c.exp }}" aria-controls="{{ c.pid }}">
+                {{ c.label }}<svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+              <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+                <ul id="{{ c.pid }}" class="vh-dsubs">
+                  <li><a class="vh-dsub vh-dsub--all" href="{{ c.href }}">{{ c.allLabel }}</a></li>
+                  <sc-for list="{{ c.subs }}" as="s" hint-placeholder-count="6"><li><a class="vh-dsub" href="{{ s.href }}">{{ s.label }}</a></li></sc-for>
+                </ul>
+              </sc-if>
+            </sc-for>
+          </div>
+        </sc-if>
+        <a class="vh-dl" href="brands.dc.html">{{ t.hd_d.brands }}</a>
+        <button type="button" class="vh-dl" onClick="{{ openAcFromDrawer }}" aria-haspopup="dialog">
+          <span>{{ t.hd_d.aircraft }}<sc-if value="{{ hasAc }}" hint-placeholder-val="{{ false }}"><span style="display:block;font:500 12px/1.4 'IBM Plex Mono',monospace;color:#6AA6E8;margin-top:2px">{{ acName }}</span></sc-if></span>
+          <svg class="vh-ic vh-flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
+        <a class="vh-dl" href="services.dc.html">{{ t.hd_d.services }}</a>
+        <a class="vh-dl" href="{{ calHref }}">{{ t.hd_d.calibration }}</a>
+        <a class="vh-dl" href="{{ rentHref }}">{{ t.hd_d.rentals }}</a>
+        <a class="vh-dl" href="contact.dc.html">{{ t.hd_d.contact }}</a>
+      </nav>
+      <div class="vh-dfoot">
+        <a class="vh-dtel" href="{{ telHref }}" dir="ltr">
+          <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:17px;height:17px"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z"></path></svg>{{ phone }}
+        </a>
+        <a class="vh-dbtn" href="{{ accountHref }}" style="height:48px">
+          <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"></path></svg>{{ t.hd_signin_up }}
+        </a>
+        <button type="button" class="vh-dcta" onClick="{{ openRfqFromDrawer }}">{{ t.hd_quote }}<sc-if value="{{ hasCount }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace;font-weight:500">({{ count }})</span></sc-if></button>
+        <a class="vh-daog" href="mailto:AOG@velmachaerospace.com">
+          <span style="display:inline-flex;align-items:center;gap:10px"><span style="width:7px;height:7px;border-radius:50%;background:#E0442E"></span><span dir="ltr">AOG 24/7</span></span>
+          <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:400;color:#FF8A73">AOG@velmachaerospace.com</span>
+        </a>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Shop by Aircraft: saved aircraft live in localStorage (vm_aircraft, see js/vm-core.js) -->
+  <sc-if value="{{ acOpen }}" hint-placeholder-val="{{ false }}">
+    <div ref="{{ acRef }}" id="vh-acp" class="{{ acCls }}" style="{{ acPos }}" role="dialog" aria-modal="{{ acModal }}" aria-labelledby="vh-acp-t">
+      <div class="vh-acp-head">
+        <span id="vh-acp-t" class="vh-acp-title">
+          <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"></path></svg>{{ t.hd_ac_title }}
+        </span>
+        <button type="button" class="vh-acp-x" onClick="{{ closeAc }}" aria-label="{{ t.hd_ac_close }}">
+          <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><path d="M5 5l14 14M19 5 5 19"></path></svg>
+        </button>
+      </div>
+      <div class="vh-acp-body">
+        <div class="vh-acp-sec">
+          <span class="vh-k">{{ t.hd_ac_add_t }}</span>
+          <label class="vh-field">{{ t.hd_ac_make }}
+            <select class="vh-select" value="{{ acMake }}" onChange="{{ onMake }}">
+              <option value="">{{ t.hd_ac_make_ph }}</option>
+              <sc-for list="{{ makes }}" as="m" hint-placeholder-count="6"><option value="{{ m }}">{{ m }}</option></sc-for>
+            </select>
+          </label>
+          <label class="vh-field">{{ t.hd_ac_model }}
+            <select class="vh-select" value="{{ acModel }}" onChange="{{ onModel }}" disabled="{{ noMake }}">
+              <option value="">{{ t.hd_ac_model_ph }}</option>
+              <sc-for list="{{ models }}" as="m" hint-placeholder-count="6"><option value="{{ m }}">{{ m }}</option></sc-for>
+            </select>
+          </label>
+          <button type="button" class="vh-btn vh-btn--blue" onClick="{{ addAc }}" disabled="{{ cantAdd }}">{{ t.hd_ac_add }}</button>
+        </div>
+        <div class="vh-acp-sec">
+          <span class="vh-k">{{ t.hd_ac_current_t }}</span>
+          <sc-if value="{{ hasAc }}" hint-placeholder-val="{{ false }}">
+            <p class="vh-cur"><svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"></path></svg>{{ acName }}</p>
+          </sc-if>
+          <sc-if value="{{ noAc }}" hint-placeholder-val="{{ true }}"><p class="vh-cur vh-cur--none">{{ t.hd_ac_none }}</p></sc-if>
+        </div>
+        <div class="vh-acp-sec">
+          <span class="vh-k">{{ t.hd_ac_saved_t }}</span>
+          <sc-if value="{{ hasSaved }}" hint-placeholder-val="{{ false }}">
+            <ul class="vh-saved">
+              <sc-for list="{{ saved }}" as="a" hint-placeholder-count="2">
+                <li>
+                  <button type="button" class="vh-saved-pick" onClick="{{ a.pick }}" aria-pressed="{{ a.on }}" aria-label="{{ a.pickLabel }}"><span class="vh-saved-dot" aria-hidden="true"></span>{{ a.name }}</button>
+                  <button type="button" class="vh-saved-rm" onClick="{{ a.remove }}" aria-label="{{ a.rmLabel }}" title="{{ a.rmLabel }}">
+                    <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"></path></svg>
+                  </button>
+                </li>
+              </sc-for>
+            </ul>
+            <button type="button" class="vh-rmall" onClick="{{ removeAll }}">{{ t.hd_ac_remove_all }}</button>
+          </sc-if>
+          <sc-if value="{{ noSaved }}" hint-placeholder-val="{{ true }}"><p class="vh-empty">{{ t.hd_ac_empty }}</p></sc-if>
+        </div>
+      </div>
+      <div class="vh-acp-foot">
+        <button type="button" class="vh-btn vh-btn--line" onClick="{{ shopWithout }}">{{ t.hd_ac_without }}</button>
+        <p class="vh-acp-hint">{{ t.hd_ac_hint }}</p>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ rfqOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeRfq }}" style="position:fixed;inset:0;z-index:210;background:rgba(7,17,29,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:vmFade .3s ease"></div>
+    <div ref="{{ rfqRef }}" role="dialog" aria-modal="true" aria-labelledby="rq-title" style="position:fixed;z-index:211;background:#FFFFFF;display:flex;flex-direction:column;top:{{ rqTop }};bottom:0;left:{{ rqL }};right:{{ rqR }};width:{{ rqW }};height:{{ rqHt }};animation:{{ rqAnim }} .5s cubic-bezier(.2,.7,.2,1);box-shadow:0 20px 60px rgba(7,17,29,.35)">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px;background:#07111D;color:#FFFFFF;flex-shrink:0;border-top-left-radius:{{ rqRad }};border-top-right-radius:{{ rqRad }}">
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span id="rq-title" style="font-family:{{ fHead }};font-stretch:106%;font-size:15px;font-weight:600;letter-spacing:{{ lsTitle }};text-transform:uppercase;color:#FFFFFF;-webkit-font-smoothing:antialiased">{{ t.rq_title }}</span>
+          <span dir="ltr" style="font-family:'Archivo',system-ui,sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;color:#7F8C99;text-align:{{ start }}">RFQ · {{ count }} · VELMACH AEROSPACE</span>
+        </div>
+        <button type="button" onClick="{{ closeRfq }}" aria-label="{{ t.rq_close }}" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"></path></svg>
+        </button>
+      </div>
+      <div style="flex:1;overflow-y:auto">
+        <dc-import name="RfqPanel" mode="modal" hint-size="100%,600px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showFloat }}" hint-placeholder-val="{{ true }}">
+    <a href="https://wa.me/971509259286" target="_blank" rel="noopener" aria-label="{{ t.float_wa }}" onMouseEnter="{{ waIn }}" onMouseLeave="{{ waOut }}" onFocus="{{ waIn }}" onBlur="{{ waOut }}" dir="ltr" style="position:fixed;bottom:{{ floatB }};right:{{ floatX }};z-index:90;height:52px;min-width:52px;border-radius:26px;background:#25D366;display:flex;align-items:center;justify-content:flex-end;gap:{{ waGap }};padding-inline:{{ waPadL }} 13px;box-shadow:0 8px 22px rgba(7,17,29,.28);text-decoration:none;transition:padding .35s cubic-bezier(.2,.7,.2,1),gap .35s ease">
+      <span style="display:block;overflow:hidden;white-space:nowrap;max-width:{{ waLabelW }};opacity:{{ waLabelOp }};color:#0B3D20;font-family:{{ fBody }};font-weight:600;font-size:15px;transition:max-width .35s cubic-bezier(.2,.7,.2,1),opacity .25s ease">{{ waLabel }}</span>
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" style="flex-shrink:0"><path fill="#FFFFFF" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.900-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.200-1.8-1.9-3.9-1.9-6.1C4.9 9.8 9.9 4.9 16 4.9s11.1 4.9 11.1 10.9S22.1 26.4 16 26.4zm6.1-8.1c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.900-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1.1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.500c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.300-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"></path></svg>
+    </a>
+  </sc-if>
+
+  <!-- back to top: appears after the first screen; the outline fills with scroll progress -->
+  <button type="button" onClick="{{ goTop }}" aria-label="{{ t.to_top }}" title="{{ t.to_top }}" tabIndex="{{ topTab }}" aria-hidden="{{ topHidden }}" style="position:fixed;bottom:{{ topB }};right:{{ topX }};z-index:90;width:44px;height:44px;padding:0;border:0;background:#07111D;color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(7,17,29,.28);opacity:{{ topOp }};visibility:{{ topVis }};transform:{{ topTf }};transition:opacity .35s ease,transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s linear {{ topVisDelay }},background .2s" style-hover="background:#0759A5">
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true" style="position:absolute;inset:0">
+      <rect x=".75" y=".75" width="42.5" height="42.5" stroke="rgba(255,255,255,.18)" stroke-width="1.5"></rect>
+      <rect ref="{{ topRingRef }}" x=".75" y=".75" width="42.5" height="42.5" stroke="#6AA6E8" stroke-width="1.5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></rect>
+    </svg>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true" style="position:relative"><path d="M12 20V5M6.5 10.5 12 5l5.5 5.5"></path></svg>
+  </button>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:fixed;bottom:88px;left:50%;transform:translateX(-50%);z-index:220;background:#07111D;color:#FFFFFF;padding:12px 18px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 30px rgba(7,17,29,.3);animation:vmUp .3s ease;white-space:nowrap">
+      <span style="width:8px;height:8px;background:#6AA6E8"></span>{{ toast }}
+      <button type="button" onClick="{{ openRfq }}" style="background:transparent;border:0;color:#6AA6E8;font:inherit;font-weight:600;cursor:pointer;padding:0">{{ t.hd_quote }}</button>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;products&quot;,&quot;categories&quot;,&quot;category&quot;,&quot;brands&quot;,&quot;search&quot;,&quot;industries&quot;,&quot;services&quot;,&quot;quality&quot;,&quot;blog&quot;,&quot;contact&quot;,&quot;rfq&quot;,&quot;page&quot;,&quot;404&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showFloating&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const WIDE = '(min-width: 1200px)';
+const OPEN_DELAY = 150, CLOSE_DELAY = 150, SUGGEST_DELAY = 300;
+const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+
+class Component extends DCLogic {
+  state = { ready: false, scrolled: false, showTop: false, drawer: false, rfqOpen: false, toast: '', waOpen: false, wide: true, hdrH: 0,
+    mega: -1, q: '', sugg: null, suggOpen: false, active: -1,
+    acOpen: false, acMake: '', acModel: '', acPos: '', dCats: false, dCat: '' };
+  progRef = React.createRef(); rfqRef = React.createRef(); drawerRef = React.createRef(); topRingRef = React.createRef();
+  hdrRef = React.createRef(); utilRef = React.createRef(); mainRef = React.createRef(); navRef = React.createRef();
+  acRef = React.createRef(); acBtnRef = React.createRef();
+  wasOpen = false; hH = 0; sTok = 0;
+
+  componentDidMount() {
+    const go = () => {
+      if (window.VM && window.VM_I18N && window.VM_I18N.en.hd_menu && window.VM_CATS && window.VM_BRANDS && window.VM_AIRCRAFT && window.VM_CONFIG && window.VM_SEARCH) {
+        this.unsub = window.VM.subscribe(() => this.forceUpdate());
+        this.mq = window.matchMedia(WIDE);
+        this.onMq = () => this.setState(s => ({ wide: this.mq.matches, mega: -1, drawer: this.mq.matches ? false : s.drawer, acOpen: false }));
+        this.mq.addEventListener ? this.mq.addEventListener('change', this.onMq) : this.mq.addListener(this.onMq);
+        const q = typeof location !== 'undefined' && /search\.(dc\.)?html$/.test(location.pathname) ? new URLSearchParams(location.search).get('q') || '' : '';
+        this.setState({ ready: true, wide: this.mq.matches, q }); this.onScroll();
+      } else this.tw = setTimeout(go, 30);
+    };
+    go();
+    this.onScroll = this.onScroll.bind(this);
+    this.onResize = () => this.measure();
+    this.onOpen = () => this.setState({ rfqOpen: true, drawer: false, acOpen: false });
+    this.onToast = e => { this.setState({ toast: e.detail }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 3200); };
+    this.onKey = e => this.globalKey(e);
+    this.onDown = e => {
+      // a click outside the desktop aircraft dropdown closes it
+      const s = this.state; if (!s.acOpen || !s.wide) return;
+      const p = this.acRef.current, b = this.acBtnRef.current;
+      if (p && !p.contains(e.target) && !(b && b.contains(e.target))) this.setState({ acOpen: false });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('vm:open-rfq', this.onOpen);
+    window.addEventListener('vm:toast', this.onToast);
+    window.addEventListener('keydown', this.onKey);
+    document.addEventListener('mousedown', this.onDown);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.measure());
+  }
+  componentWillUnmount() {
+    clearTimeout(this.tw); clearTimeout(this.tt); clearTimeout(this.openT); clearTimeout(this.closeT); clearTimeout(this.sT);
+    this.unsub && this.unsub();
+    if (this.mq) this.mq.removeEventListener ? this.mq.removeEventListener('change', this.onMq) : this.mq.removeListener(this.onMq);
+    window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('vm:open-rfq', this.onOpen); window.removeEventListener('vm:toast', this.onToast);
+    window.removeEventListener('keydown', this.onKey); document.removeEventListener('mousedown', this.onDown);
+  }
+  // The runtime passes only prevProps here, so the previous open state is tracked on the instance.
+  componentDidUpdate() {
+    this.measure();
+    const s = this.state, full = s.acOpen && !s.wide;
+    const open = s.rfqOpen ? 'rfq' : s.drawer ? 'drawer' : full ? 'ac' : s.acOpen ? 'acdrop' : '';
+    if (open === this.wasOpen) return;
+    const prev = this.wasOpen; this.wasOpen = open;
+    document.body.style.overflow = open && open !== 'acdrop' ? 'hidden' : '';
+    if (open && !prev) this.lastFocus = document.activeElement;
+    if (open) setTimeout(() => {
+      const box = this.dialogBox(); if (!box) return;
+      const f = open === 'ac' || open === 'acdrop' ? box.querySelector('select') : box.querySelector('button');
+      f && f.focus();
+    }, 60);
+    else if (this.lastFocus && this.lastFocus.focus && document.contains(this.lastFocus)) this.lastFocus.focus();
+  }
+  dialogBox() {
+    const s = this.state;
+    return (s.rfqOpen ? this.rfqRef : s.drawer ? this.drawerRef : s.acOpen ? this.acRef : { current: null }).current;
+  }
+  // Full header height before it collapses on scroll: the page spacer (and --hdr for the home hero) use it.
+  measure() {
+    const m = this.mainRef.current; if (!m) return;
+    const u = this.utilRef.current, n = this.navRef.current;
+    const h = (u ? u.scrollHeight : 0) + m.offsetHeight + (n ? n.offsetHeight : 0) + 1;
+    if (h && h !== this.hH) {
+      this.hH = h;
+      const de = document.documentElement;
+      de.style.setProperty('--hdr', h + 'px');
+      // in-page anchors land below the sticky part of the header (main row and nav stay visible on scroll)
+      de.style.scrollPaddingTop = (m.offsetHeight + (n ? n.offsetHeight : 0) + 16) + 'px';
+      this.setState({ hdrH: h });
+    }
+  }
+  onScroll() {
+    const y = window.scrollY, h = document.documentElement.scrollHeight - window.innerHeight;
+    if (this.progRef.current) this.progRef.current.style.width = (h > 0 ? Math.min(100, (y / h) * 100) : 0) + '%';
+    if (this.topRingRef.current) this.topRingRef.current.style.strokeDashoffset = String(h > 0 ? 1 - Math.min(1, y / h) : 1);
+    const s = y > 24; if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    const top = y > window.innerHeight * 0.6; if (top !== this.state.showTop) this.setState({ showTop: top });
+    if (this.state.acOpen && this.state.wide) { cancelAnimationFrame(this.raf); this.raf = requestAnimationFrame(() => this.placeAc()); }
+  }
+  globalKey(e) {
+    const s = this.state;
+    if (e.key === 'Escape') {
+      if (s.rfqOpen || s.drawer) { this.setState({ rfqOpen: false, drawer: false }); return; }
+      if (s.acOpen) { this.setState({ acOpen: false }); return; }
+      if (s.mega >= 0) { this.closeMega(true); return; }
+      if (s.suggOpen) { this.setState({ suggOpen: false, active: -1 }); return; }
+      return;
+    }
+    if (e.key !== 'Tab') return;
+    const box = s.rfqOpen || s.drawer || (s.acOpen && !s.wide) ? this.dialogBox() : null;
+    if (!box) return;
+    const f = [...box.querySelectorAll('button,a[href],input,select,textarea')].filter(x => !x.disabled && x.offsetParent !== null);
+    if (!f.length) return; const a = f[0], z = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+    else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+  }
+  goTop() {
+    window.scrollTo({ top: 0, behavior: window.VM.reduced ? 'auto' : 'smooth' });
+    // the button hides at the top, so hand keyboard focus to the start of the page
+    const home = document.querySelector('header a[href="index.html"]'); home && home.focus({ preventScroll: true });
+  }
+
+  /* ---- mega menus ---- */
+  triggers() { return this.navRef.current ? [...this.navRef.current.querySelectorAll('.vh-nl')] : []; }
+  openMega(i, focusFirst) {
+    clearTimeout(this.openT); clearTimeout(this.closeT);
+    this.setState({ mega: i, suggOpen: false });
+    if (focusFirst) setTimeout(() => { const p = document.getElementById('vh-mega-' + i); const a = p && p.querySelector('a'); a && a.focus(); }, 30);
+  }
+  closeMega(refocus) {
+    clearTimeout(this.openT); clearTimeout(this.closeT);
+    const i = this.state.mega; this.setState({ mega: -1 });
+    if (refocus && i >= 0) { const tr = this.triggers()[i]; tr && tr.focus(); }
+  }
+  enterItem(i, menu) {
+    clearTimeout(this.closeT); clearTimeout(this.openT);
+    if (!menu) return;
+    if (this.state.mega >= 0) this.setState({ mega: i });          // already browsing menus: switch at once
+    else this.openT = setTimeout(() => this.setState({ mega: i, suggOpen: false }), OPEN_DELAY);
+  }
+  leaveItem(i) {
+    clearTimeout(this.openT);
+    this.closeT = setTimeout(() => this.setState(st => (st.mega === i ? { mega: -1 } : null)), CLOSE_DELAY);
+  }
+  triggerKey(e, i, menu) {
+    const tr = this.triggers(), rtl = window.VM.lang === 'ar';
+    const next = rtl ? 'ArrowLeft' : 'ArrowRight', prev = rtl ? 'ArrowRight' : 'ArrowLeft';
+    const move = j => { e.preventDefault(); this.setState({ mega: -1 }); tr[(j + tr.length) % tr.length].focus(); };
+    if (e.key === next) move(i + 1);
+    else if (e.key === prev) move(i - 1);
+    else if (e.key === 'Home') move(0);
+    else if (e.key === 'End') move(tr.length - 1);
+    else if (menu && (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Spacebar')) { e.preventDefault(); this.openMega(i, true); }
+    else if (e.key === 'Escape' && this.state.mega === i) { e.preventDefault(); e.stopPropagation(); this.closeMega(true); }
+  }
+  megaKey(e) {
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); this.closeMega(true); return; }
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    const links = [...e.currentTarget.querySelectorAll('a')], k = links.indexOf(document.activeElement);
+    if (!links.length) return;
+    e.preventDefault();
+    links[e.key === 'ArrowDown' ? Math.min(links.length - 1, k + 1) : Math.max(0, k - 1)].focus();
+  }
+
+  /* ---- search suggestions ---- */
+  runSuggest(q) {
+    const tok = ++this.sTok;
+    window.VM_SEARCH.suggest(q, window.VM.lang === 'ar').then(r => { if (tok === this.sTok) this.setState({ sugg: r, active: -1 }); });
+  }
+  options() {
+    const r = this.state.sugg, q = this.state.q.trim();
+    if (!r || !q) return [];
+    return [...r.products, ...r.cats, ...r.brands, { href: window.VM.searchHref(q) }];
+  }
+  qKey(e) {
+    const s = this.state, opts = this.options(), n = opts.length;
+    if (e.key === 'ArrowDown' && n) { e.preventDefault(); this.setState({ suggOpen: true, active: s.active + 1 >= n ? 0 : s.active + 1 }); }
+    else if (e.key === 'ArrowUp' && n) { e.preventDefault(); this.setState({ active: s.active <= 0 ? n - 1 : s.active - 1 }); }
+    else if (e.key === 'Enter' && s.suggOpen && s.active >= 0 && opts[s.active]) { e.preventDefault(); location.href = opts[s.active].href; }
+    else if (e.key === 'Escape' && s.suggOpen) { e.preventDefault(); e.stopPropagation(); this.setState({ suggOpen: false, active: -1 }); }
+  }
+
+  /* ---- Shop by Aircraft ---- */
+  placeAc() {
+    const b = this.acBtnRef.current; if (!b) return;
+    const r = b.getBoundingClientRect(), w = 380, rtl = window.VM.lang === 'ar';
+    const left = rtl ? Math.max(16, r.left) : Math.max(16, r.right - w);
+    const pos = 'top:' + Math.round(r.bottom + 8) + 'px;left:' + Math.round(left) + 'px';
+    if (pos !== this.state.acPos) this.setState({ acPos: pos });
+  }
+  openAc() {
+    if (this.state.wide) this.placeAc();
+    this.setState({ acOpen: true, mega: -1, suggOpen: false });
+  }
+
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), s = this.state, page = this.props.page || 'home', C = window.VM_CONFIG;
+    const count = VM.rfq().length;
+    const sc = s.scrolled;
+    const qs = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams('');
+    const curCat = page === 'category' ? (qs.get('c') || '').split('/')[0] : '';
+    // On the home page the bar overlays the dark hero until the visitor scrolls or opens a menu.
+    const over = page === 'home' && !sc && s.mega < 0 && !(s.suggOpen && s.q.trim().length > 1) && !s.acOpen;
+
+    // navigation items: categories from data/categories.js, then brands, services, blog, shop all
+    const cats = (window.VM_CATS || []).filter(c => c.nav);
+    const items = cats.map(c => ({ key: c.slug, label: VM.label(c), href: VM.catHref(c.slug), type: 'cat', cat: c }))
+      .concat([{ key: 'brands', label: t.hd_nav.brands, href: VM.HREF.brands, type: 'brand' },
+        { key: 'services', label: t.hd_nav.services, href: VM.HREF.services, type: 'svc' },
+        { key: 'blog', label: t.hd_nav.blog, href: VM.HREF.blog },
+        { key: 'all', label: t.hd_nav.all, href: VM.HREF.categories }]);
+    const curKey = page === 'category' ? curCat : page === 'brands' ? 'brands' : page === 'services' || page === 'page' ? 'services' : page === 'blog' ? 'blog' : page === 'categories' ? 'all' : '';
+    const navItems = items.map((n, i) => {
+      const menu = !!n.type, open = menu && s.mega === i;
+      const o = { i: String(i), label: n.label, href: n.href, current: n.key === curKey ? 'page' : undefined,
+        expanded: menu ? String(open) : undefined, pid: menu ? 'vh-mega-' + i : undefined, open,
+        enter: () => this.enterItem(i, menu), leave: () => this.leaveItem(i),
+        blur: e => { if (s.mega === i && !e.currentTarget.contains(e.relatedTarget)) this.setState(st => (st.mega === i ? { mega: -1 } : null)); },
+        key: e => this.triggerKey(e, i, menu), megaKey: e => this.megaKey(e),
+        isCat: false, isBrand: false, isSvc: false };
+      if (!open) return o;
+      if (n.type === 'cat') {
+        const k = n.cat.children.length;
+        return { ...o, isCat: true, eyebrow: fmt(t.hd_n_cats, { n: k }), title: n.label, moreHref: n.href, moreLabel: fmt(t.hd_shop_all, { c: n.label }),
+          desc: v.ar ? n.cat.desc_ar : n.cat.desc_en,
+          cols: k > 48 ? 5 : k > 20 ? 4 : k > 8 ? 3 : 2,
+          subs: n.cat.children.map(c => ({ label: VM.label(c), href: VM.catHref(n.cat.slug, c.slug) })) };
+      }
+      if (n.type === 'brand') return { ...o, isBrand: true, eyebrow: t.hd_nav.brands, title: t.hd_brands_t, moreHref: VM.HREF.brands, moreLabel: t.hd_view_brands,
+        // a brand with no logo file in public/brands shows its name (VM.brandLogo / VM.logoFailed in js/vm-core.js)
+        // every brand with products (data/brands.js), featured ones first
+        brands: window.VM_BRANDS.slice().sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)).map(b => { const logo = VM.brandLogo(b.slug);
+          return { name: b.name, href: VM.brandHref(b.slug), logo, logoCls: VM.brandLogoDark(b.slug) ? 'is-dark' : '', alt: b.name + ' logo', fail: () => VM.logoFailed(b.slug) }; }) };
+      return { ...o, isSvc: true, eyebrow: t.hd_nav.services, title: t.hd_services_t, moreHref: VM.HREF.services, moreLabel: t.hd_see_services,
+        svcs: (C.services || []).map(x => ({ label: t.hd_svc[x.id] || x.id, href: x.href, img: x.img })) };
+    });
+
+    // search suggestions
+    const r = s.sugg, qTrim = s.q.trim();
+    let k = 0; const mark = o => { const j = k++; return { ...o, id: 'vh-opt-' + j, sel: String(s.active === j) }; };
+    const sProducts = r ? r.products.map(p => mark({ ...p, img: p.img || '', meta: [p.brand, p.pn ? t.hd_pn + ' ' + p.pn : ''].filter(Boolean).join(' · ') })) : [];
+    const sCats = r ? r.cats.map(mark) : [];
+    const sBrands = r ? r.brands.map(mark) : [];
+    const sAll = mark({ href: VM.searchHref(qTrim), label: fmt(t.hd_sugg_all, { q: qTrim }) });
+    const showSugg = s.suggOpen && qTrim.length >= 2 && !!r;
+
+    // aircraft
+    const hangar = VM.hangar(), cur = VM.currentAircraft();
+    const makeRow = window.VM_AIRCRAFT.find(m => m.make === s.acMake);
+    const acFull = !s.wide;
+
+    const drawerCats = cats.map(c => ({ label: VM.label(c), href: VM.catHref(c.slug), pid: 'vh-dc-' + c.slug, exp: String(s.dCat === c.slug), open: s.dCat === c.slug,
+      allLabel: fmt(t.hd_shop_all, { c: VM.label(c) }), toggle: () => this.setState(st => ({ dCat: st.dCat === c.slug ? '' : c.slug })),
+      subs: s.dCat === c.slug ? c.children.map(x => ({ label: VM.label(x), href: VM.catHref(c.slug, x.slug) })) : [] }));
+
+    return {
+      ...v, ready: true, t,
+      fAlt: v.ar ? "'Archivo', system-ui, sans-serif" : "'IBM Plex Sans Arabic', Tahoma, sans-serif",
+      logoAlt: v.ar ? 'شعار فيلماك إيروسبايس' : 'Velmach Aerospace F.Z.C logo',
+      progRef: this.progRef, rfqRef: this.rfqRef, drawerRef: this.drawerRef, topRingRef: this.topRingRef,
+      hdrRef: this.hdrRef, utilRef: this.utilRef, mainRef: this.mainRef, navRef: this.navRef, acRef: this.acRef, acBtnRef: this.acBtnRef,
+      hdrCls: 'vh-hdr' + (over ? ' vh-hdr--over' : '') + (sc ? ' vh-hdr--scrolled' : ''),
+      spacerH: page === 'home' ? '0px' : (s.hdrH || (v.sm ? 118 : 158)) + 'px',
+      navAria: v.ar ? 'التنقل الرئيسي' : 'Main',
+
+      utilLinks: [{ label: t.hd_util.calibration, href: VM.pageHref('calibration') }, { label: t.hd_util.gse, href: VM.pageHref('gse-service-repair') },
+        { label: t.hd_util.rent, href: VM.pageHref('rentals') }, { label: t.hd_util.sell, href: VM.pageHref('sell-trade') },
+        { label: t.hd_util.contact, href: VM.HREF.contact }],
+      phone: C.phone.display, telHref: 'tel:' + C.phone.tel,
+      accountHref: VM.pageHref('account'), calHref: VM.pageHref('calibration'), rentHref: VM.pageHref('rentals'),
+
+      searchPh: v.sm ? t.hd_search_ph_sm : t.hd_search_ph,
+      q: s.q, onQ: e => { const q = e.target.value; this.setState({ q, suggOpen: true, active: -1 }); clearTimeout(this.sT); this.sT = setTimeout(() => this.runSuggest(q), SUGGEST_DELAY); },
+      onQKey: e => this.qKey(e), onQFocus: () => { this.setState({ suggOpen: true, mega: -1 }); if (s.q.trim() && !s.sugg) this.runSuggest(s.q); },
+      onQBlur: () => this.setState({ suggOpen: false, active: -1 }),
+      keepFocus: e => e.preventDefault(),
+      onSubmit: e => { if (!qTrim) { e.preventDefault(); } },
+      suggExp: String(showSugg), activeId: showSugg && s.active >= 0 ? 'vh-opt-' + s.active : undefined,
+      showSugg, sProducts, sCats, sBrands, sAll, hasProducts: sProducts.length > 0, hasCats: sCats.length > 0, hasBrands: sBrands.length > 0,
+      noMatch: !!r && !sProducts.length && !sCats.length && !sBrands.length,
+
+      navItems,
+
+      count, hasCount: count > 0, quoteAria: fmt(t.hd_quote_aria, { n: count }),
+      toggleLang: () => VM.toggleLang(),
+      drawer: s.drawer, drawerExp: String(s.drawer), openDrawer: () => this.setState({ drawer: true, acOpen: false }), closeDrawer: () => this.setState({ drawer: false }),
+      homeCurrent: page === 'home' ? 'page' : undefined,
+      dCatsOpen: s.dCats, dCatsExp: String(s.dCats), toggleDCats: () => this.setState(st => ({ dCats: !st.dCats })), dCats: drawerCats,
+      openAcFromDrawer: () => this.setState({ drawer: false, acOpen: true }),
+
+      acOpen: s.acOpen, acExp: String(s.acOpen && s.wide), toggleAc: () => (s.acOpen ? this.setState({ acOpen: false }) : this.openAc()),
+      closeAc: () => this.setState({ acOpen: false }),
+      acCls: 'vh-acp ' + (acFull ? 'vh-acp--full' : 'vh-acp--drop'), acPos: acFull ? '' : s.acPos, acModal: String(acFull),
+      hasAc: !!cur, noAc: !cur, acName: cur ? cur.make + ' ' + cur.model : '',
+      makes: window.VM_AIRCRAFT.map(m => m.make), models: makeRow ? makeRow.models : [],
+      acMake: s.acMake, acModel: s.acModel, noMake: !makeRow, cantAdd: !makeRow || !s.acModel,
+      onMake: e => this.setState({ acMake: e.target.value, acModel: '' }), onModel: e => this.setState({ acModel: e.target.value }),
+      addAc: () => { if (makeRow && s.acModel) { VM.addAircraft(s.acMake, s.acModel); this.setState({ acMake: '', acModel: '' }); } },
+      hasSaved: hangar.saved.length > 0, noSaved: !hangar.saved.length,
+      saved: hangar.saved.map(a => { const name = a.make + ' ' + a.model;
+        return { name, on: String(a.id === hangar.current), pick: () => VM.selectAircraft(a.id), remove: () => VM.removeAircraft(a.id),
+          pickLabel: fmt(t.hd_ac_select, { a: name }), rmLabel: fmt(t.hd_ac_remove, { a: name }) }; }),
+      removeAll: () => VM.clearAircraft(),
+      shopWithout: () => { VM.selectAircraft(null); this.setState({ acOpen: false }); },
+
+      lsTitle: v.ar ? '0' : '.06em',
+      rfqOpen: s.rfqOpen, openRfq: () => this.setState({ rfqOpen: true, toast: '', acOpen: false }), closeRfq: () => this.setState({ rfqOpen: false }),
+      openRfqFromDrawer: () => this.setState({ drawer: false, rfqOpen: true }),
+      rqTop: v.sm ? 'auto' : '0px', rqL: v.sm ? '0px' : (v.ar ? '0px' : 'auto'), rqR: v.sm ? '0px' : (v.ar ? 'auto' : '0px'), rqW: v.sm ? 'auto' : 'min(600px,100vw)', rqHt: v.sm ? '92vh' : '100%',
+      rqAnim: v.sm ? 'vmSheet' : (v.ar ? 'vmFromL' : 'vmFromR'), rqRad: v.sm ? '8px' : '0px',
+      showFloat: this.props.showFloating !== false,
+      goTop: () => this.goTop(),
+      topB: this.props.showFloating !== false ? (v.sm ? '80px' : '90px') : (v.sm ? '14px' : '22px'), topX: v.sm ? '18px' : '26px',
+      topOp: s.showTop ? 1 : 0, topVis: s.showTop ? 'visible' : 'hidden', topVisDelay: s.showTop ? '0s' : '.45s',
+      topTf: s.showTop ? 'none' : 'translateY(10px)', topTab: s.showTop ? 0 : -1, topHidden: s.showTop ? 'false' : 'true',
+      floatB: v.sm ? '14px' : '22px', floatX: v.sm ? '14px' : '22px',
+      toast: s.toast,
+      waLabel: v.ar ? 'تحدث معنا' : 'Chat with us', waOpen: s.waOpen,
+      waIn: () => this.setState({ waOpen: true }), waOut: () => this.setState({ waOpen: false }),
+      waLabelW: s.waOpen ? '160px' : '0px', waLabelOp: s.waOpen ? 1 : 0, waGap: s.waOpen ? '12px' : '0px', waPadL: s.waOpen ? '22px' : '13px'
+    };
+  }
+}
+</script>
+</body>
+</html>

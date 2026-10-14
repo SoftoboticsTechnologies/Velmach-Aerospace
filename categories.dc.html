@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Categories | Velmach Aerospace</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="Browse every Velmach Aerospace product category: consumables, aircraft parts, aircraft tooling, safety equipment and ground support equipment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="css/catalogue.css">
+<link rel="stylesheet" href="css/shop.css">
+<script src="js/i18n.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/vm-core.js"></script>
+<script src="data/categories.js"></script>
+<script src="js/catalog.js"></script>
+</helmet>
+
+<dc-import name="SiteHeader" page="categories" hint-size="100%,158px"></dc-import>
+
+<sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+<main id="main" class="cx" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:{{ lh }}">
+  <section class="cx-hero" aria-labelledby="sx-h">
+    <div class="cx-wrap cx-hero-in">
+      <ol class="sx-crumbs" aria-label="{{ crumbsAria }}">
+        <li><a href="index.html">{{ t.sh_home }}</a></li>
+        <li><span aria-current="page">{{ t.sh_all_cats }}</span></li>
+      </ol>
+      <span class="cx-tag">{{ t.sh_cats_eyebrow }}</span>
+      <div class="cx-hero-grid">
+        <h1 id="sx-h" class="cx-h1">{{ t.sh_cats_title }}</h1>
+        <p class="cx-sub">{{ t.sh_cats_sub }}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cx-wrap sx-body">
+    <div class="sx-groups">
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="8">
+        <section class="sx-group" aria-labelledby="{{ g.hid }}">
+          <div class="sx-group-h">
+            <h2 id="{{ g.hid }}" class="sx-group-t"><a href="{{ g.href }}">{{ g.label }}</a></h2>
+            <span class="cx-k" dir="auto">{{ g.count }}</span>
+          </div>
+          <p class="sx-group-d">{{ g.desc }}</p>
+          <ul class="sx-links">
+            <sc-for list="{{ g.subs }}" as="c" hint-placeholder-count="8"><li><a href="{{ c.href }}">{{ c.label }}</a></li></sc-for>
+          </ul>
+          <a class="cx-link sx-more" href="{{ g.href }}">{{ g.more }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></a>
+        </section>
+      </sc-for>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+// Each group lists its first subcategories; the rest are one click away on the category page.
+const SHOWN = 8;
+const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+class Component extends DCLogic {
+  state = { ready: false, meta: null };
+  componentDidMount() {
+    const go = () => {
+      if (window.VM && window.VM_I18N && window.VM_I18N.en.sh_home && window.VM_CATS && window.VM_ROUTES && window.VM_CATALOG) {
+        this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true });
+        window.VM_CATALOG.meta().then(meta => this.setState({ meta }));
+      } else this.tw = setTimeout(go, 30);
+    };
+    go();
+  }
+  componentDidUpdate() {
+    if (!this.state.ready) return;
+    const t = window.VM.t(), R = window.VM_ROUTES;
+    R.head({ title: t.sh_cats_title + ' | Velmach Aerospace', description: t.sh_cats_sub, url: R.canonical.categories() });
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
+  renderVals() {
+    if (!this.state.ready) return { ready: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv();
+    return { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb',
+      groups: window.VM_CATS.map(p => ({ hid: 'sx-g-' + p.slug, label: VM.label(p), href: VM.catHref(p.slug), desc: v.ar ? p.desc_ar : p.desc_en,
+        count: this.state.meta && this.state.meta.categories[p.slug] ? fmt(t.sh_n_products, { n: this.state.meta.categories[p.slug].n }) : fmt(t.sh_n_sub, { n: p.children.length }),
+        more: fmt(t.hd_shop_all, { c: VM.label(p) }),
+        subs: p.children.slice(0, SHOWN).map(c => ({ label: VM.label(c), href: VM.catHref(p.slug, c.slug) })) })) };
+  }
+}
+</script>
+</body>
+</html>

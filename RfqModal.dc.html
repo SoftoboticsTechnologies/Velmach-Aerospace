@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="js/site-config.js"></script>
+<script src="data/countries.js"></script>
+</helmet>
+<sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+<div class="cx" dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:1.5">
+  <div class="rf-scrim" onClick="{{ close }}"></div>
+  <div ref="{{ boxRef }}" class="rf" role="dialog" aria-modal="true" aria-labelledby="rf-h">
+    <div class="rf-hd">
+      <h2 id="rf-h">{{ t.rf_title }}</h2>
+      <button type="button" class="rf-x" onClick="{{ close }}" aria-label="{{ t.rf_close }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"></path></svg></button>
+    </div>
+
+    <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+      <div class="rf-ok" role="status">
+        <span class="rf-ok-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+        <h3>{{ t.rf_ok_t }}</h3>
+        <p>{{ doneText }}</p>
+        <button type="button" class="cx-btn cx-btn--ink" onClick="{{ close }}">{{ t.rf_another }}</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ editing }}" hint-placeholder-val="{{ true }}">
+      <form class="rf-form" onSubmit="{{ submit }}" noValidate="true" style="display:contents">
+        <div class="rf-bd">
+          <dl class="rf-prod">
+            <div><dt>{{ t.rf_product }}</dt><dd dir="auto">{{ p.title }}</dd></div>
+            <sc-if value="{{ p.pn }}" hint-placeholder-val="{{ true }}"><div><dt>{{ t.rf_pn }}</dt><dd dir="ltr">{{ p.pn }}</dd></div></sc-if>
+            <sc-if value="{{ p.brand }}" hint-placeholder-val="{{ true }}"><div><dt>{{ t.rf_brand }}</dt><dd dir="auto">{{ p.brand }}</dd></div></sc-if>
+          </dl>
+          <sc-if value="{{ sendErr }}" hint-placeholder-val="{{ false }}"><p class="rf-alert" role="alert">{{ sendErr }}</p></sc-if>
+          <div class="rf-grid">
+            <label class="rf-f"><span>{{ t.rf_name }} *</span>
+              <input name="name" value="{{ f.name }}" onChange="{{ on.name }}" autoComplete="name" aria-invalid="{{ inv.name }}" aria-describedby="rf-e-name">
+              <sc-if value="{{ e.name }}" hint-placeholder-val="{{ false }}"><span id="rf-e-name" class="rf-err">{{ e.name }}</span></sc-if>
+            </label>
+            <label class="rf-f"><span>{{ t.rf_company }}</span>
+              <input name="company" value="{{ f.company }}" onChange="{{ on.company }}" autoComplete="organization">
+            </label>
+            <label class="rf-f"><span>{{ t.rf_email }} *</span>
+              <input name="email" type="email" value="{{ f.email }}" onChange="{{ on.email }}" autoComplete="email" dir="ltr" aria-invalid="{{ inv.email }}" aria-describedby="rf-e-email">
+              <sc-if value="{{ e.email }}" hint-placeholder-val="{{ false }}"><span id="rf-e-email" class="rf-err">{{ e.email }}</span></sc-if>
+            </label>
+            <div class="rf-f">
+              <span id="rf-phone-l">{{ t.rf_phone }} *</span>
+              <div class="rf-phone" dir="ltr">
+                <select data-v="{{ f.dial }}" value="{{ f.dial }}" onChange="{{ on.dial }}" aria-label="{{ t.rf_code }}">
+                  <sc-for list="{{ dials }}" as="d" hint-placeholder-count="5"><option value="{{ d.iso }}">{{ d.label }}</option></sc-for>
+                </select>
+                <input name="phone" type="tel" value="{{ f.phone }}" onChange="{{ on.phone }}" autoComplete="tel-national" aria-labelledby="rf-phone-l" aria-invalid="{{ inv.phone }}" aria-describedby="rf-e-phone">
+              </div>
+              <sc-if value="{{ e.phone }}" hint-placeholder-val="{{ false }}"><span id="rf-e-phone" class="rf-err">{{ e.phone }}</span></sc-if>
+            </div>
+            <label class="rf-f"><span>{{ t.rf_country }}</span>
+              <select data-v="{{ f.country }}" value="{{ f.country }}" onChange="{{ on.country }}">
+                <option value="">{{ t.rf_country_ph }}</option>
+                <sc-for list="{{ countries }}" as="c" hint-placeholder-count="5"><option value="{{ c.iso }}">{{ c.name }}</option></sc-for>
+              </select>
+            </label>
+            <label class="rf-f"><span>{{ t.rf_qty }} *</span>
+              <input name="qty" type="number" min="1" step="1" inputMode="numeric" value="{{ f.qty }}" onChange="{{ on.qty }}" aria-invalid="{{ inv.qty }}" aria-describedby="rf-e-qty">
+              <sc-if value="{{ e.qty }}" hint-placeholder-val="{{ false }}"><span id="rf-e-qty" class="rf-err">{{ e.qty }}</span></sc-if>
+            </label>
+            <label class="rf-f"><span>{{ t.rf_date }}</span>
+              <input name="date" type="date" value="{{ f.date }}" onChange="{{ on.date }}" min="{{ today }}">
+            </label>
+            <label class="rf-f rf-f--wide"><span>{{ t.rf_msg }}</span>
+              <textarea name="message" rows="4" value="{{ f.message }}" onChange="{{ on.message }}" placeholder="{{ t.rf_msg_ph }}"></textarea>
+            </label>
+            <sc-if value="{{ canAttach }}" hint-placeholder-val="{{ false }}">
+              <label class="rf-f rf-f--wide"><span>{{ t.rf_file }}</span>
+                <input ref="{{ fileRef }}" name="attachment" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.xls,.xlsx,.csv,.doc,.docx" onChange="{{ onFile }}" aria-invalid="{{ inv.file }}">
+                <span class="rf-hint">{{ t.rf_file_hint }}</span>
+                <sc-if value="{{ e.file }}" hint-placeholder-val="{{ false }}"><span class="rf-err">{{ e.file }}</span></sc-if>
+              </label>
+            </sc-if>
+            <!-- spam trap: people never see or fill this field -->
+            <label class="rf-hp" aria-hidden="true">Website<input name="website" tabIndex="-1" autoComplete="off" value="{{ f.website }}" onChange="{{ on.website }}"></label>
+          </div>
+        </div>
+        <div class="rf-ft">
+          <span class="rf-hint">{{ t.rf_note }}</span>
+          <button type="submit" class="cx-btn cx-btn--blue" disabled="{{ sending }}" aria-busy="{{ busy }}">
+            <sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}"><span class="rf-spin" aria-hidden="true"></span>{{ t.rf_sending }}</sc-if>
+            <sc-if value="{{ idle }}" hint-placeholder-val="{{ true }}">{{ t.rf_send }}</sc-if>
+          </button>
+        </div>
+      </form>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+// Request for Quote for one product. Open it with VM.requestQuote({ title, pn, brand, slug }) (js/vm-core.js).
+// Sending: with VM_CONFIG.rfq.endpoint set (a form service such as Formspree), the request is posted there with the
+// attachment, and the service emails sales and can auto-reply to the customer. Without it, the visitor's email app
+// opens with the request filled in (the site's existing mailto setup).
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const MAX_FILE = 10 * 1024 * 1024;
+const EMPTY = { name: '', company: '', email: '', dial: 'AE', phone: '', country: '', qty: '1', date: '', message: '', website: '' };
+const CONTACT_KEY = 'vm_rfq_contact';   // name, company, email and phone are remembered for the next request
+const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+
+class Component extends DCLogic {
+  state = { ready: false, open: false, p: null, f: { ...EMPTY }, e: {}, sending: false, done: '', sendErr: '' };
+  boxRef = React.createRef(); fileRef = React.createRef();
+  componentDidMount() {
+    const go = () => { if (window.VM && window.VM_I18N && window.VM_I18N.en.rf_title && window.VM_COUNTRIES && window.VM_CONFIG) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    go();
+    this.onOpen = ev => {
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(CONTACT_KEY) || '{}') || {}; } catch (x) {}
+      this.lastFocus = document.activeElement;
+      this.file = null;
+      this.setState({ open: true, p: ev.detail || {}, f: { ...EMPTY, ...saved, qty: String((ev.detail && ev.detail.qty) || 1) }, e: {}, sending: false, done: '', sendErr: '' });
+    };
+    this.onKey = ev => {
+      if (!this.state.open) return;
+      if (ev.key === 'Escape') { this.close(); return; }
+      if (ev.key !== 'Tab' || !this.boxRef.current) return;
+      const f = [...this.boxRef.current.querySelectorAll('button,a[href],input,select,textarea')].filter(x => !x.disabled && x.offsetParent !== null && x.tabIndex !== -1);
+      if (!f.length) return; const a = f[0], z = f[f.length - 1];
+      if (ev.shiftKey && document.activeElement === a) { ev.preventDefault(); z.focus(); }
+      else if (!ev.shiftKey && document.activeElement === z) { ev.preventDefault(); a.focus(); }
+    };
+    window.addEventListener('vm:rfq-product', this.onOpen);
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); window.removeEventListener('vm:rfq-product', this.onOpen); window.removeEventListener('keydown', this.onKey); }
+  componentDidUpdate() {
+    if (this.boxRef.current) this.boxRef.current.querySelectorAll('select[data-v]').forEach(el => { if (el.value !== el.dataset.v) el.value = el.dataset.v; });
+    if (this.state.open !== this.wasOpen) {
+      this.wasOpen = this.state.open;
+      document.body.style.overflow = this.state.open ? 'hidden' : '';
+      if (this.state.open) setTimeout(() => { const i = this.boxRef.current && this.boxRef.current.querySelector('input'); i && i.focus(); }, 60);
+      else if (this.lastFocus && document.contains(this.lastFocus)) this.lastFocus.focus();
+    }
+  }
+  close() { this.setState({ open: false }); }
+  set(k, v) { this.setState(s => ({ f: { ...s.f, [k]: v }, e: { ...s.e, [k]: '' } })); }
+  validate() {
+    const t = window.VM.t(), f = this.state.f, e = {};
+    if (!f.name.trim()) e.name = t.rf_e_req;
+    if (!f.email.trim()) e.email = t.rf_e_req; else if (!EMAIL_RE.test(f.email.trim())) e.email = t.rf_e_email;
+    const digits = f.phone.replace(/[^\d]/g, '');
+    if (!f.phone.trim()) e.phone = t.rf_e_req; else if (digits.length < 6 || digits.length > 15 || /[^\d\s()+-]/.test(f.phone)) e.phone = t.rf_e_phone;
+    if (!/^\d+$/.test(String(f.qty).trim()) || parseInt(f.qty, 10) < 1) e.qty = t.rf_e_qty;
+    if (this.file && this.file.size > MAX_FILE) e.file = t.rf_e_file;
+    return e;
+  }
+  dialOf(iso) { const c = window.VM_COUNTRIES.find(x => x.iso === iso); return c ? c.dial : ''; }
+  async submit(ev) {
+    ev.preventDefault();
+    if (this.state.sending) return;
+    const e = this.validate();
+    if (Object.keys(e).length) {
+      this.setState({ e });
+      setTimeout(() => { const bad = this.boxRef.current && this.boxRef.current.querySelector('[aria-invalid="true"]'); bad && bad.focus(); }, 30);
+      return;
+    }
+    const VM = window.VM, C = window.VM_CONFIG, f = this.state.f, p = this.state.p || {};
+    const to = (C.rfq && C.rfq.to) || C.email.sales;
+    if (f.website) { this.setState({ done: 'sent' }); return; }   // spam trap filled: pretend it worked, send nothing
+    try { localStorage.setItem(CONTACT_KEY, JSON.stringify({ name: f.name, company: f.company, email: f.email, dial: f.dial, phone: f.phone, country: f.country })); } catch (x) {}
+    const link = p.slug ? new URL(VM.productHref(p.slug), location.href).href : '';
+    const country = f.country ? (this.names().of(f.country) || f.country) : '-';
+    const lines = ['REQUEST FOR QUOTE - Velmach Aerospace', '',
+      'Product: ' + (p.title || '-'), 'Part number: ' + (p.pn || '-'), 'Brand: ' + (p.brand || '-'), 'Product page: ' + (link || '-'),
+      'Quantity: ' + f.qty, 'Required by: ' + (f.date || '-'), '',
+      'Name: ' + f.name, 'Company: ' + (f.company || '-'), 'Email: ' + f.email, 'Phone: ' + this.dialOf(f.dial) + ' ' + f.phone, 'Country: ' + country, '',
+      'Message:', f.message || '-'];
+    const subject = 'RFQ: ' + (p.pn || p.title || '') + (f.company ? ' - ' + f.company : '');
+    const endpoint = C.rfq && C.rfq.endpoint;
+    if (!endpoint) {
+      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+      this.setState({ done: 'mail' });
+      return;
+    }
+    this.setState({ sending: true, sendErr: '' });
+    try {
+      const fd = new FormData();
+      fd.append('_subject', subject); fd.append('_replyto', f.email); fd.append('email', f.email);
+      fd.append('name', f.name); fd.append('company', f.company); fd.append('phone', this.dialOf(f.dial) + ' ' + f.phone); fd.append('country', country);
+      fd.append('product', p.title || ''); fd.append('part_number', p.pn || ''); fd.append('brand', p.brand || ''); fd.append('product_url', link);
+      fd.append('quantity', f.qty); fd.append('required_by', f.date); fd.append('message', lines.join('\n'));
+      if (this.file) fd.append('attachment', this.file);
+      const r = await fetch(endpoint, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+      if (!r.ok) throw new Error(r.status);
+      this.setState({ sending: false, done: 'sent' });
+    } catch (x) {
+      this.setState({ sending: false, sendErr: fmt(VM.t().rf_e_send, { e: to }) });
+    }
+  }
+  names() {
+    if (!this.dn || this.dnLang !== window.VM.lang) {
+      this.dnLang = window.VM.lang;
+      try { this.dn = new Intl.DisplayNames([window.VM.lang], { type: 'region' }); } catch (x) { this.dn = { of: c => c }; }
+    }
+    return this.dn;
+  }
+  renderVals() {
+    if (!this.state.ready || !this.state.open) return { open: false };
+    const VM = window.VM, t = VM.t(), v = VM.sv(), s = this.state, f = s.f, C = window.VM_CONFIG, dn = this.names();
+    const countries = window.VM_COUNTRIES.map(c => ({ iso: c.iso, name: dn.of(c.iso) || c.iso })).sort((a, b) => a.name.localeCompare(b.name, VM.lang));
+    const on = {};
+    Object.keys(EMPTY).forEach(k => { on[k] = ev => this.set(k, ev.target.value); });
+    // choosing a country also picks its dialling code while no phone number has been typed
+    on.country = ev => { const iso = ev.target.value; this.setState(st => ({ f: { ...st.f, country: iso, dial: iso && !st.f.phone ? iso : st.f.dial } })); };
+    const inv = {}; ['name', 'email', 'phone', 'qty', 'file'].forEach(k => { inv[k] = s.e[k] ? 'true' : undefined; });
+    return { ...v, open: true, t, boxRef: this.boxRef, fileRef: this.fileRef, p: s.p || {}, f, e: s.e, on, inv,
+      countries, dials: countries.map(c => ({ iso: c.iso, label: c.iso + ' ' + this.dialOf(c.iso) })),
+      today: new Date().toISOString().slice(0, 10),
+      canAttach: !!(C.rfq && C.rfq.endpoint),
+      onFile: ev => { this.file = ev.target.files && ev.target.files[0] || null; this.setState(st => ({ e: { ...st.e, file: '' } })); },
+      sending: s.sending, idle: !s.sending, busy: String(s.sending), sendErr: s.sendErr,
+      done: !!s.done, editing: !s.done, doneText: s.done === 'mail' ? t.rf_ok_mail : t.rf_ok_b,
+      submit: ev => this.submit(ev), close: () => this.close() };
+  }
+}
+</script>
+</body>
+</html>

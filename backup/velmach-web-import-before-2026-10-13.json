@@ -1,0 +1,731 @@
+[
+ {
+  "importKey": "name:aeroshellfluid12",
+  "title": "Aeroshell Fluid 12",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "lubricating-oils",
+  "description": "Synthetic General Purpose & Aircraft Instrument Oil",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "MIL-PRF-6085D/NATO:O-147/DEF-STAN91-49/AIR 3511A"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-12/_jcr_content/root/metadata.shellimg.png/1731235333552/shell-fluid-twelve.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-12.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ },
+ {
+  "importKey": "name:aeroshellfluid31",
+  "title": "Aeroshell Fluid 31",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "hydraulic-fluid",
+  "description": "Synthetic Fire Resistant Aviation Hydraulic Fluid",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "MIL-PRF-83282D / NATOH-537 / DCSEA-437/A"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-31/_jcr_content/root/metadata.shellimg.png/1732190041046/aeroshell-fluid-promo-31.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-31.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ },
+ {
+  "importKey": "name:aeroshellfluid41",
+  "title": "Aeroshell Fluid 41",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "hydraulic-fluid",
+  "description": "Superclean Mineral Aviation Hydraulic Fluid",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "MIL-PRF-5606H / NATO:H-515 / DEF-STAN 91-48 /OM-15/Airbus CML:02-001"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41/_jcr_content/root/metadata.shellimg.png/1732189999079/aeroshell-fluid-promo-41.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ },
+ {
+  "importKey": "name:aeroshellfluid61",
+  "title": "Aeroshell Fluid 61",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "lubricating-oils",
+  "description": "",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "MIL-H-46170"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-61/_jcr_content/root/metadata.shellimg.png/1731928492760/fluid-61.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-61.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ },
+ {
+  "importKey": "name:aeroshellgrease14",
+  "title": "Aeroshell Grease 14",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "Helicopter Multi Purpose Grease",
+  "specifications": [
+   {
+    "name": "Part no. (as written)",
+    "value": "Aviation Grease"
+   },
+   {
+    "name": "Specification",
+    "value": "MIL-G-25537C / NATO:G-366 / DEF-STAN 91-51"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-14/_jcr_content/root/metadata.shellimg.png/1729413239613/grease-fourteen.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-14.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 23 table row 4"
+ },
+ {
+  "importKey": "name:aeroshellgrease22",
+  "title": "Aeroshell Grease 22",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "Synthetic Aircraft GreaseMIL-PRF-81322G/ NATO:G-395 / DEF-STAN91-52 / AIR4222/ DOD-G-24508",
+  "specifications": [
+   {
+    "name": "Part no. (as written)",
+    "value": "Grease, Ball and Roller Bearing"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-22/_jcr_content/root/metadata.shellimg.png/1731768945890/grease-twnety-two.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-22.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 24 table row 3"
+ },
+ {
+  "importKey": "name:aeroshellgrease33",
+  "title": "Aeroshell Grease 33",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "Synthetic Lithium Complex Grease For Aircraft",
+  "specifications": [
+   {
+    "name": "Part no. (as written)",
+    "value": "Multi-Purpose Airframe Grease"
+   },
+   {
+    "name": "Specification",
+    "value": "MIL-PRF-23827C Type 1/SAE-AMS-3052/DEF-STAN91-53/2Boeing: CML-D00633 / BMS3-33B"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33/_jcr_content/root/metadata.shellimg.png/1729413514251/grease-thirty-three.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 23 table row 8"
+ },
+ {
+  "importKey": "name:aeroshellturbineoil308",
+  "title": "Aeroshell Turbine Oil 308",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "engine-oil",
+  "description": "3mm cst Synthetic Turbine Engine Oil",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "MIL-PRF-7808 Grade 3 / NATO:O-148 / OX-9"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-308/_jcr_content/root/metadata.shellimg.png/1731408291202/turbine-oil-three-hundred-eight.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-308.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ },
+ {
+  "importKey": "name:aeroshellturbineoil500",
+  "title": "Aeroshell Turbine Oil 500",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "engine-oil",
+  "description": "Synthetic Turbine Engine Oil",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "MIL-PRF-23699F-STD / DEF-STAN 91-101 / NATO:O-156/JSD:OX-27/PW-521C Ty.2"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-500/_jcr_content/root/metadata.shellimg.png/1731408252479/turbine-oil-five-hundred.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-500.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ },
+ {
+  "importKey": "name:aeroshellturbineoil555",
+  "title": "Aeroshell Turbine Oil 555",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "engine-oil",
+  "description": "Synthetic Turbine & Helicopter Tansmission Fluid",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "DOD-PRF-85734A/XAS-2354/NATO:O-160/DEF-STAN 91-100/JSD:OX-26/PW-521 Ty.2"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-555/_jcr_content/root/metadata.shellimg.png/1731408336514/turbine-oil-five-hundred-fifty-five.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-555.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ },
+ {
+  "importKey": "name:aeroshellturbineoil560",
+  "title": "Aeroshell Turbine Oil 560",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "engine-oil",
+  "description": "Synthetic Turbine Engine Oil",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "MIL-PRF-23699F-HTS / NATO:O-154/OZ-27/PW-521C Ty.2"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-560/_jcr_content/root/metadata.shellimg.png/1731408371812/turbine-oil-five-hundred-sixty.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-560.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ },
+ {
+  "importKey": "name:aeroshellturbineoil750",
+  "title": "Aeroshell Turbine Oil 750",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "engine-oil",
+  "description": "7,5mm cst Synthetic Turbine Engine Oil",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "DEF-STAN 91-98 / AIR 3517 / NATO:O-149 /OX-38"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-750/_jcr_content/root/metadata.shellimg.png/1731408396113/turbine-oil-seven-hundred-fifty.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-750.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ },
+ {
+  "importKey": "name:accucool342coolant1gln",
+  "title": "ACCU-COOL 342 COOLANT (1 GLN)",
+  "partNumber": "",
+  "brand": "Zip Chem",
+  "categoryParent": "consumables",
+  "categoryChild": "chemicals",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://zipchem.com/wp-content/uploads/2021/05/Accu-Cool_342_PAIL-1.png"
+  ],
+  "sourceUrl": "https://zipchem.com/produit/accu-cool-342/",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 78"
+ },
+ {
+  "importKey": "name:accucool342coolant5gln",
+  "title": "ACCU-COOL 342 COOLANT (5 GLN)",
+  "partNumber": "",
+  "brand": "Zip Chem",
+  "categoryParent": "consumables",
+  "categoryChild": "chemicals",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://zipchem.com/wp-content/uploads/2021/05/Accu-Cool_342_PAIL-1.png"
+  ],
+  "sourceUrl": "https://zipchem.com/produit/accu-cool-342/",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 78"
+ },
+ {
+  "importKey": "name:accucool342coolant55gln",
+  "title": "ACCU-COOL 342 COOLANT (55 GLN)",
+  "partNumber": "",
+  "brand": "Zip Chem",
+  "categoryParent": "consumables",
+  "categoryChild": "chemicals",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://zipchem.com/wp-content/uploads/2021/05/Accu-Cool_342_PAIL-1.png"
+  ],
+  "sourceUrl": "https://zipchem.com/produit/accu-cool-342/",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 78"
+ },
+ {
+  "importKey": "name:corban27l177ml6oz",
+  "title": "CORBAN 27L (177 ML/6 OZ.)",
+  "partNumber": "",
+  "brand": "Zip Chem",
+  "categoryParent": "consumables",
+  "categoryChild": "anti-corrosion-lubricants",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://zipchem.com/wp-content/uploads/2021/05/Cor-Ban_27L_CAN-min.png"
+  ],
+  "sourceUrl": "https://zipchem.com/produit/cor-ban-27l/",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 78"
+ },
+ {
+  "importKey": "name:corban27l5oz",
+  "title": "CORBAN 27L (5 OZ.)",
+  "partNumber": "",
+  "brand": "Zip Chem",
+  "categoryParent": "consumables",
+  "categoryChild": "anti-corrosion-lubricants",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://zipchem.com/wp-content/uploads/2021/05/Cor-Ban_27L_CAN-min.png"
+  ],
+  "sourceUrl": "https://zipchem.com/produit/cor-ban-27l/",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 78"
+ },
+ {
+  "importKey": "name:aeroshellcalibratingfluid2202lt",
+  "title": "AeroShell Calibrating Fluid 2 (202 LT)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "calibration-fluids",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-calibrating-fluid-2/_jcr_content/root/metadata.shellimg.png/1731928968322/calibrating-fluid-two.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-calibrating-fluid-2.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 107"
+ },
+ {
+  "importKey": "name:aeroshellfluid121gln",
+  "title": "AeroShell Fluid 12 (1 GLN)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "paints-coatings",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-12/_jcr_content/root/metadata.shellimg.png/1731235333552/shell-fluid-twelve.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-12.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 107"
+ },
+ {
+  "importKey": "name:aeroshellfluid311gln",
+  "title": "AeroShell Fluid 31 (1 GLN)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "paints-coatings",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-31/_jcr_content/root/metadata.shellimg.png/1732190041046/aeroshell-fluid-promo-31.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-31.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 107"
+ },
+ {
+  "importKey": "name:aeroshellfluid411qt",
+  "title": "AeroShell Fluid 41 (1 QT)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "paints-coatings",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41/_jcr_content/root/metadata.shellimg.png/1732189999079/aeroshell-fluid-promo-41.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 107"
+ },
+ {
+  "importKey": "name:aeroshellfluid41203lt",
+  "title": "AeroShell Fluid 41 (203 LT)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "paints-coatings",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41/_jcr_content/root/metadata.shellimg.png/1732189999079/aeroshell-fluid-promo-41.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 107"
+ },
+ {
+  "importKey": "name:aeroshellfluid415gln",
+  "title": "AeroShell Fluid 41 (5 GLN)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "paints-coatings",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41/_jcr_content/root/metadata.shellimg.png/1732189999079/aeroshell-fluid-promo-41.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellfluid415lt",
+  "title": "AeroShell Fluid 41 (5 LT)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "paints-coatings",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41/_jcr_content/root/metadata.shellimg.png/1732189999079/aeroshell-fluid-promo-41.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-41.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellfluid6155gln",
+  "title": "AeroShell Fluid 61 (55 GLN)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "paints-coatings",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-61/_jcr_content/root/metadata.shellimg.png/1731928492760/fluid-61.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-fluid-61.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellcompound075gln",
+  "title": "AeroShell Compound 07 (5 GLN)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "adhesives-compounds",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-compound-7/_jcr_content/root/metadata.shellimg.png/1731928824719/compound-seven.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/hydraulic-specialty-fluids/aeroshell-compound-7.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease1417kg",
+  "title": "AeroShell Grease 14 (17 KG)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-14/_jcr_content/root/metadata.shellimg.png/1729413239613/grease-fourteen.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-14.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease143kg",
+  "title": "AeroShell Grease 14 (3 KG)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-14/_jcr_content/root/metadata.shellimg.png/1729413239613/grease-fourteen.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-14.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease14cartridge400gr",
+  "title": "AeroShell Grease 14 CARTRIDGE (400 GR)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-14/_jcr_content/root/metadata.shellimg.png/1729413239613/grease-fourteen.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-14.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease2217kg35lb",
+  "title": "AeroShell Grease 22 (17 KG/35 LB)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-22/_jcr_content/root/metadata.shellimg.png/1731768945890/grease-twnety-two.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-22.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease223kg",
+  "title": "AeroShell Grease 22 (3 KG)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-22/_jcr_content/root/metadata.shellimg.png/1731768945890/grease-twnety-two.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-22.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease22cartridge038kg",
+  "title": "AeroShell Grease 22 CARTRIDGE (0,38 KG)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-22/_jcr_content/root/metadata.shellimg.png/1731768945890/grease-twnety-two.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-22.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease3317kg",
+  "title": "AeroShell Grease 33 (17 KG)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33/_jcr_content/root/metadata.shellimg.png/1729413514251/grease-thirty-three.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease333kg",
+  "title": "AeroShell Grease 33 (3 KG)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33/_jcr_content/root/metadata.shellimg.png/1729413514251/grease-thirty-three.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease3350kg",
+  "title": "AeroShell Grease 33 (50 KG)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33/_jcr_content/root/metadata.shellimg.png/1729413514251/grease-thirty-three.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease33cartridge400gr",
+  "title": "AeroShell Grease 33 CARTRIDGE (400 GR)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33/_jcr_content/root/metadata.shellimg.png/1729413514251/grease-thirty-three.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-33.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease643kg",
+  "title": "AeroShell Grease 64 (3 KG)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-64/_jcr_content/root/metadata.shellimg.png/1729413398201/grease-sixty-four.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-64.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease717kg",
+  "title": "AeroShell Grease 7 (17 KG)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-7/_jcr_content/root/metadata.shellimg.png/1729413180464/grease-seven.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-7.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellgrease7cartridge400gr",
+  "title": "AeroShell Grease 7 CARTRIDGE (400 GR)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "aircraft-grease",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-7/_jcr_content/root/metadata.shellimg.png/1729413180464/grease-seven.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-greases/aeroshell-grease-7.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshelloildieselultra55gln",
+  "title": "AeroShell Oil Diesel Ultra (55 GLN)",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "engine-oil",
+  "description": "",
+  "specifications": [],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/piston-engine-oils/aeroshell-diesel-ultra/_jcr_content/root/metadata.shellimg.png/1731646395617/diesel-ultra.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/piston-engine-oils/aeroshell-diesel-ultra.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 108"
+ },
+ {
+  "importKey": "name:aeroshellturbineoil390",
+  "title": "Aeroshell Turbine Oil 390",
+  "partNumber": "",
+  "brand": "",
+  "categoryParent": "consumables",
+  "categoryChild": "engine-oil",
+  "description": "3mm cst Synthetic Turbine Engine Oil",
+  "specifications": [
+   {
+    "name": "Specification",
+    "value": "DEF-STAN 91-94 / OX-7"
+   }
+  ],
+  "images": [
+   "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-390/_jcr_content/root/metadata.shellimg.png/1731408315745/turbine-oil-three-hundred-ninty.png?imwidth=1280&impolicy=amidala-image-191x100"
+  ],
+  "sourceUrl": "https://www.shell.com/business-customers/aviation/aeroshell/aeroshell-turbine-engine-oils/aeroshell-turbine-oil-390.html",
+  "condition": "",
+  "documentSource": "PRODUCT LIST WITH FULL DETAILS.pdf, page 127"
+ }
+]
