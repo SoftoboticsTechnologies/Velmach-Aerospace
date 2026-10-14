@@ -11,7 +11,7 @@
 <helmet>
 <meta name="description" content="Ground support equipment, tooling, aircraft parts and consumables by brand, from Velmach Aerospace.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="css/catalogue.css">
 <link rel="stylesheet" href="css/shop.css">
 <script src="js/i18n.js"></script>
@@ -53,7 +53,7 @@
           <sc-for list="{{ brands }}" as="b" hint-placeholder-count="12">
             <li>
               <a class="sx-brand" href="{{ b.href }}">
-                <sc-if value="{{ b.logo }}" hint-placeholder-val="{{ false }}"><img class="{{ b.logoCls }}" src="{{ b.logo }}" alt="{{ b.alt }}" loading="lazy" onError="{{ b.fail }}"></sc-if>
+                <span class="sx-brand-media"><sc-if value="{{ b.logo }}" hint-placeholder-val="{{ false }}"><img class="{{ b.logoCls }}" src="{{ b.logo }}" alt="{{ b.alt }}" loading="lazy" onError="{{ b.fail }}"></sc-if><sc-if value="{{ b.noLogo }}" hint-placeholder-val="{{ true }}"><span class="sx-brand-mono" aria-hidden="true" dir="ltr">{{ b.mono }}</span></sc-if></span>
                 <span class="sx-brand-n" dir="ltr">{{ b.name }}</span>
                 <sc-if value="{{ b.count }}" hint-placeholder-val="{{ true }}"><span class="sx-brand-k">{{ b.count }}</span></sc-if>
               </a>
@@ -105,7 +105,7 @@ class Component extends DCLogic {
     const shown = s.letter ? all.filter(b => first(b) === s.letter) : all;
     const brands = shown.map(b => { const logo = VM.brandLogo(b.slug);
       const n = s.meta && s.meta.brands ? s.meta.brands[b.slug] || 0 : null;
-      return { name: b.name, href: VM.brandHref(b.slug), logo, logoCls: VM.brandLogoDark(b.slug) ? 'is-dark' : '', alt: b.name + ' logo', fail: () => VM.logoFailed(b.slug), count: n == null ? '' : n === 1 ? t.br_n1 : fmt(t.br_n, { n }) }; });
+      return { name: b.name, href: VM.brandHref(b.slug), logo, logoCls: VM.brandLogoDark(b.slug) ? 'is-dark' : '', noLogo: !logo, mono: b.name.replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase(), alt: b.name + ' logo', fail: () => VM.logoFailed(b.slug), count: n == null ? '' : n === 1 ? t.br_n1 : fmt(t.br_n, { n }) }; });
     return { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb',
       allOn: String(!s.letter), showAll: () => this.pick(''),
       letters: AZ.map(ch => ({ ch, on: String(s.letter === ch), off: !has.has(ch), pick: () => this.pick(ch) })),

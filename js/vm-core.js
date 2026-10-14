@@ -146,7 +146,7 @@
         lang: lang, dir: ar ? 'rtl' : 'ltr', ar: ar,
         fBody: ar ? FAR : "'VMAmp', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif",
         fHead: ar ? FAR : "'VMAmp', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif",
-        fMono: ar ? FAR : "'IBM Plex Mono', ui-monospace, Menlo, monospace",
+        fMono: ar ? FAR : "'Archivo', system-ui, sans-serif",
         lh: ar ? 1.85 : 1.6, lhHead: ar ? 1.35 : 1.06, ls: ar ? '0' : '.16em', lsHead: ar ? '0' : '-0.02em',
         arrow: ar ? '←' : '→', flip: ar ? 'scaleX(-1)' : 'none', start: ar ? 'right' : 'left', end: ar ? 'left' : 'right',
         sm: bp === 'sm', md: bp === 'md', lg: bp === 'lg', notLg: bp !== 'lg', notSm: bp !== 'sm'

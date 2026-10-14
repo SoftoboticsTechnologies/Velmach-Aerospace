@@ -13,7 +13,7 @@
 <meta name="description" content="Aircraft part and aerospace equipment details with request for quote.">
 <meta property="og:type" content="product">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="css/catalogue.css">
 <link rel="stylesheet" href="css/shop.css">
 <script src="js/i18n.js"></script>
@@ -90,7 +90,7 @@
             </div>
             <div class="pd-rfq-row">
               <button type="button" class="cx-btn cx-btn--line" onClick="{{ add }}" style="flex:1">
-                <svg class="cx-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3.5h6v3H9ZM7 5H5v16h14V5h-2M12 10.5v7M8.5 14h7"></path></svg>{{ t.pp_add }}
+                <svg class="cx-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 3.5h2.6l2.3 11a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21 7.5H5.9M8.5 20a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0-2.4 0ZM16 20a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0-2.4 0ZM13.2 8.6v4.6M10.9 10.9h4.6"></path></svg>{{ t.pp_add }}
               </button>
             </div>
             <a class="pp-call" href="{{ telHref }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z"></path></svg><span>{{ callLabel }}</span></a>
@@ -115,7 +115,7 @@
           <sc-if value="{{ hasSpecs }}" hint-placeholder-val="{{ true }}">
             <table class="pp-table">
               <tbody>
-                <sc-if value="{{ p.partNumber }}" hint-placeholder-val="{{ true }}"><tr><th scope="row">{{ t.rf_pn }}</th><td dir="ltr" style="font-family:'IBM Plex Mono',monospace">{{ p.partNumber }}</td></tr></sc-if>
+                <sc-if value="{{ p.partNumber }}" hint-placeholder-val="{{ true }}"><tr><th scope="row">{{ t.rf_pn }}</th><td dir="ltr" style="font-family:'Archivo',system-ui,sans-serif">{{ p.partNumber }}</td></tr></sc-if>
                 <sc-if value="{{ p.brand }}" hint-placeholder-val="{{ true }}"><tr><th scope="row">{{ t.pp_brand }}</th><td>{{ p.brand }}</td></tr></sc-if>
                 <sc-for list="{{ specs }}" as="r" hint-placeholder-count="4"><tr><th scope="row" dir="auto">{{ r.name }}</th><td dir="auto">{{ r.value }}</td></tr></sc-for>
               </tbody>
@@ -156,7 +156,7 @@
             <sc-for list="{{ r.cards }}" as="p" hint-placeholder-count="4">
               <li>
                 <article class="pcx">
-                  <div class="pcx-media"><sc-if value="{{ p.img }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.title }}" loading="lazy" width="400" height="400"></sc-if><sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><span class="pcx-noimg" dir="auto">{{ p.title }}</span></sc-if></div>
+                  <div class="pcx-media"><sc-if value="{{ p.img }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.title }}" loading="lazy" width="400" height="400"></sc-if><sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><span class="pcx-noimg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5ZM3 7.5l9 4.5 9-4.5M12 12v9"></path></svg></span></sc-if></div>
                   <div class="pcx-body">
                     <span class="pcx-brand" dir="auto">{{ p.brand }}</span>
                     <h3 class="pcx-t"><a href="{{ p.href }}">{{ p.title }}</a></h3>

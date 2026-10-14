@@ -80,15 +80,17 @@
             <li>
               <article class="pcx">
                 <div class="pcx-media">
-                  <sc-if value="{{ p.img }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.title }}" loading="lazy" decoding="async" width="400" height="400"></sc-if><sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><span class="pcx-noimg" dir="auto">{{ p.title }}</span></sc-if>
+                  <sc-if value="{{ p.img }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.title }}" loading="lazy" decoding="async" width="400" height="400"></sc-if><sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><span class="pcx-noimg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5ZM3 7.5l9 4.5 9-4.5M12 12v9"></path></svg></span></sc-if>
+                  <sc-if value="{{ p.sample }}" hint-placeholder-val="{{ false }}"><span class="pcx-tag">{{ t.pc_sample }}</span></sc-if>
                 </div>
                 <div class="pcx-body">
-                  <span class="pcx-brand" dir="auto">{{ p.brand }}</span>
+                  <sc-if value="{{ p.brand }}" hint-placeholder-val="{{ true }}"><span class="pcx-brand" dir="auto">{{ p.brand }}</span></sc-if>
                   <h3 class="pcx-t"><a href="{{ p.href }}">{{ p.title }}</a></h3>
                   <sc-if value="{{ p.pn }}" hint-placeholder-val="{{ true }}"><span class="pcx-pn">{{ t.pc_pn }} <b dir="ltr">{{ p.pn }}</b></span></sc-if>
                 </div>
                 <div class="pcx-foot">
-                  <button type="button" class="pcx-rfq" onClick="{{ p.rfq }}" aria-label="{{ p.enqLabel }}">{{ t.pc_enquire }}</button>
+                  <button type="button" class="pcx-rfq" onClick="{{ p.rfq }}" aria-label="{{ p.enqLabel }}">{{ t.pc_enquire }}<svg class="pcx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></button>
+                  <button type="button" class="pcx-add" onClick="{{ p.add }}" aria-label="{{ p.addLabel }}" title="{{ t.pc_add }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 3.5h2.6l2.3 11a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21 7.5H5.9M8.5 20a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0-2.4 0ZM16 20a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0-2.4 0ZM13.2 8.6v4.6M10.9 10.9h4.6"></path></svg></button>
                 </div>
               </article>
             </li>
@@ -329,7 +331,8 @@ class Component extends DCLogic {
       cards: shown.map(c => {
         const prod = { title: c.t, pn: c.pn, brand: c.b, slug: c.s, image: c.i };
         return { title: c.t, brand: c.b, pn: c.pn, img: c.i || '', noImg: !c.i, sample: !!c.x, href: VM.productHref(c.s),
-          enqLabel: t.pc_enquire + ': ' + c.t, rfq: () => VM.requestQuote(prod), add: () => VM.addToQuote(prod, 1) };
+          enqLabel: t.pc_enquire + ': ' + c.t, addLabel: t.pc_add + ': ' + c.t,
+          rfq: () => VM.requestQuote(prod), add: () => VM.addToQuote(prod, 1) };
       }),
       hasPages: pages > 1, pageNums, atFirst: page <= 1, atLast: page >= pages,
       prev: () => this.toPage(page - 1), next: () => this.toPage(page + 1),

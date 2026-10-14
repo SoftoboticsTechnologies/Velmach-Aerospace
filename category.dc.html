@@ -12,7 +12,7 @@
 <helmet>
 <meta name="description" content="Browse Velmach Aerospace products by category and request a quotation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="css/catalogue.css">
 <link rel="stylesheet" href="css/shop.css">
 <script src="js/i18n.js"></script>
@@ -64,7 +64,7 @@
           <div class="sx-sec-h"><h2 id="sx-sib" class="sx-h2"><a href="{{ parentHref }}">{{ browseLabel }}</a></h2><span class="cx-k" dir="auto">{{ subCount }}</span></div>
           <ul class="sx-tiles">
             <sc-for list="{{ tiles }}" as="c" hint-placeholder-count="8">
-              <li><a class="sx-tile" href="{{ c.href }}"><sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}"><span class="sx-tile-img" aria-hidden="true"><img src="{{ c.img }}" alt="" loading="lazy" width="400" height="300"></span></sc-if><span class="sx-tile-t">{{ c.label }}</span><span class="sx-tile-f"><span class="cx-k" style="color:inherit">{{ c.count }}</span><svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></span></a></li>
+              <li><a class="sx-tile" href="{{ c.href }}"><sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}"><span class="sx-tile-img" aria-hidden="true"><img src="{{ c.img }}" alt="" loading="lazy" width="400" height="300"></span></sc-if><sc-if value="{{ c.noImg }}" hint-placeholder-val="{{ false }}"><span class="sx-tile-img sx-tile-img--none" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5ZM3 7.5l9 4.5 9-4.5M12 12v9"></path></svg></span></sc-if><span class="sx-tile-t">{{ c.label }}</span><span class="sx-tile-f"><span class="cx-k" style="color:inherit">{{ c.count }}</span><svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></span></a></li>
             </sc-for>
           </ul>
         </section>

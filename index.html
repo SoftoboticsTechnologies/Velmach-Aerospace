@@ -21,7 +21,7 @@
 <link rel="manifest" href="assets/favicon_io/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="css/home.css">
 <script>document.documentElement.classList.add("js")</script>
 <!-- language is applied before first paint so Arabic visitors never see a flash of English layout -->
@@ -96,7 +96,7 @@
             <circle cx="400" cy="400" r="110" stroke="rgba(170,196,222,.10)" stroke-dasharray="2 6"/>
             <path d="M400 54V746M54 400H746" stroke="rgba(170,196,222,.06)"/>
           </g>
-          <g class="nd-labels" font-family="IBM Plex Mono, monospace" font-size="12" fill="rgba(190,206,222,.55)" text-anchor="middle" dominant-baseline="middle">
+          <g class="nd-labels" font-family="Archivo, system-ui, sans-serif" font-size="12" fill="rgba(190,206,222,.55)" text-anchor="middle" dominant-baseline="middle">
             <text x="400" y="48" fill="rgba(230,238,246,.9)">N</text><text x="576" y="95">030</text><text x="705" y="224">060</text>
             <text x="752" y="400">E</text><text x="705" y="576">120</text><text x="576" y="705">150</text>
             <text x="400" y="752">S</text><text x="224" y="705">210</text><text x="95" y="576">240</text>
@@ -258,6 +258,19 @@
     </div>
   </section>
 
+  <!-- BRANDS: two rows of brand logos scrolling in opposite directions (js/brand-strip.js fills them from data/brands.js) -->
+  <section class="sec sec--white bstrip-sec" id="brands" aria-labelledby="brands-h">
+    <div class="wrap">
+      <div class="sec-head" data-rv>
+        <h2 id="brands-h" class="h2" data-t="hb_title">Brands we supply</h2>
+        <a class="link-arrow" href="brands.dc.html"><span data-t="hb_link">View all brands</span><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+    <div class="bstrip" data-brand-strip>
+      <noscript><p class="wrap"><a href="brands.dc.html">View all brands</a></p></noscript>
+    </div>
+  </section>
+
   <!-- 02 STRATEGIC LOCATION: vector map (tools/build-home-map.py) + origin panel -->
   <section class="sec sec--paper loc" id="location" aria-labelledby="loc-h">
     <div class="wrap">
@@ -275,7 +288,7 @@
                 <path d="M181.2 0V670M362.4 0V670M543.6 0V670M724.8 0V670M906 0V670"/>
                 <path d="M0 20H1087M0 220H1087M0 420H1087M0 620H1087"/>
               </g>
-              <g class="map-grat-l" font-family="IBM Plex Mono, monospace" font-size="13" fill="#7A8591">
+              <g class="map-grat-l" font-family="Archivo, system-ui, sans-serif" font-size="13" fill="#7A8591">
                 <text x="187" y="660">0°</text><text x="368" y="660">20°E</text><text x="549" y="660">40°E</text><text x="730" y="660">60°E</text><text x="912" y="660">80°E</text>
                 <text x="8" y="214">40°N</text><text x="8" y="414">20°N</text><text x="8" y="614">0°</text>
               </g>
@@ -435,19 +448,6 @@
           <span class="ecard-cta"><span data-t="eco_view">View in catalogue</span><span class="ecard-arw"><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
         </a>
       </div>
-    </div>
-  </section>
-
-  <!-- BRANDS: two rows of brand logos scrolling in opposite directions (js/brand-strip.js fills them from data/brands.js) -->
-  <section class="sec sec--paper bstrip-sec" id="brands" aria-labelledby="brands-h">
-    <div class="wrap">
-      <div class="sec-head" data-rv>
-        <h2 id="brands-h" class="h2" data-t="hb_title">Brands we supply</h2>
-        <a class="link-arrow" href="brands.dc.html"><span data-t="hb_link">View all brands</span><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      </div>
-    </div>
-    <div class="bstrip" data-brand-strip>
-      <noscript><p class="wrap"><a href="brands.dc.html">View all brands</a></p></noscript>
     </div>
   </section>
 

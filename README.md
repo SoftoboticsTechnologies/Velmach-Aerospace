@@ -19,7 +19,7 @@ Bilingual (EN / AR) site for VELMACH AEROSPACE F.Z.C. Pages in this project are 
 ## Header (SiteHeader.dc.html)
 Every page imports it. From top to bottom:
 - Utility bar (1200px and wider): AOG desk, then Calibration, GSE Service & Repair, Rent, Sell / Trade, Contact Us and the phone number (`phone` in js/site-config.js).
-- Main row: logo (the square mark below 760px), search with live suggestions, Shop by Aircraft, the quote list button (clipboard icon) with its item count and the Request Quote button ("RFQ" below 760px). Both open the RFQ panel.
+- Main row: logo (the square mark below 760px), search with live suggestions, Shop by Aircraft, the quote list button (cart icon) with its item count and the Request Quote button ("RFQ" below 760px). Both open the RFQ panel.
 - Navigation (1200px and wider): one mega menu per category in data/categories.js (`nav: true`), then Shop by Brand, Services (cards from `services` in js/site-config.js), Blog and Shop All. Menus open on hover after 150 ms and close on mouse leave or Esc. Keyboard: Tab between items, Enter follows the link, ArrowDown or Space opens the menu and moves into it, ArrowUp/ArrowDown move inside it, ArrowLeft/ArrowRight/Home/End move between items, Esc closes and returns focus.
 - Below 1200px: a hamburger opens a side drawer (Shop by Category accordion, Shop by Brand, Shop by Aircraft, Services, Calibration, Rentals, Contact Us, phone, Sign In), and the search sits on its own row under the header.
 - Search suggestions (js/search.js) wait 300 ms after typing and show matching products, categories and brands; Enter opens search.dc.html. Products come from `searchIndex` in js/site-config.js (data/catalog/search.json).

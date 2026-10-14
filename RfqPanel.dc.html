@@ -107,7 +107,7 @@
           </span>
           <span style="font-size:13px;color:#56626E;margin-top:-4px">{{ t.r_manual_sub }}</span>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <input value="{{ mPn }}" onChange="{{ onMPn }}" onKeyDown="{{ mKey }}" placeholder="{{ t.r_manual_pn }}" aria-label="{{ t.r_manual_pn }}" dir="ltr" style="flex:2 1 160px;min-width:0;height:44px;padding-inline:12px;border:1px solid #C3C7C9;background:#FFFFFF;font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:{{ start }};outline:none" style-focus="border-color:#0759A5">
+            <input value="{{ mPn }}" onChange="{{ onMPn }}" onKeyDown="{{ mKey }}" placeholder="{{ t.r_manual_pn }}" aria-label="{{ t.r_manual_pn }}" dir="ltr" style="flex:2 1 160px;min-width:0;height:44px;padding-inline:12px;border:1px solid #C3C7C9;background:#FFFFFF;font-family:'Archivo',system-ui,sans-serif;font-size:14px;text-align:{{ start }};outline:none" style-focus="border-color:#0759A5">
             <input type="number" min="1" value="{{ mQty }}" onChange="{{ onMQty }}" aria-label="{{ t.r_manual_qty }}" style="flex:0 0 78px;height:44px;padding-inline:10px;border:1px solid #C3C7C9;background:#FFFFFF;font:inherit;font-size:14px;outline:none" style-focus="border-color:#0759A5">
             <button type="button" onClick="{{ addManual }}" style="flex:1 1 110px;height:44px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s" style-hover="background:#0B1B2B">{{ t.r_manual_add }}</button>
           </div>

@@ -6,7 +6,7 @@
   --steel: #56626E; --steel-2: #8A96A3; --mist: #C9D2DB; --dim: #9FB0C1;
   --paper: #F3F1EC; --paper-2: #EAE7E0; --white: #FBFBF9; --line: #DADBD8; --line-2: #C3C7C9;
   --blue: #0759A5; --blue-2: #0A6BC4; --sig: #6AA6E8; --aog: #E0442E; --aog-2: #FF8A73;
-  --fm: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+  --fm: 'Archivo', system-ui, sans-serif;
   --ease: cubic-bezier(.2, .7, .2, 1);
   --wrap: 1320px; --gut: clamp(16px, 4vw, 56px);
   --dir: 1;
@@ -17,7 +17,7 @@ body { background: var(--white); }
 .cx * { box-sizing: border-box; }
 .cx-wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gut); }
 .cx-mono { font-family: var(--fm); }
-.cx-k { font: 500 11.5px/1.4 var(--fm); letter-spacing: .14em; text-transform: uppercase; color: var(--steel); }
+.cx-k { font: 600 11.5px/1.4 var(--fm); letter-spacing: .1em; text-transform: uppercase; color: var(--steel); }
 [dir="rtl"] .cx-k { font-family: inherit; letter-spacing: 0; font-size: 13px; }
 .cx-ic { width: 18px; height: 18px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: square; stroke-linejoin: miter; }
 .cx-arw { transform: translateX(calc(var(--ax, 0px) * var(--dir))) scaleX(var(--dir)); transition: transform .4s var(--ease); }

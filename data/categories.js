@@ -4,9 +4,6 @@
    Slugs are part of every product and category URL: rename a label freely, but keep its slug.
    nav: false keeps a category off the header menus (it is still listed on categories.dc.html). */
 window.VM_CATS = [
-  {"slug": "ground-support-equipment", "en": "Ground Support Equipment", "ar": "معدات الدعم الأرضي", "nav": true, "desc_en": "Equipment for handling, servicing, powering and maintaining aircraft on the ramp and in the hangar, from jacks and towbars to ground power units.", "desc_ar": "معدات لمناولة الطائرات وخدمتها وتزويدها بالطاقة وصيانتها في ساحات الوقوف والحظائر، من الرافعات وقضبان السحب إلى وحدات الطاقة الأرضية.", "children": [
-    {"slug": "fueling-gse", "en": "Fueling GSE", "ar": "معدات التزود بالوقود", "desc_en": "Refuelling carts, nozzles, hoses and filtration equipment for handling aviation fuel.", "desc_ar": "عربات تزويد بالوقود وفوهات وخراطيم ومعدات ترشيح لمناولة وقود الطيران."}
-  ]},
   {"slug": "aircraft-tooling", "en": "Aircraft Tooling", "ar": "عِدد وأدوات الطائرات", "nav": true, "desc_en": "Hand tools, measuring instruments, manufacturer-specific tooling and test equipment for line and base maintenance.", "desc_ar": "عِدد يدوية وأدوات قياس وعِدد خاصة بالشركات المصنّعة ومعدات اختبار لأعمال الصيانة الخطية والأساسية.", "children": [
     {"slug": "other-aircraft-tools", "en": "Other Aircraft Tools", "ar": "أدوات طائرات أخرى", "desc_en": "Specialist aircraft tools that do not fit a single category.", "desc_ar": "عِدد طائرات متخصصة لا تندرج ضمن فئة واحدة."},
     {"slug": "drill-bits", "en": "Drill Bits", "ar": "لقم الحفر", "desc_en": "High-speed steel and cobalt drill bits for aluminium, titanium and composite structures.", "desc_ar": "لقم حفر من الفولاذ عالي السرعة والكوبالت لهياكل الألومنيوم والتيتانيوم والمواد المركبة."},
@@ -67,5 +64,8 @@ window.VM_CATS = [
     {"slug": "fire-extinguishers", "en": "Fire Extinguishers", "ar": "طفايات الحريق", "desc_en": "Cabin and hangar fire extinguishers and mounting brackets.", "desc_ar": "طفايات حريق للمقصورة والحظائر وحوامل تثبيتها."},
     {"slug": "protective-breathing-equipment-pbe", "en": "Protective Breathing Equipment (PBE)", "ar": "معدات التنفس الواقية (PBE)", "desc_en": "Smoke hoods and protective breathing equipment for crew.", "desc_ar": "أغطية رأس للحماية من الدخان ومعدات تنفس واقية للأطقم."},
     {"slug": "safety-apparel", "en": "Safety Apparel", "ar": "ملابس السلامة", "desc_en": "Protective clothing, gloves and footwear.", "desc_ar": "ملابس واقية وقفازات وأحذية."}
+  ]},
+  {"slug": "ground-support-equipment", "en": "Ground Support Equipment", "ar": "معدات الدعم الأرضي", "nav": true, "desc_en": "Equipment for handling, servicing, powering and maintaining aircraft on the ramp and in the hangar, from jacks and towbars to ground power units.", "desc_ar": "معدات لمناولة الطائرات وخدمتها وتزويدها بالطاقة وصيانتها في ساحات الوقوف والحظائر، من الرافعات وقضبان السحب إلى وحدات الطاقة الأرضية.", "children": [
+    {"slug": "fueling-gse", "en": "Fueling GSE", "ar": "معدات التزود بالوقود", "desc_en": "Refuelling carts, nozzles, hoses and filtration equipment for handling aviation fuel.", "desc_ar": "عربات تزويد بالوقود وفوهات وخراطيم ومعدات ترشيح لمناولة وقود الطيران."}
   ]}
 ];

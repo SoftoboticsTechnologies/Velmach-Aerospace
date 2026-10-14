@@ -16,7 +16,7 @@
 <link rel="alternate" hreflang="en" href="https://www.velmachaerospace.com/blogs.html?lang=en">
 <link rel="alternate" hreflang="ar" href="https://www.velmachaerospace.com/blogs.html?lang=ar">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <script src="js/i18n.js"></script>
 <script src="data/blogs.js"></script>
 <script src="js/vm-core.js"></script>
@@ -70,7 +70,7 @@ input[type=search]::-webkit-search-cancel-button{filter:invert(1) opacity(.6)}
       <div role="group" aria-label="{{ t.b_all }}" style="max-width:1320px;margin:0 auto;padding-inline:clamp(16px,4vw,56px);display:flex;gap:4px;overflow-x:auto;scrollbar-width:none">
         <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4">
           <button type="button" onClick="{{ c.onClick }}" aria-pressed="{{ c.active }}" style="position:relative;flex-shrink:0;display:inline-flex;align-items:center;gap:10px;height:56px;padding-inline:16px;border:0;background:transparent;color:{{ c.fg }};font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:color .2s" style-hover="color:#FFFFFF">
-            {{ c.label }}<span dir="ltr" style="min-width:24px;height:20px;padding-inline:6px;display:inline-flex;align-items:center;justify-content:center;background:{{ c.countBg }};color:{{ c.countFg }};font-family:'IBM Plex Mono',monospace;font-size:11px;border-radius:10px">{{ c.count }}</span>
+            {{ c.label }}<span dir="ltr" style="min-width:24px;height:20px;padding-inline:6px;display:inline-flex;align-items:center;justify-content:center;background:{{ c.countBg }};color:{{ c.countFg }};font-family:'Archivo',system-ui,sans-serif;font-size:11px;border-radius:10px">{{ c.count }}</span>
             <span aria-hidden="true" style="position:absolute;inset-inline:12px;bottom:0;height:3px;background:#6AA6E8;transform:scaleX({{ c.bar }});transition:transform .35s cubic-bezier(.2,.7,.2,1)"></span>
           </button>
         </sc-for>
@@ -136,7 +136,7 @@ input[type=search]::-webkit-search-cancel-button{filter:invert(1) opacity(.6)}
     <sc-if value="{{ multiPage }}" hint-placeholder-val="{{ false }}">
       <nav aria-label="Pagination" style="display:flex;justify-content:center;align-items:center;gap:12px">
         <button type="button" onClick="{{ prevPg }}" disabled="{{ prevDisabled }}" style="height:44px;padding-inline:18px;border:1px solid #0B1B2B;background:#FFFFFF;font:inherit;font-weight:600;cursor:pointer;opacity:{{ prevOp }}">{{ t.p_prev }}</button>
-        <span dir="ltr" style="min-width:72px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4B5563">{{ pageLabel }}</span>
+        <span dir="ltr" style="min-width:72px;text-align:center;font-family:'Archivo',system-ui,sans-serif;font-size:13px;color:#4B5563">{{ pageLabel }}</span>
         <button type="button" onClick="{{ nextPg }}" disabled="{{ nextDisabled }}" style="height:44px;padding-inline:18px;border:0;background:#0B1B2B;color:#FFFFFF;font:inherit;font-weight:600;cursor:pointer;opacity:{{ nextOp }}">{{ t.p_next }}</button>
       </nav>
     </sc-if>

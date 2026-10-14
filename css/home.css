@@ -6,9 +6,9 @@
   --paper: #F3F1EC; --paper-2: #EAE7E0; --white: #FBFBF9; --line: #DADBD8; --line-2: #C3C7C9;
   --blue: #0759A5; --blue-2: #0A6BC4; --sig: #6AA6E8; --aog: #E0442E; --aog-2: #FF8A73;
   --fs: 'VMAmp', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --fm: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
-  --fk: var(--fm);                      /* technical labels (mono in EN, Arabic face in AR) */
-  --ls-k: .14em;
+  --fm: 'Archivo', system-ui, sans-serif;
+  --fk: var(--fm);                      /* small uppercase labels (Archivo in EN, Arabic face in AR) */
+  --ls-k: .1em;
   --wrap: 1320px; --gut: clamp(16px, 4vw, 56px);
   --ease: cubic-bezier(.2, .7, .2, 1); --ease-io: cubic-bezier(.65, 0, .35, 1);
   --dir: 1; --hdr: 112px;
@@ -44,7 +44,7 @@ main { display: block; background: var(--white); }
 /* type */
 .h2 { font: 500 clamp(30px, 3.5vw, 52px)/1.06 var(--fs); font-stretch: 108%; letter-spacing: -.024em; color: inherit; text-wrap: balance; max-width: 19ch; }
 .lead { font-size: clamp(16px, 1.25vw, 18px); line-height: 1.65; color: #4A5561; max-width: 52ch; text-wrap: pretty; }
-.mono-k { font: 500 11.5px/1.4 var(--fk); letter-spacing: var(--ls-k); text-transform: uppercase; color: var(--steel); }
+.mono-k { font: 600 11.5px/1.4 var(--fk); letter-spacing: var(--ls-k); text-transform: uppercase; color: var(--steel); }
 [dir="rtl"] .h2, [dir="rtl"] .hero-h { line-height: 1.35; letter-spacing: 0; }
 [dir="rtl"] .mono-k { font-size: 13px; }
 
@@ -650,6 +650,10 @@ main { display: block; background: var(--white); }
   .tagbar-item { padding-inline: 8px; }
 }
 
+/* brands sit right under the carousel: tighter spacing than other sections */
+.sec.bstrip-sec { padding-block: clamp(28px, 3.5vw, 48px) clamp(32px, 4vw, 56px); }
+.bstrip-sec .sec-head { margin-bottom: clamp(20px, 2.5vw, 32px); }
+.sec.loc { padding-top: clamp(40px, 5vw, 72px); }
 /* brand strip: two rows scrolling in opposite directions, paused on hover or focus (js/brand-strip.js) */
 .bstrip-sec .sec-head { align-items: center; }
 .bstrip-sec .link-arrow { justify-self: end; color: var(--blue); }
