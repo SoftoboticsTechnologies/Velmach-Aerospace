@@ -17,6 +17,7 @@
 <script src="js/i18n.js"></script>
 <script src="js/routes.js"></script>
 <script src="js/vm-core.js"></script>
+<script src="js/catalog.js"></script>
 <script src="data/aircraft.js"></script>
 </helmet>
 
@@ -38,25 +39,62 @@
     </div>
   </section>
 
-  <div class="cx-wrap sx-body">
+  <div class="cx-wrap sx-body ac-body">
+    <form class="ac-find" role="search" onSubmit="{{ noSubmit }}">
+      <label for="ac-q" class="ac-find-l">{{ t.ac_find }}</label>
+      <div class="ac-find-box">
+        <svg class="ac-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <input id="ac-q" type="search" value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.ac_find_ph }}" autocomplete="off" spellcheck="false">
+        <sc-if value="{{ hasQ }}" hint-placeholder-val="{{ false }}"><button type="button" class="ac-find-x" onClick="{{ clearQ }}" aria-label="{{ t.ac_find_clear }}"><svg class="ac-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></sc-if>
+      </div>
+    </form>
+
+    <sc-if value="{{ hasFeat }}" hint-placeholder-val="{{ true }}">
+      <section class="sx-sec" aria-labelledby="ac-feat">
+        <div class="sx-sec-h"><h2 id="ac-feat" class="sx-h2">{{ t.ac_feat_t }}</h2><p class="ac-d">{{ t.ac_feat_d }}</p></div>
+        <ul class="ac-tiles">
+          <sc-for list="{{ feat }}" as="f" hint-placeholder-count="6">
+            <li><a class="ac-tile" href="{{ f.href }}" onClick="{{ f.pick }}" aria-current="{{ f.cur }}" aria-label="{{ f.aria }}">
+              <span class="ac-tile-ic"><svg class="ac-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"></path></svg></span>
+              <span class="ac-tile-b"><span class="cx-k" dir="ltr">{{ f.make }}</span><span class="ac-tile-t" dir="ltr">{{ f.model }}</span></span>
+              <span class="ac-tile-f"><span class="ac-n">{{ f.parts }}</span><span class="ac-arw" aria-hidden="true">{{ arrow }}</span></span>
+            </a></li>
+          </sc-for>
+        </ul>
+      </section>
+    </sc-if>
+
+    <section class="sx-sec" aria-labelledby="ac-all">
+      <div class="sx-sec-h"><h2 id="ac-all" class="sx-h2">{{ t.ac_all_t }}</h2></div>
+      <sc-if value="{{ noMatch }}" hint-placeholder-val="{{ false }}"><p class="ac-none">{{ noneLabel }}</p></sc-if>
+      <div class="sx-groups">
+        <sc-for list="{{ makes }}" as="m" hint-placeholder-count="6">
+          <section class="sx-group" aria-labelledby="{{ m.hid }}">
+            <div class="sx-group-h"><h3 id="{{ m.hid }}" class="sx-group-t" dir="ltr">{{ m.make }}</h3><span class="cx-k">{{ m.count }}</span></div>
+            <ul class="sx-chips">
+              <sc-for list="{{ m.models }}" as="x" hint-placeholder-count="4">
+                <li><button type="button" class="ac-chip" onClick="{{ x.pick }}" aria-pressed="{{ x.on }}" aria-label="{{ x.aria }}"><span dir="ltr">{{ x.model }}</span><sc-if value="{{ x.hasN }}" hint-placeholder-val="{{ false }}"><span class="ac-chip-n">{{ x.n }}</span></sc-if></button></li>
+              </sc-for>
+            </ul>
+          </section>
+        </sc-for>
+      </div>
+    </section>
+
     <sc-if value="{{ hasAc }}" hint-placeholder-val="{{ false }}">
-      <div class="lx-fits" role="status">
-        <span>{{ curLabel }}</span>
-        <span style="display:flex;gap:18px;flex-wrap:wrap"><a class="cx-link" href="categories.dc.html">{{ t.ac_go }}</a><button type="button" onClick="{{ clear }}">{{ t.ac_clear }}</button></span>
+      <div class="ac-cur" role="status">
+        <span class="ac-cur-t"><svg class="ac-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"></path></svg><span>{{ curLabel }}</span></span>
+        <span class="ac-cur-a">
+          <a class="cx-btn cx-btn--blue" href="{{ curHref }}">{{ curGo }}<span aria-hidden="true">{{ arrow }}</span></a>
+          <button type="button" class="ac-cur-x" onClick="{{ clear }}">{{ t.ac_clear }}</button>
+        </span>
       </div>
     </sc-if>
-    <div class="sx-groups">
-      <sc-for list="{{ makes }}" as="m" hint-placeholder-count="6">
-        <section class="sx-group" aria-labelledby="{{ m.hid }}">
-          <div class="sx-group-h"><h2 id="{{ m.hid }}" class="sx-group-t" dir="ltr">{{ m.make }}</h2></div>
-          <ul class="sx-chips">
-            <sc-for list="{{ m.models }}" as="x" hint-placeholder-count="4">
-              <li><button type="button" class="sx-chip" onClick="{{ x.pick }}" aria-pressed="{{ x.on }}" aria-label="{{ x.aria }}" style="cursor:pointer;font:inherit;font-weight:600;{{ x.style }}"><span dir="ltr">{{ x.model }}</span></button></li>
-            </sc-for>
-          </ul>
-        </section>
-      </sc-for>
-    </div>
+
+    <aside class="ac-help" aria-labelledby="ac-help-t">
+      <div><h2 id="ac-help-t" class="ac-help-t">{{ t.ac_missing_t }}</h2><p class="ac-help-b">{{ t.ac_missing_b }}</p></div>
+      <span class="ac-help-a"><button type="button" class="cx-btn cx-btn--blue" onClick="{{ ask }}">{{ t.ac_ask }}</button><a class="cx-link" href="{{ contactHref }}">{{ t.hd_util.contact }}</a></span>
+    </aside>
   </div>
 </main>
 </sc-if>
@@ -65,11 +103,19 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 // Shop by Aircraft page (/aircraft): picking a model saves it with VM.addAircraft (js/vm-core.js), the same as the header panel.
+// Part counts per aircraft come from data/catalog/meta.json (scripts/build-catalog.py); "View parts" opens the search
+// listing filtered to that aircraft (search.dc.html?q=&ac=<id>).
 const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
+const norm = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '');
 class Component extends DCLogic {
-  state = { ready: false };
+  state = { ready: false, counts: {}, q: '' };
   componentDidMount() {
-    const go = () => { if (window.VM && window.VM_I18N && window.VM_I18N.en.ac_title && window.VM_AIRCRAFT && window.VM_ROUTES) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
+    const go = () => {
+      if (window.VM && window.VM_I18N && window.VM_I18N.en.ac_feat_t && window.VM_AIRCRAFT && window.VM_ROUTES && window.VM_CATALOG) {
+        this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true });
+        window.VM_CATALOG.meta().then(m => this.setState({ counts: (m && m.aircraft) || {} }));
+      } else this.tw = setTimeout(go, 30);
+    };
     go();
   }
   componentDidUpdate() {
@@ -80,13 +126,33 @@ class Component extends DCLogic {
   componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
   renderVals() {
     if (!this.state.ready) return { ready: false };
-    const VM = window.VM, t = VM.t(), v = VM.sv(), cur = VM.currentAircraft();
+    const VM = window.VM, t = VM.t(), v = VM.sv(), cur = VM.currentAircraft(), counts = this.state.counts, q = norm(this.state.q);
+    const parts = n => (n === 1 ? t.ac_parts1 : fmt(t.ac_parts, { n }));
+    const href = id => VM.searchHref('') + '&ac=' + encodeURIComponent(id);
+    // every aircraft in data/aircraft.js, narrowed by the search box (make, model or both, ignoring spaces and punctuation)
+    const all = [];
+    window.VM_AIRCRAFT.forEach(m => m.models.forEach(model => {
+      const id = VM.acId(m.make, model);
+      if (!q || norm(m.make + model).includes(q) || norm(model).includes(q)) all.push({ make: m.make, model, id, n: counts[id] || 0 });
+    }));
+    // aircraft that have parts listed for them, most parts first
+    const feat = all.filter(a => a.n).sort((a, b) => b.n - a.n).map(a => ({ make: a.make, model: a.model, href: href(a.id), parts: parts(a.n),
+      cur: cur && cur.id === a.id ? 'true' : undefined, aria: fmt(t.ac_view_n, { n: a.n, a: a.make + ' ' + a.model }), pick: () => VM.addAircraft(a.make, a.model) }));
+    const makes = [];
+    all.forEach(a => { let g = makes[makes.length - 1]; if (!g || g.make !== a.make) makes.push(g = { make: a.make, hid: 'ac-m-' + makes.length, list: [] }); g.list.push(a); });
+    const curN = cur ? counts[cur.id] || 0 : 0;
     return { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb',
+      q: this.state.q, hasQ: !!this.state.q, onQ: e => this.setState({ q: e.target.value }), clearQ: () => this.setState({ q: '' }), noSubmit: e => e.preventDefault(),
       hasAc: !!cur, curLabel: cur ? fmt(t.ac_current, { a: cur.make + ' ' + cur.model }) : '', clear: () => VM.selectAircraft(null),
-      makes: window.VM_AIRCRAFT.map((m, i) => ({ make: m.make, hid: 'ac-m-' + i,
-        models: m.models.map(model => { const on = !!cur && cur.id === VM.acId(m.make, model);
-          return { model, on: String(on), aria: fmt(t.ac_pick, { a: m.make + ' ' + model }),
-            style: on ? 'background:#0B1B2B;border-color:#0B1B2B;color:#FFFFFF' : '', pick: () => VM.addAircraft(m.make, model) }; }) })) };
+      curHref: cur && curN ? href(cur.id) : VM.HREF.categories,
+      curGo: cur && curN ? fmt(t.ac_view_n, { n: curN, a: cur.make + ' ' + cur.model }) : t.ac_go,
+      hasFeat: feat.length > 0, feat,
+      noMatch: !all.length, noneLabel: fmt(t.ac_none_t, { q: this.state.q.trim() }),
+      makes: makes.map(g => ({ make: g.make, hid: g.hid, count: fmt(t.ac_models, { n: g.list.length }),
+        models: g.list.map(a => { const on = !!cur && cur.id === a.id;
+          return { model: a.model, on: String(on), hasN: a.n > 0, n: String(a.n), aria: fmt(t.ac_pick, { a: a.make + ' ' + a.model }) + (a.n ? ' (' + parts(a.n) + ')' : ''),
+            pick: () => (on ? VM.selectAircraft(null) : VM.addAircraft(a.make, a.model)) }; }) })),
+      ask: () => VM.openRfq(), contactHref: VM.HREF.contact };
   }
 }
 </script>

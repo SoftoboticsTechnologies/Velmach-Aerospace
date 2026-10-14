@@ -651,7 +651,12 @@ ar: {
     br_desc: "{b} products in {cats}, supplied by Velmach Aerospace with quotations on request.", br_desc0: "{b} products are quoted on request: send us the part number.",
     br_n: "{n} products", br_n1: "1 product",
     ac_eyebrow: "Shop by Aircraft", ac_title: "Find parts for your aircraft", ac_sub: "Choose your aircraft. Product listings then show parts that fit it, together with universal items.",
-    ac_pick: "Shop for {a}", ac_current: "Currently shopping for {a}", ac_clear: "Shop without aircraft", ac_go: "Browse categories"
+    ac_pick: "Shop for {a}", ac_current: "Currently shopping for {a}", ac_clear: "Shop without aircraft", ac_go: "Browse categories",
+    ac_find: "Find your aircraft", ac_find_ph: "Search make or model, e.g. Falcon 2000", ac_find_clear: "Clear search",
+    ac_feat_t: "Aircraft with dedicated parts", ac_feat_d: "These aircraft have parts listed specifically for them. Choose one to see its parts.",
+    ac_all_t: "All aircraft", ac_parts: "{n} parts", ac_parts1: "1 part", ac_models: "{n} models", ac_view: "View parts for {a}", ac_view_n: "View {n} parts for {a}",
+    ac_none_t: "No aircraft matches “{q}”", ac_missing_t: "Don’t see your aircraft?",
+    ac_missing_b: "We source parts for most commercial, business and rotary-wing aircraft. Send us the part number and aircraft type.", ac_ask: "Request a quote"
   });
   Object.assign(D.ar, {
     ls_filters: "عوامل التصفية", ls_sub: "الفئة الفرعية", ls_cat: "الفئة", ls_brand: "العلامة التجارية", ls_brand_search: "ابحث في العلامات", ls_cond: "الحالة",
@@ -685,6 +690,11 @@ ar: {
     br_desc: "منتجات {b} في فئات {cats}، تورّدها فيلماك إيروسبايس مع عروض أسعار عند الطلب.", br_desc0: "منتجات {b} متاحة بعرض سعر عند الطلب: أرسل لنا رقم القطعة.",
     br_n: "{n} منتج", br_n1: "منتج واحد",
     ac_eyebrow: "تسوّق حسب الطائرة", ac_title: "ابحث عن قطع طائرتك", ac_sub: "اختر طائرتك، وستعرض قوائم المنتجات القطع المناسبة لها مع المنتجات العامة.",
-    ac_pick: "تسوّق لـ {a}", ac_current: "تتسوّق حاليًا لـ {a}", ac_clear: "تسوّق دون تحديد طائرة", ac_go: "تصفّح الفئات"
+    ac_pick: "تسوّق لـ {a}", ac_current: "تتسوّق حاليًا لـ {a}", ac_clear: "تسوّق دون تحديد طائرة", ac_go: "تصفّح الفئات",
+    ac_find: "ابحث عن طائرتك", ac_find_ph: "ابحث بالشركة المصنّعة أو الطراز، مثل Falcon 2000", ac_find_clear: "مسح البحث",
+    ac_feat_t: "طائرات لها قطع مخصّصة", ac_feat_d: "لهذه الطائرات قطع مدرجة خصيصًا لها. اختر طائرة لعرض قطعها.",
+    ac_all_t: "جميع الطائرات", ac_parts: "{n} قطعة", ac_parts1: "قطعة واحدة", ac_models: "{n} طرازات", ac_view: "عرض قطع {a}", ac_view_n: "عرض {n} قطعة لـ {a}",
+    ac_none_t: "لا توجد طائرة تطابق “{q}”", ac_missing_t: "لا تجد طائرتك؟",
+    ac_missing_b: "نوفّر قطعًا لمعظم الطائرات التجارية وطائرات الأعمال والمروحيات. أرسل إلينا رقم القطعة ونوع الطائرة.", ac_ask: "اطلب عرض سعر"
   });
 })(window.VM_I18N);

@@ -443,3 +443,58 @@
   .pcx-t { font-size: 16px; }
   .pcx-rfq { font-size: 14px; }
 }
+
+/* Shop by Aircraft page (aircraft.dc.html): search, current aircraft bar, aircraft with parts, every make and model */
+.ac-body { gap: clamp(32px, 4vw, 52px); }
+.ac-ic { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.ac-find { display: flex; flex-direction: column; gap: 8px; max-width: 640px; margin: 0; }
+.ac-find-l { font-weight: 600; font-size: 14px; color: var(--navy); }
+.ac-find-box { display: flex; align-items: center; gap: 10px; height: 54px; padding-inline: 16px 6px; border: 1px solid var(--line-2); border-radius: 12px; background: #fff; color: var(--steel); transition: border-color .2s, box-shadow .2s; }
+[dir="rtl"] .ac-find-box { padding-inline: 16px 6px; }
+.ac-find-box:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(7, 89, 165, .15); }
+.ac-find-box input { flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; color: var(--navy); font: inherit; font-size: 16px; outline: none; }
+.ac-find-box input::-webkit-search-cancel-button { display: none; }
+.ac-find-x { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border: 0; border-radius: 8px; background: transparent; color: var(--steel); cursor: pointer; }
+.ac-find-x:hover { background: var(--paper); color: var(--navy); }
+.ac-cur { position: sticky; bottom: 16px; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; padding: 12px 12px 12px 18px; border-radius: 14px; background: var(--ink); color: #fff; box-shadow: 0 18px 40px -16px rgba(7, 17, 29, .55); animation: vmFade .25s ease; }
+[dir="rtl"] .ac-cur { padding: 12px 18px 12px 12px; }
+.ac-cur-t { display: inline-flex; align-items: center; gap: 12px; font-weight: 600; font-size: 15px; }
+.ac-cur-t .ac-ic { color: var(--sig); }
+.ac-cur-a { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+.ac-cur-a .cx-btn { border-radius: 10px; }
+.ac-cur-x { padding: 0; border: 0; background: none; color: #C9D3DD; font: inherit; font-size: 13.5px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.ac-cur-x:hover { color: #fff; }
+.ac-d { margin: 0; max-width: 52ch; font-size: 14px; line-height: 1.55; color: var(--steel); }
+.ac-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.ac-tiles > li { display: flex; min-width: 0; }
+.ac-tile { display: flex; flex-direction: column; gap: 14px; width: 100%; padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: 0 1px 2px rgba(7, 17, 29, .04); color: var(--navy); text-decoration: none; transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s, color .2s; }
+.ac-tile:hover, .ac-tile:focus-visible { transform: translateY(-3px); border-color: #C7D6E6; box-shadow: 0 18px 40px -18px rgba(7, 27, 43, .28); color: var(--blue); }
+.ac-tile:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.ac-tile[aria-current="true"] { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
+@media (prefers-reduced-motion: reduce) { .ac-tile:hover, .ac-tile:focus-visible { transform: none; } }
+.ac-tile-ic { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: #EEF4FB; color: var(--blue); }
+.ac-tile[aria-current="true"] .ac-tile-ic { background: var(--blue); color: #fff; }
+.ac-tile-b { display: flex; flex-direction: column; gap: 4px; }
+.ac-tile-t { font-size: 20px; font-weight: 600; line-height: 1.2; font-stretch: 106%; }
+.ac-tile-f { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
+.ac-n { font: 600 13px/1 'Archivo', system-ui, sans-serif; font-variant-numeric: tabular-nums; color: var(--steel); }
+.ac-tile:hover .ac-n { color: var(--blue); }
+.ac-arw { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: #F1F3F5; transition: background .25s, color .25s; }
+.ac-tile:hover .ac-arw { background: var(--blue); color: #fff; }
+.ac-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: #F7F8F8; color: #2E3A46; font: inherit; font-size: 13.5px; font-weight: 600; line-height: 1.25; cursor: pointer; transition: background .2s, border-color .2s, color .2s; }
+.ac-chip:hover { border-color: #B9CDE3; background: #F0F6FD; color: var(--blue); }
+.ac-chip:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.ac-chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.ac-chip-n { min-width: 22px; padding: 3px 7px; border-radius: 999px; background: #E1ECF8; font: 600 11px/1 'Archivo', system-ui, sans-serif; font-variant-numeric: tabular-nums; text-align: center; color: var(--blue); }
+.ac-chip[aria-pressed="true"] .ac-chip-n { background: rgba(255, 255, 255, .2); color: #fff; }
+.ac-none { margin: 0; padding: 18px; border: 1px dashed var(--line-2); border-radius: 12px; color: var(--steel); text-align: center; }
+.ac-help { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; padding: clamp(22px, 3vw, 32px); border-radius: 18px; background: var(--paper); }
+.ac-help-t { margin: 0 0 6px; font-size: 20px; font-weight: 600; color: var(--navy); }
+.ac-help-b { margin: 0; max-width: 60ch; font-size: 14.5px; line-height: 1.6; color: var(--steel); }
+.ac-help-a { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
+.ac-help-a .cx-btn { border-radius: 10px; }
+@media (max-width: 759px) {
+  .ac-cur { bottom: 10px; }
+  .ac-cur-a, .ac-cur-a .cx-btn { width: 100%; }
+  .ac-cur-a .cx-btn { white-space: normal; text-align: center; }
+}

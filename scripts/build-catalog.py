@@ -7,7 +7,7 @@ Each file plays the part a database index would on a server:
   data/catalog/c/<parent>/<child>.json   every product in a subcategory
   data/catalog/b/<brand>.json            every product of a brand                           - lookup by brand
   data/catalog/search.json               cards of every product (search suggestions and search page) - lookup by part number / text
-  data/catalog/meta.json                 product counts per category, subcategory, brand and condition
+  data/catalog/meta.json                 product counts per category, subcategory, brand, condition and aircraft
   data/brands.js                         every brand that has products, with its logo file when public/brands/ has one
   sitemap-products.xml, sitemap-categories.xml
 Listing pages fetch one card file and page through it 24/48/96 at a time; images load lazily.
@@ -117,6 +117,23 @@ def build(force=False):
         print(f"  ! {r['partNumber']} ({r['brand']}): category {r['categoryParent']}/{r['categoryChild']} no longer exists in data/categories.js; not published")
     products.sort(key=lambda r: (r.get('createdAt') or '', r['slug']), reverse=True)   # newest first
 
+    # Shop by Aircraft: a product without compatibleAircraft takes its aircraft from an "Aircraft" specification
+    amap, unknown_ac = L.AircraftMap(L.load_aircraft()), {}
+    for r in products:
+        if r.get('compatibleAircraft'):
+            continue
+        ids = []
+        for s in r.get('specifications') or []:
+            if str(s.get('name', '')).strip().lower() == 'aircraft':
+                found, unknown = amap.from_spec(s.get('value', ''))
+                ids += found
+                for u in unknown:
+                    unknown_ac[u] = unknown_ac.get(u, 0) + 1
+        if ids:
+            r['compatibleAircraft'] = sorted(set(ids))
+    for u, n in sorted(unknown_ac.items(), key=lambda x: -x[1]):
+        print(f'  ! aircraft "{u}" in {n} product specification(s) is not in data/aircraft.js; those products show for every aircraft')
+
     written = 0
     base = L.CATALOG
     wanted = set()
@@ -163,6 +180,12 @@ def build(force=False):
                                        'i': {ch['slug']: next((c['i'] for c in by_child.get((p['slug'], ch['slug']), []) if c['i']), '') for ch in p['children']}} for p in cats},
             'brands': {b['slug']: len(by_brand.get(b['slug'], [])) for b in brands},
             'conditions': {'new': sum(1 for c in cards if c['k'] == 'new'), 'used': sum(1 for c in cards if c['k'] == 'used')}}
+    # Shop by Aircraft page: how many products list each aircraft
+    by_ac = {}
+    for c in cards:
+        for a in c.get('a', []):
+            by_ac[a] = by_ac.get(a, 0) + 1
+    meta['aircraft'] = dict(sorted(by_ac.items()))
     put('meta.json', meta)
     removed = sync_dir(os.path.join(base, 'p'), wanted) + sync_dir(os.path.join(base, 'c'), wanted) + sync_dir(os.path.join(base, 'b'), wanted)
     manifest.save()

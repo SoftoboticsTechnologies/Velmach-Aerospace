@@ -1,6 +1,6 @@
 /* Velmach Aerospace: loads the catalogue files written by scripts/build-catalog.py (data/catalog/).
    Every call returns a Promise and each file is fetched once per page.
-     VM_CATALOG.meta()                  counts per category, subcategory, brand and condition
+     VM_CATALOG.meta()                  counts per category, subcategory, brand, condition and aircraft
      VM_CATALOG.list(parent, child)     compact cards for a category or subcategory, newest first
      VM_CATALOG.brand(slug)             compact cards for a brand
      VM_CATALOG.product(slug)           one product with every field (null when it does not exist)
@@ -16,7 +16,7 @@
   }
   var enc = encodeURIComponent;
   window.VM_CATALOG = {
-    meta: function () { return get('meta.json', { total: 0, categories: {}, brands: {}, conditions: {} }); },
+    meta: function () { return get('meta.json', { total: 0, categories: {}, brands: {}, conditions: {}, aircraft: {} }); },
     list: function (parent, child) { return get('c/' + enc(parent) + (child ? '/' + enc(child) : '') + '.json', []); },
     brand: function (slug) { return get('b/' + enc(slug) + '.json', []); },
     product: function (slug) { return get('p/' + enc(slug) + '.json', null); },

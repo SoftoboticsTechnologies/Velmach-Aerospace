@@ -144,6 +144,35 @@ class AircraftMap:
         v = str(value).strip()
         return self.ids.get(v.lower()) or self.ids.get(norm_key(v))
 
+    # Names the source data uses in its "Aircraft" specification, mapped to data/aircraft.js models.
+    SPEC_ALIASES = [
+        (r'^(dassault\s+)?(falcon|f)\s*2000\b', 'Dassault Falcon 2000'),
+        (r'^(dassault\s+)?falcon\s*900', 'Dassault Falcon 900'),
+        (r'^(hawker|raytheon hawker)\s*(800|850|900)', 'Textron Aviation Hawker 800/900'),
+        (r'^gulfstream\s*(g\s*)?(iv|4)\b', 'Gulfstream GIV'),
+        (r'^gulfstream\s*(g\s*)?300\b', 'Gulfstream G300'),
+        (r'^(bombardier\s+)?lear(jet)?\s*(45|75)\b', 'Bombardier Learjet 45/75'),
+        (r'^(lockheed\s+)?jet\s*star', 'Lockheed Martin JetStar'),
+        (r'^dornier\s*328\s*jet', 'Dornier 328JET'),
+        (r'^dornier\s*328', 'Dornier 328'),
+        (r'^boeing(\s+aircraft)?\s+717', 'Boeing 717'),
+    ]
+
+    def from_spec(self, value):
+        """Ids for an "Aircraft" specification such as "Falcon 2000, Gulfstream GIV SN 1352"; returns (ids, unknown names)."""
+        ids, unknown = [], []
+        for part in re.split(r'[,;|]', str(value)):
+            name = re.sub(r'\s+(sn|s/n|msn)\s*\S+$', '', part.strip(), flags=re.I).strip()
+            if not name:
+                continue
+            aid = self.resolve(name)
+            if not aid:
+                for pattern, target in self.SPEC_ALIASES:
+                    if re.search(pattern, name, re.I):
+                        aid = self.resolve(target); break
+            (ids if aid else unknown).append(aid or name)
+        return sorted(set(ids)), unknown
+
 
 # ---------- product description HTML ----------
 
