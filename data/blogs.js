@@ -9,7 +9,7 @@ window.VM_BLOGS = [
     seoTitle: 'Aircraft Maintenance Chemicals: A Buyer’s Guide | Velmach Aerospace',
     description: 'How maintenance chemicals are specified, approved, documented and stored, and what MRO buyers should check before placing an order.',
     date: '2026-10-05', updated: '2026-10-05', category: 'materials', tags: ['chemicals', 'MRO', 'specifications', 'storage'],
-    image: 'assets/blog/aircraft-maintenance-chemicals-guide.png', imageAlt: 'Blueprint-style illustration of chemical containers and molecular structures',
+    image: 'assets/blog/aircraft-maintenance-chemicals-guide.jpg', imageAlt: 'Maintenance technician in a high-visibility vest inspecting the underside of an aircraft wing',
     excerpt: 'Strippers, solvents, primers, sealants and inhibitors all have to match a specification called up in the maintenance data. Here is how buyers can source them with fewer surprises.',
     body: [
       { p: 'Every maintenance task that touches an aircraft structure, system or engine relies on chemicals somewhere in the process. Surfaces are cleaned and degreased before inspection, old coatings are stripped, fasteners are installed wet with sealant, and repaired areas are protected with primers and corrosion inhibitors. None of these products are interchangeable household items: each one has to meet the specification called up in the approved maintenance data, and each one arrives with documents that the receiving inspector will check.' },
@@ -47,7 +47,7 @@ window.VM_BLOGS = [
     seoTitle: 'Aerospace Lubricants and Aircraft Safety | Velmach Aerospace',
     description: 'Engine oils, hydraulic fluids and greases each have specific approvals. Learn why lubricant selection matters for safety and how to source the right product.',
     date: '2026-10-05', updated: '2026-10-05', category: 'materials', tags: ['lubricants', 'hydraulic fluids', 'greases', 'specifications'],
-    image: 'assets/blog/aerospace-lubricants-and-aircraft-safety.png', imageAlt: 'Blueprint-style illustration of meshing gears and an oil droplet',
+    image: 'assets/blog/aerospace-lubricants-and-aircraft-safety.jpg', imageAlt: 'Close-up of a jet engine fan case with harnesses and fluid lines',
     excerpt: 'Turbine oils, hydraulic fluids and greases are approved for specific aircraft and components. Mixing or substituting them can damage seals, bearings and systems.',
     body: [
       { p: 'Lubricants rarely attract attention until something goes wrong. Yet engine oils, hydraulic fluids and greases protect some of the most heavily loaded components on an aircraft: turbine bearings and gearboxes, flight control actuators, landing gear and wheel bearings. They work across extreme temperature ranges, resist breakdown at high loads and speeds, and must stay compatible with the seals and materials they touch.' },
@@ -80,7 +80,7 @@ window.VM_BLOGS = [
     seoTitle: 'Choosing Aviation Cleaning Products | Velmach Aerospace',
     description: 'Exterior washes, interior cleaners, degreasers and engine wash products: how to choose approved aviation cleaning products that protect aircraft and save time.',
     date: '2026-10-05', updated: '2026-10-05', category: 'maintenance', tags: ['cleaners', 'aircraft washing', 'MRO', 'materials compatibility'],
-    image: 'assets/blog/aviation-cleaning-products-efficient-operations.png', imageAlt: 'Blueprint-style illustration of an aircraft fuselage cross-section with spray lines',
+    image: 'assets/blog/aviation-cleaning-products-efficient-operations.jpg', imageAlt: 'Airliner at the gate during a turnaround, with a catering truck and ground equipment alongside',
     excerpt: 'Cleaning is part of maintenance, not just appearance. The right approved products protect paint, metals and composites and keep inspections on schedule.',
     body: [
       { p: 'Clean aircraft are easier to inspect, less prone to corrosion and more efficient to operate. Dirt, exhaust residue, hydraulic fluid and de-icing fluid deposits can hide cracks and corrosion, trap moisture against the structure and add drag. Cleaning therefore sits within maintenance programmes rather than alongside them.' },
@@ -114,7 +114,7 @@ window.VM_BLOGS = [
     seoTitle: 'Aircraft Corrosion Protection Practices | Velmach Aerospace',
     description: 'The common types of aircraft corrosion, where they occur, and the materials and practices that prevent them, from coatings and sealants to inhibitors.',
     date: '2026-10-05', updated: '2026-10-05', category: 'maintenance', tags: ['corrosion', 'coatings', 'sealants', 'inhibitors'],
-    image: 'assets/blog/aircraft-corrosion-protection-practices.png', imageAlt: 'Blueprint-style illustration of a riveted panel and protective coating layers',
+    image: 'assets/blog/aircraft-corrosion-protection-practices.jpg', imageAlt: 'Close-up of weathered, riveted aluminium skin on an aircraft fuselage',
     excerpt: 'Corrosion is one of the main threats to airframe life. Understanding how it starts, and which materials stop it, keeps aircraft structurally sound for longer.',
     body: [
       { p: 'Corrosion is a constant background threat to every aircraft. Aluminium alloys, high-strength steels and magnesium components all react with their environment, and moisture, salt, industrial pollution and spilled fluids speed the process up. Left unchecked, corrosion reduces structural strength, increases repair costs and can take aircraft out of service.' },
@@ -145,7 +145,7 @@ window.VM_BLOGS = [
     seoTitle: 'How Aviation Supply Chains Keep Fleets Flying | Velmach Aerospace',
     description: 'From AOG requests to dangerous goods shipping and traceability documents: how the aviation parts and materials supply chain supports fleet availability.',
     date: '2026-10-05', updated: '2026-10-05', category: 'supply', tags: ['supply chain', 'AOG', 'logistics', 'traceability'],
-    image: 'assets/blog/aviation-supply-chains-keep-fleets-operational.png', imageAlt: 'Blueprint-style illustration of a globe with connected routes',
+    image: 'assets/blog/aviation-supply-chains-keep-fleets-operational.jpg', imageAlt: 'Air cargo containers on the apron beside a wide-body airliner',
     excerpt: 'Behind every on-time departure is a supply chain that moves parts, materials and documents across borders quickly and with full traceability.',
     body: [
       { p: 'An aircraft can be grounded by a missing part that costs a few dollars. When that happens, the cost of the delay quickly outweighs the value of the item. Keeping fleets available therefore depends on a supply chain that can find the right part or material, prove its origin and condition, and deliver it where it is needed, often across several borders.' },
@@ -174,7 +174,7 @@ window.VM_BLOGS = [
     seoTitle: 'Aircraft Consumables Explained | Velmach Aerospace',
     description: 'What counts as an aircraft consumable, how consumables differ from expendables and rotables, and how to manage shelf life, storage and traceability.',
     date: '2026-10-05', updated: '2026-10-05', category: 'supply', tags: ['consumables', 'shelf life', 'inventory', 'traceability'],
-    image: 'assets/blog/understanding-aircraft-consumables.png', imageAlt: 'Blueprint-style illustration of a tape roll, sealant cartridge and container',
+    image: 'assets/blog/understanding-aircraft-consumables.jpg', imageAlt: 'Warehouse aisle lined with racks of boxed stock',
     excerpt: 'Consumables are used up during maintenance, but they are still controlled materials. Here is how they fit into the parts picture and how to manage them well.',
     body: [
       { p: 'Maintenance organisations deal with thousands of different items, from complex repairable components to a tube of sealant. The low-cost, high-volume end of that range, the consumables, is easy to underestimate. Yet a missing roll of tape or an expired adhesive can stop a task just as surely as a missing component.' },

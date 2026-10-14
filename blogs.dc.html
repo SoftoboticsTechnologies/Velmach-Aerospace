@@ -52,9 +52,9 @@ input[type=search]::-webkit-search-cancel-button{filter:invert(1) opacity(.6)}
         <label style="position:relative;display:flex;align-items:center">
           <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">{{ t.b_search }}</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9FC6EE" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" style="position:absolute;inset-inline-start:18px"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m20 20-4.6-4.6"></path></svg>
-          <input type="search" value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.b_search_ph }}" style="width:100%;height:58px;padding-inline:52px 18px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);font:inherit;font-size:16px;color:#FFFFFF;outline:none;transition:border-color .2s,background .2s" style-focus="border-color:#6AA6E8;background:rgba(255,255,255,.1)">
+          <input type="search" value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.b_search_ph }}" style="width:100%;height:58px;padding-inline:52px 18px;border:1px solid rgba(255,255,255,.22);border-radius:14px;background:rgba(255,255,255,.06);font:inherit;font-size:16px;color:#FFFFFF;outline:none;transition:border-color .2s,background .2s" style-focus="border-color:#6AA6E8;background:rgba(255,255,255,.1)">
         </label>
-        <dl style="margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14)">
+        <dl style="margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden">
           <sc-for list="{{ stats }}" as="st" hint-placeholder-count="3">
             <div style="display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:#07111D">
               <dt dir="ltr" style="font-family:{{ fHead }};font-stretch:112%;font-size:26px;font-weight:600;line-height:1;text-align:{{ start }}">{{ st.k }}</dt>
@@ -65,13 +65,12 @@ input[type=search]::-webkit-search-cancel-button{filter:invert(1) opacity(.6)}
       </div>
     </div>
 
-    <!-- category tabs -->
-    <div style="border-top:1px solid rgba(255,255,255,.12)">
-      <div role="group" aria-label="{{ t.b_all }}" style="max-width:1320px;margin:0 auto;padding-inline:clamp(16px,4vw,56px);display:flex;gap:4px;overflow-x:auto;scrollbar-width:none">
+    <!-- category chips -->
+    <div style="border-top:1px solid rgba(255,255,255,.1)">
+      <div role="group" aria-label="{{ t.b_all }}" style="max-width:1320px;margin:0 auto;padding:18px clamp(16px,4vw,56px);display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
         <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4">
-          <button type="button" onClick="{{ c.onClick }}" aria-pressed="{{ c.active }}" style="position:relative;flex-shrink:0;display:inline-flex;align-items:center;gap:10px;height:56px;padding-inline:16px;border:0;background:transparent;color:{{ c.fg }};font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:color .2s" style-hover="color:#FFFFFF">
-            {{ c.label }}<span dir="ltr" style="min-width:24px;height:20px;padding-inline:6px;display:inline-flex;align-items:center;justify-content:center;background:{{ c.countBg }};color:{{ c.countFg }};font-family:'Archivo',system-ui,sans-serif;font-size:11px;border-radius:10px">{{ c.count }}</span>
-            <span aria-hidden="true" style="position:absolute;inset-inline:12px;bottom:0;height:3px;background:#6AA6E8;transform:scaleX({{ c.bar }});transition:transform .35s cubic-bezier(.2,.7,.2,1)"></span>
+          <button type="button" onClick="{{ c.onClick }}" aria-pressed="{{ c.active }}" style="flex-shrink:0;display:inline-flex;align-items:center;gap:10px;height:42px;padding-inline:16px 6px;border:1px solid {{ c.bd }};border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font:inherit;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer;transition:background .25s,border-color .25s,color .25s" style-hover="border-color:#6AA6E8">
+            {{ c.label }}<span dir="ltr" style="min-width:30px;height:30px;padding-inline:8px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:{{ c.countBg }};color:{{ c.countFg }};font-family:'Archivo',system-ui,sans-serif;font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums">{{ c.count }}</span>
           </button>
         </sc-for>
       </div>
@@ -82,10 +81,10 @@ input[type=search]::-webkit-search-cancel-button{filter:invert(1) opacity(.6)}
 
     <!-- featured -->
     <sc-if value="{{ featured }}" hint-placeholder-val="{{ true }}">
-      <a href="{{ f.href }}" onMouseEnter="{{ fEnter }}" onMouseLeave="{{ fLeave }}" style="position:relative;display:grid;grid-template-columns:{{ featCols }};background:#07111D;color:#FFFFFF;text-decoration:none;overflow:hidden;box-shadow:{{ fShadow }};transition:box-shadow .5s;animation:vmUp .6s both">
+      <a href="{{ f.href }}" onMouseEnter="{{ fEnter }}" onMouseLeave="{{ fLeave }}" style="position:relative;display:grid;grid-template-columns:{{ featCols }};background:#07111D;color:#FFFFFF;text-decoration:none;overflow:hidden;border-radius:22px;box-shadow:{{ fShadow }};transition:box-shadow .5s;animation:vmUp .6s both">
         <span style="position:relative;display:block;aspect-ratio:1200/630;overflow:hidden;background:#0B1928">
           <img src="{{ f.img }}" alt="{{ f.alt }}" decoding="async" width="1200" height="630" style="width:100%;height:100%;object-fit:cover;display:block;transform:scale({{ fZoom }});transition:transform 1s cubic-bezier(.2,.7,.2,1)">
-          <span style="position:absolute;top:18px;inset-inline-start:18px;display:inline-flex;align-items:center;gap:8px;padding:6px 10px;background:#0759A5;font-family:{{ fMono }};font-size:11px;letter-spacing:{{ ls }};text-transform:uppercase"><span style="width:6px;height:6px;border-radius:50%;background:#FFFFFF"></span>{{ t.b_featured }}</span>
+          <span style="position:absolute;top:18px;inset-inline-start:18px;display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:#0759A5;box-shadow:0 6px 16px -6px rgba(0,0,0,.5);font-family:{{ fMono }};font-size:11px;letter-spacing:{{ ls }};text-transform:uppercase"><span style="width:6px;height:6px;border-radius:50%;background:#FFFFFF"></span>{{ t.b_featured }}</span>
         </span>
         <span style="padding:clamp(24px,3.4vw,48px);display:flex;flex-direction:column;gap:16px;justify-content:center">
           <span style="font-family:{{ fMono }};font-size:11.5px;letter-spacing:{{ ls }};text-transform:uppercase;color:#9FC6EE">{{ f.cat }}</span>
@@ -101,32 +100,32 @@ input[type=search]::-webkit-search-cancel-button{filter:invert(1) opacity(.6)}
     </sc-if>
 
     <!-- result line -->
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid #DADBD8;padding-bottom:14px">
-      <span style="font-family:{{ fMono }};font-size:12px;letter-spacing:{{ ls }};text-transform:uppercase;color:#56626E">{{ resultLabel }}</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px 20px;flex-wrap:wrap;border-bottom:1px solid #DADBD8;padding-bottom:16px">
+      <h2 style="margin:0;display:inline-flex;align-items:center;gap:14px;font-family:{{ fHead }};font-stretch:106%;font-size:clamp(22px,2.2vw,30px);font-weight:500;line-height:1.2;letter-spacing:{{ lsHead }}"><span aria-hidden="true" style="width:8px;height:8px;background:#0759A5;box-shadow:0 0 0 5px rgba(7,89,165,.14)"></span>{{ resultLabel }}</h2>
       <sc-if value="{{ filtered }}" hint-placeholder-val="{{ false }}">
-        <button type="button" onClick="{{ reset }}" style="display:inline-flex;align-items:center;gap:8px;height:36px;padding-inline:14px;border:1px solid #C3C7C9;background:#FFFFFF;font:inherit;font-size:13.5px;font-weight:600;color:#0B1B2B;cursor:pointer" style-hover="border-color:#0B1B2B">× {{ t.b_all }}</button>
+        <button type="button" onClick="{{ reset }}" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding-inline:16px;border:1px solid #C3C7C9;border-radius:999px;background:#FFFFFF;font:inherit;font-size:13.5px;font-weight:600;color:#0B1B2B;cursor:pointer;transition:border-color .2s,color .2s" style-hover="border-color:#0759A5;color:#0759A5">× {{ t.b_all }}</button>
       </sc-if>
     </div>
 
     <sc-if value="{{ hasCards }}" hint-placeholder-val="{{ true }}">
       <div style="display:grid;grid-template-columns:{{ gridCols }};gap:clamp(18px,2vw,28px)">
         <sc-for list="{{ cards }}" as="b" hint-placeholder-count="3">
-          <a href="{{ b.href }}" onMouseEnter="{{ b.enter }}" onMouseLeave="{{ b.leave }}" style="position:relative;display:flex;flex-direction:column;background:#FFFFFF;border:1px solid {{ b.border }};color:#0B1B2B;text-decoration:none;box-shadow:{{ b.shadow }};transform:translateY({{ b.lift }});transition:border-color .4s,box-shadow .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1);animation:vmUp .5s both;animation-delay:{{ b.delay }}">
-            <span aria-hidden="true" style="position:absolute;z-index:1;top:-1px;inset-inline-start:-1px;height:3px;width:{{ b.bar }};background:#0759A5;transition:width .7s cubic-bezier(.2,.7,.2,1)"></span>
+          <a href="{{ b.href }}" onMouseEnter="{{ b.enter }}" onMouseLeave="{{ b.leave }}" style="position:relative;display:flex;flex-direction:column;background:#FFFFFF;border:1px solid {{ b.border }};border-radius:18px;overflow:hidden;color:#0B1B2B;text-decoration:none;box-shadow:{{ b.shadow }};transform:translateY({{ b.lift }});transition:border-color .4s,box-shadow .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1);animation:vmUp .5s both;animation-delay:{{ b.delay }}">
+            <span aria-hidden="true" style="position:absolute;z-index:1;top:0;inset-inline-start:0;height:3px;width:{{ b.bar }};background:#0759A5;transition:width .7s cubic-bezier(.2,.7,.2,1)"></span>
             <span style="position:relative;display:block;aspect-ratio:1200/630;overflow:hidden;background:#07111D">
               <img src="{{ b.img }}" alt="{{ b.alt }}" loading="lazy" decoding="async" width="1200" height="630" style="width:100%;height:100%;object-fit:cover;display:block;transform:scale({{ b.zoom }});transition:transform .9s cubic-bezier(.2,.7,.2,1)">
-              <span style="position:absolute;bottom:12px;inset-inline-start:12px;padding:5px 9px;background:rgba(7,17,29,.82);color:#FFFFFF;font-family:{{ fMono }};font-size:10.5px;letter-spacing:{{ ls }};text-transform:uppercase">{{ b.cat }}</span>
+              <span style="position:absolute;top:14px;inset-inline-start:14px;padding:6px 12px;border-radius:999px;background:rgba(7,17,29,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);color:#FFFFFF;font-family:{{ fMono }};font-size:10.5px;letter-spacing:{{ ls }};text-transform:uppercase">{{ b.cat }}</span>
             </span>
             <span style="padding:22px 22px 0;display:flex;flex-direction:column;gap:12px;flex:1">
               <span style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px;color:#6B7280">
-                <span>{{ b.date }}</span><span aria-hidden="true" style="width:3px;height:3px;border-radius:50%;background:#B7C0C9"></span><span>{{ b.mins }}</span>
+                <span style="display:inline-flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="1"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>{{ b.date }}</span><span style="display:inline-flex;align-items:center;gap:6px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>{{ b.mins }}</span>
               </span>
               <span dir="ltr" style="font-family:{{ fHead }};font-stretch:104%;font-size:20px;font-weight:500;line-height:1.28;text-align:{{ start }};color:{{ b.titleC }};transition:color .3s">{{ b.title }}</span>
               <span dir="ltr" style="color:#4A5561;font-size:14.5px;line-height:1.6;text-align:{{ start }}">{{ b.excerpt }}</span>
             </span>
             <span style="margin:18px 22px 0;padding-block:16px 20px;border-top:1px solid #EEF0EE;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#0759A5">
               {{ t.b_read }}
-              <span aria-hidden="true" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid {{ b.arwBorder }};background:{{ b.arwBg }};color:{{ b.arwFg }};transition:all .35s">{{ arrow }}</span>
+              <span aria-hidden="true" style="width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid {{ b.arwBorder }};background:{{ b.arwBg }};color:{{ b.arwFg }};transition:all .35s">{{ arrow }}</span>
             </span>
           </a>
         </sc-for>
@@ -135,14 +134,14 @@ input[type=search]::-webkit-search-cancel-button{filter:invert(1) opacity(.6)}
 
     <sc-if value="{{ multiPage }}" hint-placeholder-val="{{ false }}">
       <nav aria-label="Pagination" style="display:flex;justify-content:center;align-items:center;gap:12px">
-        <button type="button" onClick="{{ prevPg }}" disabled="{{ prevDisabled }}" style="height:44px;padding-inline:18px;border:1px solid #0B1B2B;background:#FFFFFF;font:inherit;font-weight:600;cursor:pointer;opacity:{{ prevOp }}">{{ t.p_prev }}</button>
+        <button type="button" onClick="{{ prevPg }}" disabled="{{ prevDisabled }}" style="height:44px;padding-inline:20px;border:1px solid #0B1B2B;border-radius:999px;background:#FFFFFF;font:inherit;font-weight:600;cursor:pointer;opacity:{{ prevOp }}">{{ t.p_prev }}</button>
         <span dir="ltr" style="min-width:72px;text-align:center;font-family:'Archivo',system-ui,sans-serif;font-size:13px;color:#4B5563">{{ pageLabel }}</span>
-        <button type="button" onClick="{{ nextPg }}" disabled="{{ nextDisabled }}" style="height:44px;padding-inline:18px;border:0;background:#0B1B2B;color:#FFFFFF;font:inherit;font-weight:600;cursor:pointer;opacity:{{ nextOp }}">{{ t.p_next }}</button>
+        <button type="button" onClick="{{ nextPg }}" disabled="{{ nextDisabled }}" style="height:44px;padding-inline:20px;border:0;border-radius:999px;background:#0B1B2B;color:#FFFFFF;font:inherit;font-weight:600;cursor:pointer;opacity:{{ nextOp }}">{{ t.p_next }}</button>
       </nav>
     </sc-if>
 
     <sc-if value="{{ none }}" hint-placeholder-val="{{ false }}">
-      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:clamp(32px,4vw,56px);background:#FFFFFF;border:1px dashed #C3C7C9">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:clamp(32px,4vw,56px);background:#FFFFFF;border:1px dashed #C3C7C9;border-radius:18px">
         <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#0759A5" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m20 20-4.6-4.6M8 10.5h5"></path></svg>
         <h2 style="margin:0;font-family:{{ fHead }};font-size:clamp(22px,2.2vw,28px);font-weight:500">{{ t.b_none_t }}</h2>
         <p style="margin:0;color:#4A5561">{{ t.b_none_b }}</p>
@@ -152,15 +151,16 @@ input[type=search]::-webkit-search-cancel-button{filter:invert(1) opacity(.6)}
   </section>
 
   <!-- CTA -->
-  <section style="background:#F3F1EC;border-top:1px solid #E6E4DE">
-    <div style="max-width:1320px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,56px);display:grid;grid-template-columns:{{ ctaCols }};gap:28px 64px;align-items:center">
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <h2 style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(28px,3vw,44px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};max-width:22ch;text-wrap:balance">{{ t.cta_title }}</h2>
-        <p style="margin:0;font-size:17px;line-height:1.65;color:#4A5561;max-width:56ch">{{ t.cta_body }}</p>
+  <section style="position:relative;overflow:hidden;isolation:isolate;background:#07111D;color:#FFFFFF">
+    <div aria-hidden="true" style="position:absolute;z-index:-1;inset-inline-end:-6%;top:50%;width:34%;aspect-ratio:1;transform:translateY(-50%);border-radius:50%;border:1px solid rgba(170,196,222,.12);box-shadow:0 0 0 50px rgba(170,196,222,.025),0 0 0 100px rgba(170,196,222,.018)"></div>
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(32px,4vw,48px) clamp(16px,4vw,56px);display:grid;grid-template-columns:{{ ctaCols }};gap:24px 64px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <h2 style="margin:0;font-family:{{ fHead }};font-stretch:108%;font-size:clamp(24px,2.4vw,34px);font-weight:500;line-height:{{ lhHead }};letter-spacing:{{ lsHead }};max-width:26ch;text-wrap:balance">{{ t.cta_title }}</h2>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#A8B4C1;max-width:60ch">{{ t.cta_body }}</p>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:{{ ctaJustify }}">
-        <button type="button" onClick="{{ openRfq }}" style="display:inline-flex;align-items:center;gap:10px;height:54px;padding-inline:26px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:background .3s" style-hover="background:#0B1B2B">{{ t.cta_btn }} <span aria-hidden="true">{{ arrow }}</span></button>
-        <a href="categories.dc.html" style="display:inline-flex;align-items:center;height:54px;padding-inline:24px;border:1px solid #0B1B2B;color:#0B1B2B;text-decoration:none;font-weight:600;font-size:15px;transition:background .3s,color .3s" style-hover="background:#0B1B2B;color:#FFFFFF">{{ t.cats_link }}</a>
+        <button type="button" onClick="{{ openRfq }}" style="display:inline-flex;align-items:center;gap:10px;height:50px;padding-inline:24px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:background .3s" style-hover="background:#0A6BC4">{{ t.cta_btn }} <span aria-hidden="true">{{ arrow }}</span></button>
+        <a href="categories.dc.html" style="display:inline-flex;align-items:center;height:50px;padding-inline:22px;border:1px solid rgba(255,255,255,.3);color:#FFFFFF;text-decoration:none;font-weight:600;font-size:15px;transition:border-color .3s" style-hover="border-color:#FFFFFF">{{ t.cats_link }}</a>
       </div>
     </div>
   </section>
@@ -202,7 +202,7 @@ class Component extends DCLogic {
     const rest = showFeat ? list.slice(1) : list;
     const pages = Math.max(1, Math.ceil(rest.length / PER_PAGE)), pg = Math.min(s.pg, pages - 1);
     const cards = rest.slice(pg * PER_PAGE, pg * PER_PAGE + PER_PAGE).map((a, i) => { const on = s.hover === i;
-      return { ...view(a), delay: (i * 60) + 'ms', border: on ? '#C3C7C9' : '#DADBD8', shadow: on ? '0 22px 50px rgba(11,27,43,.12)' : 'none',
+      return { ...view(a), delay: (i * 60) + 'ms', border: on ? '#C3C7C9' : '#DADBD8', shadow: on ? '0 24px 48px -24px rgba(7,27,43,.3), 0 6px 14px -8px rgba(7,27,43,.12)' : '0 1px 2px rgba(7,17,29,.04)',
         lift: on ? '-4px' : '0px', bar: on ? '100%' : '0%', zoom: on ? 1.06 : 1, titleC: on ? '#0759A5' : '#0B1B2B',
         arwBorder: on ? '#0759A5' : '#C3C7C9', arwBg: on ? '#0759A5' : 'transparent', arwFg: on ? '#FFFFFF' : '#0759A5',
         enter: () => this.setState({ hover: i }), leave: () => this.setState(st => st.hover === i ? { hover: -1 } : null) }; });
@@ -217,8 +217,9 @@ class Component extends DCLogic {
         { k: totalMins + "'", v: ar ? 'دقائق قراءة' : 'Minutes of reading' }
       ],
       chips: [{ id: 'all', label: t.b_all }, ...Object.keys(t.b_cats).map(id => ({ id, label: t.b_cats[id] }))].map(c => { const on = s.cat === c.id;
-        return { label: c.label, active: on, count: count(c.id), fg: on ? '#FFFFFF' : '#9FB0C1', bar: on ? 1 : 0,
-          countBg: on ? '#6AA6E8' : 'rgba(255,255,255,.1)', countFg: on ? '#07111D' : '#C9D2DB',
+        return { label: c.label, active: on, count: count(c.id), fg: on ? '#07111D' : '#C9D2DB',
+          bg: on ? '#FFFFFF' : 'rgba(255,255,255,.04)', bd: on ? '#FFFFFF' : 'rgba(255,255,255,.16)',
+          countBg: on ? '#07111D' : 'rgba(255,255,255,.1)', countFg: on ? '#FFFFFF' : '#C9D2DB',
           onClick: () => this.setState({ cat: c.id, pg: 0 }) }; }),
       q: s.q, onQ: e => this.setState({ q: e.target.value, pg: 0 }),
       filtered, reset: () => this.setState({ cat: 'all', q: '', pg: 0 }),

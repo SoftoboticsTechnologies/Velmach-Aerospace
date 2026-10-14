@@ -81,7 +81,6 @@ a:hover{color:#0B1B2B}
 .vh-burger span + span{width:14px}
 .vh-logo{grid-area:logo;display:flex;align-items:center;height:64px;margin:0;padding:0}
 .vh-logo-full{height:56px;width:auto;display:block;transition:filter .45s ease}
-.vh-logo-mark{display:none;width:36px;height:36px}
 .vh-hdr--over .vh-logo-full{filter:brightness(0) invert(1)}
 .vh-actions{grid-area:actions;display:flex;align-items:center;gap:8px}
 .vh-search{grid-area:search;position:relative;padding-bottom:12px}
@@ -181,6 +180,9 @@ a:hover{color:#0B1B2B}
   background-image:linear-gradient(rgba(150,180,210,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(150,180,210,.05) 1px,transparent 1px);background-size:40px 40px}
 .vh[dir="rtl"] .vh-drawer{animation-name:vmFromR}
 .vh-dhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+.vh-dlogo{display:flex;align-items:center}
+.vh-dlogo img{height:44px;width:auto;display:block;filter:brightness(0) invert(1)}
+.vh-dhead-a{display:flex;align-items:center;gap:8px}
 .vh-dbtn{height:40px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding-inline:14px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#FFFFFF;font-weight:600;cursor:pointer;text-decoration:none}
 .vh-dbtn--sq{width:40px;padding:0}
 .vh-dnav{display:flex;flex-direction:column}
@@ -198,7 +200,7 @@ a:hover{color:#0B1B2B}
 .vh-dcta:hover{background:var(--blue-2)}
 .vh-dtel{display:flex;align-items:center;gap:10px;color:var(--mist);text-decoration:none;font:500 14px/1 var(--mono)}
 .vh-dtel:hover{color:#FFFFFF}
-.vh-daog{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid rgba(224,68,46,.7);color:#FFFFFF;padding:13px 16px;text-decoration:none;font-weight:600}
+.vh-daog{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;border:1px solid rgba(224,68,46,.7);border-radius:4px;background:rgba(224,68,46,.08);color:#FFFFFF;padding:13px 14px;text-decoration:none;font-weight:600}
 .vh-daog:hover{color:#FFFFFF;border-color:var(--aog)}
 
 /* Shop by Aircraft panel: dropdown on desktop, full screen below 1200px */
@@ -247,9 +249,13 @@ a:hover{color:#0B1B2B}
   .vh-main-in{column-gap:16px}
 }
 @media (max-width:759px){
-  .vh-logo-full{display:none}
-  .vh-logo-mark{display:block}
-  .vh-logo{height:60px}
+  .vh-main-in{column-gap:10px}
+  .vh-logo{height:64px}
+  .vh-logo-full{height:46px}
+  .vh-burger,.vh-cart{width:42px;height:42px}
+  .vh-burger{padding-inline:10px}
+  .vh-rq{height:42px}
+  .vh-search{padding-bottom:10px}
   .vh-sform{height:44px}
   .vh-rq{padding-inline:12px}
   .vh-rq .vh-rq-l{display:none}
@@ -298,7 +304,6 @@ a:hover{color:#0B1B2B}
         <button type="button" class="vh-burger" onClick="{{ openDrawer }}" aria-label="{{ t.hd_menu }}" aria-expanded="{{ drawerExp }}" aria-haspopup="dialog"><span></span><span></span></button>
         <a href="index.html" class="vh-logo" aria-label="{{ t.hd_home }}">
           <img class="vh-logo-full" src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" width="1432" height="800">
-          <img class="vh-logo-mark" src="assets/img/favicon.svg" alt="{{ logoAlt }}" width="36" height="36">
         </a>
 
         <div class="vh-search">
@@ -429,10 +434,13 @@ a:hover{color:#0B1B2B}
     <div class="vh-ov" onClick="{{ closeDrawer }}"></div>
     <div ref="{{ drawerRef }}" class="vh-drawer" role="dialog" aria-modal="true" aria-label="{{ t.menu }}">
       <div class="vh-dhead">
+        <a href="index.html" class="vh-dlogo" aria-label="{{ t.hd_home }}"><img src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" width="1432" height="800"></a>
+        <span class="vh-dhead-a">
         <button type="button" class="vh-dbtn" onClick="{{ toggleLang }}" style="font-family:{{ fAlt }}">{{ t.lang_btn }}</button>
         <button type="button" class="vh-dbtn vh-dbtn--sq" onClick="{{ closeDrawer }}" aria-label="{{ t.close }}">
           <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><path d="M5 5l14 14M19 5 5 19"></path></svg>
         </button>
+        </span>
       </div>
       <nav class="vh-dnav" aria-label="{{ navAria }}">
         <a class="vh-dl" href="index.html" aria-current="{{ homeCurrent }}">{{ t.hd_d.home }}</a>
@@ -473,7 +481,7 @@ a:hover{color:#0B1B2B}
         </a>
         <button type="button" class="vh-dcta" onClick="{{ openRfqFromDrawer }}">{{ t.hd_quote }}<sc-if value="{{ hasCount }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Archivo',system-ui,sans-serif;font-weight:500">({{ count }})</span></sc-if></button>
         <a class="vh-daog" href="mailto:AOG@velmachaerospace.com">
-          <span style="display:inline-flex;align-items:center;gap:10px"><span style="width:7px;height:7px;border-radius:50%;background:#E0442E"></span><span dir="ltr">AOG 24/7</span></span>
+          <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:50%;background:#E0442E;animation:vmPulse 2.6s infinite"></span><span dir="ltr">AOG 24/7</span></span>
           <span dir="ltr" style="font-family:'Archivo',system-ui,sans-serif;font-size:13px;font-weight:400;color:#FF8A73">AOG@velmachaerospace.com</span>
         </a>
       </div>

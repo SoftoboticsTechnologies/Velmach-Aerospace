@@ -80,7 +80,7 @@ The previous 2,190-product catalogue is no longer on the site. Its data, images 
 ## Blog
 - Articles live in `data/blogs.js` (slug, title, seoTitle, description, date, category, tags, image, excerpt, body blocks: h2 / h3 / p / ul). Adding an entry adds it to the listing, related articles and previous/next links; also add its URL to sitemap.xml.
 - Pages: blogs.dc.html (listing: featured article, topic filter, search) and `blog.dc.html?a=<slug>` (article, contents, share links, related articles, BlogPosting schema, Open Graph).
-- Featured images are 1200x630 PNGs in `assets/blog/`.
+- Featured images are 1200x630 JPEG photos in `assets/blog/` (Unsplash License; see `assets/blog/CREDITS.md`).
 
 ## URLs
 The site links to the `.dc.html` pages with query strings (category.dc.html?c=, product.dc.html?p=, brand.dc.html?b=), which work on any static host. Clean URLs are ready:

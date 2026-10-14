@@ -545,6 +545,7 @@ ar: {
 
     sh_home: "Home", sh_all_cats: "All categories", sh_rfq: "Request a quote", sh_contact: "Contact sales",
     sh_cats_eyebrow: "Catalogue", sh_cats_title: "Shop all categories",
+    sh_cats_jump: "Jump to", sh_cats_more: "+{n} more", sh_cats_cta_t: "Can't find the part you need?", sh_cats_cta_d: "Send us the part number and quantity. Our sourcing team will quote it, even if it is not listed in the catalogue.",
     sh_cats_sub: "Ground support equipment, tooling, aircraft parts, consumables and safety equipment. If you cannot find an item, send us the part number and we will source it.",
     sh_n_sub: "{n} subcategories", sh_sub_tabs: "Subcategories", sh_view_cat: "View category", sh_browse: "Browse {c}",
     sh_empty_t: "Products are being added", sh_empty_b: "We are loading the catalogue for this section. Send us the part number or a description and our team will reply with a quotation.",
@@ -589,6 +590,7 @@ ar: {
 
     sh_home: "الرئيسية", sh_all_cats: "كل الفئات", sh_rfq: "اطلب عرض سعر", sh_contact: "تواصل مع المبيعات",
     sh_cats_eyebrow: "الكتالوج", sh_cats_title: "تسوّق كل الفئات",
+    sh_cats_jump: "انتقل إلى", sh_cats_more: "+{n} أخرى", sh_cats_cta_t: "لم تجد القطعة التي تحتاجها؟", sh_cats_cta_d: "أرسل لنا رقم القطعة والكمية، وسيقدّم لك فريق التوريد عرض سعر حتى لو لم تكن مدرجة في الكتالوج.",
     sh_cats_sub: "معدات الدعم الأرضي والعِدد وقطع غيار الطائرات والمواد الاستهلاكية ومعدات السلامة. إن لم تجد ما تبحث عنه، أرسل لنا رقم القطعة وسنوفّرها لك.",
     sh_n_sub: "{n} فئة فرعية", sh_sub_tabs: "الفئات الفرعية", sh_view_cat: "عرض الفئة", sh_browse: "تصفّح {c}",
     sh_empty_t: "جارٍ إضافة المنتجات", sh_empty_b: "نعمل على تحميل الكتالوج لهذا القسم. أرسل لنا رقم القطعة أو وصفها وسيرد فريقنا بعرض سعر.",

@@ -36,26 +36,55 @@
         <h1 id="sx-h" class="cx-h1">{{ t.sh_cats_title }}</h1>
         <p class="cx-sub">{{ t.sh_cats_sub }}</p>
       </div>
+      <nav class="sx-jump" aria-label="{{ t.sh_cats_jump }}">
+        <span class="sx-jump-k">{{ t.sh_cats_jump }}</span>
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+          <a class="sx-jump-a" href="#{{ g.sid }}"><span class="sx-jump-n">{{ g.n }}</span>{{ g.label }}</a>
+        </sc-for>
+      </nav>
     </div>
   </section>
 
   <div class="cx-wrap sx-body">
-    <div class="sx-groups">
-      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="8">
-        <section class="sx-group" aria-labelledby="{{ g.hid }}">
-          <div class="sx-group-h">
-            <h2 id="{{ g.hid }}" class="sx-group-t"><a href="{{ g.href }}">{{ g.label }}</a></h2>
-            <span class="cx-k" dir="auto">{{ g.count }}</span>
+    <div class="sx-cards">
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+        <section class="sx-card" id="{{ g.sid }}" aria-labelledby="{{ g.hid }}">
+          <div class="sx-card-h">
+            <span class="sx-card-bg" aria-hidden="true">{{ g.n }}</span>
+            <div class="sx-card-top">
+              <span class="sx-card-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="{{ g.icon }}"></path></svg></span>
+              <span class="sx-card-k" dir="auto">{{ g.count }}</span>
+            </div>
+            <h2 id="{{ g.hid }}" class="sx-card-t"><a href="{{ g.href }}">{{ g.label }}</a></h2>
           </div>
-          <p class="sx-group-d">{{ g.desc }}</p>
-          <ul class="sx-links">
-            <sc-for list="{{ g.subs }}" as="c" hint-placeholder-count="8"><li><a href="{{ c.href }}">{{ c.label }}</a></li></sc-for>
-          </ul>
-          <a class="cx-link sx-more" href="{{ g.href }}">{{ g.more }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></a>
+          <div class="sx-card-b">
+            <p class="sx-card-d">{{ g.desc }}</p>
+            <ul class="sx-chips">
+              <sc-for list="{{ g.subs }}" as="c" hint-placeholder-count="8"><li><a class="sx-chip" href="{{ c.href }}">{{ c.label }}</a></li></sc-for>
+            </ul>
+            <div class="sx-card-f">
+              <a class="cx-link sx-more" href="{{ g.href }}">{{ g.more }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></a>
+              <sc-if value="{{ g.rest }}" hint-placeholder-val="{{ false }}"><a class="sx-card-rest" href="{{ g.href }}">{{ g.rest }}</a></sc-if>
+            </div>
+          </div>
         </section>
       </sc-for>
     </div>
+
   </div>
+
+  <aside class="sx-band" aria-labelledby="sx-cta-h">
+    <div class="cx-wrap sx-band-in">
+      <div class="sx-band-tx">
+        <h2 id="sx-cta-h" class="sx-band-t">{{ t.sh_cats_cta_t }}</h2>
+        <p class="sx-band-d">{{ t.sh_cats_cta_d }}</p>
+      </div>
+      <div class="sx-band-a">
+        <a class="cx-btn cx-btn--blue" href="rfq.dc.html">{{ t.sh_rfq }}<svg class="cx-ic cx-arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"></path></svg></a>
+        <a class="cx-btn sx-band-line" href="contact.dc.html">{{ t.sh_contact }}</a>
+      </div>
+    </div>
+  </aside>
 </main>
 </sc-if>
 
@@ -64,6 +93,15 @@
 <script type="text/x-dc" data-dc-script>
 // Each group lists its first subcategories; the rest are one click away on the category page.
 const SHOWN = 8;
+// Line icons (24px grid) for each top-level category; '_' is the fallback for new ones.
+const ICONS = {
+  'aircraft-tooling': 'M14.7 6.3a4 4 0 0 0-5.4 4.9L3.5 17l3.5 3.5 5.8-5.8a4 4 0 0 0 4.9-5.4l-2.6 2.6-2.5-.5-.5-2.5z',
+  'aircraft-parts': 'M12 2.5c.8 0 1.5.7 1.5 1.5v5l7.5 4.5v2l-7.5-2.3v4.6l2 1.6V21L12 20l-3.5 1v-1.6l2-1.6v-4.6L3 15.5v-2L10.5 9V4c0-.8.7-1.5 1.5-1.5z',
+  'consumables': 'M12 3.5S6.5 9.6 6.5 14a5.5 5.5 0 0 0 11 0c0-4.4-5.5-10.5-5.5-10.5zM9.5 14.5a2.5 2.5 0 0 0 2.5 2.5',
+  'safety-equipment': 'M12 3l7 2.8V11c0 4.4-2.9 8.2-7 9.8-4.1-1.6-7-5.4-7-9.8V5.8zM8.8 12l2.2 2.2 4.2-4.4',
+  'ground-support-equipment': 'M2.5 6.5h11v9h-11zM13.5 9.5h4l3.5 3.5v2.5h-7.5M5 17.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0M15 17.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0',
+  _: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'
+};
 const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
 class Component extends DCLogic {
   state = { ready: false, meta: null };
@@ -86,9 +124,11 @@ class Component extends DCLogic {
     if (!this.state.ready) return { ready: false };
     const VM = window.VM, t = VM.t(), v = VM.sv();
     return { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb',
-      groups: window.VM_CATS.map(p => ({ hid: 'sx-g-' + p.slug, label: VM.label(p), href: VM.catHref(p.slug), desc: v.ar ? p.desc_ar : p.desc_en,
+      groups: window.VM_CATS.map((p, i) => ({ hid: 'sx-g-' + p.slug, sid: 'sx-c-' + p.slug, n: String(i + 1).padStart(2, '0'), icon: ICONS[p.slug] || ICONS._,
+        label: VM.label(p), href: VM.catHref(p.slug), desc: v.ar ? p.desc_ar : p.desc_en,
         count: this.state.meta && this.state.meta.categories[p.slug] ? fmt(t.sh_n_products, { n: this.state.meta.categories[p.slug].n }) : fmt(t.sh_n_sub, { n: p.children.length }),
         more: fmt(t.hd_shop_all, { c: VM.label(p) }),
+        rest: p.children.length > SHOWN ? fmt(t.sh_cats_more, { n: p.children.length - SHOWN }) : '',
         subs: p.children.slice(0, SHOWN).map(c => ({ label: VM.label(c), href: VM.catHref(p.slug, c.slug) })) })) };
   }
 }
