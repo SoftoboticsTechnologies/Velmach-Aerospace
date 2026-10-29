@@ -792,14 +792,15 @@ class Component extends DCLogic {
     // On the home page the bar overlays the dark hero until the visitor scrolls or opens a menu.
     const over = page === 'home' && !sc && s.mega < 0 && !(s.suggOpen && s.q.trim().length > 1) && !s.acOpen;
 
-    // navigation items: categories from data/categories.js, then brands, services, blog, shop all
+    // navigation items: shop all, categories from data/categories.js, then brands, services, quality, blog
     const cats = (window.VM_CATS || []).filter(c => c.nav);
-    const items = cats.map(c => ({ key: c.slug, label: VM.label(c), href: VM.catHref(c.slug), type: 'cat', cat: c }))
+    const items = [{ key: 'all', label: t.hd_nav.all, href: VM.HREF.categories }]
+      .concat(cats.map(c => ({ key: c.slug, label: VM.label(c), href: VM.catHref(c.slug), type: 'cat', cat: c })))
       .concat([{ key: 'brands', label: t.hd_nav.brands, href: VM.HREF.brands, type: 'brand' },
         { key: 'services', label: t.hd_nav.services, href: VM.HREF.services, type: 'svc' },
-        { key: 'blog', label: t.hd_nav.blog, href: VM.HREF.blog },
-        { key: 'all', label: t.hd_nav.all, href: VM.HREF.categories }]);
-    const curKey = page === 'category' ? curCat : page === 'brands' ? 'brands' : page === 'services' || page === 'page' ? 'services' : page === 'blog' ? 'blog' : page === 'categories' ? 'all' : '';
+        { key: 'quality', label: t.hd_nav.quality, href: VM.HREF.quality },
+        { key: 'blog', label: t.hd_nav.blog, href: VM.HREF.blog }]);
+    const curKey = page === 'category' ? curCat : page === 'brands' ? 'brands' : page === 'services' || page === 'page' ? 'services' : page === 'quality' ? 'quality' : page === 'blog' ? 'blog' : page === 'categories' ? 'all' : '';
     const navItems = items.map((n, i) => {
       const menu = !!n.type, open = menu && s.mega === i;
       const o = { i: String(i), label: n.label, href: n.href, current: n.key === curKey ? 'page' : undefined,

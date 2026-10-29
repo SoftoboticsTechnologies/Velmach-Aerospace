@@ -49,6 +49,35 @@ def short_hash(text, n=10):
     return hashlib.sha1(str(text).encode('utf-8')).hexdigest()[:n]
 
 
+REPRESENTATIVE = os.path.join(CATALOG, 'representative-images.json')
+
+
+def load_representative():
+    """Representative photos per component type (scripts/representative-images.py): {type: {thumb, large, credit, ...}}."""
+    try:
+        reps = json.load(open(REPRESENTATIVE, encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+    return {k: v for k, v in reps.items() if v.get('large')}
+
+
+def images_for(r, found, reps):
+    """A product's images: the photo of its own part number (found: product-images.json), else the representative photo
+    of its component type (labelled as such on the page), else none (the category placeholder shows)."""
+    img = found.get(norm_key(r['partNumber']))
+    if img:
+        return [{k: img[k] for k in ('thumb', 'large', 'original')} | {'src': img.get('source', '')}]
+    from component_types import component_type
+    rep = reps.get(component_type(r.get('title', '')))
+    # 'aircraft': the photo shows a part of those aircraft only (e.g. a TFE731 engine: Hawker 800, not a Falcon 2000's CFE738)
+    if rep and rep.get('aircraft') and not re.search(rep['aircraft'], r.get('aircraftListed', ''), re.I):
+        rep = None
+    if rep and (not rep.get('only') or r['id'] in rep['only']):
+        return [{'thumb': rep['thumb'], 'large': rep['large'], 'original': rep['large'], 'src': rep.get('source', ''),
+                 'kind': 'representative', 'credit': rep.get('credit', '')}]
+    return []
+
+
 # ---------- reading the site's JS data files ----------
 
 def _js_value(path, var):

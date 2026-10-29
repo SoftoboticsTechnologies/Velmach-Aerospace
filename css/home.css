@@ -191,6 +191,16 @@ main { display: block; background: var(--white); }
 [dir="rtl"] .psearch-line { --origin: right; }
 .psearch-field:focus-within .psearch-line { transform: scaleX(1); }
 
+/* catalogue filters under the hero search (js/home-filters.js) */
+.psearch-filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+.psf { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.psf-l { font: 500 11px/1.3 var(--fk); letter-spacing: var(--ls-k); text-transform: uppercase; color: var(--mist); }
+[dir="rtl"] .psf-l { font-size: 13px; }
+.psf select { width: 100%; height: 44px; padding-inline: 12px 30px; border: 1px solid rgba(255, 255, 255, .22); border-radius: 0; background: rgba(255, 255, 255, .045) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2375828F' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 12px center / 11px 8px; color: #fff; font: 400 14px var(--fs); text-overflow: ellipsis; appearance: none; cursor: pointer; transition: border-color .3s; }
+[dir="rtl"] .psf select { padding-inline: 12px 30px; background-position: left 12px center; }
+.psf select:hover { border-color: rgba(255, 255, 255, .34); }
+.psf select:focus-visible { outline: none; border-color: var(--sig); }
+.psf select option { color: #0b1620; background: #fff; }
 .hero-aog { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 24px; margin-top: 4px; }
 .aog-link { display: inline-flex; align-items: center; gap: 12px; height: 48px; padding-inline: 16px 18px; border: 1px solid rgba(224, 68, 46, .65); color: #fff; font-weight: 600; font-size: 14.5px; text-decoration: none; white-space: nowrap; transition: background .3s, border-color .3s; }
 .aog-link > .ic:first-child { color: var(--aog-2); }
@@ -600,6 +610,7 @@ main { display: block; background: var(--white); }
   .tagbar-items { flex-wrap: nowrap; }
   .tagbar-item { padding: 10px 9px; }
   .psearch-field { height: 58px; }
+  .psearch-filters { grid-template-columns: minmax(0, 1fr); gap: 8px; }
   .psearch-ic { display: none; }
   .psearch input { padding-inline: 14px 6px; font-size: 15px; }
   .psearch-btn { padding-inline: 14px; font-size: 14px; }
@@ -654,7 +665,7 @@ main { display: block; background: var(--white); }
 .sec.bstrip-sec { padding-block: clamp(28px, 3.5vw, 48px) clamp(32px, 4vw, 56px); }
 .bstrip-sec .sec-head { margin-bottom: clamp(20px, 2.5vw, 32px); }
 .sec.loc { padding-top: clamp(40px, 5vw, 72px); }
-/* brand strip: two rows scrolling in opposite directions, paused on hover or focus (js/brand-strip.js) */
+/* brand strip: two rows scrolling in opposite directions, paused on keyboard focus (js/brand-strip.js) */
 .bstrip-sec .sec-head { align-items: center; }
 .bstrip-sec .link-arrow { justify-self: end; color: var(--blue); }
 [dir="rtl"] .bstrip-sec .link-arrow { justify-self: start; }
@@ -662,7 +673,7 @@ main { display: block; background: var(--white); }
 .bstrip-row { display: flex; overflow: hidden; }
 .bstrip-track { display: flex; gap: 14px; width: max-content; margin: 0; padding: 0; list-style: none; animation: bstripL 40s linear infinite; }
 .bstrip-row--rev .bstrip-track { animation-name: bstripR; }
-.bstrip:hover .bstrip-track, .bstrip:focus-within .bstrip-track { animation-play-state: paused; }
+.bstrip:focus-within .bstrip-track { animation-play-state: paused; }
 @keyframes bstripL { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 7px)); } }
 @keyframes bstripR { from { transform: translateX(calc(-50% - 7px)); } to { transform: translateX(0); } }
 .bstrip-tile { display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; width: 200px; height: 104px; padding: 12px 16px; background: #fff; border: 1px solid var(--line); color: var(--navy); font: 600 17px/1.2 var(--fs); letter-spacing: -.01em; text-align: center; text-decoration: none; transition: border-color .2s, color .2s; }

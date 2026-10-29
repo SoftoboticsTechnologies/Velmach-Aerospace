@@ -55,13 +55,25 @@
       .slice(0, limit).map(function (m) { return { label: m.b.name, slug: m.b.slug, href: window.VM.brandHref(m.b.slug) }; });
   }
 
-  // products matching q (already normalised), best first: part number, then title, then brand
+  // how well a part number matches the compacted query: exact 10, starts with it 8, contains it 5
+  function pnScore(pn, cq) {
+    pn = compact(pn);
+    return !cq || !pn ? 0 : pn === cq ? 10 : pn.indexOf(cq) === 0 ? 8 : pn.indexOf(cq) > -1 ? 5 : 0;
+  }
+
+  // products matching q (already normalised), best first: part number (or alternate part number), then
+  // description, then aircraft (card field m, e.g. "Dassault Falcon 2000") and brand
   function rank(list, q) {
     var cq = compact(q), out = [];
     for (var i = 0; i < list.length; i++) {
-      var p = list[i], r = 0, pn = compact(p.pn);
-      if (cq && pn) r = pn === cq ? 10 : pn.indexOf(cq) === 0 ? 8 : pn.indexOf(cq) > -1 ? 5 : 0;
-      r = Math.max(r, score(p.t, q) * 2, score(p.b, q) * 1.5);
+      var p = list[i], r = Math.max(pnScore(p.pn, cq), pnScore(p.ap, cq) - 1);
+      r = Math.max(r, score(p.t, q) * 2, score(p.m, q) * 1.5, score(p.b, q) * 1.5);
+      // words in any order across fields: "falcon 2000 valve", "honeywell giv"
+      if (!r && q.indexOf(' ') > 0) {
+        var hay = ' ' + norm([p.t, p.m, p.b, p.pn, p.ap].join(' ')), words = q.split(' '), all = true;
+        for (var w = 0; w < words.length && all; w++) all = hay.indexOf(' ' + words[w]) > -1 || compact(hay).indexOf(compact(words[w])) > -1;
+        if (all) r = 1;
+      }
       if (r) out.push({ p: p, r: r, i: i });
     }
     out.sort(function (a, b) { return b.r - a.r || a.i - b.i; });

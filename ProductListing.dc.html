@@ -256,16 +256,16 @@ class Component extends DCLogic {
     // the aircraft chosen in the header narrows every listing (products with no aircraft listed fit all)
     const base = (s.cards || []).filter(c => VM.fitsAircraft({ compatibleAircraft: c.a }));
     const dims = mode === 'category' ? (catPath[1] ? ['brand', 'cond', 'ac'] : ['sub', 'brand', 'cond', 'ac'])
-      : mode === 'brand' ? ['cat', 'cond', 'ac'] : ['cat', 'brand', 'cond', 'ac'];
+      : mode === 'brand' ? ['cat', 'sub', 'cond', 'ac'] : ['cat', 'sub', 'brand', 'cond', 'ac'];
     const passes = (c, skip) => dims.every(d => d === skip || this.match(c, d, s.f[d]));
     const rows = base.filter(c => passes(c, null));
 
     // facet options: every value present in the base list, counted against the other active filters
     const label = (dim, key, c) => {
-      if (dim === 'sub') { const f = VM.findCat(catPath[0] + '/' + key); return f && f.child ? VM.label(f.child) : key; }
+      if (dim === 'sub') { const f = VM.findCat(((c && c.p) || catPath[0]) + '/' + key); return f && f.child ? VM.label(f.child) : key; }
       if (dim === 'cat') { const f = VM.findCat(key); return f ? VM.label(f.parent) : key; }
       if (dim === 'brand') return c ? c.b : key;
-      if (dim === 'cond') return key === 'used' ? t.ls_cond_used : t.ls_cond_new;
+      if (dim === 'cond') return VM.condLabel(key);
       return VM.acLabel(key);
     };
     const facets = dims.map(dim => {
@@ -273,7 +273,7 @@ class Component extends DCLogic {
       base.forEach(c => { const val = DIMS[dim].get(c); (DIMS[dim].multi ? val : [val]).forEach(k => { if (k && !seen.has(k)) seen.set(k, c); }); });
       base.filter(c => passes(c, dim)).forEach(c => { const val = DIMS[dim].get(c); (DIMS[dim].multi ? val : [val]).forEach(k => { if (k) counts.set(k, (counts.get(k) || 0) + 1); }); });
       let opts = [...seen.keys()].map(k => ({ k, label: label(dim, k, seen.get(k)), n: counts.get(k) || 0, checked: s.f[dim].includes(k) }));
-      opts.sort((a, b) => (dim === 'cond' ? (a.k === 'new' ? -1 : 1) : a.label.localeCompare(b.label)));
+      opts.sort((a, b) => (dim === 'cond' ? b.n - a.n || a.label.localeCompare(b.label) : a.label.localeCompare(b.label)));
       const searchable = dim === 'brand' && opts.length > FACET_ROWS;
       if (searchable && s.bq.trim()) { const q = s.bq.trim().toLowerCase(); opts = opts.filter(o => o.checked || o.label.toLowerCase().includes(q)); }
       const total = opts.length, open = !!s.more[dim];
@@ -282,7 +282,7 @@ class Component extends DCLogic {
         onQ: e => this.setState({ bq: e.target.value }), empty: searchable && !opts.length,
         hasMore: total > FACET_ROWS, expanded: String(open), moreLabel: open ? t.ls_less : fmt(t.ls_more, { n: total - FACET_ROWS }),
         toggleMore: () => this.setState(st => ({ more: { ...st.more, [dim]: !st.more[dim] } })),
-        visible: seen.size > 0,
+        visible: seen.size > 1 || s.f[dim].length > 0,   // a filter with a single choice narrows nothing
         opts: opts.map(o => ({ label: o.label, n: String(o.n), checked: o.checked, disabled: !o.checked && !o.n, toggle: e => this.setFilter(dim, o.k, e.target.checked) })) };
     }).filter(f => f.visible);
 

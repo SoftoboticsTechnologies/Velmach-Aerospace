@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Velmach Aerospace 3D Logo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&display=swap">
+<!-- Print source for velmach-3d-logo.pdf (tools/build-3d-logo-pdf.py). Images come from export/. -->
+<style>
+@page { size: 297mm 210mm; margin: 0; }
+:root { --ink: #07111D; --navy: #0A2A57; --blue: #0759A5; --sky: #4A9BE8; --orange: #F7821B; --fg: #E8EEF5; --muted: #8FA3B8; --line: #1C2E44; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { margin: 0; }
+body { font-family: 'Archivo', 'Segoe UI', sans-serif; color: var(--fg); }
+.page { width: 297mm; height: 210mm; overflow: hidden; position: relative; page-break-after: always; break-after: page;
+  background: radial-gradient(110% 90% at 30% 35%, #12305A 0%, #0A1A2E 55%, var(--ink) 100%); padding: 14mm 16mm; }
+.page:last-child { page-break-after: auto; break-after: auto; }
+.mono { font-family: 'JetBrains Mono', Consolas, monospace; }
+.eyebrow { font: 600 8.5pt 'JetBrains Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); }
+h1, h2 { font-stretch: 125%; font-weight: 900; margin: 0; line-height: 1.02; }
+h1 { font-size: 40pt; } h2 { font-size: 26pt; }
+h1 em, h2 em { font-style: normal; color: var(--orange); }
+p { margin: 0; color: var(--muted); font-size: 10.5pt; line-height: 1.5; }
+.foot { position: absolute; left: 16mm; right: 16mm; bottom: 9mm; display: flex; justify-content: space-between; font: 7.5pt 'JetBrains Mono', monospace; color: var(--muted); letter-spacing: .06em; }
+
+/* cover */
+.cover { display: grid; grid-template-rows: auto 1fr auto; gap: 8mm; }
+.cover .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6mm; align-items: center; }
+.cover figure { margin: 0; display: grid; gap: 3mm; justify-items: center; text-align: center; }
+.cover figure img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+.cover figcaption { font: 600 8pt 'JetBrains Mono', monospace; color: var(--fg); letter-spacing: .08em; }
+.cover figcaption span { display: block; color: var(--muted); font-weight: 400; }
+.palette { display: flex; gap: 8mm; padding-bottom: 6mm; }
+.palette div { display: flex; align-items: center; gap: 3mm; font: 8pt 'JetBrains Mono', monospace; color: var(--muted); }
+.palette i { width: 9mm; height: 9mm; border-radius: 2mm; display: block; }
+.palette b { display: block; color: var(--fg); font-weight: 600; }
+
+/* model pages */
+.model { display: grid; grid-template-columns: 128mm 1fr; gap: 10mm; }
+.hero { position: relative; border-radius: 4mm; overflow: hidden; background: radial-gradient(100% 80% at 50% 35%, #1A3F70, #0A1A2E 70%); border: .3mm solid var(--line); height: 170mm; }
+.hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.hero .tag { position: absolute; top: 5mm; left: 5mm; font: 600 8pt 'JetBrains Mono', monospace; color: var(--orange); background: rgba(247,130,27,.14); padding: 1.2mm 2.4mm; border-radius: 1.5mm; letter-spacing: .1em; }
+.side { display: grid; grid-template-rows: auto auto 1fr auto; gap: 5mm; min-width: 0; height: 170mm; }
+.side .head { display: grid; gap: 3mm; }
+.views { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4mm; }
+.views figure { margin: 0; border: .3mm solid var(--line); border-radius: 3mm; background: rgba(255,255,255,.03); padding: 2mm; display: grid; }
+.views img { width: 100%; height: 38mm; object-fit: contain; }
+.views figcaption { font: 7pt 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-align: center; padding-top: 1mm; }
+.meta { display: grid; gap: 3mm; }
+.chips { display: flex; gap: 3mm; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 2mm; font: 7.5pt 'JetBrains Mono', monospace; border: .3mm solid var(--line); border-radius: 10mm; padding: 1mm 2.6mm 1mm 1.2mm; }
+.chip i { width: 4mm; height: 4mm; border-radius: 50%; display: block; }
+.uses { font: 8pt 'JetBrains Mono', monospace; color: var(--muted); }
+.uses b { color: var(--fg); }
+
+/* light page */
+.light { background: #F2F5F9; color: #0B1928; display: grid; grid-template-rows: auto 1fr; gap: 6mm; }
+.light p { color: #55667A; }
+.light .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5mm; align-items: center; }
+.light figure { margin: 0; background: #fff; border: .3mm solid #D5DDE6; border-radius: 3mm; padding: 3mm; text-align: center; }
+.light figure img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+.light figcaption { font: 600 7.5pt 'JetBrains Mono', monospace; letter-spacing: .08em; color: #0A2A57; padding-top: 2mm; }
+.light .foot { color: #55667A; }
+</style>
+</head>
+<body>
+
+<section class="page cover">
+  <div style="display:grid;gap:4mm;max-width:190mm">
+    <div class="eyebrow">Velmach Aerospace F.Z.C · Identity study · October 2026</div>
+    <h1>3D logo in <em>orange</em><br>and blue</h1>
+    <p>Four three-dimensional versions of the Velmach V mark. Each page shows the full logo and the mark from four angles, so the depth of the model is visible. The matching .glb 3D files are in the same delivery folder.</p>
+  </div>
+  <div class="row">
+    <figure><img src="export/1-orbit/velmach-orbit-mark.png" alt=""><figcaption>VM-3D-01<span>Orbit Monogram</span></figcaption></figure>
+    <figure><img src="export/2-hex/velmach-hex-mark.png" alt=""><figcaption>VM-3D-02<span>Hangar Badge</span></figcaption></figure>
+    <figure><img src="export/3-globe/velmach-globe-mark.png" alt=""><figcaption>VM-3D-03<span>Mach Globe</span></figcaption></figure>
+    <figure><img src="export/4-chevron/velmach-chevron-mark.png" alt=""><figcaption>VM-3D-04<span>Velocity Chevron</span></figcaption></figure>
+  </div>
+  <div class="palette">
+    <div><i style="background:#F7821B"></i><span><b>Flight Orange</b>#F7821B · RGB 247 130 27</span></div>
+    <div><i style="background:#0759A5"></i><span><b>Velmach Blue</b>#0759A5 · RGB 7 89 165</span></div>
+    <div><i style="background:#0A2A57"></i><span><b>Deep Navy</b>#0A2A57 · RGB 10 42 87</span></div>
+    <div><i style="background:#4A9BE8"></i><span><b>Sky</b>#4A9BE8 · RGB 74 155 232</span></div>
+  </div>
+  <div class="foot"><span>VELMACH AEROSPACE F.Z.C · AJMAN FREE ZONE, UAE</span><span>01 / 06</span></div>
+</section>
+
+<template id="model">
+  <section class="page model">
+    <div class="hero"><img data-src="lockup-on-dark" alt=""><span class="tag" data-f="no"></span></div>
+    <div class="side">
+      <div class="head"><div class="eyebrow" data-f="eyebrow"></div><h2 data-f="name"></h2><p data-f="text"></p></div>
+      <div class="views">
+        <figure><img data-src="views/left" alt=""><figcaption>Front left</figcaption></figure>
+        <figure><img data-src="views/right" alt=""><figcaption>Front right</figcaption></figure>
+        <figure><img data-src="views/side" alt=""><figcaption>Side, showing depth</figcaption></figure>
+        <figure><img data-src="views/top" alt=""><figcaption>From above</figcaption></figure>
+      </div>
+      <div></div>
+      <div class="meta"><div class="chips" data-f="chips"></div><div class="uses"><b>Best for:</b> <span data-f="uses"></span></div><div class="uses"><b>Files:</b> <span data-f="files"></span></div></div>
+    </div>
+    <div class="foot"><span>VELMACH AEROSPACE F.Z.C · 3D LOGO</span><span data-f="pg"></span></div>
+  </section>
+</template>
+
+<section class="page light" id="light">
+  <div style="display:grid;gap:3mm;max-width:200mm">
+    <div class="eyebrow">On light backgrounds</div>
+    <h2>All four models on white</h2>
+    <p>Navy wordmark versions for letterhead, invoices, certificates and white web pages.</p>
+  </div>
+  <div class="grid">
+    <figure><img src="export/1-orbit/velmach-orbit-lockup-on-light.png" alt=""><figcaption>01 · ORBIT MONOGRAM</figcaption></figure>
+    <figure><img src="export/2-hex/velmach-hex-lockup-on-light.png" alt=""><figcaption>02 · HANGAR BADGE</figcaption></figure>
+    <figure><img src="export/3-globe/velmach-globe-lockup-on-light.png" alt=""><figcaption>03 · MACH GLOBE</figcaption></figure>
+    <figure><img src="export/4-chevron/velmach-chevron-lockup-on-light.png" alt=""><figcaption>04 · VELOCITY CHEVRON</figcaption></figure>
+  </div>
+  <div class="foot"><span>VELMACH AEROSPACE F.Z.C · 3D LOGO</span><span>06 / 06</span></div>
+</section>
+
+<script>
+const M = [
+  { dir: '1-orbit', id: 'orbit', no: 'VM-3D-01', name: 'Orbit <em>Monogram</em>', colors: ['#0759A5', '#4A9BE8', '#F7821B'],
+    text: 'The current V and A ligature rebuilt in depth: a blue V and a sky-blue A share one stroke. An orange flight path circles both and ends in an aircraft. It stays closest to the logo used today, so the change to orange and blue reads as an update, not a rebrand.',
+    uses: 'Website header, letterhead, certificates' },
+  { dir: '2-hex', id: 'hex', no: 'VM-3D-02', name: 'Hangar <em>Badge</em>', colors: ['#0A2A57', '#F7821B', '#4A9BE8'],
+    text: 'A deep-navy hexagon with the V cut through it and an orange V set into the cut, like a stamped part tag. The flat outline stays clear down to 16 px, so it suits icons and small marks.',
+    uses: 'Favicon, app icon, uniform patch, packaging seal' },
+  { dir: '3-globe', id: 'globe', no: 'VM-3D-03', name: 'Mach <em>Globe</em>', colors: ['#0759A5', '#4A9BE8', '#F7821B'],
+    text: 'A blue globe with latitude and longitude lines, two flight orbits and an orange V on the front. It shows global parts supply out of the UAE. It needs room to read well, so use it large.',
+    uses: 'Home hero, trade-show booth, video intro' },
+  { dir: '4-chevron', id: 'chevron', no: 'VM-3D-04', name: 'Velocity <em>Chevron</em>', colors: ['#0759A5', '#F7821B', '#4A9BE8'],
+    text: 'The V split into a blue arm and a longer orange arm that climbs like a take-off line, with three speed bars behind it. It is the most modern of the four and the easiest to animate.',
+    uses: 'Social avatar, AOG desk branding, motion intros' },
+];
+const tpl = document.getElementById('model'), light = document.getElementById('light');
+M.forEach((m, i) => {
+  const p = tpl.content.firstElementChild.cloneNode(true);
+  p.querySelectorAll('[data-src]').forEach(img => img.src = `export/${m.dir}/${img.dataset.src.replace(/(views\/)?(.*)/, (_, v = '', n) => `${v}velmach-${m.id}-${n}`)}.png`);
+  const f = k => p.querySelector(`[data-f="${k}"]`);
+  f('no').textContent = m.no;
+  f('eyebrow').textContent = `Model ${i + 1} of 4`;
+  f('name').innerHTML = m.name;
+  f('text').textContent = m.text;
+  f('uses').textContent = m.uses;
+  f('files').textContent = `velmach-${m.id}.glb (3D) · lockup and mark PNGs, 2048 px`;
+  f('chips').innerHTML = m.colors.map(c => `<span class="chip"><i style="background:${c}"></i>${c}</span>`).join('');
+  f('pg').textContent = `0${i + 2} / 06`;
+  light.before(p);
+});
+</script>
+</body>
+</html>

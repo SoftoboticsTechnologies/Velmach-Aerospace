@@ -1,0 +1,420 @@
+<title>Velmach 3D Logo Concepts</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a hangar-floor spec sheet. Short header, then a 2x2 grid of live 3D stages, each with its spec strip. */
+:root {
+  --bg: #07111D; --panel: #0C1A2B; --line: #1C2E44; --fg: #E8EEF5; --muted: #8FA3B8;
+  --orange: #F7821B; --orange-deep: #D9620A; --blue: #0759A5; --blue-deep: #0A2A57; --sky: #4A9BE8;
+  --stage-dark: #0A1A2E; --stage-light: #F2F5F9; --stage-ink-dark: #FFFFFF; --stage-ink-light: #0A2A57;
+  --f-display: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { --bg: #EEF2F6; --panel: #FFFFFF; --line: #D5DDE6; --fg: #0B1928; --muted: #55667A; color-scheme: light; }
+}
+:root[data-theme="light"] { --bg: #EEF2F6; --panel: #FFFFFF; --line: #D5DDE6; --fg: #0B1928; --muted: #55667A; color-scheme: light; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 32px; }
+
+header { display: grid; gap: 12px; max-width: 70ch; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--orange); }
+h1 { margin: 0; font-family: var(--f-display); font-stretch: 125%; font-weight: 850; font-size: clamp(28px, 4.6vw, 48px); line-height: 1.05; letter-spacing: .01em; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--orange); }
+header p { margin: 0; color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.stage { position: relative; aspect-ratio: 1 / 1; max-width: 100%; background: radial-gradient(120% 90% at 50% 30%, color-mix(in srgb, var(--stage-dark) 80%, var(--sky) 20%), var(--stage-dark) 70%); transition: background .3s; cursor: grab; }
+.stage[data-bg="light"] { background: radial-gradient(120% 90% at 50% 30%, #FFFFFF, var(--stage-light) 70%); }
+.stage:active { cursor: grabbing; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; }
+.lockup { position: absolute; left: 0; right: 0; bottom: 6%; text-align: center; pointer-events: none; color: var(--stage-ink-dark); }
+.stage[data-bg="light"] .lockup { color: var(--stage-ink-light); }
+.lockup b { display: block; font-family: var(--f-display); font-stretch: 125%; font-weight: 900; font-size: clamp(22px, 4.2vw, 40px); letter-spacing: .06em; line-height: 1; }
+.lockup b i { font-style: normal; color: var(--orange); }
+.lockup small { display: block; margin-top: 6px; font-family: var(--f-display); font-stretch: 125%; font-weight: 600; font-size: clamp(9px, 1.25vw, 12px); letter-spacing: .5em; opacity: .75; }
+.tag { position: absolute; top: 14px; left: 14px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; padding: 4px 8px; border-radius: 6px; background: rgba(247,130,27,.14); color: var(--orange); }
+.tools { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; }
+.tools button, .exports button { font: 600 12px/1 var(--f-body); border-radius: 8px; padding: 7px 10px; cursor: pointer; border: 1px solid rgba(255,255,255,.18); background: rgba(7,17,29,.55); color: #fff; backdrop-filter: blur(6px); }
+.stage[data-bg="light"] .tools button { background: rgba(255,255,255,.75); color: var(--stage-ink-light); border-color: rgba(10,42,87,.18); }
+.tools button[aria-pressed="true"] { background: var(--orange); border-color: var(--orange); color: #1A0E02; }
+button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+.info { padding: 20px 22px 22px; display: grid; gap: 12px; align-content: start; }
+.info h2 { margin: 0; font-family: var(--f-display); font-stretch: 112%; font-weight: 800; font-size: 20px; letter-spacing: .01em; }
+.info p { margin: 0; color: var(--muted); max-width: 62ch; }
+.spec { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 11.5px; padding: 5px 9px 5px 6px; border: 1px solid var(--line); border-radius: 999px; color: var(--fg); }
+.chip .sw { width: 14px; height: 14px; border-radius: 50%; }
+.uses { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.uses strong { color: var(--fg); font-weight: 600; }
+.exports { display: flex; flex-wrap: wrap; gap: 8px; }
+.exports button { background: transparent; color: var(--fg); border-color: var(--line); }
+.exports button:hover { border-color: var(--orange); color: var(--orange); }
+
+footer { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .stage { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Velmach Aerospace F.Z.C · Identity study · 4 models</div>
+    <h1>3D logo in <em>orange</em> and blue</h1>
+    <p>Four extruded versions of the Velmach V mark, rendered live. Drag any model to turn it. Use the Light / Dark button to check each one on both kinds of background.</p>
+    <div class="legend">
+      <span><i class="sw" style="background:#F7821B"></i>Flight Orange #F7821B</span>
+      <span><i class="sw" style="background:#0759A5"></i>Velmach Blue #0759A5</span>
+      <span><i class="sw" style="background:#0A2A57"></i>Deep Navy #0A2A57</span>
+      <span><i class="sw" style="background:#4A9BE8"></i>Sky #4A9BE8</span>
+    </div>
+  </header>
+  <section class="grid" id="grid"></section>
+  <footer>Rendered with Three.js r128 · Physically based materials with clearcoat · Units are scene units (the V is 4.0 u wide).</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/GLTFExporter.js"></script>
+<script>
+(() => {
+  const C = { orange: '#F7821B', orangeDeep: '#D9620A', blue: '#0759A5', navy: '#0A2A57', sky: '#4A9BE8', steel: '#C9D6E3' };
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let embedded = true;
+  try { embedded = window.self !== window.top; } catch (e) { embedded = true; }
+
+  // ---------- geometry helpers ----------
+  const col = hex => new THREE.Color(hex).convertSRGBToLinear();
+  const mat = (hex, o = {}) => new THREE.MeshPhysicalMaterial(Object.assign({ color: col(hex), metalness: .15, roughness: .32, clearcoat: 1, clearcoatRoughness: .08, envMapIntensity: .75 }, o));
+  const shape = (pts, holes = []) => {
+    const s = new THREE.Shape(pts.map(p => new THREE.Vector2(p[0], p[1])));
+    holes.forEach(h => s.holes.push(new THREE.Path(h.map(p => new THREE.Vector2(p[0], p[1])))));
+    return s;
+  };
+  const extrude = (s, depth, bevel = .06) => {
+    const g = new THREE.ExtrudeGeometry(s, { depth, bevelEnabled: bevel > 0, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 5, curveSegments: 32 });
+    g.translate(0, 0, -depth / 2);
+    return g;
+  };
+  const xf = (pts, s = 1, dx = 0, dy = 0) => pts.map(p => [p[0] * s + dx, p[1] * s + dy]);
+
+  // The Velmach V: 4.0 u wide, 3.0 u tall. The A is the same stroke inverted.
+  const V = [[-2.0, 1.5], [-1.1, 1.5], [0, -0.45], [1.1, 1.5], [2.0, 1.5], [0.35, -1.5], [-0.35, -1.5]];
+  const A = [[-1.6, -1.5], [-0.7, -1.5], [0, 0.3], [0.7, -1.5], [1.6, -1.5], [0.35, 1.5], [-0.35, 1.5]];
+
+  // Flight-path ring that thickens toward its head, where the aircraft sits.
+  function orbit(radius, tube, arc, hex, head = 0) {
+    const g = new THREE.TorusGeometry(radius, tube, 20, 220, arc);
+    const p = g.attributes.position, v = new THREE.Vector3();
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i);
+      let a = Math.atan2(v.y, v.x); if (a < 0) a += Math.PI * 2;
+      const t = Math.min(1, a / arc), k = .12 + .88 * Math.pow(t, .8);
+      const cx = Math.cos(a) * radius, cy = Math.sin(a) * radius;
+      p.setXYZ(i, cx + (v.x - cx) * k, cy + (v.y - cy) * k, v.z * k);
+    }
+    g.computeVertexNormals();
+    const ring = new THREE.Group(), inner = new THREE.Group();
+    inner.rotation.z = head - arc;
+    ring.add(inner);
+    inner.add(new THREE.Mesh(g, mat(hex, { metalness: .25, roughness: .22 })));
+    const plane = aircraft(hex);
+    plane.position.set(Math.cos(arc) * radius, Math.sin(arc) * radius, 0);
+    plane.rotation.z = arc + Math.PI / 2;
+    inner.add(plane);
+    return ring;
+  }
+
+  // Small airliner, nose on +X, wings in the XY plane.
+  function aircraft(hex) {
+    const g = new THREE.Group(), m = mat(hex, { metalness: .25, roughness: .22 });
+    const body = new THREE.LatheGeometry([[0, -.5], [.055, -.44], [.07, -.2], [.07, .25], [.045, .42], [0, .5]].map(p => new THREE.Vector2(p[0], p[1])), 20);
+    body.rotateZ(-Math.PI / 2);
+    g.add(new THREE.Mesh(body, m));
+    const wing = [[.12, 0], [-.1, .55], [-.2, .55], [-.14, 0]];
+    const tail = [[-.36, 0], [-.48, .2], [-.54, .2], [-.5, 0]];
+    [wing, tail].forEach(w => [1, -1].forEach(s => g.add(new THREE.Mesh(extrude(shape(w.map(p => [p[0], p[1] * s])), .025, .01), m))));
+    const fin = new THREE.Mesh(extrude(shape([[-.32, 0], [-.48, .24], [-.54, .24], [-.5, 0]]), .025, .01), m);
+    fin.rotation.x = Math.PI / 2;
+    g.add(fin);
+    g.scale.setScalar(1.15);
+    return g;
+  }
+
+  function roundRect(w, h, r) {
+    const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+    s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+    s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+    s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+    return s;
+  }
+
+  // ---------- the four models ----------
+  function buildOrbit() {
+    const g = new THREE.Group();
+    const v = new THREE.Mesh(extrude(shape(V), .6), mat(C.blue));
+    v.position.set(-.75, 0, .1);
+    const a = new THREE.Mesh(extrude(shape(A), .6), mat(C.sky, { metalness: .3 }));
+    a.position.set(.85, 0, -.3);
+    const tri = new THREE.Mesh(extrude(shape([[-.34, -1.5], [.34, -1.5], [0, -.3]]), .5, .04), mat(C.orange));
+    tri.position.set(.85, 0, -.2);
+    const ring = orbit(2.55, .085, Math.PI * 1.72, C.orange, .35);
+    ring.rotation.set(1.22, -.12, .34);
+    ring.position.y = .15;
+    g.add(v, a, tri, ring);
+    g.position.y = .55;
+    return g;
+  }
+
+  function buildHex() {
+    const g = new THREE.Group();
+    const hex = r => Array.from({ length: 6 }, (_, i) => { const t = Math.PI / 2 + i * Math.PI / 3; return [Math.cos(t) * r, Math.sin(t) * r]; });
+    const hole = xf(V, .6, 0, .12);
+    g.add(new THREE.Mesh(extrude(shape(hex(2.1), [hole]), .55, .08), mat(C.navy, { metalness: .3, roughness: .3 })));
+    const rim = new THREE.Mesh(extrude(shape(hex(2.42), [hex(2.26)]), .3, .03), mat(C.orange));
+    rim.position.z = -.12;
+    const inlay = new THREE.Mesh(extrude(shape(xf(V, .52, 0, .12)), .9, .05), mat(C.orange));
+    inlay.position.z = .12;
+    g.add(rim, inlay);
+    g.position.y = .5;
+    g.scale.setScalar(1.05);
+    return g;
+  }
+
+  function buildGlobe() {
+    const g = new THREE.Group();
+    const globe = new THREE.Group();
+    globe.add(new THREE.Mesh(new THREE.SphereGeometry(1.55, 64, 48), mat(C.blue, { metalness: .1, roughness: .4 })));
+    const pts = [], R = 1.565;
+    for (const lat of [-60, -30, 0, 30, 60]) {
+      const y = Math.sin(lat * Math.PI / 180) * R, r = Math.cos(lat * Math.PI / 180) * R;
+      for (let i = 0; i < 96; i++) { const a = i / 96 * Math.PI * 2, b = (i + 1) / 96 * Math.PI * 2; pts.push(Math.cos(a) * r, y, Math.sin(a) * r, Math.cos(b) * r, y, Math.sin(b) * r); }
+    }
+    for (let lon = 0; lon < 180; lon += 30) {
+      const o = lon * Math.PI / 180;
+      for (let i = 0; i < 96; i++) {
+        const a = i / 96 * Math.PI * 2, b = (i + 1) / 96 * Math.PI * 2;
+        pts.push(Math.cos(a) * R * Math.cos(o), Math.sin(a) * R, Math.cos(a) * R * Math.sin(o), Math.cos(b) * R * Math.cos(o), Math.sin(b) * R, Math.cos(b) * R * Math.sin(o));
+      }
+    }
+    const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+    globe.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ color: col(C.sky), transparent: true, opacity: .55 })));
+    globe.userData.spin = true;
+    const v = new THREE.Mesh(extrude(shape(xf(V, .62)), .45), mat(C.orange));
+    v.position.set(0, -.05, 1.55);
+    const r1 = orbit(2.3, .06, Math.PI * 1.6, C.orange, .5); r1.rotation.set(1.3, .35, .2);
+    const r2 = new THREE.Mesh(new THREE.TorusGeometry(2.05, .025, 12, 200), mat(C.sky, { metalness: .3 })); r2.rotation.set(1.45, -.5, -.3);
+    g.add(globe, v, r1, r2);
+    g.position.y = .6;
+    return g;
+  }
+
+  function buildChevron() {
+    const g = new THREE.Group();
+    const left = [[-2.0, 1.5], [-1.1, 1.5], [-0.05, -0.37], [-0.05, -1.5], [-0.35, -1.5]];
+    const right = [[0.05, -0.37], [0.05, -1.5], [0.35, -1.5], [2.95, 2.4], [1.55, 2.2]];
+    g.add(new THREE.Mesh(extrude(shape(left), .6), mat(C.blue)));
+    g.add(new THREE.Mesh(extrude(shape(right), .6), mat(C.orange)));
+    [[.6, 1.5], [0, 1.1], [-.6, .7]].forEach(([y, len]) => {
+      const edge = -0.35 - (y + 1.5) * 0.55;
+      const bar = new THREE.Mesh(extrude(roundRect(len, .2, .1), .35, .03), mat(C.sky));
+      bar.position.set(edge - .3 - len / 2, y, -.05);
+      g.add(bar);
+    });
+    g.position.set(.1, .3, 0);
+    g.scale.setScalar(.92);
+    return g;
+  }
+
+  const MODELS = [
+    { id: 'orbit', no: 'VM-3D-01', name: 'Orbit Monogram', build: buildOrbit,
+      text: 'The current V and A ligature rebuilt in depth: a blue V and a sky-blue A share one stroke. An orange flight path circles both and ends in an aircraft. It stays closest to the logo you have now, so the change to orange and blue reads as an update, not a rebrand.',
+      uses: 'Website header, letterhead, certificates', colors: [C.blue, C.sky, C.orange] },
+    { id: 'hex', no: 'VM-3D-02', name: 'Hangar Badge', build: buildHex,
+      text: 'A deep-navy hexagon with the V cut through it and an orange V set into the cut, like a stamped part tag. The flat outline stays clear down to 16 px, so it suits icons and small marks.',
+      uses: 'Favicon, app icon, uniform patch, packaging seal', colors: [C.navy, C.orange, C.sky] },
+    { id: 'globe', no: 'VM-3D-03', name: 'Mach Globe', build: buildGlobe,
+      text: 'A blue globe with latitude and longitude lines, two flight orbits and an orange V on the front. It shows global parts supply out of the UAE. It needs room to read well, so use it large.',
+      uses: 'Home hero, trade-show booth, video intro', colors: [C.blue, C.sky, C.orange] },
+    { id: 'chevron', no: 'VM-3D-04', name: 'Velocity Chevron', build: buildChevron,
+      text: 'The V split into a blue arm and a longer orange arm that climbs like a take-off line, with three speed bars behind it. It is the most modern of the four and the easiest to animate.',
+      uses: 'Social avatar, AOG desk branding, motion intros', colors: [C.blue, C.orange, C.sky] },
+  ];
+
+  // ---------- page ----------
+  const grid = document.getElementById('grid');
+  const stages = [];
+
+  MODELS.forEach(m => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="stage" data-bg="dark">
+        <span class="tag">${m.no}</span>
+        <div class="tools">
+          <button type="button" id="spin-${m.id}" aria-pressed="false">Spin 360°</button>
+          <button type="button" id="bg-${m.id}">Light</button>
+        </div>
+        <div class="lockup"><b>VELM<i>A</i>CH</b><small>AEROSPACE F.Z.C</small></div>
+      </div>
+      <div class="info">
+        <h2>${m.name}</h2>
+        <p>${m.text}</p>
+        <div class="spec">${m.colors.map(c => `<span class="chip"><i class="sw" style="background:${c}"></i>${c}</span>`).join('')}</div>
+        <div class="uses"><strong>Best for:</strong> ${m.uses}</div>
+        ${embedded ? '' : `<div class="exports"><button type="button" data-png="${m.id}">Save PNG (2048 px)</button><button type="button" data-glb="${m.id}">Save 3D model (.glb)</button></div>`}
+      </div>`;
+    grid.appendChild(card);
+    stages.push(makeStage(card.querySelector('.stage'), m));
+  });
+
+  function makeStage(el, m) {
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.LinearToneMapping;
+    renderer.toneMappingExposure = .85;
+    renderer.setClearColor(0x000000, 0);
+    el.prepend(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new THREE.RoomEnvironment(), .04).texture;
+    const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(4, 6, 8);
+    const rim = new THREE.DirectionalLight(col(C.orange), 1.2); rim.position.set(-6, 2, -5);
+    const fill = new THREE.DirectionalLight(col(C.sky), .6); fill.position.set(-5, -3, 6);
+    scene.add(key, rim, fill);
+
+    const camera = new THREE.PerspectiveCamera(30, 1, .1, 100);
+    camera.position.set(0, 0, 13.5);
+    const model = m.build();
+    const pivot = new THREE.Group(); pivot.add(model); scene.add(pivot);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = false; controls.enablePan = false; controls.enableDamping = true;
+    controls.minPolarAngle = Math.PI * .25; controls.maxPolarAngle = Math.PI * .75;
+
+    const s = { el, m, renderer, scene, camera, model, pivot, controls, spin: false, visible: true, light: false, touched: 0 };
+    controls.addEventListener('start', () => { s.touched = performance.now(); });
+
+    const spinBtn = el.querySelector(`#spin-${m.id}`), bgBtn = el.querySelector(`#bg-${m.id}`);
+    spinBtn.addEventListener('click', () => { s.spin = !s.spin; spinBtn.setAttribute('aria-pressed', s.spin); });
+    bgBtn.addEventListener('click', () => {
+      s.light = !s.light; el.dataset.bg = s.light ? 'light' : 'dark'; bgBtn.textContent = s.light ? 'Dark' : 'Light';
+      renderer.toneMappingExposure = s.light ? .8 : .85;
+    });
+
+    const resize = () => {
+      const w = el.clientWidth, h = el.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    };
+    new ResizeObserver(resize).observe(el); resize();
+    new IntersectionObserver(([e]) => { s.visible = e.isIntersecting; }).observe(el);
+    return s;
+  }
+
+  const clock = new THREE.Clock();
+  function frame() {
+    const dt = Math.min(clock.getDelta(), .05), t = clock.elapsedTime;
+    for (const s of stages) {
+      if (!s.visible) continue;
+      const idle = performance.now() - s.touched > 2500;
+      if (s.spin) s.pivot.rotation.y += dt * .9;
+      else if (!reduceMotion && idle) s.pivot.rotation.y += (Math.sin(t * .55) * .5 - s.pivot.rotation.y) * Math.min(1, dt * 2.5);
+      if (!reduceMotion) s.model.traverse(o => { if (o.userData.spin) o.rotation.y += dt * .35; });
+      s.controls.update();
+      s.renderer.render(s.scene, s.camera);
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // ---------- exports (only when the file is opened directly in a browser) ----------
+  const save = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); };
+
+  // Renders one model to a square transparent canvas. With a wordmark it is the full lockup;
+  // without one the mark is cropped to its own bounds plus a margin.
+  function composite(s, { N = 2048, word = true, light = s.light } = {}) {
+    const { renderer, camera, el } = s, pr = renderer.getPixelRatio();
+    renderer.setPixelRatio(1); renderer.setSize(N, N, false); camera.aspect = 1; camera.updateProjectionMatrix();
+    renderer.render(s.scene, camera);
+    let out = document.createElement('canvas'); out.width = N; out.height = N;
+    const ctx = out.getContext('2d');
+    ctx.drawImage(renderer.domElement, 0, 0);
+    renderer.setPixelRatio(pr);
+    const w = el.clientWidth, h = el.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    if (word) {
+      const ink = light ? '#0A2A57' : '#FFFFFF', size = N * .085;
+      ctx.textBaseline = 'alphabetic'; ctx.fontStretch = 'expanded';
+      ctx.font = `900 ${size}px Archivo`; ctx.letterSpacing = `${size * .06}px`;
+      const parts = [['VELM', ink], ['A', C.orange], ['CH', ink]];
+      const widths = parts.map(([t]) => ctx.measureText(t).width);
+      let x = N / 2 - widths.reduce((a, b) => a + b, 0) / 2;
+      parts.forEach(([t, c], i) => { ctx.fillStyle = c; ctx.fillText(t, x, N * .9); x += widths[i]; });
+      ctx.font = `600 ${N * .026}px Archivo`; ctx.letterSpacing = `${N * .013}px`;
+      ctx.textAlign = 'center'; ctx.fillStyle = ink; ctx.globalAlpha = .75;
+      ctx.fillText('AEROSPACE F.Z.C', N / 2, N * .95);
+      ctx.globalAlpha = 1;
+    } else {
+      const d = ctx.getImageData(0, 0, N, N).data;
+      let x0 = N, y0 = N, x1 = 0, y1 = 0;
+      for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) if (d[(y * N + x) * 4 + 3] > 8) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      const side = Math.max(x1 - x0, y1 - y0) * 1.08, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+      const crop = document.createElement('canvas'); crop.width = N; crop.height = N;
+      crop.getContext('2d').drawImage(out, cx - side / 2, cy - side / 2, side, side, 0, 0, N, N);
+      out = crop;
+    }
+    return out;
+  }
+  const glbOf = s => new Promise(res => new THREE.GLTFExporter().parse(s.model, res, { binary: true }));
+
+  grid.addEventListener('click', async e => {
+    const png = e.target.closest('[data-png]'), glb = e.target.closest('[data-glb]');
+    const s = stages.find(x => x.m.id === (png ? png.dataset.png : glb ? glb.dataset.glb : ''));
+    if (!s) return;
+    if (png) {
+      await document.fonts.ready;
+      composite(s).toBlob(b => save(b, `velmach-3d-${s.m.id}-${s.light ? 'on-light' : 'on-dark'}.png`), 'image/png');
+    } else {
+      save(new Blob([await glbOf(s)], { type: 'model/gltf-binary' }), `velmach-3d-${s.m.id}.glb`);
+    }
+  });
+
+  // Batch export for tools/ scripts: open the file with #export and read <pre id="export"> (JSON of base64 files).
+  if (location.hash === '#export') (async () => {
+    await document.fonts.load('900 40px Archivo'); await document.fonts.ready;
+    stages.forEach(s => { s.spin = false; s.touched = Infinity; s.pivot.rotation.set(0, 0, 0); s.controls.reset(); });
+    const files = {}, b64 = buf => { let s = '', u = new Uint8Array(buf); for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); };
+    for (const s of stages) {
+      const base = `${MODELS.indexOf(s.m) + 1}-${s.m.id}`;
+      files[`${base}/velmach-${s.m.id}-lockup-on-dark.png`] = composite(s, { light: false }).toDataURL('image/png').split(',')[1];
+      files[`${base}/velmach-${s.m.id}-lockup-on-light.png`] = composite(s, { light: true }).toDataURL('image/png').split(',')[1];
+      files[`${base}/velmach-${s.m.id}-mark.png`] = composite(s, { word: false }).toDataURL('image/png').split(',')[1];
+      files[`${base}/velmach-${s.m.id}-icon-512.png`] = composite(s, { word: false, N: 512 }).toDataURL('image/png').split(',')[1];
+      files[`${base}/velmach-${s.m.id}.glb`] = b64(await glbOf(s));
+      // Angled views of the mark, used by tools/build-3d-logo-pdf.py.
+      for (const [view, x, y] of [['left', .12, -.6], ['right', .12, .6], ['side', .05, 1.2], ['top', .7, .25]]) {
+        s.pivot.rotation.set(x, y, 0);
+        files[`${base}/views/velmach-${s.m.id}-${view}.png`] = composite(s, { word: false, N: 1024 }).toDataURL('image/png').split(',')[1];
+      }
+      s.pivot.rotation.set(0, 0, 0);
+    }
+    const pre = document.createElement('pre'); pre.id = 'export'; pre.hidden = true;
+    pre.textContent = JSON.stringify(files); document.body.appendChild(pre);
+  })();
+})();
+</script>

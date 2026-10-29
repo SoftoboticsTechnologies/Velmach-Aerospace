@@ -1,0 +1,99 @@
+{
+ "control-panel": {
+  "label": "Cockpit control panel",
+  "file": "File:FMS_B747-cockpit.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File%3AFMS_B747-cockpit.jpg",
+  "source": "https://upload.wikimedia.org/wikipedia/commons/4/44/FMS_B747-cockpit.jpg?utm_source=commons.wikimedia.org&utm_campaign=rest&utm_content=thumbnail_unscaled",
+  "license": "Public domain",
+  "author": "Snowdog",
+  "large": "images/representative/control-panel.webp",
+  "thumb": "images/representative/thumbs/control-panel.webp",
+  "saved": "File:FMS_B747-cockpit.jpg",
+  "credit": "Photo: Snowdog, Public domain, via Wikimedia Commons"
+ },
+ "radio": {
+  "label": "Avionics radio unit",
+  "file": "File:MSL-SDST.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File%3AMSL-SDST.jpg",
+  "source": "https://upload.wikimedia.org/wikipedia/commons/6/6d/MSL-SDST.jpg?utm_source=commons.wikimedia.org&utm_campaign=rest&utm_content=thumbnail_unscaled",
+  "license": "Public domain",
+  "author": "JPL",
+  "large": "images/representative/radio.webp",
+  "thumb": "images/representative/thumbs/radio.webp",
+  "saved": "File:MSL-SDST.jpg",
+  "credit": "Photo: JPL, Public domain, via Wikimedia Commons"
+ },
+ "instrument": {
+  "label": "Cockpit instrument",
+  "file": "File:Kreuzzeiger2.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File%3AKreuzzeiger2.jpg",
+  "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Kreuzzeiger2.jpg/960px-Kreuzzeiger2.jpg?utm_source=commons.wikimedia.org&utm_campaign=rest&utm_content=thumbnail",
+  "license": "Public domain",
+  "author": "Ulfbastel",
+  "large": "images/representative/instrument.webp",
+  "thumb": "images/representative/thumbs/instrument.webp",
+  "saved": "File:Kreuzzeiger2.jpg",
+  "credit": "Photo: Ulfbastel, Public domain, via Wikimedia Commons"
+ },
+ "light": {
+  "label": "Aircraft light",
+  "file": "File:Saab_91D_Safir_OH-SFJ_Turku_Airshow_2015_03.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File%3ASaab_91D_Safir_OH-SFJ_Turku_Airshow_2015_03.JPG",
+  "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Saab_91D_Safir_OH-SFJ_Turku_Airshow_2015_03.JPG/960px-Saab_91D_Safir_OH-SFJ_Turku_Airshow_2015_03.JPG?utm_source=commons.wikimedia.org&utm_campaign=rest&utm_content=thumbnail",
+  "license": "Public domain",
+  "author": "MKFI",
+  "large": "images/representative/light.webp",
+  "thumb": "images/representative/thumbs/light.webp",
+  "saved": "File:Saab_91D_Safir_OH-SFJ_Turku_Airshow_2015_03.JPG",
+  "credit": "Photo: MKFI, Public domain, via Wikimedia Commons"
+ },
+ "engine": {
+  "label": "Turbofan engine",
+  "file": "File:Honeywell_TFE731-5R-1H_Engine_left_front_view_at_JASDF_Komaki_Air_Base_March_13,_2016.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File%3AHoneywell_TFE731-5R-1H_Engine_left_front_view_at_JASDF_Komaki_Air_Base_March_13%2C_2016.jpg",
+  "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Honeywell_TFE731-5R-1H_Engine_left_front_view_at_JASDF_Komaki_Air_Base_March_13%2C_2016.jpg/960px-Honeywell_TFE731-5R-1H_Engine_left_front_view_at_JASDF_Komaki_Air_Base_March_13%2C_2016.jpg?utm_source=commons.wikimedia.org&utm_campaign=rest&utm_content=thumbnail",
+  "license": "CC BY-SA 4.0",
+  "author": "Hunini",
+  "aircraft": "^Hawker 800",
+  "large": "images/representative/engine.webp",
+  "thumb": "images/representative/thumbs/engine.webp",
+  "saved": "File:Honeywell_TFE731-5R-1H_Engine_left_front_view_at_JASDF_Komaki_Air_Base_March_13,_2016.jpg",
+  "credit": "Photo: Hunini, CC BY-SA 4.0, via Wikimedia Commons"
+ },
+ "battery": {
+  "label": "Aircraft battery",
+  "file": "File:Hubschraubermuseum_Bückeburg_2010_0894.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File%3AHubschraubermuseum_B%C3%BCckeburg_2010_0894.JPG",
+  "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Hubschraubermuseum_B%C3%BCckeburg_2010_0894.JPG/960px-Hubschraubermuseum_B%C3%BCckeburg_2010_0894.JPG?utm_source=commons.wikimedia.org&utm_campaign=rest&utm_content=thumbnail",
+  "license": "CC BY-SA 3.0",
+  "author": "Bin im Garten",
+  "large": "images/representative/battery.webp",
+  "thumb": "images/representative/thumbs/battery.webp",
+  "saved": "File:Hubschraubermuseum_Bückeburg_2010_0894.JPG",
+  "credit": "Photo: Bin im Garten, CC BY-SA 3.0, via Wikimedia Commons"
+ },
+ "fire-portable": {
+  "label": "Portable halon fire extinguisher",
+  "file": "File:Aviation_H3R_Halon_1211_fire_extinguisher.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File%3AAviation_H3R_Halon_1211_fire_extinguisher.jpg",
+  "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Aviation_H3R_Halon_1211_fire_extinguisher.jpg/500px-Aviation_H3R_Halon_1211_fire_extinguisher.jpg?utm_source=commons.wikimedia.org&utm_campaign=rest&utm_content=thumbnail",
+  "license": "CC BY-SA 4.0",
+  "author": "Bovineone",
+  "large": "images/representative/fire-portable.webp",
+  "thumb": "images/representative/thumbs/fire-portable.webp",
+  "saved": "File:Aviation_H3R_Halon_1211_fire_extinguisher.jpg",
+  "credit": "Photo: Bovineone, CC BY-SA 4.0, via Wikimedia Commons"
+ },
+ "cabin-seat": {
+  "label": "Cabin passenger seat (single)",
+  "file": "File:EBACE_2019,_Le_Grand-Saconnex_(EB190630).jpg",
+  "page": "https://commons.wikimedia.org/wiki/File%3AEBACE_2019%2C_Le_Grand-Saconnex_%28EB190630%29.jpg",
+  "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/EBACE_2019%2C_Le_Grand-Saconnex_%28EB190630%29.jpg/500px-EBACE_2019%2C_Le_Grand-Saconnex_%28EB190630%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=rest&utm_content=thumbnail",
+  "license": "CC BY-SA 4.0",
+  "author": "Matti Blume",
+  "large": "images/representative/cabin-seat.webp",
+  "thumb": "images/representative/thumbs/cabin-seat.webp",
+  "saved": "File:EBACE_2019,_Le_Grand-Saconnex_(EB190630).jpg",
+  "credit": "Photo: Matti Blume, CC BY-SA 4.0, via Wikimedia Commons"
+ }
+}

@@ -51,11 +51,15 @@
               <img src="{{ mainImg }}" alt="{{ imgAlt }}" width="1200" height="1200" decoding="async">
             </button>
           </sc-if>
-          <!-- no photo of this exact product: its name and part number instead of a placeholder picture -->
+          <!-- no photo of this exact product: the generic picture of its category, its name and part number -->
           <sc-if value="{{ noImg }}" hint-placeholder-val="{{ false }}">
-            <div class="pd-noimg"><span dir="auto">{{ p.title }}</span><sc-if value="{{ p.partNumber }}" hint-placeholder-val="{{ true }}"><b dir="ltr">{{ p.partNumber }}</b></sc-if></div>
+            <div class="pd-noimg"><sc-if value="{{ phImg }}" hint-placeholder-val="{{ false }}"><img src="{{ phImg }}" alt="" width="400" height="400" style="width:min(70%,300px);height:auto;margin-block:-8% -4%"></sc-if><span dir="auto">{{ p.title }}</span><sc-if value="{{ p.partNumber }}" hint-placeholder-val="{{ true }}"><b dir="ltr">{{ p.partNumber }}</b></sc-if></div>
           </sc-if>
         </div>
+        <!-- a photo of the component type, not of this exact part: said so, with the photo credit -->
+        <sc-if value="{{ repImg }}" hint-placeholder-val="{{ false }}">
+          <p class="pp-rep"><b>{{ t.pp_rep }}</b> {{ t.pp_rep_note }}<sc-if value="{{ repCredit }}" hint-placeholder-val="{{ false }}"><span class="pp-rep-credit" dir="auto">{{ repCredit }}</span></sc-if></p>
+        </sc-if>
         <sc-if value="{{ multi }}" hint-placeholder-val="{{ false }}">
           <div class="pp-thumbs">
             <sc-for list="{{ thumbs }}" as="m" hint-placeholder-count="3">
@@ -135,7 +139,7 @@
           <sc-if value="{{ hasAc }}" hint-placeholder-val="{{ true }}">
             <ul class="pp-acs"><sc-for list="{{ acs }}" as="a" hint-placeholder-count="3"><li class="{{ a.cls }}">{{ a.label }}</li></sc-for></ul>
           </sc-if>
-          <sc-if value="{{ universal }}" hint-placeholder-val="{{ false }}"><p class="pp-muted">{{ t.pc_universal }}. {{ t.pp_universal }}</p></sc-if>
+          <sc-if value="{{ universal }}" hint-placeholder-val="{{ false }}"><p class="pp-muted">{{ t.pp_ac_none }}</p></sc-if>
         </sc-if>
       </div>
     </section>
@@ -278,7 +282,7 @@ class Component extends DCLogic {
     if (this.headKey === key) return;
     this.headKey = key;
     if (!p) { R.head({ title: t.pp_missing_t + ' | Velmach Aerospace', description: t.pp_missing_b, noindex: true }); return; }
-    const images = p.images.map(i => R.abs(i.large));
+    const images = p.images.filter(i => i.kind !== 'representative').map(i => R.abs(i.large));   // a representative photo is not the product's
     const desc = p.shortDescription || [p.title, p.partNumber, p.brand].filter(Boolean).join(', ');
     const ld = { '@context': 'https://schema.org/', '@type': 'Product', name: p.title, description: desc };
     if (p.partNumber) ld.sku = p.partNumber;
@@ -331,9 +335,10 @@ class Component extends DCLogic {
     return {
       ...base, found: true, missing: false, crumbs, p, descRef: this.descRef, lbRef: this.lbRef,
       brandHref: VM.brandHref(p.brandSlug), catHref: VM.catHref(p.categoryParent, p.categoryChild || undefined), catLabel: VM.label(f.child || f.parent) || p.categoryParent,
-      condLabel: p.condition === 'Used' ? t.ls_cond_used : t.ls_cond_new,
+      condLabel: VM.condLabel(p.conditionCode || (p.condition === 'Used' ? 'used' : 'new')),
       fits, fitsLabel: cur ? fmt(t.pp_fits, { a: cur.make + ' ' + cur.model }) : '',
-      hasImg: p.images.length > 0, noImg: !p.images.length, mainImg: imgs[idx].large, bigImg: imgs[idx].original || imgs[idx].large, imgAlt: [p.title, p.partNumber].filter(Boolean).join(', '), multi: n > 1, countLabel: fmt(t.pp_img, { n: idx + 1, m: n }),
+      hasImg: p.images.length > 0, noImg: !p.images.length, phImg: p.placeholder || '', mainImg: imgs[idx].large, bigImg: imgs[idx].original || imgs[idx].large, imgAlt: [p.title, p.partNumber].filter(Boolean).join(', '), multi: n > 1, countLabel: fmt(t.pp_img, { n: idx + 1, m: n }),
+      repImg: imgs[idx].kind === 'representative', repCredit: imgs[idx].credit || '',
       thumbs: imgs.map((m, i) => ({ src: m.thumb, cur: String(i === idx), label: fmt(t.pp_img, { n: i + 1, m: n }), pick: () => this.setState({ img: i }) })),
       ...swipe,
       openViewer: () => this.setState({ viewer: true, zoom: false }), closeViewer: () => this.setState({ viewer: false, zoom: false }),

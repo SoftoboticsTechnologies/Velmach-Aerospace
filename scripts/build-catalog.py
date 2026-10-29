@@ -13,7 +13,7 @@ Each file plays the part a database index would on a server:
 Listing pages fetch one card file and page through it 24/48/96 at a time; images load lazily.
 Cards are sorted newest first. Files whose content has not changed are left untouched.
 """
-import argparse, os, sys
+import argparse, collections, os, sys
 from urllib.parse import quote
 from xml.sax.saxutils import escape
 
@@ -23,13 +23,30 @@ import catalog_lib as L
 SITE = 'https://www.velmachaerospace.com/'   # TODO: replace domain (same placeholder as sitemap.xml)
 
 
+def cond_key(r):
+    """Condition filter value: the inventory's condition code (in, ar, rp ...), or new / used for older imports."""
+    if r.get('conditionCode'):
+        return r['conditionCode'].lower()
+    return 'used' if r.get('condition') == 'Used' else ('none' if r.get('condition') == 'Not stated' else 'new')
+
+
 def card(r):
     """Compact listing record: short keys keep category files small at tens of thousands of products."""
     c = {'s': r['slug'], 't': r['title'], 'pn': r['partNumber'], 'b': r['brand'], 'bs': r['brandSlug'],
-         'p': r['categoryParent'], 'c': r['categoryChild'], 'k': 'used' if r.get('condition') == 'Used' else 'new',
-         'i': r['images'][0]['thumb'] if r.get('images') else '', 'd': (r.get('createdAt') or '')[:10]}
+         'p': r['categoryParent'], 'c': r['categoryChild'], 'k': cond_key(r),
+         'i': r['images'][0]['thumb'] if r.get('images') else r.get('placeholder', ''), 'd': (r.get('createdAt') or '')[:10]}
+    if not r.get('images') and r.get('placeholder'):
+        c['ph'] = 1                                  # category placeholder, not a photo of the part
+    elif r.get('images') and r['images'][0].get('kind') == 'representative':
+        c['rep'] = 1                                 # photo of the component type, not of this exact part
+    if r.get('altPartNumber'):
+        c['ap'] = r['altPartNumber']
+    if r.get('serialNumber'):
+        c['sn'] = r['serialNumber']
     if r.get('compatibleAircraft'):
         c['a'] = r['compatibleAircraft']
+        # aircraft names for the text search ("falcon 2000", "gulfstream giv sn 1352")
+        c['m'] = ' '.join(dict.fromkeys(filter(None, [(r.get('aircraftMake', '') + ' ' + r.get('aircraftModel', '')).strip(), r.get('aircraftListed', '')])))
     if r.get('sample'):
         c['x'] = 1
     return c
@@ -40,9 +57,12 @@ def public(r):
     return {'id': r['id'], 'slug': r['slug'], 'title': r['title'], 'partNumber': r['partNumber'], 'brand': r['brand'], 'brandSlug': r['brandSlug'],
             'categoryParent': r['categoryParent'], 'categoryChild': r['categoryChild'], 'shortDescription': r.get('shortDescription', ''),
             'description': r.get('description', ''), 'specifications': r.get('specifications', []),
-            'images': [{'thumb': i['thumb'], 'large': i['large'], 'original': i.get('original', i['large'])} for i in r.get('images', [])],
+            'images': [{'thumb': i['thumb'], 'large': i['large'], 'original': i.get('original', i['large'])}
+                       | ({'kind': i['kind'], 'credit': i.get('credit', '')} if i.get('kind') else {}) for i in r.get('images', [])],
             'documents': [{'label': d['label'], 'url': d['url']} for d in r.get('documents', [])],
             'compatibleAircraft': r.get('compatibleAircraft', []), 'condition': r.get('condition', 'New'),
+            'conditionCode': r.get('conditionCode', ''), 'altPartNumber': r.get('altPartNumber', ''), 'serialNumber': r.get('serialNumber', ''),
+            'certification': r.get('certification', ''), 'aircraftListed': r.get('aircraftListed', ''), 'placeholder': r.get('placeholder', ''),
             'sample': bool(r.get('sample')), 'updatedAt': r.get('updatedAt', '')}
 
 
@@ -115,7 +135,8 @@ def build(force=False):
             dropped.append(r)
     for r in dropped:
         print(f"  ! {r['partNumber']} ({r['brand']}): category {r['categoryParent']}/{r['categoryChild']} no longer exists in data/categories.js; not published")
-    products.sort(key=lambda r: (r.get('createdAt') or '', r['slug']), reverse=True)   # newest first
+    # newest first; products imported together keep the inventory's order (serial number 1, 2, 3 ...)
+    products.sort(key=lambda r: (r.get('createdAt') or '', -(r.get('serialNo') or 0), r['slug']), reverse=True)
 
     # Shop by Aircraft: a product without compatibleAircraft takes its aircraft from an "Aircraft" specification
     amap, unknown_ac = L.AircraftMap(L.load_aircraft()), {}
@@ -176,10 +197,11 @@ def build(force=False):
     put('search.json', cards)
     meta = {'total': len(products), 'samples': sum(1 for r in products if r.get('sample')),
             'categories': {p['slug']: {'n': len(by_parent.get(p['slug'], [])), 'c': {ch['slug']: len(by_child.get((p['slug'], ch['slug']), [])) for ch in p['children']},
-                                       # tile images: the newest product photo in each subcategory
-                                       'i': {ch['slug']: next((c['i'] for c in by_child.get((p['slug'], ch['slug']), []) if c['i']), '') for ch in p['children']}} for p in cats},
+                                       # tile images: the newest product photo in each subcategory, else its placeholder
+                                       'i': {ch['slug']: next((c['i'] for c in by_child.get((p['slug'], ch['slug']), []) if c['i'] and not c.get('ph')),
+                                                              next((c['i'] for c in by_child.get((p['slug'], ch['slug']), []) if c['i']), '')) for ch in p['children']}} for p in cats},
             'brands': {b['slug']: len(by_brand.get(b['slug'], [])) for b in brands},
-            'conditions': {'new': sum(1 for c in cards if c['k'] == 'new'), 'used': sum(1 for c in cards if c['k'] == 'used')}}
+            'conditions': dict(sorted(collections.Counter(c['k'] for c in cards).items()))}
     # Shop by Aircraft page: how many products list each aircraft
     by_ac = {}
     for c in cards:
