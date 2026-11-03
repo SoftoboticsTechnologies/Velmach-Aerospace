@@ -95,7 +95,6 @@ en: {
     { k: "Incorporated", v: "19 September 2025" },
     { k: "Corporate Tax TRN", v: "105160013600001", ltr: true }
   ],
-  lead_title: "Leadership", mgr_role: "Manager", mgr_name: "Anup Kumar Rajendraprasad Chaurasiya", mgr_photo: "Manager photo",
 
   p_eyebrow: "Catalogue", p_title: "Products & Capabilities", p_sub: "Search by part number, SAP code or keyword, filter by category, and add items to your RFQ list.",
   p_cats: "Categories", p_all: "All categories", p_search_ph: "Part number or keyword", p_cond_label: "Condition",
@@ -268,7 +267,6 @@ ar: {
     { k: "تاريخ التأسيس", v: "19 سبتمبر 2025" },
     { k: "رقم التسجيل الضريبي للشركات", v: "105160013600001", ltr: true }
   ],
-  lead_title: "الإدارة", mgr_role: "المدير", mgr_name: "أنوب كومار راجيندرابراساد شوراسيا", mgr_photo: "صورة المدير",
 
   p_eyebrow: "الكتالوج", p_title: "المنتجات والإمكانات", p_sub: "ابحث برقم القطعة أو رمز SAP أو بكلمة مفتاحية، وصفِّ النتائج حسب الفئة، ثم أضف القطع إلى قائمة طلب الأسعار.",
   p_cats: "الفئات", p_all: "جميع الفئات", p_search_ph: "رقم القطعة أو كلمة مفتاحية", p_cond_label: "الحالة",
