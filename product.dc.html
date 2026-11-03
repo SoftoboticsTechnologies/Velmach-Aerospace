@@ -162,7 +162,7 @@
                 <article class="pcx">
                   <div class="pcx-media"><sc-if value="{{ p.img }}" hint-placeholder-val="{{ true }}"><img src="{{ p.img }}" alt="{{ p.title }}" loading="lazy" width="400" height="400"></sc-if><sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}"><span class="pcx-noimg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5ZM3 7.5l9 4.5 9-4.5M12 12v9"></path></svg></span></sc-if></div>
                   <div class="pcx-body">
-                    <span class="pcx-brand" dir="auto">{{ p.brand }}</span>
+                    <sc-if value="{{ p.brand }}" hint-placeholder-val="{{ true }}"><span class="pcx-brand" dir="auto">{{ p.brand }}</span></sc-if>
                     <h3 class="pcx-t"><a href="{{ p.href }}">{{ p.title }}</a></h3>
                     <sc-if value="{{ p.pn }}" hint-placeholder-val="{{ true }}"><span class="pcx-pn">{{ t.pc_pn }} <b dir="ltr">{{ p.pn }}</b></span></sc-if>
                   </div>
@@ -216,7 +216,7 @@
 <dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
-// Product page: product.dc.html?p=<slug> (clean form /p/<slug>, see js/routes.js). Data: data/catalog/p/<slug>.json.
+// Product page: product.dc.html?p=<slug> (clean form /p/<slug>, see js/routes.js). Data: the product bucket data/catalog/p/<bucket>.json (VM_CATALOG.product).
 const TABS = ['desc', 'specs', 'docs', 'ac'];
 const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
 function productSlug() {
@@ -242,8 +242,10 @@ class Component extends DCLogic {
         C.product(slug).then(p => {
           this.setState({ ready: true, p });
           if (!p) return;
-          C.list(p.categoryParent, p.categoryChild || undefined).then(cs => this.setState({ related: cs.filter(c => c.s !== p.slug).slice(0, 12) }));
-          if (p.brandSlug) C.brand(p.brandSlug).then(cs => this.setState({ brandCards: cs.filter(c => c.s !== p.slug).slice(0, 12) }));
+          // related rails: the 24-card slice of the subcategory / brand list this product is in (built by build-catalog.py)
+          const rails = p.rails || {};
+          if (rails.rel != null) C.rail(rails.rel).then(cs => this.setState({ related: cs.filter(c => c.s !== p.slug).slice(0, 12) }));
+          if (p.brandSlug && rails.brand != null) C.rail(rails.brand).then(cs => this.setState({ brandCards: cs.filter(c => c.s !== p.slug).slice(0, 12) }));
         });
       } else this.tw = setTimeout(go, 30);
     };
@@ -335,7 +337,7 @@ class Component extends DCLogic {
     return {
       ...base, found: true, missing: false, crumbs, p, descRef: this.descRef, lbRef: this.lbRef,
       brandHref: VM.brandHref(p.brandSlug), catHref: VM.catHref(p.categoryParent, p.categoryChild || undefined), catLabel: VM.label(f.child || f.parent) || p.categoryParent,
-      condLabel: VM.condLabel(p.conditionCode || (p.condition === 'Used' ? 'used' : 'new')),
+      condLabel: VM.condLabel(p.conditionCode || (p.condition === 'Used' ? 'used' : p.condition === 'Not stated' ? 'none' : 'new')),
       fits, fitsLabel: cur ? fmt(t.pp_fits, { a: cur.make + ' ' + cur.model }) : '',
       hasImg: p.images.length > 0, noImg: !p.images.length, phImg: p.placeholder || '', mainImg: imgs[idx].large, bigImg: imgs[idx].original || imgs[idx].large, imgAlt: [p.title, p.partNumber].filter(Boolean).join(', '), multi: n > 1, countLabel: fmt(t.pp_img, { n: idx + 1, m: n }),
       repImg: imgs[idx].kind === 'representative', repCredit: imgs[idx].credit || '',

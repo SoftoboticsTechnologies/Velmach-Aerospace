@@ -8,7 +8,7 @@ en: {
 
   hero_eyebrow: "Aircraft parts · Aerospace materials · Ajman Free Zone, UAE",
   hero_title: "Aircraft Parts & Aerospace Materials, Sourced and Delivered from the UAE",
-  hero_sub: "Velmach Aerospace F.Z.C trades aircraft spare parts, components and technical materials for aviation, MRO, oil and gas and industrial buyers. Send us a part number and our team will return a quotation.",
+  hero_sub: "Velmach Aerospace F.Z.C trades aircraft spare parts, components and technical materials for aviation, MRO and industrial buyers. Send us a part number and our team will return a quotation.",
   hero_cta1: "Search Parts / Request Quote", hero_cta2: "AOG Support",
   hero_note: "Enter a part number or description. If it is not in our catalogue, we will source it for you.",
   hero_panel: "Plan view · reference drawing",
@@ -29,7 +29,6 @@ en: {
     { id: "tapes", title: "Self-Adhesive Materials & Tapes", desc: "Tapes, films and self-adhesive technical materials." },
     { id: "other", title: "Other Materials", desc: "Further aviation consumables and materials." },
     { id: "petrochem", title: "Petrochemical Materials", desc: "Petrochemical products supplied for industrial applications." },
-    { id: "oilgas", title: "Oil & Gas Equipment & Spares", desc: "Well equipment, devices and spare parts for oil and gas operations." },
     { id: "used", title: "Used Serviceable & Surplus Parts", desc: "Serviceable used material, surplus stock and aircraft scrap." },
     { id: "consultancy", title: "Aviation Consultancy", desc: "Advisory support on sourcing, materials and aviation projects." }
   ],
@@ -40,7 +39,7 @@ en: {
     { t: "AOG priority handling", b: "Aircraft on Ground requests go straight to a dedicated desk, around the clock." },
     { t: "Traceability documentation", b: "We request traceability and conformity documents with every order." },
     { t: "Free-zone efficiency", b: "Import and export handled from Ajman Free Zone for streamlined cross-border trade." },
-    { t: "Multi-industry sourcing", b: "One supplier for aviation parts, chemicals, lubricants and oil and gas spares." },
+    { t: "Multi-industry sourcing", b: "One supplier for aviation parts, chemicals, lubricants and technical materials." },
     { t: "Dedicated quality contact", b: "Quality and documentation questions reach our QC desk directly.", email: "QC@velmachaerospace.com" }
   ],
 
@@ -58,7 +57,6 @@ en: {
     { id: "bizav", title: "Business & General Aviation", short: "Private, charter and general aviation operators.", body: "Smaller fleets need responsive sourcing. We help operators and owners locate parts and materials for a wide range of aircraft types.", needs: ["Airframe and engine components", "Paints and coatings", "Tapes and self-adhesive materials", "Greases and lubricants"] },
     { id: "mro", title: "MRO Organisations", short: "Maintenance, repair and overhaul facilities.", body: "MRO shops rely on a steady supply of consumables and chemicals alongside hard-to-find components. We consolidate these needs into single quotations.", needs: ["Process chemicals and cleaners", "Sealants, adhesives and compounds", "Consumables and hardware", "Used serviceable material"] },
     { id: "defence", title: "Defence & Government", short: "Government and defence aviation buyers.", body: "We welcome enquiries from government and defence procurement teams and handle each request in line with applicable import and export regulations.", needs: ["Spare parts and components", "Lubricants and fluids", "Coatings and chemicals", "Sourcing and procurement support"] },
-    { id: "oilgas", title: "Oil & Gas", short: "Upstream and downstream energy operations.", body: "Our licence covers oil and natural gas well equipment and spare parts, along with petrochemical materials and industrial lubricants.", needs: ["Well equipment and devices", "Equipment spare parts", "Petrochemical materials", "Industrial lubricants and greases"] },
     { id: "industrial", title: "Industrial & Manufacturing", short: "Factories and industrial maintenance teams.", body: "Manufacturers can source chemicals, adhesives, paints and self-adhesive materials from us for production and maintenance.", needs: ["Industrial chemicals", "Glues and adhesives", "Paints and varnishes", "Self-adhesive materials"] }
   ],
 
@@ -75,7 +73,7 @@ en: {
   f_addr_short: "Ajman Free Zone, U.A.E",
 
   about_eyebrow: "About", about_title: "About Velmach Aerospace", about_sub: "A UAE free-zone company trading aircraft parts, technical materials and aviation expertise.",
-  about_intro1: "Velmach Aerospace F.Z.C is a newly established free-zone company licensed by the Ajman Free Zone Authority in the United Arab Emirates. We trade aircraft spare parts and components, and supply the technical materials that aviation and industry depend on: lubricants, chemicals, paints, adhesives, self-adhesive materials, petrochemicals and oil and gas well equipment.",
+  about_intro1: "Velmach Aerospace F.Z.C is a newly established free-zone company licensed by the Ajman Free Zone Authority in the United Arab Emirates. We trade aircraft spare parts and components, and supply the technical materials that aviation and industry depend on: lubricants, chemicals, paints, adhesives, self-adhesive materials and petrochemicals.",
   about_intro2: "Our work covers import and export, the trade of used serviceable parts and aircraft scrap, and aviation consultancy. We are building the company around quick responses, clear documentation and direct access to the right contact for every request.",
   about_photo: "Office or team photo",
   mission_t: "Mission", mission_b: "To give aviation and industrial buyers a dependable, transparent source for parts and technical materials from the UAE.",
@@ -166,7 +164,7 @@ en: {
     home: ["Velmach Aerospace | Aircraft Parts & Aerospace Materials, UAE", "Aircraft spare parts, components, lubricants, chemicals and technical materials traded from Ajman Free Zone, UAE. 24/7 AOG desk."],
     about: ["About | Velmach Aerospace F.Z.C", "Velmach Aerospace F.Z.C is a free-zone company licensed by the Ajman Free Zone Authority, UAE."],
     products: ["Products & Capabilities | Velmach Aerospace", "Search aircraft parts and aerospace materials and add them to your request for quote."],
-    industries: ["Industries Served | Velmach Aerospace", "Commercial aviation, business aviation, MRO, defence, oil and gas and industrial buyers."],
+    industries: ["Industries Served | Velmach Aerospace", "Commercial aviation, business aviation, MRO, defence and industrial buyers."],
     services: ["Services | Velmach Aerospace", "AOG support, global sourcing, import and export, used serviceable material and aviation consultancy."],
     quality: ["Quality & Compliance | Velmach Aerospace", "Traceability commitments and company registration documents of Velmach Aerospace F.Z.C."],
     rfq: ["Request for Quote | Velmach Aerospace", "Send your parts list to Velmach Aerospace and receive a quotation."],
@@ -183,7 +181,7 @@ ar: {
 
   hero_eyebrow: "قطع غيار الطائرات · مواد الطيران · منطقة عجمان الحرة، الإمارات",
   hero_title: "قطع غيار الطائرات ومواد الطيران، نوفّرها ونسلّمها من دولة الإمارات",
-  hero_sub: "تتاجر فيلماك إيروسبايس في قطع غيار الطائرات ومكوناتها والمواد الفنية لقطاعات الطيران والصيانة والنفط والغاز والصناعة. أرسل إلينا رقم القطعة، ويعود إليك فريقنا بعرض سعر.",
+  hero_sub: "تتاجر فيلماك إيروسبايس في قطع غيار الطائرات ومكوناتها والمواد الفنية لقطاعات الطيران والصيانة والصناعة. أرسل إلينا رقم القطعة، ويعود إليك فريقنا بعرض سعر.",
   hero_cta1: "ابحث عن قطعة / اطلب عرض سعر", hero_cta2: "دعم الطائرات المتوقفة",
   hero_note: "أدخل رقم القطعة أو وصفها. إن لم تكن ضمن الكتالوج، نتولى توفيرها لك.",
   hero_panel: "مسقط أفقي · رسم مرجعي",
@@ -204,7 +202,6 @@ ar: {
     { id: "tapes", title: "المواد والأشرطة ذاتية اللصق", desc: "أشرطة وأغشية ومواد فنية ذاتية اللصق." },
     { id: "other", title: "مواد أخرى", desc: "مواد ومستهلكات طيران أخرى." },
     { id: "petrochem", title: "المواد البتروكيماوية", desc: "منتجات بتروكيماوية للتطبيقات الصناعية." },
-    { id: "oilgas", title: "معدات النفط والغاز وقطع غيارها", desc: "معدات وأجهزة آبار وقطع غيار لعمليات النفط والغاز." },
     { id: "used", title: "القطع المستعملة الصالحة والفائضة", desc: "مواد مستعملة صالحة للخدمة ومخزون فائض وخردة طائرات." },
     { id: "consultancy", title: "استشارات الطيران", desc: "دعم استشاري في التوريد والمواد ومشاريع الطيران." }
   ],
@@ -215,7 +212,7 @@ ar: {
     { t: "أولوية لطلبات AOG", b: "تُحال طلبات الطائرات المتوقفة مباشرة إلى مكتب مخصص على مدار الساعة." },
     { t: "وثائق التتبّع", b: "نطلب وثائق التتبّع والمطابقة مع كل طلبية." },
     { t: "كفاءة المنطقة الحرة", b: "ندير عمليات الاستيراد والتصدير من منطقة عجمان الحرة لتيسير التجارة عبر الحدود." },
-    { t: "توريد لقطاعات متعددة", b: "مورّد واحد لقطع الطيران والكيماويات والزيوت وقطع غيار النفط والغاز." },
+    { t: "توريد لقطاعات متعددة", b: "مورّد واحد لقطع الطيران والكيماويات والزيوت والمواد الفنية." },
     { t: "جهة جودة مخصصة", b: "تصل استفسارات الجودة والوثائق مباشرة إلى قسم مراقبة الجودة.", email: "QC@velmachaerospace.com" }
   ],
 
@@ -233,7 +230,6 @@ ar: {
     { id: "bizav", title: "طيران الأعمال والطيران العام", short: "مشغّلو الطيران الخاص والعارض والطيران العام.", body: "تحتاج الأساطيل الصغيرة إلى توريد سريع الاستجابة، ونساعد المشغّلين والملّاك على إيجاد القطع والمواد لطيف واسع من أنواع الطائرات.", needs: ["مكونات هياكل الطائرات والمحركات", "دهانات وطلاءات", "أشرطة ومواد ذاتية اللصق", "شحوم وزيوت تزليق"] },
     { id: "mro", title: "مؤسسات الصيانة والإصلاح والعَمرة", short: "منشآت الصيانة والإصلاح والعَمرة (MRO).", body: "تعتمد ورش الصيانة على إمداد منتظم بالمواد الاستهلاكية والكيماويات إلى جانب المكونات صعبة التوفر، ونجمع هذه الاحتياجات في عرض سعر واحد.", needs: ["كيماويات تشغيلية ومنظفات", "مواد إحكام ولواصق ومركبات", "مستهلكات وقطع تثبيت", "مواد مستعملة صالحة للخدمة"] },
     { id: "defence", title: "الدفاع والجهات الحكومية", short: "جهات الطيران الحكومية والدفاعية.", body: "نرحّب باستفسارات فرق المشتريات الحكومية والدفاعية، ونتعامل مع كل طلب وفق أنظمة الاستيراد والتصدير المعمول بها.", needs: ["قطع غيار ومكونات", "زيوت وسوائل", "طلاءات وكيماويات", "دعم التوريد والمشتريات"] },
-    { id: "oilgas", title: "النفط والغاز", short: "عمليات قطاع الطاقة في مراحل المنبع والمصب.", body: "تشمل رخصتنا معدات وأجهزة آبار النفط والغاز الطبيعي وقطع غيارها، إضافة إلى المواد البتروكيماوية وزيوت التزليق الصناعية.", needs: ["معدات وأجهزة الآبار", "قطع غيار المعدات", "مواد بتروكيماوية", "زيوت وشحوم صناعية"] },
     { id: "industrial", title: "الصناعة والتصنيع", short: "المصانع وفرق الصيانة الصناعية.", body: "يمكن للمصنّعين الحصول منا على الكيماويات واللواصق والدهانات والمواد ذاتية اللصق لأغراض الإنتاج والصيانة.", needs: ["كيماويات صناعية", "صمغ ولواصق", "دهانات وورنيش", "مواد ذاتية اللصق"] }
   ],
 
@@ -250,7 +246,7 @@ ar: {
   f_addr_short: "منطقة عجمان الحرة، الإمارات",
 
   about_eyebrow: "من نحن", about_title: "عن فيلماك إيروسبايس", about_sub: "شركة منطقة حرة إماراتية تتاجر في قطع غيار الطائرات والمواد الفنية وتقدّم خبرات الطيران.",
-  about_intro1: "فيلماك إيروسبايس ش.م.ح شركة حديثة التأسيس في المنطقة الحرة، مرخّصة من هيئة منطقة عجمان الحرة في دولة الإمارات العربية المتحدة. نتاجر في قطع غيار الطائرات ومكوناتها، ونورّد المواد الفنية التي يعتمد عليها قطاعا الطيران والصناعة، ومنها الزيوت والكيماويات والدهانات واللواصق والمواد ذاتية اللصق والمواد البتروكيماوية ومعدات آبار النفط والغاز.",
+  about_intro1: "فيلماك إيروسبايس ش.م.ح شركة حديثة التأسيس في المنطقة الحرة، مرخّصة من هيئة منطقة عجمان الحرة في دولة الإمارات العربية المتحدة. نتاجر في قطع غيار الطائرات ومكوناتها، ونورّد المواد الفنية التي يعتمد عليها قطاعا الطيران والصناعة، ومنها الزيوت والكيماويات والدهانات واللواصق والمواد ذاتية اللصق والمواد البتروكيماوية.",
   about_intro2: "يشمل نشاطنا الاستيراد والتصدير، وتجارة القطع المستعملة الصالحة للخدمة وخردة الطائرات، واستشارات الطيران. ونبني الشركة على سرعة الاستجابة ووضوح الوثائق وتمكين العميل من الوصول المباشر إلى الجهة المعنية بطلبه.",
   about_photo: "صورة المكتب أو الفريق",
   mission_t: "رسالتنا", mission_b: "أن نكون لمشتري قطاعي الطيران والصناعة مصدراً موثوقاً وشفافاً لقطع الغيار والمواد الفنية من دولة الإمارات.",
@@ -341,7 +337,7 @@ ar: {
     home: ["فيلماك إيروسبايس | قطع غيار الطائرات ومواد الطيران، الإمارات", "قطع غيار الطائرات ومكوناتها والزيوت والكيماويات والمواد الفنية من منطقة عجمان الحرة. مكتب AOG على مدار الساعة."],
     about: ["من نحن | فيلماك إيروسبايس ش.م.ح", "فيلماك إيروسبايس ش.م.ح شركة منطقة حرة مرخّصة من هيئة منطقة عجمان الحرة."],
     products: ["المنتجات والإمكانات | فيلماك إيروسبايس", "ابحث عن قطع الطائرات ومواد الطيران وأضفها إلى طلب عرض السعر."],
-    industries: ["القطاعات | فيلماك إيروسبايس", "الطيران التجاري وطيران الأعمال والصيانة والدفاع والنفط والغاز والصناعة."],
+    industries: ["القطاعات | فيلماك إيروسبايس", "الطيران التجاري وطيران الأعمال والصيانة والدفاع والصناعة."],
     services: ["الخدمات | فيلماك إيروسبايس", "دعم AOG والتوريد العالمي والاستيراد والتصدير والقطع المستعملة واستشارات الطيران."],
     quality: ["الجودة والامتثال | فيلماك إيروسبايس", "التزامات التتبّع ووثائق تسجيل شركة فيلماك إيروسبايس ش.م.ح."],
     rfq: ["طلب عرض سعر | فيلماك إيروسبايس", "أرسل قائمة القطع إلى فيلماك إيروسبايس واحصل على عرض سعر."],
@@ -355,7 +351,7 @@ ar: {
 (function (D) {
   Object.assign(D.en, {
     hero2_eyebrow: "Aerospace parts • Materials • Sourcing",
-    hero2_sub: "We source aircraft spare parts, components and technical materials for aviation, MRO, oil and gas and industrial buyers, with a dedicated AOG desk and import and export handled from Ajman Free Zone.",
+    hero2_sub: "We source aircraft spare parts, components and technical materials for aviation, MRO and industrial buyers, with a dedicated AOG desk and import and export handled from Ajman Free Zone.",
     hero_cta_search: "Search parts", hero_cta_aog: "AOG support",
     viz_ref: "Reference drawing", viz_scale: "Not to scale", viz_origin: "Origin · Ajman Free Zone", viz_track: "Track",
     hv_c1: "Spinner", hv_c1s: "Composite nose cap", hv_c2: "Fan rotor", hv_c2s: "12 blades · Ø 2 360", hv_c3: "Compressor", hv_c3s: "9 stages",
@@ -366,7 +362,6 @@ ar: {
       { id: "parts", cat: "parts", t: "Aircraft Parts & Components", b: "Rotables, expendables and consumables, sourced to your part number, new, used-serviceable or surplus.", meta: ["Rotables", "Expendables", "Consumables"] },
       { id: "lubchem", cat: "lubricants", t: "Lubricants & Chemicals", b: "Aviation and industrial oils, greases, hydraulic fluids and process chemicals.", meta: ["Greases", "Oils", "Chemicals"] },
       { id: "materials", cat: "paints", t: "Coatings, Adhesives & Tapes", b: "Paints, varnishes, sealants, glues and self-adhesive materials.", meta: ["Coatings", "Sealants", "Tapes"] },
-      { id: "oilgas", cat: "oilgas", t: "Oil & Gas Equipment", b: "Oil and natural gas well equipment, devices and spare parts, with petrochemical materials for industrial use.", meta: ["Well equipment", "Devices", "Spares"] },
       { id: "used", cat: "used", t: "Used Serviceable & Surplus", b: "Serviceable used material, surplus stock and aircraft scrap.", meta: ["Serviceable", "Surplus", "Scrap"] },
       { id: "petro", cat: "petrochem", t: "Petrochemical Materials", b: "Petrochemical products supplied for industrial applications.", meta: ["Solvents", "Base materials"] },
       { id: "consult", cat: "consultancy", t: "Aviation Consultancy", b: "Advisory support on sourcing strategy, materials selection and aviation projects.", meta: ["Sourcing", "Materials", "Projects"] }
@@ -374,7 +369,7 @@ ar: {
     why2_title: "Procurement built around the part number",
     why2_sub: "What you can expect from every request you send us.",
     how2_title: "Four steps from search to dispatch",
-    ind2_title: "Six target markets",
+    ind2_title: "Five target markets",
     cta_title: "Have a part number? Request a quote.",
     rq_title: "Request a quote", rq_items: "RFQ items", rq_close: "Close request panel", rq_full: "Open full RFQ page",
     rq_aog_t: "AOG priority request", rq_aog_b: "Your request goes straight to the AOG desk. For immediate help, contact:",
@@ -424,7 +419,7 @@ ar: {
   });
   Object.assign(D.ar, {
     hero2_eyebrow: "قطع الطيران • المواد • التوريد",
-    hero2_sub: "نوفّر قطع غيار الطائرات ومكوناتها والمواد الفنية لقطاعات الطيران والصيانة والنفط والغاز والصناعة، مع مكتب مخصص لطلبات AOG، ونتولى الاستيراد والتصدير من منطقة عجمان الحرة.",
+    hero2_sub: "نوفّر قطع غيار الطائرات ومكوناتها والمواد الفنية لقطاعات الطيران والصيانة والصناعة، مع مكتب مخصص لطلبات AOG، ونتولى الاستيراد والتصدير من منطقة عجمان الحرة.",
     hero_cta_search: "ابحث عن القطع", hero_cta_aog: "دعم الطائرات المتوقفة",
     viz_ref: "رسم مرجعي", viz_scale: "ليس وفق المقياس", viz_origin: "نقطة الانطلاق · منطقة عجمان الحرة", viz_track: "المسار",
     hv_c1: "مخروط المقدمة", hv_c1s: "غطاء مركّب", hv_c2: "دوّار المروحة", hv_c2s: "12 شفرة · Ø 2 360", hv_c3: "الضاغط", hv_c3s: "9 مراحل",
@@ -435,7 +430,6 @@ ar: {
       { id: "parts", cat: "parts", t: "قطع غيار الطائرات ومكوناتها", b: "قطع دوّارة ومستهلكة ومواد استهلاكية، نوفّرها وفق رقم القطعة، جديدة أو مستعملة صالحة للخدمة أو فائضة.", meta: ["قطع دوّارة", "قطع مستهلكة", "مواد استهلاكية"] },
       { id: "lubchem", cat: "lubricants", t: "الزيوت والكيماويات", b: "زيوت وشحوم الطيران والصناعة وسوائل الأنظمة الهيدروليكية والكيماويات التشغيلية.", meta: ["شحوم", "زيوت", "كيماويات"] },
       { id: "materials", cat: "paints", t: "الطلاءات واللواصق والأشرطة", b: "دهانات وورنيش ومواد إحكام وصمغ ومواد ذاتية اللصق.", meta: ["طلاءات", "مواد إحكام", "أشرطة"] },
-      { id: "oilgas", cat: "oilgas", t: "معدات النفط والغاز", b: "معدات وأجهزة آبار النفط والغاز الطبيعي وقطع غيارها، إلى جانب المواد البتروكيماوية للاستخدام الصناعي.", meta: ["معدات الآبار", "أجهزة", "قطع غيار"] },
       { id: "used", cat: "used", t: "القطع المستعملة الصالحة والفائضة", b: "مواد مستعملة صالحة للخدمة ومخزون فائض وخردة طائرات.", meta: ["صالحة للخدمة", "فائضة", "خردة"] },
       { id: "petro", cat: "petrochem", t: "المواد البتروكيماوية", b: "منتجات بتروكيماوية للتطبيقات الصناعية.", meta: ["مذيبات", "مواد أساسية"] },
       { id: "consult", cat: "consultancy", t: "استشارات الطيران", b: "دعم استشاري في استراتيجية التوريد واختيار المواد ومشاريع الطيران.", meta: ["التوريد", "المواد", "المشاريع"] }
@@ -443,7 +437,7 @@ ar: {
     why2_title: "مشتريات تنطلق من رقم القطعة",
     why2_sub: "ما يمكنك توقعه مع كل طلب ترسله إلينا.",
     how2_title: "أربع خطوات من البحث إلى الشحن",
-    ind2_title: "ستة أسواق مستهدفة",
+    ind2_title: "خمسة أسواق مستهدفة",
     cta_title: "لديك رقم قطعة؟ اطلب عرض سعر.",
     rq_title: "طلب عرض سعر", rq_items: "بنود الطلب", rq_close: "إغلاق لوحة الطلب", rq_full: "فتح صفحة الطلب كاملة",
     rq_aog_t: "طلب AOG ذو أولوية", rq_aog_b: "يصل طلبك مباشرة إلى مكتب AOG. للمساعدة الفورية تواصل عبر:",
@@ -552,7 +546,7 @@ ar: {
     sh_n_sub: "{n} subcategories", sh_sub_tabs: "Subcategories", sh_view_cat: "View category", sh_browse: "Browse {c}",
     sh_empty_t: "Products are being added", sh_empty_b: "We are loading the catalogue for this section. Send us the part number or a description and our team will reply with a quotation.",
     sh_cat_missing_t: "Category not found", sh_cat_missing_b: "This category link is not available. Browse all categories instead.",
-    sh_brands_eyebrow: "Brands", sh_brands_title: "Shop by brand", sh_brands_sub: "Parts in our inventory by aircraft manufacturer (OEM).",
+    sh_brands_eyebrow: "Brands", sh_brands_title: "Shop by brand", sh_brands_sub: "Aircraft parts by aircraft manufacturer (OEM), and consumables by their maker.",
     sh_letters: "Filter brands by letter", sh_all: "All", sh_brands_none: "No brands start with {l}.",
     sh_brand_products: "Products from {b}", sh_brand_missing_t: "Brand not found", sh_brand_missing_b: "This brand link is not available. Browse all brands instead.",
     sh_all_brands: "All brands",
@@ -599,7 +593,7 @@ ar: {
     sh_n_sub: "{n} فئة فرعية", sh_sub_tabs: "الفئات الفرعية", sh_view_cat: "عرض الفئة", sh_browse: "تصفّح {c}",
     sh_empty_t: "جارٍ إضافة المنتجات", sh_empty_b: "نعمل على تحميل الكتالوج لهذا القسم. أرسل لنا رقم القطعة أو وصفها وسيرد فريقنا بعرض سعر.",
     sh_cat_missing_t: "الفئة غير موجودة", sh_cat_missing_b: "رابط هذه الفئة غير متاح. تصفّح كل الفئات بدلًا من ذلك.",
-    sh_brands_eyebrow: "العلامات التجارية", sh_brands_title: "تسوّق حسب العلامة التجارية", sh_brands_sub: "القطع المتوفرة في مخزوننا حسب الشركة المصنّعة للطائرة.",
+    sh_brands_eyebrow: "العلامات التجارية", sh_brands_title: "تسوّق حسب العلامة التجارية", sh_brands_sub: "قطع الطائرات حسب الشركة المصنّعة للطائرة، والمواد الاستهلاكية حسب الشركة المصنّعة لها.",
     sh_letters: "تصفية العلامات حسب الحرف", sh_all: "الكل", sh_brands_none: "لا توجد علامات تبدأ بالحرف {l}.",
     sh_brand_products: "منتجات {b}", sh_brand_missing_t: "العلامة غير موجودة", sh_brand_missing_b: "رابط هذه العلامة غير متاح. تصفّح كل العلامات بدلًا من ذلك.",
     sh_all_brands: "كل العلامات",
@@ -624,7 +618,7 @@ ar: {
 /* ---- v5 catalogue listing, product page, request for quote, brands ---- */
 (function (D) {
   Object.assign(D.en, {
-    ls_filters: "Filters", ls_sub: "Subcategory", ls_cat: "Category", ls_brand: "Brand (aircraft OEM)", ls_brand_search: "Search brands", ls_cond: "Condition",
+    ls_filters: "Filters", ls_sub: "Subcategory", ls_cat: "Category", ls_brand: "Brand", ls_brand_search: "Search brands", ls_cond: "Condition",
     ls_ac: "Aircraft", ls_cond_new: "New", ls_cond_used: "Used", ls_clear: "Clear all", ls_show: "Show results",
     ls_results: "{n} results", ls_result1: "1 result", ls_sort: "Sort", ls_sort_rel: "Relevance", ls_sort_az: "Name A–Z", ls_sort_za: "Name Z–A", ls_sort_new: "Newest",
     ls_per: "Per page", ls_grid: "Grid view", ls_list: "List view", ls_prev: "Previous", ls_next: "Next", ls_page: "Page {n}", ls_pages: "Pages",
@@ -644,7 +638,7 @@ ar: {
     pp_no_docs: "No documents are published for this product yet. Ask us for datasheets or certificates.", pp_universal: "This part is not specific to one aircraft type.", pp_ac_none: "No aircraft type is recorded for this part in our inventory. Send us your aircraft and we will confirm the fit.",
     pp_related: "Related products", pp_more_brand: "More from {b}", pp_gallery: "Product images", pp_rep: "Representative image.", pp_rep_note: "Shows the type of component; the actual part may look different.", pp_img: "Image {n} of {m}", pp_zoom: "Open image viewer",
     pp_viewer: "Image viewer", pp_close: "Close", pp_prev_img: "Previous image", pp_next_img: "Next image", pp_zoom_in: "Zoom in", pp_zoom_out: "Zoom out",
-    pp_brand: "Brand (aircraft OEM)", pp_cond: "Condition", pp_qty: "Quantity", pp_scroll_prev: "Scroll back", pp_scroll_next: "Scroll forward", pp_view_all: "View all",
+    pp_brand: "Brand", pp_cond: "Condition", pp_qty: "Quantity", pp_scroll_prev: "Scroll back", pp_scroll_next: "Scroll forward", pp_view_all: "View all",
     pp_missing_t: "Product not found", pp_missing_b: "This product link is not in our catalogue. Search the catalogue or send us the part number and we will source it.",
     pp_sample_note: "Sample listing used to test the catalogue.", pp_pdf: "PDF",
     rf_title: "Request for Quote", rf_product: "Product", rf_pn: "Part number", rf_brand: "Brand", rf_name: "Full name", rf_company: "Company",
@@ -656,7 +650,8 @@ ar: {
     rf_e_req: "Please fill in this field.", rf_e_email: "Enter a valid email address.", rf_e_phone: "Enter a valid phone number.", rf_e_qty: "Enter a quantity of 1 or more.",
     rf_e_file: "The file is larger than 10 MB.", rf_e_send: "The request could not be sent. Check your connection and try again, or email {e}.",
     qp_link: "Product page",
-    hb_eyebrow: "Brands", hb_title: "Brands we supply", hb_link: "View all brands",
+    hb_eyebrow: "Brands", hb_title: "Brands we have", hb_link: "View all brands",
+    hm_title: "Brands we supply", hm_link: "Shop by aircraft", hm_air: "Aircraft", hm_heli: "Helicopters",
     br_desc: "{b} products in {cats}, supplied by Velmach Aerospace with quotations on request.", br_desc0: "{b} products are quoted on request: send us the part number.",
     br_n: "{n} products", br_n1: "1 product",
     ac_eyebrow: "Shop by Aircraft", ac_title: "Find parts for your aircraft", ac_sub: "Choose your aircraft. Product listings then show parts that fit it, together with universal items.",
@@ -668,7 +663,7 @@ ar: {
     ac_missing_b: "We source parts for most commercial, business and rotary-wing aircraft. Send us the part number and aircraft type.", ac_ask: "Request a quote"
   });
   Object.assign(D.ar, {
-    ls_filters: "عوامل التصفية", ls_sub: "الفئة الفرعية", ls_cat: "الفئة", ls_brand: "العلامة التجارية (الشركة المصنّعة للطائرة)", ls_brand_search: "ابحث في العلامات", ls_cond: "الحالة",
+    ls_filters: "عوامل التصفية", ls_sub: "الفئة الفرعية", ls_cat: "الفئة", ls_brand: "العلامة التجارية", ls_brand_search: "ابحث في العلامات", ls_cond: "الحالة",
     ls_ac: "الطائرة", ls_cond_new: "جديد", ls_cond_used: "مستعمل", ls_clear: "مسح الكل", ls_show: "عرض النتائج",
     ls_results: "{n} نتيجة", ls_result1: "نتيجة واحدة", ls_sort: "الترتيب", ls_sort_rel: "الأكثر صلة", ls_sort_az: "الاسم أ–ي", ls_sort_za: "الاسم ي–أ", ls_sort_new: "الأحدث",
     ls_per: "لكل صفحة", ls_grid: "عرض شبكي", ls_list: "عرض قائمة", ls_prev: "السابق", ls_next: "التالي", ls_page: "الصفحة {n}", ls_pages: "الصفحات",
@@ -686,7 +681,7 @@ ar: {
     pp_no_docs: "لا توجد مستندات منشورة لهذا المنتج بعد. اطلب منا النشرات الفنية أو الشهادات.", pp_universal: "هذه القطعة ليست خاصة بطراز طائرة واحد.", pp_ac_none: "لا يوجد طراز طائرة مسجّل لهذه القطعة في مخزوننا. أرسل لنا طراز طائرتك وسنؤكد توافقها.",
     pp_related: "منتجات ذات صلة", pp_more_brand: "المزيد من {b}", pp_gallery: "صور المنتج", pp_rep: "صورة توضيحية.", pp_rep_note: "تُظهر نوع المكوّن؛ قد يختلف شكل القطعة الفعلية.", pp_img: "الصورة {n} من {m}", pp_zoom: "فتح عارض الصور",
     pp_viewer: "عارض الصور", pp_close: "إغلاق", pp_prev_img: "الصورة السابقة", pp_next_img: "الصورة التالية", pp_zoom_in: "تكبير", pp_zoom_out: "تصغير",
-    pp_brand: "العلامة التجارية (الشركة المصنّعة للطائرة)", pp_cond: "الحالة", pp_qty: "الكمية", pp_scroll_prev: "التمرير للخلف", pp_scroll_next: "التمرير للأمام", pp_view_all: "عرض الكل",
+    pp_brand: "العلامة التجارية", pp_cond: "الحالة", pp_qty: "الكمية", pp_scroll_prev: "التمرير للخلف", pp_scroll_next: "التمرير للأمام", pp_view_all: "عرض الكل",
     pp_missing_t: "المنتج غير موجود", pp_missing_b: "رابط هذا المنتج غير موجود في الكتالوج. ابحث في الكتالوج أو أرسل لنا رقم القطعة وسنوفّرها لك.",
     pp_sample_note: "منتج نموذجي لاختبار الكتالوج.", pp_pdf: "PDF",
     rf_title: "طلب عرض سعر", rf_product: "المنتج", rf_pn: "رقم القطعة", rf_brand: "العلامة التجارية", rf_name: "الاسم الكامل", rf_company: "الشركة",
@@ -698,7 +693,8 @@ ar: {
     rf_e_req: "يرجى تعبئة هذا الحقل.", rf_e_email: "أدخل بريدًا إلكترونيًا صحيحًا.", rf_e_phone: "أدخل رقم هاتف صحيحًا.", rf_e_qty: "أدخل كمية 1 أو أكثر.",
     rf_e_file: "حجم الملف أكبر من 10 ميغابايت.", rf_e_send: "تعذّر إرسال الطلب. تحقق من الاتصال وحاول مجددًا، أو راسلنا على {e}.",
     qp_link: "صفحة المنتج",
-    hb_eyebrow: "العلامات التجارية", hb_title: "العلامات التي نوردها", hb_link: "عرض كل العلامات التجارية",
+    hb_eyebrow: "العلامات التجارية", hb_title: "العلامات المتوفرة لدينا", hb_link: "عرض كل العلامات التجارية",
+    hm_title: "العلامات التي نوردها", hm_link: "تسوّق حسب الطائرة", hm_air: "الطائرات", hm_heli: "المروحيات",
     br_desc: "منتجات {b} في فئات {cats}، تورّدها فيلماك إيروسبايس مع عروض أسعار عند الطلب.", br_desc0: "منتجات {b} متاحة بعرض سعر عند الطلب: أرسل لنا رقم القطعة.",
     br_n: "{n} منتج", br_n1: "منتج واحد",
     ac_eyebrow: "تسوّق حسب الطائرة", ac_title: "ابحث عن قطع طائرتك", ac_sub: "اختر طائرتك، وستعرض قوائم المنتجات القطع المناسبة لها مع المنتجات العامة.",

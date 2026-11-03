@@ -28,7 +28,11 @@ AIRCRAFT = [
     (r'^(lockheed\s+)?jet\s*star', 'Lockheed', 'JetStar', 'Lockheed'),
     (r'^(bombardier\s+)?lear(jet)?\s*(\d{2})', 'Learjet', None, 'Learjet'),
     (r'^(bombardier\s+)?challenger\s*(\d{3})', 'Bombardier', None, 'Bombardier'),
+    (r'^(boeing\s+)?(7[0-9]7)\b', 'Boeing', None, 'Boeing'),                # the Boeing lists give the model alone: "777"
 ]
+# makes whose parts the representative photos were reviewed for (scripts/representative-images.py); other aircraft keep
+# the placeholder until their photos are reviewed
+REVIEWED_PHOTO_MAKES = {'Dassault', 'Gulfstream', 'Hawker', 'Dornier', 'Lockheed', 'Learjet'}
 # values that mean "no aircraft"
 NO_AIRCRAFT = {'', 'na', 'n/a', 'none', '-', 'tbd', 'unknown'}
 # airframe / engine details after the model: "Falcon 2000 SN 138", "F2000 738 Engine"
@@ -104,6 +108,7 @@ CATEGORY_RULES = [
     ('filters', r'\bfilters?\b|\belement\b|\bstrainer\b'),
 ]
 FALLBACK_CATEGORY = 'other-aircraft-parts'
+NO_AIRCRAFT_CATEGORY = 'other-aircraft-parts'   # Other / Miscellaneous: every row with no Aircraft Type (your rule, 2026-11-03)
 
 # placeholder picture for each subcategory (images/placeholders/<name>.svg) when a product has no photo
 PLACEHOLDER = {

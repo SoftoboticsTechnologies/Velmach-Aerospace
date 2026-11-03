@@ -51,9 +51,10 @@
 
   function loadCards() {
     if (cards || loading) return;
+    // the header's search index (js/search.js reads and decodes data/catalog/search.json once for the whole page)
+    if (!window.VM_SEARCH) { setTimeout(loadCards, 60); return; }
     loading = true;
-    fetch(window.VM_CONFIG && window.VM_CONFIG.searchIndex || 'data/catalog/search.json')
-      .then(function (r) { return r.ok ? r.json() : []; }).then(function (d) { cards = d; render(); })
+    window.VM_SEARCH.index().then(function (d) { cards = d; render(); })
       .catch(function () { loading = false; });
   }
 

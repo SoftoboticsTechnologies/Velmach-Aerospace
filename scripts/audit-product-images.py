@@ -1,6 +1,6 @@
 """Product image audit: python scripts/audit-product-images.py
 
-Writes reports/product_image_audit.csv with one line per product in data/catalog/products.jsonl (every inventory row),
+Writes reports/product_image_audit.csv with one line per product in the store (data/catalog/store/) (every inventory row),
 built from what is recorded, never guessed:
   - the product itself (part number, alternate part number, brand, category, the image it has now)
   - the image search of its part number: data/catalog/.image-state.json and data/catalog/product-images.json, written by

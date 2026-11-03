@@ -69,10 +69,9 @@ def main():
             index[x].append((t, i, u))
     # products on the site without a photo
     items, fam = [], family_ids()
-    for line in open(os.path.join(ROOT, 'data', 'catalog', 'products.jsonl'), encoding='utf-8'):
-        if not line.strip():
-            continue
-        r = json.loads(line)
+    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    import catalog_lib as L
+    for r in L.load_store().values():
         pid = r['key'][4:] if r['key'].startswith('doc:') else r['key']
         if (r.get('images') and pid not in fam) or r.get('sample'):
             continue

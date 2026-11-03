@@ -3,6 +3,7 @@
    A product's compatibleAircraft list uses the same ids ("<make-slug>/<model-slug>", e.g. "dassault/falcon-2000").
    To add or rename a model, edit AIRCRAFT in scripts/inventory_rules.py and re-run the import. */
 window.VM_AIRCRAFT = [
+  { make: "Boeing", models: ["747", "757", "767", "777", "787"] },
   { make: "Dassault", models: ["Falcon 20", "Falcon 900EX", "Falcon 2000"] },
   { make: "Dornier", models: ["328"] },
   { make: "Gulfstream", models: ["G300", "GIV"] },

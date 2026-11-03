@@ -311,8 +311,11 @@ main { display: block; background: var(--white); }
 .lg-route { width: 18px; height: 2.5px; background: var(--sig); }
 
 /* ========== 03 PRODUCT ECOSYSTEM ========== */
-/* category cards: six equal cards, each led by a large product image panel */
-.pcat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 1.6vw, 24px); }
+/* category cards: five cards, three across then two wider ones, each led by a large product image panel */
+.pcat-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(16px, 1.6vw, 24px); }
+.pcat { grid-column: span 2; }
+.pcat:nth-child(4):nth-last-child(2), .pcat:nth-child(5):last-child { grid-column: span 3; }
+.pcat:nth-child(4):nth-last-child(2) .pcat-media, .pcat:nth-child(5):last-child .pcat-media { aspect-ratio: 2 / 1; }
 .pcat { position: relative; display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); color: var(--navy); text-decoration: none; overflow: hidden; transition: border-color .4s, box-shadow .5s var(--ease), transform .5s var(--ease); }
 .pcat::before { content: ""; position: absolute; z-index: 2; top: 0; inset-inline-start: 0; height: 3px; width: 0; background: var(--blue); transition: width .8s var(--ease); }
 .pcat:hover, .pcat:focus-visible { border-color: var(--line-2); box-shadow: 0 24px 56px rgba(11, 27, 43, .12); transform: translateY(-4px); color: var(--navy); --ax: 4px; }
@@ -572,6 +575,10 @@ main { display: block; background: var(--white); }
   .why-sticky, .trust-head { position: static; }
   .why-counter { display: none; }
   .pcat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pcat, .pcat:nth-child(4):nth-last-child(2), .pcat:nth-child(5):last-child { grid-column: auto; }
+  .pcat:nth-child(4):nth-last-child(2) .pcat-media { aspect-ratio: 4 / 3; }
+  .pcat:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .pcat:last-child:nth-child(odd) .pcat-media { aspect-ratio: 8 / 3; }
   .eco-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .ecard--wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .ecard--wide .ecard-top { flex-direction: row; align-items: center; grid-column: 1 / -1; }
@@ -632,6 +639,7 @@ main { display: block; background: var(--white); }
   .map-grat-l { display: none; }
   .map-cap span:first-child { max-width: 60%; }
   .pcat-grid { grid-template-columns: minmax(0, 1fr); }
+  .pcat:last-child:nth-child(odd) .pcat-media { aspect-ratio: 4 / 3; }
   .eco-grid { grid-template-columns: minmax(0, 1fr); }
   .ecard--wide { display: flex; align-items: stretch; }
   .ecard--wide .ecard-top { flex-direction: row; align-items: center; }
@@ -665,7 +673,7 @@ main { display: block; background: var(--white); }
 .sec.bstrip-sec { padding-block: clamp(28px, 3.5vw, 48px) clamp(32px, 4vw, 56px); }
 .bstrip-sec .sec-head { margin-bottom: clamp(20px, 2.5vw, 32px); }
 .sec.loc { padding-top: clamp(40px, 5vw, 72px); }
-/* brand strip: two rows scrolling in opposite directions, paused on keyboard focus (js/brand-strip.js) */
+/* brand strips: rows scrolling in alternating directions, paused on keyboard focus (js/brand-strip.js) */
 .bstrip-sec .sec-head { align-items: center; }
 .bstrip-sec .link-arrow { justify-self: end; color: var(--blue); }
 [dir="rtl"] .bstrip-sec .link-arrow { justify-self: start; }
@@ -683,3 +691,8 @@ main { display: block; background: var(--white); }
 .bstrip-tile img + .bstrip-n { font-size: 13px; font-weight: 500; }
 @media (max-width: 759px) { .bstrip-tile { width: 150px; height: 88px; font-size: 15px; } .bstrip-tile img { height: 34px; } }
 @media (prefers-reduced-motion: reduce) { .bstrip-row { overflow-x: auto; } .bstrip-track { animation: none; } }
+.sec.bstrip-sec--follow { padding-top: 0; }
+.bstrip-sec--makers .sec-head .h2 { max-width: none; }
+@media (min-width: 760px) { .bstrip-sec--makers .sec-head .h2 { white-space: nowrap; } }
+.bstrip-lbl { margin-block: 0 4px; color: var(--navy); font: 600 clamp(20px, 2vw, 26px)/1.2 var(--fs); letter-spacing: -.01em; }
+.bstrip-lbl:not(:first-child) { margin-top: 18px; }

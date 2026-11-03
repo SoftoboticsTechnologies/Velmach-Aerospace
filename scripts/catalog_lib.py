@@ -1,6 +1,6 @@
 """Shared helpers for the catalogue scripts (import-products.py, build-catalog.py).
 
-The catalogue "database" is data/catalog/products.jsonl: one product per line, keyed by part number + brand.
+The catalogue "database" is the store, data/catalog/store/<shard>.jsonl: one product per line, keyed by part number + brand.
 The site never reads it directly; build-catalog.py turns it into the small JSON files the pages load.
 """
 import hashlib, html, json, os, re, tempfile, unicodedata, time
@@ -8,7 +8,9 @@ from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CATALOG = os.path.join(ROOT, 'data', 'catalog')
-STORE = os.path.join(CATALOG, 'products.jsonl')
+STORE_DIR = os.path.join(CATALOG, 'store')               # the store: store/<shard>.jsonl, one product per line
+STORE_SHARDS = 64
+STORE = os.path.join(CATALOG, 'products.jsonl')          # single-file store of earlier versions (read, then replaced)
 ASSETS = os.path.join(ROOT, 'assets', 'catalog')          # earlier layout (one folder per URL slug); removed with --remove-samples
 PRODUCT_DIR = os.path.join(ROOT, 'images', 'products')    # images/products/<part-number>/<part-number>-1.jpg ...
 
@@ -71,6 +73,9 @@ def images_for(r, found, reps):
     rep = reps.get(component_type(r.get('title', '')))
     # 'aircraft': the photo shows a part of those aircraft only (e.g. a TFE731 engine: Hawker 800, not a Falcon 2000's CFE738)
     if rep and rep.get('aircraft') and not re.search(rep['aircraft'], r.get('aircraftListed', ''), re.I):
+        rep = None
+    # photos were reviewed for parts of a known aircraft; a row with no aircraft type keeps its placeholder
+    if rep and not r.get('aircraftListed'):
         rep = None
     if rep and (not rep.get('only') or r['id'] in rep['only']):
         return [{'thumb': rep['thumb'], 'large': rep['large'], 'original': rep['large'], 'src': rep.get('source', ''),
@@ -351,22 +356,38 @@ def dumps(obj):
     return json.dumps(obj, ensure_ascii=False, separators=(',', ':'))
 
 
+def store_shard(key):
+    """Store file of a product: the store is split in STORE_SHARDS files so none comes near GitHub's 100 MB file limit."""
+    return f'{int(hashlib.sha1(key.encode("utf-8")).hexdigest()[:4], 16) % STORE_SHARDS:02x}.jsonl'
+
+
 def load_store():
-    """key -> product record."""
+    """key -> product record. Reads data/catalog/store/*.jsonl, or the single products.jsonl of earlier versions."""
     store = {}
-    if os.path.exists(STORE):
-        with open(STORE, encoding='utf-8') as f:
+    files = sorted(os.path.join(STORE_DIR, f) for f in os.listdir(STORE_DIR) if f.endswith('.jsonl')) if os.path.isdir(STORE_DIR) else []
+    for path in files or ([STORE] if os.path.exists(STORE) else []):
+        with open(path, encoding='utf-8') as f:
             for n, line in enumerate(f, 1):
                 line = line.strip()
                 if line:
                     try:
                         rec = json.loads(line)
                     except ValueError as e:
-                        raise SystemExit(f'{rel(STORE)} line {n}: {e}')
+                        raise SystemExit(f'{rel(path)} line {n}: {e}')
                     store[rec['key']] = rec
     return store
 
 
 def save_store(store):
-    lines = [dumps(store[k]) for k in sorted(store)]
-    write_file(STORE, ('\n'.join(lines) + ('\n' if lines else '')).encode('utf-8'))
+    """Writes the shards whose content changed and removes the single products.jsonl of earlier versions."""
+    shards = {}
+    for k in sorted(store):
+        shards.setdefault(store_shard(k), []).append(dumps(store[k]))
+    os.makedirs(STORE_DIR, exist_ok=True)
+    for name in set(os.listdir(STORE_DIR)) - set(shards):
+        if name.endswith('.jsonl'):
+            os.remove(os.path.join(STORE_DIR, name))
+    for name, lines in shards.items():
+        write_if_changed(os.path.join(STORE_DIR, name), '\n'.join(lines) + '\n')
+    if os.path.exists(STORE):
+        os.remove(STORE)

@@ -8,7 +8,7 @@
 <body>
 <x-dc>
 <helmet>
-<meta name="description" content="Commercial aviation, business aviation, MRO, defence, oil and gas and industrial buyers.">
+<meta name="description" content="Commercial aviation, business aviation, MRO, defence and industrial buyers.">
 <meta property="og:title" content="Industries Served | Velmach Aerospace">
 <meta property="og:description" content="Target markets for Velmach Aerospace parts, materials and services.">
 <meta property="og:type" content="website">
@@ -40,8 +40,8 @@ a{color:#0759A5;text-underline-offset:4px}
   <!-- HERO: photo mosaic behind a dark scrim -->
   <section aria-labelledby="i-h1" style="position:relative;overflow:hidden;background:#07111D;color:#FFFFFF;isolation:isolate">
     <div aria-hidden="true" style="position:absolute;inset:0;z-index:-2;display:grid;grid-template-columns:{{ mosaicCols }};grid-auto-rows:1fr;gap:2px">
-      <sc-for list="{{ mosaic }}" as="m" hint-placeholder-count="6">
-        <span style="position:relative;overflow:hidden;animation:vmFade 1.2s both;animation-delay:{{ m.d }}"><img src="{{ m.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></span>
+      <sc-for list="{{ mosaic }}" as="m" hint-placeholder-count="5">
+        <span style="position:relative;overflow:hidden;grid-row:{{ m.row }};animation:vmFade 1.2s both;animation-delay:{{ m.d }}"><img src="{{ m.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></span>
       </sc-for>
     </div>
     <div aria-hidden="true" style="position:absolute;inset:0;z-index:-1;background:{{ heroShade }}"></div>
@@ -201,7 +201,8 @@ class Component extends DCLogic {
       heroShade: ar
         ? 'linear-gradient(270deg,rgba(7,17,29,.96) 0%,rgba(7,17,29,.86) 50%,rgba(7,17,29,.55) 100%)'
         : 'linear-gradient(90deg,rgba(7,17,29,.96) 0%,rgba(7,17,29,.86) 50%,rgba(7,17,29,.55) 100%)',
-      mosaic: I.map((x, i) => ({ img: 'assets/industries/' + x.id + '.jpg', d: (i * 90) + 'ms' })),
+      // with an odd count the first photo spans two rows so the grid has no empty cell
+      mosaic: I.map((x, i) => ({ img: 'assets/industries/' + x.id + '.jpg', d: (i * 90) + 'ms', row: !i && I.length % 2 ? 'span 2' : 'auto' })),
       mosaicCols: v.sm ? 'repeat(2,1fr)' : 'repeat(3,1fr)',
       stats: [
         { k: String(I.length).padStart(2, '0'), v: ar ? 'قطاعات نخدمها' : 'Industries served', c: '#FFFFFF' },

@@ -1,19 +1,26 @@
 """Publish the catalogue: python scripts/build-catalog.py
 
-Reads data/catalog/products.jsonl (written by import-products.py) and writes the static files the site loads.
+Reads the store (data/catalog/store/*.jsonl, written by the importers) and writes the static files the site loads.
 Each file plays the part a database index would on a server:
-  data/catalog/p/<slug>.json             one product (product page)                         - lookup by slug
+  data/catalog/p/<bucket>.json           the products whose slug hashes to that bucket (product page): {slug: product}.
+                                         bucket = FNV-1a 32-bit hash of the slug, modulo BUCKETS, as 3 hex digits
+                                         (js/catalog.js computes the same); ~60 products per file instead of one file each
   data/catalog/c/<parent>.json           every product in a category, as compact cards     - lookup by category
   data/catalog/c/<parent>/<child>.json   every product in a subcategory
   data/catalog/b/<brand>.json            every product of a brand                           - lookup by brand
-  data/catalog/search.json               cards of every product (search suggestions and search page) - lookup by part number / text
+  data/catalog/search.json               cards of every product (search suggestions, search page, and every list
+                                         longer than BIG_LIST: its own file is then {"src": "all", "p", "c" | "bs"}, and
+                                         the page filters the cards of this file instead of loading a second copy)
+  data/catalog/r/<n>/<id>.json           24-card slices of each subcategory and brand list, newest first: the related
+                                         rails of a product page (the product names its slices in "rails")
   data/catalog/meta.json                 product counts per category, subcategory, brand, condition and aircraft
   data/brands.js                         every brand that has products, with its logo file when public/brands/ has one
-  sitemap-products.xml, sitemap-categories.xml
-Listing pages fetch one card file and page through it 24/48/96 at a time; images load lazily.
+  sitemap-products.xml (a sitemap index of sitemap-products-<n>.xml, SITEMAP_URLS each), sitemap-categories.xml
+Card files are compact (see encode_cards): {"f": fields, "d": {field: values}, "r": rows}; js/search.js turns them
+back into card objects. Listing pages page through them 24/48/96 at a time; images load lazily.
 Cards are sorted newest first. Files whose content has not changed are left untouched.
 """
-import argparse, collections, os, sys
+import argparse, collections, os, re, sys
 from urllib.parse import quote
 from xml.sax.saxutils import escape
 
@@ -21,6 +28,50 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import catalog_lib as L
 
 SITE = 'https://www.velmachaerospace.com/'   # TODO: replace domain (same placeholder as sitemap.xml)
+BUCKETS = 4096          # product files
+BIG_LIST = 20000        # a list longer than this is read from search.json instead of its own file
+RAIL = 24               # cards per related-rail slice
+SITEMAP_URLS = 40000    # URLs per product sitemap file (the protocol allows 50,000)
+# card fields in the order rows store them (fields usually empty go last, so rows end early); fields in DICT are
+# stored as an index into a list of their distinct values (index 0 = empty)
+CARD_FIELDS = ['s', 'pn', 't', 'pc', 'k', 'i', 'd', 'ph', 'b', 'rep', 'a', 'm', 'ap', 'sn', 'x']
+DICT = ['t', 'pc', 'k', 'i', 'd', 'b', 'a', 'm']   # a list: file content must not depend on set order
+
+
+def bucket(slug):
+    """FNV-1a 32-bit of the slug's characters (slugs are ASCII), modulo BUCKETS, as 3 hex digits. js/catalog.js matches it."""
+    h = 0x811c9dc5
+    for ch in slug:
+        h = ((h ^ ord(ch)) * 0x01000193) & 0xffffffff
+    return f'{h % BUCKETS:03x}'
+
+
+def encode_cards(cards):
+    """Compact card file: {"f": CARD_FIELDS, "d": {field: [distinct values]}, "r": [[value or index, ...], ...]}.
+    pc holds [category, subcategory], b holds [brand, brand slug], a the aircraft ids joined by spaces."""
+    dicts = {f: ([['', '']] if f in ('pc', 'b') else ['']) for f in DICT}
+    index = {f: {} for f in DICT}
+    rows = []
+    for c in cards:
+        vals = dict(c, pc=[c['p'], c['c']], b=[c['b'], c['bs']], a=' '.join(c.get('a', [])))
+        row = []
+        for f in CARD_FIELDS:
+            v = vals.get(f, '')
+            if f in DICT:
+                if not v or v == ['', '']:
+                    v = 0
+                else:
+                    key = tuple(v) if isinstance(v, list) else v
+                    if key not in index[f]:
+                        index[f][key] = len(dicts[f]); dicts[f].append(v)
+                    v = index[f][key]
+            elif f in ('ph', 'rep', 'x'):
+                v = 1 if v else 0
+            row.append(v)
+        while row and row[-1] in (0, ''):
+            row.pop()
+        rows.append(row)
+    return {'f': CARD_FIELDS, 'd': dicts, 'r': rows}
 
 
 def cond_key(r):
@@ -53,7 +104,7 @@ def card(r):
 
 
 def public(r):
-    """What the product page loads; source URLs and internal keys stay in products.jsonl."""
+    """What the product page loads; source URLs and internal keys stay in the store."""
     return {'id': r['id'], 'slug': r['slug'], 'title': r['title'], 'partNumber': r['partNumber'], 'brand': r['brand'], 'brandSlug': r['brandSlug'],
             'categoryParent': r['categoryParent'], 'categoryChild': r['categoryChild'], 'shortDescription': r.get('shortDescription', ''),
             'description': r.get('description', ''), 'specifications': r.get('specifications', []),
@@ -166,8 +217,6 @@ def build(force=False):
         wanted.add(path)
         written += manifest.put(path, L.dumps(obj))
 
-    for r in products:
-        put(f"p/{r['slug']}.json", public(r))
     cards = [card(r) for r in products]
     by_parent, by_child, by_brand = {}, {}, {}
     for c in cards:
@@ -176,11 +225,33 @@ def build(force=False):
             by_child.setdefault((c['p'], c['c']), []).append(c)
         if c['bs']:                                  # products without a stated brand have no brand page
             by_brand.setdefault(c['bs'], []).append(c)
+
+    def put_list(rel_path, lst, ref):
+        put(rel_path, dict(ref, src='all') if len(lst) > BIG_LIST else encode_cards(lst))
+
+    # related rails: each subcategory and brand list cut in slices of RAIL cards; a product names the slice it is in
+    rails, rail_of = 0, {}
+    for kind, groups in (('rel', by_child), ('brand', by_brand)):
+        for lst in groups.values():
+            for i in range(0, len(lst), RAIL):
+                part = lst[i:i + RAIL]
+                put(f'r/{rails // 1000}/{rails}.json', encode_cards(part))
+                for c in part:
+                    rail_of.setdefault(c['s'], {})[kind] = rails
+                rails += 1
+    buckets = {}
+    for r in products:
+        rec = public(r)
+        if r['slug'] in rail_of:
+            rec['rails'] = rail_of[r['slug']]
+        buckets.setdefault(bucket(r['slug']), {})[r['slug']] = rec
+    for bk, recs in buckets.items():
+        put(f'p/{bk}.json', recs)
     # every category gets a file (an empty list when it has no products yet), so pages never request a missing file
     for p in cats:
-        put(f"c/{p['slug']}.json", by_parent.get(p['slug'], []))
+        put_list(f"c/{p['slug']}.json", by_parent.get(p['slug'], []), {'p': p['slug']})
         for ch in p['children']:
-            put(f"c/{p['slug']}/{ch['slug']}.json", by_child.get((p['slug'], ch['slug']), []))
+            put_list(f"c/{p['slug']}/{ch['slug']}.json", by_child.get((p['slug'], ch['slug']), []), {'p': p['slug'], 'c': ch['slug']})
 
     # brands: every brand that has products; one without products is dropped, featured or not
     known = {b['slug']: dict(b) for b in L.load_brands()}
@@ -190,11 +261,11 @@ def build(force=False):
     brands = sorted((b for b in known.values() if b['slug'] in by_brand), key=lambda b: b['name'].lower())
     for b in brands:
         b['featured'] = bool(b.get('featured', False))
-        put(f"b/{b['slug']}.json", by_brand.get(b['slug'], []))
+        put_list(f"b/{b['slug']}.json", by_brand.get(b['slug'], []), {'bs': b['slug']})
     brands_changed = write_brands_js(brands)
 
     # the search index holds full cards, so the search page can filter by category, brand, condition and aircraft
-    put('search.json', cards)
+    put('search.json', encode_cards(cards))
     meta = {'total': len(products), 'samples': sum(1 for r in products if r.get('sample')),
             'categories': {p['slug']: {'n': len(by_parent.get(p['slug'], [])), 'c': {ch['slug']: len(by_child.get((p['slug'], ch['slug']), [])) for ch in p['children']},
                                        # tile images: the newest product photo in each subcategory, else its placeholder
@@ -209,12 +280,24 @@ def build(force=False):
             by_ac[a] = by_ac.get(a, 0) + 1
     meta['aircraft'] = dict(sorted(by_ac.items()))
     put('meta.json', meta)
-    removed = sync_dir(os.path.join(base, 'p'), wanted) + sync_dir(os.path.join(base, 'c'), wanted) + sync_dir(os.path.join(base, 'b'), wanted)
+    removed = sum(sync_dir(os.path.join(base, d), wanted) for d in ('p', 'c', 'b', 'r'))
     manifest.save()
 
     # sitemaps: real products only (sample products are for testing and stay out of search engines)
     live = [r for r in products if not r.get('sample')]
-    L.write_if_changed(os.path.join(L.ROOT, 'sitemap-products.xml'), urlset([SITE + 'product.html?p=' + quote(r['slug']) for r in live]))
+    urls = [SITE + 'product.html?p=' + quote(r['slug']) for r in live]
+    parts = [urls[i:i + SITEMAP_URLS] for i in range(0, len(urls), SITEMAP_URLS)] or [[]]
+    for n, part in enumerate(parts, 1):
+        L.write_if_changed(os.path.join(L.ROOT, f'sitemap-products-{n}.xml'), urlset(part))
+    for f in os.listdir(L.ROOT):                     # files of an earlier, longer catalogue
+        m = re.fullmatch(r'sitemap-products-(\d+)\.xml', f)
+        if m and int(m.group(1)) > len(parts):
+            os.remove(os.path.join(L.ROOT, f))
+    L.write_if_changed(os.path.join(L.ROOT, 'sitemap-products.xml'),
+                       '<?xml version="1.0" encoding="UTF-8"?>\n<!-- Generated by scripts/build-catalog.py. TODO: replace domain -->\n'
+                       '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                       + ''.join(f'  <sitemap><loc>{SITE}sitemap-products-{n}.xml</loc></sitemap>\n' for n in range(1, len(parts) + 1))
+                       + '</sitemapindex>\n')
     cat_urls = [SITE + 'categories.html'] + [SITE + 'category.html?c=' + p['slug'] for p in cats] + \
                [SITE + 'category.html?c=' + p['slug'] + '/' + ch['slug'] for p in cats for ch in p['children']] + \
                [SITE + 'brands.html'] + [SITE + 'brand.html?b=' + quote(b['slug']) for b in brands] + \

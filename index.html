@@ -32,6 +32,7 @@
 <script src="js/hero-engine.js" defer></script>
 <script src="js/home.js" defer></script>
 <script src="data/brands.js" defer></script>
+<script src="data/makers.js" defer></script>
 <script src="data/categories.js" defer></script>
 <script src="data/aircraft.js" defer></script>
 <script src="js/site-config.js" defer></script>
@@ -60,7 +61,6 @@
   <symbol id="i-parts" viewBox="0 0 24 24"><path d="M12 2.8 20 7.4v9.2l-8 4.6-8-4.6V7.4z"/><circle cx="12" cy="12" r="3.3"/></symbol>
   <symbol id="i-lubchem" viewBox="0 0 24 24"><path d="M12 3c3.6 4.3 6 7.6 6 10.6a6 6 0 0 1-12 0C6 10.6 8.4 7.3 12 3ZM8.6 14.5h6.8"/></symbol>
   <symbol id="i-materials" viewBox="0 0 24 24"><path d="M12 3.5 21 8l-9 4.5L3 8zM3 12l9 4.5 9-4.5M3 16l9 4.5 9-4.5"/></symbol>
-  <symbol id="i-oilgas" viewBox="0 0 24 24"><path d="M8 21 12 3l4 18M9.3 15.2h5.4M10.4 10.2h3.2M5 21h14"/></symbol>
   <symbol id="i-used" viewBox="0 0 24 24"><path d="M19.4 9A8 8 0 0 0 5.2 7.4M4.6 15a8 8 0 0 0 14.2 1.6M19.5 4v5h-5M4.5 20v-5h5"/></symbol>
   <symbol id="i-petro" viewBox="0 0 24 24"><path d="M7 3.5h10c1 2.8 1 14.2 0 17H7c-1-2.8-1-14.2 0-17ZM6.3 9h11.4M6.3 15h11.4"/></symbol>
   <symbol id="i-consult" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.8"/><path d="M11.2 6.7 6 21M12.8 6.7 18 21M8.2 15h7.6"/></symbol>
@@ -190,7 +190,7 @@
       <div class="hero-copy">
         <p class="tagbar"><span class="tagbar-mark" aria-hidden="true"></span><span class="tagbar-items" data-t="hero2_eyebrow" data-split="•">Aerospace parts • Materials • Sourcing</span></p>
         <h1 id="hero-h" class="hero-h" data-t="hero_title">Aircraft Parts &amp; Aerospace Materials, Sourced and Delivered from the UAE</h1>
-        <p class="hero-sub" data-t="hero2_sub">We source aircraft spare parts, components and technical materials for aviation, MRO, oil and gas and industrial buyers, with a dedicated AOG desk and import and export handled from Ajman Free Zone.</p>
+        <p class="hero-sub" data-t="hero2_sub">We source aircraft spare parts, components and technical materials for aviation, MRO and industrial buyers, with a dedicated AOG desk and import and export handled from Ajman Free Zone.</p>
 
         <form class="psearch" role="search" action="search.dc.html" method="get">
           <label class="psearch-label" for="hero-q">
@@ -268,11 +268,24 @@
     </div>
   </section>
 
-  <!-- BRANDS: two rows of brand logos scrolling in opposite directions (js/brand-strip.js fills them from data/brands.js) -->
-  <section class="sec sec--white bstrip-sec" id="brands" aria-labelledby="brands-h">
+  <!-- AIRCRAFT & HELICOPTER BRANDS: one row per type, each maker its own tile (js/brand-strip.js fills them from data/makers.js) -->
+  <section class="sec sec--white bstrip-sec bstrip-sec--makers" id="makers" aria-labelledby="makers-h">
     <div class="wrap">
       <div class="sec-head" data-rv>
-        <h2 id="brands-h" class="h2" data-t="hb_title">Brands we supply</h2>
+        <h2 id="makers-h" class="h2" data-t="hm_title">Brands we supply</h2>
+        <a class="link-arrow" href="aircraft.dc.html"><span data-t="hm_link">Shop by aircraft</span><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+    <div class="bstrip" data-maker-strip>
+      <noscript><p class="wrap"><a href="aircraft.dc.html">Shop by aircraft</a></p></noscript>
+    </div>
+  </section>
+
+  <!-- BRANDS: three rows of brand logos scrolling in alternating directions (js/brand-strip.js fills them from data/brands.js) -->
+  <section class="sec sec--white bstrip-sec bstrip-sec--follow" id="brands" aria-labelledby="brands-h">
+    <div class="wrap">
+      <div class="sec-head" data-rv>
+        <h2 id="brands-h" class="h2" data-t="hb_title">Brands we have</h2>
         <a class="link-arrow" href="brands.dc.html"><span data-t="hb_link">View all brands</span><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
@@ -404,18 +417,6 @@
           <span class="pcat-cta"><span data-t="eco_ask">Ask us to source it</span><span class="pcat-arw"><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
         </a>
 
-        <a class="pcat" href="categories.dc.html" data-rv>
-          <div class="pcat-media pcat-media--2 is-photo" aria-hidden="true">
-            <figure><img src="assets/home/eco-oilgas-1.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"></figure>
-            <figure><img src="assets/home/eco-oilgas-2.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"></figure>
-          </div>
-          <div class="pcat-body">
-            <div class="pcat-head"><svg class="ic pcat-ic" aria-hidden="true"><use href="#i-oilgas"/></svg><h3 class="pcat-t" data-t="eco.3.t">Oil &amp; Gas Equipment</h3></div>
-            <p class="pcat-b" data-t="eco.3.b">Oil and natural gas well equipment, devices and spare parts, with petrochemical materials for industrial use.</p>
-            <ul class="pcat-tags"><li data-t="eco.3.meta.0">Well equipment</li><li data-t="eco.3.meta.1">Devices</li><li data-t="eco.3.meta.2">Spares</li></ul>
-          </div>
-          <span class="pcat-cta"><span data-t="eco_view">View in catalogue</span><span class="pcat-arw"><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
-        </a>
 
         <a class="pcat" href="category.dc.html?c=aircraft-parts" data-rv>
           <div class="pcat-media pcat-media--2 is-photo" aria-hidden="true">
@@ -423,21 +424,21 @@
             <figure><img src="assets/home/eco-used-2.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"></figure>
           </div>
           <div class="pcat-body">
-            <div class="pcat-head"><svg class="ic pcat-ic" aria-hidden="true"><use href="#i-used"/></svg><h3 class="pcat-t" data-t="eco.4.t">Used Serviceable &amp; Surplus</h3></div>
-            <p class="pcat-b" data-t="eco.4.b">Serviceable used material, surplus stock and aircraft scrap.</p>
-            <ul class="pcat-tags"><li data-t="eco.4.meta.0">Serviceable</li><li data-t="eco.4.meta.1">Surplus</li><li data-t="eco.4.meta.2">Scrap</li></ul>
+            <div class="pcat-head"><svg class="ic pcat-ic" aria-hidden="true"><use href="#i-used"/></svg><h3 class="pcat-t" data-t="eco.3.t">Used Serviceable &amp; Surplus</h3></div>
+            <p class="pcat-b" data-t="eco.3.b">Serviceable used material, surplus stock and aircraft scrap.</p>
+            <ul class="pcat-tags"><li data-t="eco.3.meta.0">Serviceable</li><li data-t="eco.3.meta.1">Surplus</li><li data-t="eco.3.meta.2">Scrap</li></ul>
           </div>
           <span class="pcat-cta"><span data-t="eco_view">View in catalogue</span><span class="pcat-arw"><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
         </a>
 
         <a class="pcat" href="contact.dc.html" data-rv>
           <div class="pcat-media pcat-media--1 is-photo" aria-hidden="true">
-            <figure><img src="assets/home/eco-petro-1.jpg" alt="" width="800" height="600" loading="lazy" decoding="async"></figure>
+            <figure><img src="assets/home/eco-petro-1.jpg" alt="" width="1200" height="900" loading="lazy" decoding="async"></figure>
           </div>
           <div class="pcat-body">
-            <div class="pcat-head"><svg class="ic pcat-ic" aria-hidden="true"><use href="#i-petro"/></svg><h3 class="pcat-t" data-t="eco.5.t">Petrochemical Materials</h3></div>
-            <p class="pcat-b" data-t="eco.5.b">Petrochemical products supplied for industrial applications.</p>
-            <ul class="pcat-tags"><li data-t="eco.5.meta.0">Solvents</li><li data-t="eco.5.meta.1">Base materials</li></ul>
+            <div class="pcat-head"><svg class="ic pcat-ic" aria-hidden="true"><use href="#i-petro"/></svg><h3 class="pcat-t" data-t="eco.4.t">Petrochemical Materials</h3></div>
+            <p class="pcat-b" data-t="eco.4.b">Petrochemical products supplied for industrial applications.</p>
+            <ul class="pcat-tags"><li data-t="eco.4.meta.0">Solvents</li><li data-t="eco.4.meta.1">Base materials</li></ul>
           </div>
           <span class="pcat-cta"><span data-t="eco_ask">Ask us to source it</span><span class="pcat-arw"><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
         </a>
@@ -447,10 +448,10 @@
         <a class="ecard ecard--wide" href="services.dc.html" data-rv>
           <div class="ecard-top"><svg class="ic ecard-ic ecard-ic--lg" aria-hidden="true"><use href="#i-consult"/></svg></div>
           <div class="ecard-body">
-            <h3 class="ecard-t" data-t="eco.6.t">Aviation Consultancy</h3>
-            <p class="ecard-b" data-t="eco.6.b">Advisory support on sourcing strategy, materials selection and aviation projects.</p>
+            <h3 class="ecard-t" data-t="eco.5.t">Aviation Consultancy</h3>
+            <p class="ecard-b" data-t="eco.5.b">Advisory support on sourcing strategy, materials selection and aviation projects.</p>
           </div>
-          <ul class="meta"><li data-t="eco.6.meta.0">Sourcing</li><li data-t="eco.6.meta.1">Materials</li><li data-t="eco.6.meta.2">Projects</li></ul>
+          <ul class="meta"><li data-t="eco.5.meta.0">Sourcing</li><li data-t="eco.5.meta.1">Materials</li><li data-t="eco.5.meta.2">Projects</li></ul>
           <span class="ecard-cta"><span data-t="eco_view">View in catalogue</span><span class="ecard-arw"><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></span></span>
         </a>
       </div>
@@ -474,7 +475,7 @@
           <li class="why-item" data-rv data-why="1"><span class="why-n" dir="ltr">02</span><div><h3 class="why-t" data-t="whys.1.t">AOG priority handling</h3><p class="why-b" data-t="whys.1.b">Aircraft on Ground requests go straight to a dedicated desk, around the clock.</p></div></li>
           <li class="why-item" data-rv data-why="2"><span class="why-n" dir="ltr">03</span><div><h3 class="why-t" data-t="whys.2.t">Traceability documentation</h3><p class="why-b" data-t="whys.2.b">We request traceability and conformity documents with every order.</p></div></li>
           <li class="why-item" data-rv data-why="3"><span class="why-n" dir="ltr">04</span><div><h3 class="why-t" data-t="whys.3.t">Free-zone efficiency</h3><p class="why-b" data-t="whys.3.b">Import and export handled from Ajman Free Zone for streamlined cross-border trade.</p></div></li>
-          <li class="why-item" data-rv data-why="4"><span class="why-n" dir="ltr">05</span><div><h3 class="why-t" data-t="whys.4.t">Multi-industry sourcing</h3><p class="why-b" data-t="whys.4.b">One supplier for aviation parts, chemicals, lubricants and oil and gas spares.</p></div></li>
+          <li class="why-item" data-rv data-why="4"><span class="why-n" dir="ltr">05</span><div><h3 class="why-t" data-t="whys.4.t">Multi-industry sourcing</h3><p class="why-b" data-t="whys.4.b">One supplier for aviation parts, chemicals, lubricants and technical materials.</p></div></li>
           <li class="why-item" data-rv data-why="5"><span class="why-n" dir="ltr">06</span><div><h3 class="why-t" data-t="whys.5.t">Dedicated quality contact</h3><p class="why-b" data-t="whys.5.b">Quality and documentation questions reach our QC desk directly.</p><a class="why-mail" href="mailto:QC@velmachaerospace.com" dir="ltr">QC@velmachaerospace.com</a></div></li>
         </ol>
       </div>
@@ -525,11 +526,11 @@
     <div class="sec-nd sec-nd--ind" aria-hidden="true" data-nd></div>
     <div class="wrap">
       <div class="sec-head" data-rv>
-        <h2 id="ind-h" class="h2" data-t="ind2_title">Six target markets</h2>
+        <h2 id="ind-h" class="h2" data-t="ind2_title">Five target markets</h2>
       </div>
       <div class="ind-sel" data-ind>
         <span class="ind-bar" aria-hidden="true"></span>
-        <!-- items 0-5 -->
+        <!-- items 0-4 -->
         <div class="ind-item is-open">
           <h3 class="ind-h3"><button type="button" class="ind-btn" id="ind-b0" aria-expanded="true" aria-controls="ind-p0"><span class="ind-name" data-t="industries.0.title">Commercial Aviation</span><svg class="ic ind-chev" aria-hidden="true"><use href="#i-arrow"/></svg></button></h3>
           <div class="ind-panel" id="ind-p0" role="region" aria-labelledby="ind-b0">
@@ -575,24 +576,13 @@
           </div>
         </div>
         <div class="ind-item">
-          <h3 class="ind-h3"><button type="button" class="ind-btn" id="ind-b4" aria-expanded="false" aria-controls="ind-p4"><span class="ind-name" data-t="industries.4.title">Oil &amp; Gas</span><svg class="ic ind-chev" aria-hidden="true"><use href="#i-arrow"/></svg></button></h3>
+          <h3 class="ind-h3"><button type="button" class="ind-btn" id="ind-b4" aria-expanded="false" aria-controls="ind-p4"><span class="ind-name" data-t="industries.4.title">Industrial &amp; Manufacturing</span><svg class="ic ind-chev" aria-hidden="true"><use href="#i-arrow"/></svg></button></h3>
           <div class="ind-panel" id="ind-p4" role="region" aria-labelledby="ind-b4" hidden>
-            <div class="ind-vis" aria-hidden="true"><svg class="ic ind-glyph"><use href="#i-oilgas"/></svg></div>
-            <p class="ind-short" data-t="industries.4.short">Upstream and downstream energy operations.</p>
-            <p class="ind-body" data-t="industries.4.body">Our licence covers oil and natural gas well equipment and spare parts, along with petrochemical materials and industrial lubricants.</p>
-            <p class="mono-k" data-t="ip_needs">Typical needs</p>
-            <ul class="ind-needs"><li data-t="industries.4.needs.0">Well equipment and devices</li><li data-t="industries.4.needs.1">Equipment spare parts</li><li data-t="industries.4.needs.2">Petrochemical materials</li><li data-t="industries.4.needs.3">Industrial lubricants and greases</li></ul>
-            <a class="link-arrow" href="industries.dc.html#ind-oilgas"><span data-t="ind_view">View industry</span><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </div>
-        <div class="ind-item">
-          <h3 class="ind-h3"><button type="button" class="ind-btn" id="ind-b5" aria-expanded="false" aria-controls="ind-p5"><span class="ind-name" data-t="industries.5.title">Industrial &amp; Manufacturing</span><svg class="ic ind-chev" aria-hidden="true"><use href="#i-arrow"/></svg></button></h3>
-          <div class="ind-panel" id="ind-p5" role="region" aria-labelledby="ind-b5" hidden>
             <div class="ind-vis" aria-hidden="true"><svg class="ic ind-glyph"><use href="#i-industrial"/></svg></div>
-            <p class="ind-short" data-t="industries.5.short">Factories and industrial maintenance teams.</p>
-            <p class="ind-body" data-t="industries.5.body">Manufacturers can source chemicals, adhesives, paints and self-adhesive materials from us for production and maintenance.</p>
+            <p class="ind-short" data-t="industries.4.short">Factories and industrial maintenance teams.</p>
+            <p class="ind-body" data-t="industries.4.body">Manufacturers can source chemicals, adhesives, paints and self-adhesive materials from us for production and maintenance.</p>
             <p class="mono-k" data-t="ip_needs">Typical needs</p>
-            <ul class="ind-needs"><li data-t="industries.5.needs.0">Industrial chemicals</li><li data-t="industries.5.needs.1">Glues and adhesives</li><li data-t="industries.5.needs.2">Paints and varnishes</li><li data-t="industries.5.needs.3">Self-adhesive materials</li></ul>
+            <ul class="ind-needs"><li data-t="industries.4.needs.0">Industrial chemicals</li><li data-t="industries.4.needs.1">Glues and adhesives</li><li data-t="industries.4.needs.2">Paints and varnishes</li><li data-t="industries.4.needs.3">Self-adhesive materials</li></ul>
             <a class="link-arrow" href="industries.dc.html#ind-industrial"><span data-t="ind_view">View industry</span><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
         </div>

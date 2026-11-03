@@ -5,6 +5,7 @@
    nav: false keeps a category off the header menus (it is still listed on categories.dc.html).
    The master inventory has no category column: scripts/import-inventory.py picks the subcategory from the description
    (CATEGORY_RULES in scripts/inventory_rules.py). A new subcategory there needs an entry here.
+   Consumables and Aircraft Tooling hold the products of scripts/import-list-sheet.py (subcategories that have products).
    The tree before the master inventory import: backup/catalogue-before-master-inventory-2026-10-29/categories.js */
 window.VM_CATS = [
   {"slug": "aircraft-parts", "en": "Aircraft Parts", "ar": "قطع غيار الطائرات", "nav": true, "desc_en": "Rotables and components for business and regional aircraft, each with its part number, serial number, condition and certification.", "desc_ar": "قطع دوّارة ومكونات لطائرات الأعمال والطائرات الإقليمية، لكل منها رقم القطعة والرقم التسلسلي والحالة والشهادة.", "children": [
@@ -30,6 +31,33 @@ window.VM_CATS = [
     {"slug": "filters", "en": "Filters", "ar": "الفلاتر", "desc_en": "Air, hydraulic, fuel and electronic filters and filter assemblies.", "desc_ar": "فلاتر الهواء والهيدروليك والوقود والفلاتر الإلكترونية ومجموعاتها."},
     {"slug": "aircraft-batteries", "en": "Batteries & Chargers", "ar": "البطاريات والشواحن", "desc_en": "Aircraft batteries, chargers and battery monitoring parts.", "desc_ar": "بطاريات الطائرات وشواحنها وقطع مراقبة البطاريات."},
     {"slug": "emergency-locator-transmitters-elts", "en": "Emergency Locator Transmitters (ELTs)", "ar": "أجهزة إرسال تحديد موقع الطوارئ (ELT)", "desc_en": "ELTs, ELT control panels and antennas.", "desc_ar": "أجهزة تحديد موقع الطوارئ ولوحات التحكم بها وهوائياتها."},
-    {"slug": "other-aircraft-parts", "en": "Other Aircraft Parts", "ar": "قطع طائرات أخرى", "desc_en": "Components that do not fall under a single system.", "desc_ar": "مكونات لا تندرج ضمن نظام واحد."}
+    {"slug": "other-aircraft-parts", "en": "Other / Miscellaneous", "ar": "أخرى / متنوعة", "desc_en": "Parts listed without an aircraft type, and components that do not fall under a single system.", "desc_ar": "قطع مدرجة دون تحديد نوع الطائرة، ومكونات لا تندرج ضمن نظام واحد."}
+  ]},
+  {"slug": "consumables", "en": "Consumables", "ar": "المواد الاستهلاكية", "nav": true, "desc_en": "Oils, greases, fluids, cleaning supplies, tapes and lockwire used every day in aircraft maintenance.", "desc_ar": "زيوت وشحوم وسوائل ومستلزمات تنظيف وأشرطة وأسلاك تثبيت تُستخدم يوميًا في صيانة الطائرات.", "children": [
+    {"slug": "engine-oil", "en": "Engine Oil", "ar": "زيت المحرك", "desc_en": "Piston and turbine engine oils for aviation use.", "desc_ar": "زيوت محركات مكبسية وتوربينية لاستخدامات الطيران."},
+    {"slug": "aircraft-grease", "en": "Aircraft Grease", "ar": "شحوم الطائرات", "desc_en": "Greases for wheel bearings, airframes, controls and general lubrication.", "desc_ar": "شحوم لمحامل العجلات وهياكل الطائرات وأدوات التحكم والتشحيم العام."},
+    {"slug": "anti-corrosion-lubricants", "en": "Anti-Corrosion Lubricants", "ar": "مواد تشحيم مانعة للتآكل", "desc_en": "Corrosion-inhibiting compounds and lubricants that protect metal surfaces and electrical connections.", "desc_ar": "مركبات مانعة للتآكل ومواد تشحيم تحمي الأسطح المعدنية والتوصيلات الكهربائية."},
+    {"slug": "aircraft-hangar-cleaning-supplies", "en": "Aircraft & Hangar Cleaning Supplies", "ar": "مستلزمات تنظيف الطائرات والحظائر", "desc_en": "Cleaners, degreasers, wipes and polishes for aircraft and hangar floors.", "desc_ar": "منظفات ومزيلات شحوم ومناديل ومواد تلميع للطائرات وأرضيات الحظائر."},
+    {"slug": "hydraulic-fluid", "en": "Hydraulic Fluid", "ar": "السائل الهيدروليكي", "desc_en": "Mineral, synthetic and phosphate-ester hydraulic fluids.", "desc_ar": "سوائل هيدروليكية معدنية وصناعية وفوسفاتية الإستر."},
+    {"slug": "fuel-additives", "en": "Fuel Additives", "ar": "إضافات الوقود", "desc_en": "Additives for fuel system icing inhibition and fuel treatment.", "desc_ar": "إضافات لمنع تجمد نظام الوقود ومعالجة الوقود."},
+    {"slug": "calibration-fluids", "en": "Calibration Fluids", "ar": "سوائل المعايرة", "desc_en": "Fluids for calibrating fuel controls, flow meters and test equipment.", "desc_ar": "سوائل لمعايرة أنظمة التحكم بالوقود ومقاييس التدفق ومعدات الاختبار."},
+    {"slug": "lubricating-oils", "en": "Lubricating Oils", "ar": "زيوت التزليق", "desc_en": "General lubricating, instrument and gear oils.", "desc_ar": "زيوت تزليق عامة وزيوت للأجهزة والتروس."},
+    {"slug": "landing-gear-fluid", "en": "Landing Gear Fluid", "ar": "سائل عجلات الهبوط", "desc_en": "Shock strut fluids for landing gear servicing.", "desc_ar": "سوائل المساعدات لخدمة عجلات الهبوط."},
+    {"slug": "leak-detector-fluid", "en": "Leak Detector Fluid", "ar": "سائل كشف التسرب", "desc_en": "Leak detection solutions for pressurised systems and fittings.", "desc_ar": "محاليل كشف التسرب للأنظمة المضغوطة والوصلات."},
+    {"slug": "tape", "en": "Tape", "ar": "الأشرطة اللاصقة", "desc_en": "Aluminium, masking, sealing and speed tapes for maintenance.", "desc_ar": "أشرطة ألومنيوم وتغطية وإحكام وأشرطة سريعة لأعمال الصيانة."},
+    {"slug": "safety-wire-lockwire", "en": "Safety Wire & Lockwire", "ar": "أسلاك الأمان والتثبيت", "desc_en": "Stainless and Inconel safety wire, shear wire and lockwire tools.", "desc_ar": "أسلاك أمان من الفولاذ المقاوم للصدأ والإنكونيل وأسلاك القص وأدوات أسلاك التثبيت."},
+    {"slug": "adhesives-compounds", "en": "Adhesives & Compounds", "ar": "المواد اللاصقة والمركبات", "desc_en": "Structural and general-purpose adhesives, epoxies, potting and bonding compounds for aircraft maintenance.", "desc_ar": "مواد لاصقة هيكلية وعامة وإيبوكسي ومركبات تغليف وربط لصيانة الطائرات."},
+    {"slug": "sealants", "en": "Sealants", "ar": "مواد الإحكام", "desc_en": "Fuel tank, firewall, windshield and general-purpose aerospace sealants.", "desc_ar": "مواد إحكام لخزانات الوقود والجدران النارية والزجاج الأمامي وللاستخدامات العامة في الطيران."},
+    {"slug": "paints-coatings", "en": "Paints & Coatings", "ar": "الدهانات والطلاءات", "desc_en": "Aircraft primers, topcoats, coatings, thinners and hardeners.", "desc_ar": "بادئات طلاء وطبقات نهائية وطلاءات ومخففات ومصلدات للطائرات."},
+    {"slug": "chemicals", "en": "Chemicals", "ar": "المواد الكيميائية", "desc_en": "Solvents, acids, removers, accelerators and other process chemicals.", "desc_ar": "مذيبات وأحماض ومزيلات ومسرّعات ومواد كيميائية أخرى للعمليات."},
+    {"slug": "ndt-chemicals", "en": "NDT Chemicals", "ar": "مواد الفحص غير الإتلافي", "desc_en": "Penetrants, developers, removers and magnetic particle materials for non-destructive testing.", "desc_ar": "مواد نافذة ومظهّرات ومزيلات ومواد الجسيمات المغناطيسية للفحص غير الإتلافي."},
+    {"slug": "composite-materials", "en": "Composite Materials", "ar": "المواد المركبة", "desc_en": "Prepregs, fabrics, films and vacuum-bagging materials for composite repair.", "desc_ar": "ألياف مشبعة مسبقًا وأقمشة وأغشية ومواد التفريغ بالأكياس لإصلاح المواد المركبة."},
+    {"slug": "raw-materials", "en": "Raw Materials", "ar": "المواد الخام", "desc_en": "Sheet, bar, rod and other raw materials.", "desc_ar": "صفائح وقضبان وأعمدة ومواد خام أخرى."}
+  ]},
+  {"slug": "aircraft-tooling", "en": "Aircraft Tooling", "ar": "عِدد وأدوات الطائرات", "nav": true, "desc_en": "Hand tools, measuring instruments, manufacturer-specific tooling and test equipment for line and base maintenance.", "desc_ar": "عِدد يدوية وأدوات قياس وعِدد خاصة بالشركات المصنّعة ومعدات اختبار لأعمال الصيانة الخطية والأساسية.", "children": [
+    {"slug": "other-aircraft-tools", "en": "Other Aircraft Tools", "ar": "أدوات طائرات أخرى", "desc_en": "Specialist aircraft tools that do not fit a single category.", "desc_ar": "عِدد طائرات متخصصة لا تندرج ضمن فئة واحدة."},
+    {"slug": "sealant-adhesive-application-tools", "en": "Sealant & Adhesive Application Tools", "ar": "أدوات تطبيق المواد المانعة للتسرب واللاصقة", "desc_en": "Guns, nozzles and cartridges for applying sealants and adhesives.", "desc_ar": "مسدسات وفوهات وخراطيش لتطبيق المواد المانعة للتسرب والمواد اللاصقة."},
+    {"slug": "abrasives", "en": "Abrasives", "ar": "مواد الصنفرة والكشط", "desc_en": "Abrasive pads, discs and papers for surface preparation and finishing.", "desc_ar": "وسائد وأقراص وأوراق كشط لتحضير الأسطح وتشطيبها."},
+    {"slug": "marking-tools", "en": "Marking Tools", "ar": "أدوات التعليم", "desc_en": "Markers, scribes and pens suitable for use on aircraft surfaces.", "desc_ar": "أقلام وأدوات تعليم مناسبة للاستخدام على أسطح الطائرة."}
   ]}
 ];

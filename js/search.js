@@ -20,12 +20,35 @@
     return t.indexOf(q) > -1 ? 1 : 0;
   }
 
+  // compact card file ({f, d, r}, written by scripts/build-catalog.py) -> card objects; same as VM_CATALOG.decode,
+  // repeated here because pages without the catalogue script (the home page) search too
+  function decode(d) {
+    if (Array.isArray(d)) return d;
+    if (!d || !d.r) return [];
+    var f = d.f, D = d.d, rows = d.r, out = new Array(rows.length);
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i], c = { s: '', t: '', pn: '', b: '', bs: '', p: '', c: '', k: '', i: '', d: '' };
+      for (var j = 0; j < row.length; j++) {
+        var v = row[j], k = f[j];
+        if (!v) continue;
+        if (k === 'pc') { c.p = D.pc[v][0]; c.c = D.pc[v][1]; }
+        else if (k === 'b') { c.b = D.b[v][0]; c.bs = D.b[v][1]; }
+        else if (k === 'a') c.a = D.a[v].split(' ');
+        else c[k] = D[k] ? D[k][v] : v;
+      }
+      out[i] = c;
+    }
+    return out;
+  }
+
   function loadIndex() {
     var url = window.VM_CONFIG && window.VM_CONFIG.searchIndex;
     if (!url) return Promise.resolve([]);
     if (index) return Promise.resolve(index);
-    if (!loading) loading = fetch(url).then(function (r) { return r.ok ? r.json() : []; })
-      .then(function (d) { index = Array.isArray(d) ? d : []; return index; })
+    // catalogue pages already hold every card (VM_CATALOG.all() reads the same file): one download, one copy in memory
+    var src = window.VM_CATALOG && window.VM_CATALOG.all ? window.VM_CATALOG.all()
+      : fetch(url).then(function (r) { return r.ok ? r.json() : []; }).then(decode);
+    if (!loading) loading = src.then(function (d) { index = Array.isArray(d) ? d : []; return index; })
       .catch(function () { loading = null; return []; });
     return loading;
   }
@@ -88,6 +111,7 @@
 
   window.VM_SEARCH = {
     norm: norm,
+    decode: decode,
     /* every product card (data/catalog/search.json) */
     index: loadIndex,
     /* product cards matching the text, best first */

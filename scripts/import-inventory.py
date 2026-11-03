@@ -1,7 +1,8 @@
 """Import the master parts inventory spreadsheet: python scripts/import-inventory.py [file.xlsx] [--max-serial 5560]
 
-Replaces the whole catalogue with the rows of the inventory (the spreadsheet is the source of truth): every product in
-data/catalog/products.jsonl that is not in the sheet is removed. Re-run it whenever the inventory is updated.
+Replaces the inventory products with the rows of the inventory (the spreadsheet is the source of truth): every inventory
+product (key "inv:") in the store that is not in the sheet is removed. Products of other imports
+(scripts/import-list-sheet.py, key "list:") are kept. Re-run it whenever the inventory is updated.
 
 Columns are found by their header (the first row in the top 10 that names a part number and a description):
   Part # / Part Number / P/N            -> partNumber (required)
@@ -19,7 +20,7 @@ Each data row becomes one product: one row is one physical unit, so a part numbe
 three products. Rows past --max-serial are ignored. Empty rows are skipped and listed in reports/inventory-skipped.csv.
 The category is chosen from keywords in the description (scripts/inventory_rules.py) because the sheet has none.
 
-Writes: data/catalog/products.jsonl, data/aircraft.js (every aircraft model in the sheet), reports/inventory-skipped.csv,
+Writes: the store (data/catalog/store/), data/aircraft.js (every aircraft model in the sheet), reports/inventory-skipped.csv,
 reports/inventory-import-<date>.md; then runs scripts/build-catalog.py (product, listing, brand and search files, sitemaps).
 Product images come from data/catalog/product-images.json (scripts/find-product-images.py); a product without one shows
 the placeholder picture of its category (images/placeholders/).
@@ -131,7 +132,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('file', nargs='?', default=DEFAULT_FILE, help='inventory .xlsx (default: %(default)s)')
     ap.add_argument('--sheet', help='sheet name (default: the first sheet)')
-    ap.add_argument('--max-serial', type=int, default=5560, help='import serial numbers 1..N only (default: %(default)s); 0 = every row')
+    ap.add_argument('--max-serial', type=int, default=0, help='import serial numbers 1..N only; 0 = every row (default)')
     ap.add_argument('--no-build', action='store_true', help='do not run build-catalog.py afterwards')
     a = ap.parse_args()
 
@@ -154,6 +155,7 @@ def main():
     now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat()
 
     store, skipped, warnings = {}, [], []
+    same_row, merged = {}, 0
     seen_unit = collections.Counter()
     taken = set()
     pos = 0
@@ -178,6 +180,7 @@ def main():
             continue
         alt = clean(cell('altPn'))
         sn = clean(cell('sn'), warn)
+        sn_cell = sn                                 # as written: "NSN" / "N/A" rows are units of their own, not repeats
         if sn.lower() in NO_SERIAL:
             sn = ''
         code = clean(cell('cond')).upper()
@@ -193,7 +196,17 @@ def main():
         brand_basis = 'brand'
         if not brand and ac:
             brand, brand_basis = ac['oem'], 'aircraft OEM'
-        cat = R.category_for(' '.join([desc, clean(cell('category'))]))
+        # a row with no aircraft type goes to Other / Miscellaneous; the others by the words of their description
+        cat = R.category_for(' '.join([desc, clean(cell('category'))])) if ac else R.NO_AIRCRAFT_CATEGORY
+
+        # a row without a serial number that repeats an earlier row exactly is the same listing, not another unit
+        if not sn_cell:
+            sig = (L.norm_key(pn), desc.lower(), alt.lower(), code, cert_raw.lower(), clean(cell('aircraft')).lower(), clean(cell('brand')).lower())
+            if sig in same_row:
+                store[same_row[sig]]['_rows'] += 1
+                merged += 1
+                seen_unit[L.norm_key(pn) + '|-'] += 1     # keeps the keys (and URLs) of the rows after it unchanged
+                continue
 
         unit = L.norm_key(pn) + '|' + (L.norm_key(sn) or '-')
         seen_unit[unit] += 1
@@ -244,27 +257,41 @@ def main():
             'shortDescription': ' '.join([sentence] + extra).replace('&amp;', '&'),
             'description': '<p>' + sentence + '</p>' + ('<p>' + ' '.join(extra) + '</p>' if extra else ''),
             'specifications': specs,
-            'images': L.images_for({'partNumber': pn, 'title': title, 'id': L.product_id(key)}, images, reps),
+            'images': L.images_for({'partNumber': pn, 'title': title, 'id': L.product_id(key),
+                                    'aircraftListed': ac['raw'] if ac and ac['make'] in R.REVIEWED_PHOTO_MAKES else ''}, images, reps),
             'placeholder': f"images/placeholders/{R.PLACEHOLDER.get(cat, 'generic')}.svg",
             'documents': [], 'compatibleAircraft': [L.aircraft_id(ac['make'], ac['model'])] if ac else [],
             'aircraftListed': ac['raw'] if ac else '', 'aircraftMake': ac['make'] if ac else '', 'aircraftModel': ac['model'] if ac else '',
             'condition': cond or 'Not stated', 'conditionCode': code, 'certification': cert, 'sample': False,
             'source': f'{os.path.basename(a.file)} row {excel_row}',
-            'createdAt': old_created.get(key) or now, 'updatedAt': now,
+            'createdAt': old_created.get(key) or now, 'updatedAt': now, '_rows': 1,
         }
         store[key] = rec
+        if not sn_cell:
+            same_row[sig] = key
+
+    for key, rec in store.items():
+        n = rec.pop('_rows')
+        if n > 1:
+            rec['specifications'].append({'name': 'Rows in the inventory sheet', 'value': str(n)})
+        prev = old.get(key)
+        if prev and {k: v for k, v in prev.items() if k != 'updatedAt'} == {k: v for k, v in rec.items() if k != 'updatedAt'}:
+            rec['updatedAt'] = prev.get('updatedAt', now)    # unchanged: keeps its date (and the store file its content)
 
     # ---- write ----
-    removed = len([k for k in old if k not in store])
+    removed = len([k for k in old if k.startswith('inv:') and k not in store])
+    products = list(store.values())
+    for k, r in old.items():                         # other imports (scripts/import-list-sheet.py: "list:") are kept
+        if not k.startswith('inv:'):
+            store[k] = r
     L.save_store(store)
     write_aircraft(store.values())
-    products = list(store.values())
     expected = (max((r['serialNo'] for r in products), default=0) if not a.max_serial else a.max_serial)
-    write_reports(a, products, skipped, warnings, removed, expected)
-    print(f'Imported {len(products)} products ({len(skipped)} rows skipped, {len(warnings)} warnings); '
+    write_reports(a, products, skipped, warnings, removed, expected, merged)
+    print(f'Imported {len(products)} products ({merged} repeated rows merged, {len(skipped)} rows skipped, {len(warnings)} warnings); '
           f'{removed} products not in the sheet removed from the catalogue.')
-    if len(products) + len(skipped) != expected:
-        print(f'  ! {len(products)} imported + {len(skipped)} skipped is not the expected {expected} rows: the sheet ends early or has gaps in its serial numbers')
+    if len(products) + merged + len(skipped) != expected:
+        print(f'  ! {len(products)} imported + {merged} merged + {len(skipped)} skipped is not the expected {expected} rows: the sheet ends early or has gaps in its serial numbers')
     if not a.no_build:
         import importlib.util
         spec = importlib.util.spec_from_file_location('build_catalog', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'build-catalog.py'))
@@ -304,7 +331,7 @@ def grouped(warnings):
     return '\n'.join(lines)
 
 
-def write_reports(a, products, skipped, warnings, removed, expected):
+def write_reports(a, products, skipped, warnings, removed, expected, merged=0):
     os.makedirs(REPORTS, exist_ok=True)
     with open(os.path.join(REPORTS, 'inventory-skipped.csv'), 'w', newline='', encoding='utf-8-sig') as f:
         w = csv.writer(f)
@@ -327,8 +354,9 @@ Source: `{os.path.relpath(a.file, L.ROOT)}`, serial numbers 1 to {expected}.
 
 | | |
 |---|---|
-| Rows read | {len(products) + len(skipped)} |
+| Rows read | {len(products) + merged + len(skipped)} |
 | Products imported | {len(products)} |
+| Repeated rows merged (no S/N, every column the same) | {merged} |
 | Rows skipped | {len(skipped)} (reports/inventory-skipped.csv) |
 | Distinct part numbers | {len({L.norm_key(r['partNumber']) for r in products})} |
 | Products with a photo of the part | {with_img} |
