@@ -1,13 +1,14 @@
 /* Velmach Aerospace: home page brand strips.
    [data-brand-strip]: every product brand (data/brands.js, A to Z, aircraft makers left out) dealt across three rows.
    [data-maker-strip]: aircraft and helicopter manufacturers (data/makers.js), one labelled row per type.
-   Rows scroll in alternating directions without a seam and pause on keyboard focus; each tile shows the logo (when
+   Rows scroll in alternating directions without a seam and pause on hover or keyboard focus; each tile shows the logo (when
    there is one) above the name. With reduced motion the rows stay still and scroll by hand. */
 (function () {
   var builtW = 0, resizeT;
   function brandTile(b) { return { name: b.name, href: window.VM.brandHref(b.slug), slug: b.slug }; }
   // a maker that is a catalog brand links to its brand page; any other maker to the quote request page
-  function makerTile(m) { return m.slug ? { name: m.name, href: window.VM.brandHref(m.slug), slug: m.slug } : { name: m.name, href: 'rfq.dc.html', logo: m.logo }; }
+  function isBrand(slug) { return !!slug && (window.VM_BRANDS || []).some(function (b) { return b.slug === slug; }); }
+  function makerTile(m) { return { name: m.name, href: isBrand(m.slug) ? window.VM.brandHref(m.slug) : 'rfq.dc.html', logo: m.logo }; }
   function brandRows() {
     var mk = window.VM_MAKERS || {}, skip = {};
     (mk.aircraft || []).concat(mk.helicopters || []).forEach(function (m) { if (m.slug) skip[m.slug] = 1; });
@@ -82,7 +83,7 @@
     var t = window.VM.t() || {};
     document.querySelectorAll('.bstrip-lbl[data-t]').forEach(function (p) { var v = t[p.getAttribute('data-t')]; if (v) p.textContent = v; });
     document.querySelectorAll('.bstrip-tile[data-brand], .bstrip-tile[data-logo]').forEach(function (a) {
-      var slug = a.getAttribute('data-brand'), src = slug ? window.VM.brandLogo(slug) : a.getAttribute('data-logo');
+      var slug = a.getAttribute('data-brand'), src = a.getAttribute('data-logo') || (slug ? window.VM.brandLogo(slug) : '');
       if (src && !a.querySelector('img')) {
         var img = new Image();
         img.src = src; img.alt = a.textContent + ' logo'; img.loading = 'lazy';

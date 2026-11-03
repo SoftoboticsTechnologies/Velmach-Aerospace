@@ -6,9 +6,3 @@ __pycache__/
 *.pyc
 
 assets/velmach product/Aviall Product Catalog & Source Book/Aviall Product Catalog & Source Book.pdf
-# Image search progress (scripts/find-product-images.py); the found images are in data/catalog/product-images.json
-data/catalog/.image-state.json
-# Search API keys (scripts/find-product-images.py reads them from here); never commit
-.env
-# Photos waiting for manual review (scripts/find-product-images.py); published ones are copied to images/products/
-data/catalog/.image-review/

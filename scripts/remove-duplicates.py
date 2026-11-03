@@ -11,9 +11,8 @@ reports/duplicates-removed.csv, and added to data/velmach-hidden.json so a later
 import collections, csv, datetime, json, os, re, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STORE = os.path.join(ROOT, 'data', 'catalog', 'products.jsonl')
 HIDDEN = os.path.join(ROOT, 'data', 'velmach-hidden.json')
-sys.path.insert(0, os.path.join(ROOT, 'scripts'))
-import catalog_lib as L
 
 
 def norm(t):
@@ -22,7 +21,8 @@ def norm(t):
 
 def main():
     dry = '--dry-run' in sys.argv
-    recs = list(L.load_store().values())
+    lines = [l for l in open(STORE, encoding='utf-8').read().splitlines() if l.strip()]
+    recs = [json.loads(l) for l in lines]
     groups = collections.defaultdict(list)
     for r in recs:
         if not r.get('sample'):
@@ -65,7 +65,8 @@ def main():
         if r.get('sourceUrl') and not keep.get('sourceUrl'):
             by_key[keep['key']]['sourceUrl'] = r['sourceUrl']
         by_key[keep['key']]['pnDir'] = by_key[keep['key']].get('pnDir') or r.get('pnDir')
-    L.save_store({r['key']: by_key[r['key']] for r in recs if r['key'] not in hide})
+    out = [json.dumps(by_key[r['key']], ensure_ascii=False, separators=(',', ':')) for r in recs if r['key'] not in hide]
+    open(STORE, 'w', encoding='utf-8', newline='\n').write('\n'.join(out) + '\n')
     hidden = json.load(open(HIDDEN, encoding='utf-8')) if os.path.exists(HIDDEN) else {}
     for k, (r, keep) in hide.items():
         hidden[k[4:] if k.startswith('doc:') else k] = {'reason': 'duplicate', 'kept': keep['key'], 'date': stamp}

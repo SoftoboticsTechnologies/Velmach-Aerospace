@@ -46,10 +46,10 @@
     pageHref: function (slug) { return VM.clean() ? '/' + encodeURIComponent(slug) : 'page.dc.html?p=' + encodeURIComponent(slug); },
     /* The previous catalogue's category ids (products.dc.html?cat=...), pointed at the closest new category. */
     legacyCatHref: function (cat) {
-      // only aircraft parts remain in the catalogue; the old materials categories go to all categories
-      var m = { parts: 'aircraft-parts', used: 'aircraft-parts' };
+      var m = { parts: 'aircraft-parts', used: 'aircraft-parts', lubricants: 'consumables', chemicals: 'consumables', cleaners: 'consumables',
+        paints: 'consumables', adhesives: 'consumables', sealants: 'consumables', petrochem: 'consumables', tapes: 'consumables/tape' };
       if (cat === 'consultancy') return 'services.dc.html';
-      return m[cat] && VM.findCat(m[cat]) ? 'category.dc.html?c=' + m[cat] : 'categories.dc.html';
+      return m[cat] ? 'category.dc.html?c=' + m[cat] : 'categories.dc.html';
     },
     /* Category tree lookups (data/categories.js). path is "parent" or "parent/child". */
     findCat: function (path) {
@@ -93,12 +93,10 @@
     selectAircraft: function (id) { var h = VM.hangar(); h.current = id || null; VM.setHangar(h); },
     removeAircraft: function (id) { var h = VM.hangar(); h.saved = h.saved.filter(function (a) { return a.id !== id; }); if (h.current === id) h.current = null; VM.setHangar(h); },
     clearAircraft: function () { VM.setHangar({ saved: [], current: null }); },
-    /* true when a product suits the selected aircraft. Every product fits when no aircraft is selected; once one is,
-       only parts listed for it do (inventory parts without an aircraft are not assumed to fit everything). */
+    /* true when a product suits the selected aircraft (no aircraft selected, or the product lists none, means it fits) */
     fitsAircraft: function (product) {
       var a = VM.currentAircraft(), list = product && product.compatibleAircraft;
-      if (!a) return true;
-      if (!list || !list.length) return false;
+      if (!a || !list || !list.length) return true;
       for (var i = 0; i < list.length; i++) { var x = String(list[i]); if (x === a.id || x.toLowerCase() === (a.make + ' ' + a.model).toLowerCase()) return true; }
       return false;
     },
@@ -127,9 +125,14 @@
       VM.addRfq({ pn: product.pn, name_en: product.title, name_ar: product.title, brand: product.brand || '', slug: product.slug || '',
         image: product.image || '', cond: 'any' }, qty || 1);
     },
-    /* "Inspected" for a condition code ("in", "IN"); unknown codes show as written. Older imports use "new" / "used". */
+    /* Condition filter / product label for a card's condition key: "new", "used", "none" (not stated) or a parts-list
+       condition code ("in", "ar", "sv" ...; ATA Spec 2000 names below). A code without a name shows as written. */
     condLabel: function (code) {
-      var k = String(code || '').toLowerCase(), names = VM.t().cond || {};
+      var k = String(code || '').toLowerCase(), ar = lang === 'ar';
+      var names = ar ? { 'new': 'جديد', used: 'مستعمل', none: 'غير محددة', ne: 'جديد', ns: 'فائض جديد', fn: 'جديد من المصنع', oh: 'مُعاد تأهيله',
+          sv: 'صالح للخدمة', rp: 'مُصلَح', 'in': 'مفحوص', tst: 'مُختبَر', ar: 'كما نُزع من الطائرة', ber: 'إصلاحه غير مجدٍ اقتصاديًا' }
+        : { 'new': 'New', used: 'Used', none: 'Not stated', ne: 'New', ns: 'New surplus', fn: 'Factory new', oh: 'Overhauled',
+          sv: 'Serviceable', rp: 'Repaired', 'in': 'Inspected', tst: 'Tested', ar: 'As removed', ber: 'Beyond economic repair' };
       return names[k] || (k ? k.toUpperCase() : names.none);
     },
     /* "Boeing 737 NG" for an aircraft id ("boeing/737-ng"), from data/aircraft.js */

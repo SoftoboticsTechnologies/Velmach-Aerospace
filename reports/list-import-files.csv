@@ -1,0 +1,11 @@
+﻿File,Read as,Result
+PRODUCT LIST.xlsx 2.xlsx,consumables list,"506 product rows; sheet ""Sheet1"": 12 embedded pictures, all brand logos or groups of logos (not product photos)"
+oil and lubricants.xlsx,consumables list,"4881 product rows; sheet ""Sheet2"": list of supplier websites and e-mails, not products; sheet ""Sheet1"": 57 embedded pictures, all brand logos or groups of logos (not product photos)"
+VELMACH AEROSPACE Master Parts Inventory 06-05-2026.xlsx,parts list,"241762 rows, 241762 with a part number"
+2026-10-lead-time-updates.xlsx,parts list,"152614 rows, 152614 with a part number"
+AeroDirect_Rotable_Parts.xlsx,parts list,"7685 rows, 7685 with a part number"
+REGIONAL AVIONICS STOCK INVENTORY.xlsx,parts list,"459 rows, 459 with a part number"
+2026-10-seasonal-parts.xlsx,parts list,"690 rows, 690 with a part number"
+PICIMAGE.xlsx,pictures,"pictures only: customer, airline and aircraft-maker logo collages and a supplier link (no products)"
+product images.docx,pictures,one picture: a collage of brand logos (no products)
+products-export.csv,export of an earlier import,"9755 rows, checked for duplicates"

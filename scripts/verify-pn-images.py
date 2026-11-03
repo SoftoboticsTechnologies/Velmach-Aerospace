@@ -147,10 +147,10 @@ def family_ids():
 def main():
     rdir = sys.argv[1]
     store = {}
-    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
-    import catalog_lib as L
-    for r in L.load_store().values():
-        store[r['key'][4:] if r['key'].startswith('doc:') else r['key']] = r
+    for line in open(os.path.join(ROOT, 'data', 'catalog', 'products.jsonl'), encoding='utf-8'):
+        if line.strip():
+            r = json.loads(line)
+            store[r['key'][4:] if r['key'].startswith('doc:') else r['key']] = r
     items = [x for f in sorted(glob.glob(os.path.join(rdir, 'result*.json'))) for x in json.load(open(f, encoding='utf-8'))]
     fam = family_ids()
     f = Fetcher()

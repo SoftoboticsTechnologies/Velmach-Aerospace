@@ -1,0 +1,8 @@
+ M data/categories.js
+ D js/home-filters.js
+ M js/search.js
+ M js/vm-core.js
+ D scripts/find-product-images.py
+ D scripts/import-inventory.py
+ D scripts/inventory_rules.py
+?? backup/before-restore-2026-11-03/

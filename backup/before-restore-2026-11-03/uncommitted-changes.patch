@@ -1,0 +1,1462 @@
+diff --git a/data/categories.js b/data/categories.js
+index 995eb632..f9351b2e 100644
+--- a/data/categories.js
++++ b/data/categories.js
+@@ -2,36 +2,40 @@
+    URLs: category.dc.html?c=<parent> and ?c=<parent>/<child> (clean form: /c/<parent>/<child>, see js/routes.js).
+    desc_en / desc_ar: the short introduction shown on the category page and in the menus.
+    Slugs are part of every product and category URL: rename a label freely, but keep its slug.
+-   nav: false keeps a category off the header menus (it is still listed on categories.dc.html).
+-   The master inventory has no category column: scripts/import-inventory.py picks the subcategory from the description
+-   (CATEGORY_RULES in scripts/inventory_rules.py). A new subcategory there needs an entry here.
+-   Consumables and Aircraft Tooling hold the products of scripts/import-list-sheet.py (subcategories that have products).
+-   The tree before the master inventory import: backup/catalogue-before-master-inventory-2026-10-29/categories.js */
++   nav: false keeps a category off the header menus (it is still listed on categories.dc.html). */
+ window.VM_CATS = [
+-  {"slug": "aircraft-parts", "en": "Aircraft Parts", "ar": "قطع غيار الطائرات", "nav": true, "desc_en": "Rotables and components for business and regional aircraft, each with its part number, serial number, condition and certification.", "desc_ar": "قطع دوّارة ومكونات لطائرات الأعمال والطائرات الإقليمية، لكل منها رقم القطعة والرقم التسلسلي والحالة والشهادة.", "children": [
+-    {"slug": "avionics", "en": "Avionics", "ar": "إلكترونيات الطيران", "desc_en": "Radios, navigation, displays, flight computers, audio and cabin electronics.", "desc_ar": "أجهزة الراديو والملاحة والشاشات وحواسيب الطيران وأنظمة الصوت وإلكترونيات المقصورة."},
+-    {"slug": "instruments-indicators", "en": "Instruments & Indicators", "ar": "العدادات والمؤشرات", "desc_en": "Indicators, gauges, probes, sensors and transmitters.", "desc_ar": "مؤشرات وعدادات ومجسات وحساسات وأجهزة إرسال القياسات."},
+-    {"slug": "electrical-hardware", "en": "Electrical Components", "ar": "المكونات الكهربائية", "desc_en": "Switches, relays, contactors, generators, inverters, power supplies and wiring.", "desc_ar": "مفاتيح ومرحلات وموصلات قدرة ومولدات وعواكس ومزودات طاقة وأسلاك."},
+-    {"slug": "engine-parts", "en": "Engine & APU Parts", "ar": "قطع المحرك ووحدة الطاقة المساعدة", "desc_en": "Engine and APU components, ignition, starters, cowls and thrust reversers.", "desc_ar": "مكونات المحرك ووحدة الطاقة المساعدة والإشعال والمشغلات والأغطية وعاكسات الدفع."},
+-    {"slug": "flight-controls", "en": "Flight Controls", "ar": "أنظمة التحكم في الطيران", "desc_en": "Flaps, slats, spoilers, trim, actuators, servos and control linkages.", "desc_ar": "القلابات والشرائح والمفسدات والتقليم والمشغلات والمؤازرات ووصلات التحكم."},
+-    {"slug": "valves-regulators", "en": "Valves & Regulators", "ar": "الصمامات والمنظمات", "desc_en": "Shut-off, check, relief and control valves, pressure regulators and restrictors.", "desc_ar": "صمامات الإغلاق وعدم الرجوع والتنفيس والتحكم ومنظمات الضغط والمقيّدات."},
+-    {"slug": "cockpit-cabin-parts", "en": "Cockpit & Cabin Parts", "ar": "قطع قمرة القيادة والمقصورة", "desc_en": "Panels, seats, galley equipment, doors and cabin furnishings.", "desc_ar": "ألواح ومقاعد ومعدات المطبخ وأبواب وتجهيزات المقصورة."},
+-    {"slug": "lighting", "en": "Lighting", "ar": "الإنارة", "desc_en": "Exterior, interior and cockpit lights, strobes, ballasts and light controls.", "desc_ar": "إنارة خارجية وداخلية وإنارة قمرة القيادة ومصابيح وامضة وموازنات ووحدات تحكم بالإنارة."},
+-    {"slug": "fuel-system-parts", "en": "Fuel System Parts", "ar": "قطع نظام الوقود", "desc_en": "Fuel pumps, valves, controls, tubes and quantity components.", "desc_ar": "مضخات الوقود وصماماته ووحدات التحكم والأنابيب ومكونات قياس الكمية."},
+-    {"slug": "air-conditioning-pneumatics", "en": "Air Conditioning & Pneumatics", "ar": "التكييف والأنظمة الهوائية", "desc_en": "Bleed air, pressurisation, ducts, fans, heat exchangers and ice protection.", "desc_ar": "هواء التنفيس والضغط ومجاري الهواء والمراوح والمبادلات الحرارية والحماية من الجليد."},
+-    {"slug": "hydraulic-parts", "en": "Hydraulic Parts", "ar": "القطع الهيدروليكية", "desc_en": "Pumps, accumulators, servo valves, motors and hydraulic actuators.", "desc_ar": "مضخات ومراكم وصمامات مؤازرة ومحركات ومشغلات هيدروليكية."},
+-    {"slug": "ducting-hoses", "en": "Hoses, Tubes & Manifolds", "ar": "الخراطيم والأنابيب والمشعبات", "desc_en": "Hose assemblies, tubes, pipes and manifolds.", "desc_ar": "مجموعات الخراطيم والأنابيب والمواسير والمشعبات."},
+-    {"slug": "landing-gear-parts", "en": "Landing Gear Parts", "ar": "قطع عجلات الهبوط", "desc_en": "Gear actuators, uplocks, struts, steering and landing gear components.", "desc_ar": "مشغلات العجلات وأقفالها والمساعدات والتوجيه ومكونات عجلات الهبوط."},
+-    {"slug": "oxygen-fire-protection", "en": "Oxygen & Fire Protection", "ar": "الأكسجين والحماية من الحريق", "desc_en": "Oxygen bottles, masks, regulators, fire detection and extinguishing.", "desc_ar": "أسطوانات الأكسجين والأقنعة والمنظمات وكشف الحريق وإطفاؤه."},
+-    {"slug": "airframe-structures", "en": "Airframe & Structures", "ar": "هيكل الطائرة والأجزاء الإنشائية", "desc_en": "Fairings, leading edges, skins, ribs, extrusions and structural parts.", "desc_ar": "الأغطية الانسيابية والحواف الأمامية والجلد والأضلاع والمقاطع المبثوقة والأجزاء الإنشائية."},
+-    {"slug": "wheels-brakes", "en": "Wheels & Brakes", "ar": "العجلات والفرامل", "desc_en": "Wheels, rims, brakes, brake accumulators and brake controls.", "desc_ar": "العجلات والجنوط والفرامل ومراكم الفرامل ووحدات التحكم بها."},
+-    {"slug": "windows-windshields", "en": "Windows & Windshields", "ar": "النوافذ والزجاج الأمامي", "desc_en": "Windshields, cabin windows and wiper assemblies.", "desc_ar": "الزجاج الأمامي ونوافذ المقصورة ومجموعات المساحات."},
+-    {"slug": "hardware-fasteners", "en": "Hardware & Fasteners", "ar": "المثبتات والقطع المعدنية", "desc_en": "Brackets, rods, mounts, bearings and other hardware.", "desc_ar": "حوامل وقضبان وقواعد تثبيت ومحامل وقطع معدنية أخرى."},
+-    {"slug": "seals-o-rings", "en": "Seals & O-Rings", "ar": "موانع التسرب والحلقات الدائرية", "desc_en": "Seals, O-rings, gaskets and packings.", "desc_ar": "موانع التسرب والحلقات الدائرية والحشوات."},
+-    {"slug": "filters", "en": "Filters", "ar": "الفلاتر", "desc_en": "Air, hydraulic, fuel and electronic filters and filter assemblies.", "desc_ar": "فلاتر الهواء والهيدروليك والوقود والفلاتر الإلكترونية ومجموعاتها."},
+-    {"slug": "aircraft-batteries", "en": "Batteries & Chargers", "ar": "البطاريات والشواحن", "desc_en": "Aircraft batteries, chargers and battery monitoring parts.", "desc_ar": "بطاريات الطائرات وشواحنها وقطع مراقبة البطاريات."},
+-    {"slug": "emergency-locator-transmitters-elts", "en": "Emergency Locator Transmitters (ELTs)", "ar": "أجهزة إرسال تحديد موقع الطوارئ (ELT)", "desc_en": "ELTs, ELT control panels and antennas.", "desc_ar": "أجهزة تحديد موقع الطوارئ ولوحات التحكم بها وهوائياتها."},
+-    {"slug": "other-aircraft-parts", "en": "Other / Miscellaneous", "ar": "أخرى / متنوعة", "desc_en": "Parts listed without an aircraft type, and components that do not fall under a single system.", "desc_ar": "قطع مدرجة دون تحديد نوع الطائرة، ومكونات لا تندرج ضمن نظام واحد."}
++  {"slug": "aircraft-tooling", "en": "Aircraft Tooling", "ar": "عِدد وأدوات الطائرات", "nav": true, "desc_en": "Hand tools, measuring instruments, manufacturer-specific tooling and test equipment for line and base maintenance.", "desc_ar": "عِدد يدوية وأدوات قياس وعِدد خاصة بالشركات المصنّعة ومعدات اختبار لأعمال الصيانة الخطية والأساسية.", "children": [
++    {"slug": "other-aircraft-tools", "en": "Other Aircraft Tools", "ar": "أدوات طائرات أخرى", "desc_en": "Specialist aircraft tools that do not fit a single category.", "desc_ar": "عِدد طائرات متخصصة لا تندرج ضمن فئة واحدة."},
++    {"slug": "drill-bits", "en": "Drill Bits", "ar": "لقم الحفر", "desc_en": "High-speed steel and cobalt drill bits for aluminium, titanium and composite structures.", "desc_ar": "لقم حفر من الفولاذ عالي السرعة والكوبالت لهياكل الألومنيوم والتيتانيوم والمواد المركبة."},
++    {"slug": "crimping-tools", "en": "Crimping Tools", "ar": "أدوات كبس الأطراف", "desc_en": "Hand and pneumatic crimp tools for terminating aircraft wiring to specification.", "desc_ar": "أدوات كبس يدوية وهوائية لتركيب أطراف أسلاك الطائرة وفق المواصفات."},
++    {"slug": "measurement-tools", "en": "Measurement Tools", "ar": "أدوات القياس", "desc_en": "Micrometers, gauges and measuring instruments for maintenance inspection.", "desc_ar": "ميكرومترات ومقاييس وأدوات قياس لفحوصات الصيانة."},
++    {"slug": "temperature-measurement", "en": "Temperature Measurement", "ar": "قياس درجة الحرارة", "desc_en": "Thermometers, thermocouples and infrared cameras for temperature checks.", "desc_ar": "موازين حرارة ومزدوجات حرارية وكاميرات تعمل بالأشعة تحت الحمراء لفحوصات الحرارة."},
++    {"slug": "sealant-adhesive-application-tools", "en": "Sealant & Adhesive Application Tools", "ar": "أدوات تطبيق المواد المانعة للتسرب واللاصقة", "desc_en": "Guns, nozzles and cartridges for applying sealants and adhesives.", "desc_ar": "مسدسات وفوهات وخراطيش لتطبيق المواد المانعة للتسرب والمواد اللاصقة."},
++    {"slug": "wrenches", "en": "Wrenches", "ar": "المفاتيح", "desc_en": "Combination, open-end, torque and specialty wrenches.", "desc_ar": "مفاتيح مركبة ومفتوحة ومفاتيح عزم ومفاتيح متخصصة."},
++    {"slug": "abrasives", "en": "Abrasives", "ar": "مواد الصنفرة والكشط", "desc_en": "Abrasive pads, discs and papers for surface preparation and finishing.", "desc_ar": "وسائد وأقراص وأوراق كشط لتحضير الأسطح وتشطيبها."},
++    {"slug": "screwdrivers", "en": "Screwdrivers", "ar": "المفكات", "desc_en": "Screwdrivers and bits for aircraft fasteners.", "desc_ar": "مفكات ولقم لمثبتات الطائرات."},
++    {"slug": "knives", "en": "Knives", "ar": "السكاكين", "desc_en": "Utility knives and blades for workshop use.", "desc_ar": "سكاكين وشفرات متعددة الاستخدامات للورش."},
++    {"slug": "inspection-lights", "en": "Inspection Lights", "ar": "مصابيح الفحص", "desc_en": "Flashlights, inspection lamps and mirrors for close visual inspection.", "desc_ar": "مصابيح يدوية ومصابيح فحص ومرايا للفحص البصري الدقيق."},
++    {"slug": "marking-tools", "en": "Marking Tools", "ar": "أدوات التعليم", "desc_en": "Markers, scribes and pens suitable for use on aircraft surfaces.", "desc_ar": "أقلام وأدوات تعليم مناسبة للاستخدام على أسطح الطائرة."}
++  ]},
++  {"slug": "aircraft-parts", "en": "Aircraft Parts", "ar": "قطع غيار الطائرات", "nav": true, "desc_en": "Replacement parts for airframes, engines, landing gear, cabins and aircraft systems, quoted to your part number.", "desc_ar": "قطع غيار لهياكل الطائرات والمحركات وعجلات الهبوط والمقصورات وأنظمة الطائرة، مسعّرة وفق رقم القطعة.", "children": [
++    {"slug": "air-filters", "en": "Air Filters", "ar": "فلاتر الهواء", "desc_en": "Engine induction, cabin and system air filters.", "desc_ar": "فلاتر هواء لمداخل المحركات والمقصورة والأنظمة."},
++    {"slug": "lighting", "en": "Lighting", "ar": "الإنارة", "desc_en": "Exterior, interior and cockpit lighting, lamps and LED replacements.", "desc_ar": "إنارة خارجية وداخلية وإنارة قمرة القيادة ومصابيح وبدائل LED."},
++    {"slug": "aircraft-tires", "en": "Aircraft Tires", "ar": "إطارات الطائرات", "desc_en": "Main and nose wheel tyres and tubes for general, business and commercial aviation.", "desc_ar": "إطارات وأنابيب داخلية للعجلات الرئيسية والأمامية لطائرات الطيران العام والأعمال والتجارية."},
++    {"slug": "hydraulic-parts", "en": "Hydraulic Parts", "ar": "القطع الهيدروليكية", "desc_en": "Pumps, valves, actuators, seals and fittings for aircraft hydraulic systems.", "desc_ar": "مضخات وصمامات ومشغلات وموانع تسرب ووصلات لأنظمة الطائرة الهيدروليكية."},
++    {"slug": "emergency-locator-transmitters-elts", "en": "Emergency Locator Transmitters (ELTs)", "ar": "أجهزة إرسال تحديد موقع الطوارئ (ELT)", "desc_en": "Emergency locator transmitters, batteries, antennas and installation kits.", "desc_ar": "أجهزة إرسال تحديد موقع الطوارئ وبطارياتها وهوائياتها وأطقم تركيبها."},
++    {"slug": "aircraft-batteries", "en": "Aircraft Batteries", "ar": "بطاريات الطائرات", "desc_en": "Lead-acid and nickel-cadmium main and emergency batteries.", "desc_ar": "بطاريات رئيسية وبطاريات طوارئ من نوع الرصاص الحمضي والنيكل كادميوم."},
++    {"slug": "wheels-brakes", "en": "Wheels & Brakes", "ar": "العجلات والفرامل", "desc_en": "Wheel assemblies, brake discs, linings and brake parts.", "desc_ar": "مجموعات العجلات وأقراص الفرامل وبطاناتها وقطع الفرامل."},
++    {"slug": "windows-windshields", "en": "Windows & Windshields", "ar": "النوافذ والزجاج الأمامي", "desc_en": "Windshields, cabin windows and window seals.", "desc_ar": "الزجاج الأمامي ونوافذ المقصورة وموانع تسرب النوافذ."},
++    {"slug": "ducting-hoses", "en": "Ducting & Hoses", "ar": "مجاري الهواء والخراطيم", "desc_en": "Air ducting, flexible hoses and clamps.", "desc_ar": "مجاري هواء وخراطيم مرنة ومشابك."},
++    {"slug": "fuel-system-parts", "en": "Fuel System Parts", "ar": "قطع نظام الوقود", "desc_en": "Fuel pumps, valves, caps, drains and sensors.", "desc_ar": "مضخات وقود وصمامات وأغطية ومصارف وحساسات."},
++    {"slug": "landing-gear-parts", "en": "Landing Gear Parts", "ar": "قطع عجلات الهبوط", "desc_en": "Struts, seals, bushings and other landing gear components.", "desc_ar": "مساعدات وموانع تسرب وجلب ومكونات أخرى لعجلات الهبوط."},
++    {"slug": "cockpit-cabin-parts", "en": "Cockpit & Cabin Parts", "ar": "قطع قمرة القيادة والمقصورة", "desc_en": "Interior panels, seats, controls and cabin hardware.", "desc_ar": "ألواح داخلية ومقاعد وأدوات تحكم وتجهيزات المقصورة."},
++    {"slug": "engine-parts", "en": "Engine Parts", "ar": "قطع المحرك", "desc_en": "Engine components, gaskets, seals, mounts and accessories.", "desc_ar": "مكونات المحرك وحشواته وموانع تسربه وقواعده وملحقاته."},
++    {"slug": "hose-assemblies", "en": "Hose Assemblies", "ar": "مجموعات الخراطيم", "desc_en": "Hydraulic, fuel and oil hose assemblies made to specification.", "desc_ar": "مجموعات خراطيم هيدروليكية ووقود وزيت مصنوعة حسب المواصفات."},
++    {"slug": "electrical-hardware", "en": "Electrical Hardware", "ar": "المكونات الكهربائية", "desc_en": "Connectors, contacts, switches, relays, terminals and other electrical components.", "desc_ar": "موصلات وأطراف توصيل ومفاتيح ومرحلات ونهايات طرفية ومكونات كهربائية أخرى."},
++    {"slug": "hardware-fasteners", "en": "Hardware & Fasteners", "ar": "المثبتات والقطع المعدنية", "desc_en": "Bolts, nuts, screws, rivets, washers, clamps and other aircraft hardware.", "desc_ar": "براغٍ وصواميل ومسامير برشام وحلقات ومشابك وقطع معدنية أخرى للطائرات."},
++    {"slug": "seals-o-rings", "en": "Seals & O-Rings", "ar": "موانع التسرب والحلقات الدائرية", "desc_en": "O-rings, gaskets, packings and seals.", "desc_ar": "حلقات دائرية وحشوات وموانع تسرب."}
+   ]},
+   {"slug": "consumables", "en": "Consumables", "ar": "المواد الاستهلاكية", "nav": true, "desc_en": "Oils, greases, fluids, cleaning supplies, tapes and lockwire used every day in aircraft maintenance.", "desc_ar": "زيوت وشحوم وسوائل ومستلزمات تنظيف وأشرطة وأسلاك تثبيت تُستخدم يوميًا في صيانة الطائرات.", "children": [
+     {"slug": "engine-oil", "en": "Engine Oil", "ar": "زيت المحرك", "desc_en": "Piston and turbine engine oils for aviation use.", "desc_ar": "زيوت محركات مكبسية وتوربينية لاستخدامات الطيران."},
+@@ -41,7 +45,8 @@ window.VM_CATS = [
+     {"slug": "hydraulic-fluid", "en": "Hydraulic Fluid", "ar": "السائل الهيدروليكي", "desc_en": "Mineral, synthetic and phosphate-ester hydraulic fluids.", "desc_ar": "سوائل هيدروليكية معدنية وصناعية وفوسفاتية الإستر."},
+     {"slug": "fuel-additives", "en": "Fuel Additives", "ar": "إضافات الوقود", "desc_en": "Additives for fuel system icing inhibition and fuel treatment.", "desc_ar": "إضافات لمنع تجمد نظام الوقود ومعالجة الوقود."},
+     {"slug": "calibration-fluids", "en": "Calibration Fluids", "ar": "سوائل المعايرة", "desc_en": "Fluids for calibrating fuel controls, flow meters and test equipment.", "desc_ar": "سوائل لمعايرة أنظمة التحكم بالوقود ومقاييس التدفق ومعدات الاختبار."},
+-    {"slug": "lubricating-oils", "en": "Lubricants", "ar": "مواد التشحيم", "desc_en": "General lubricating, instrument and gear oils.", "desc_ar": "زيوت تزليق عامة وزيوت للأجهزة والتروس."},
++    {"slug": "lubricating-oils", "en": "Lubricating Oils", "ar": "زيوت التزليق", "desc_en": "General lubricating, instrument and gear oils.", "desc_ar": "زيوت تزليق عامة وزيوت للأجهزة والتروس."},
++    {"slug": "dielectric-coolants", "en": "Dielectric Coolants", "ar": "سوائل التبريد العازلة", "desc_en": "Dielectric coolants for avionics and radar cooling systems.", "desc_ar": "سوائل تبريد عازلة لأنظمة تبريد إلكترونيات الطيران والرادار."},
+     {"slug": "landing-gear-fluid", "en": "Landing Gear Fluid", "ar": "سائل عجلات الهبوط", "desc_en": "Shock strut fluids for landing gear servicing.", "desc_ar": "سوائل المساعدات لخدمة عجلات الهبوط."},
+     {"slug": "leak-detector-fluid", "en": "Leak Detector Fluid", "ar": "سائل كشف التسرب", "desc_en": "Leak detection solutions for pressurised systems and fittings.", "desc_ar": "محاليل كشف التسرب للأنظمة المضغوطة والوصلات."},
+     {"slug": "tape", "en": "Tape", "ar": "الأشرطة اللاصقة", "desc_en": "Aluminium, masking, sealing and speed tapes for maintenance.", "desc_ar": "أشرطة ألومنيوم وتغطية وإحكام وأشرطة سريعة لأعمال الصيانة."},
+@@ -54,10 +59,13 @@ window.VM_CATS = [
+     {"slug": "composite-materials", "en": "Composite Materials", "ar": "المواد المركبة", "desc_en": "Prepregs, fabrics, films and vacuum-bagging materials for composite repair.", "desc_ar": "ألياف مشبعة مسبقًا وأقمشة وأغشية ومواد التفريغ بالأكياس لإصلاح المواد المركبة."},
+     {"slug": "raw-materials", "en": "Raw Materials", "ar": "المواد الخام", "desc_en": "Sheet, bar, rod and other raw materials.", "desc_ar": "صفائح وقضبان وأعمدة ومواد خام أخرى."}
+   ]},
+-  {"slug": "aircraft-tooling", "en": "Aircraft Tooling", "ar": "عِدد وأدوات الطائرات", "nav": true, "desc_en": "Hand tools, measuring instruments, manufacturer-specific tooling and test equipment for line and base maintenance.", "desc_ar": "عِدد يدوية وأدوات قياس وعِدد خاصة بالشركات المصنّعة ومعدات اختبار لأعمال الصيانة الخطية والأساسية.", "children": [
+-    {"slug": "other-aircraft-tools", "en": "Other Aircraft Tools", "ar": "أدوات طائرات أخرى", "desc_en": "Specialist aircraft tools that do not fit a single category.", "desc_ar": "عِدد طائرات متخصصة لا تندرج ضمن فئة واحدة."},
+-    {"slug": "sealant-adhesive-application-tools", "en": "Sealant & Adhesive Application Tools", "ar": "أدوات تطبيق المواد المانعة للتسرب واللاصقة", "desc_en": "Guns, nozzles and cartridges for applying sealants and adhesives.", "desc_ar": "مسدسات وفوهات وخراطيش لتطبيق المواد المانعة للتسرب والمواد اللاصقة."},
+-    {"slug": "abrasives", "en": "Abrasives", "ar": "مواد الصنفرة والكشط", "desc_en": "Abrasive pads, discs and papers for surface preparation and finishing.", "desc_ar": "وسائد وأقراص وأوراق كشط لتحضير الأسطح وتشطيبها."},
+-    {"slug": "marking-tools", "en": "Marking Tools", "ar": "أدوات التعليم", "desc_en": "Markers, scribes and pens suitable for use on aircraft surfaces.", "desc_ar": "أقلام وأدوات تعليم مناسبة للاستخدام على أسطح الطائرة."}
++  {"slug": "safety-equipment", "en": "Safety Equipment", "ar": "معدات السلامة", "nav": true, "desc_en": "Personal protective equipment, emergency equipment and ramp safety gear for crews and ground staff.", "desc_ar": "معدات الحماية الشخصية ومعدات الطوارئ ومستلزمات السلامة في ساحات الوقوف للأطقم والعاملين الأرضيين.", "children": [
++    {"slug": "goggles", "en": "Goggles", "ar": "النظارات الواقية", "desc_en": "Safety goggles and eye protection for maintenance work.", "desc_ar": "نظارات واقية وحماية للعين لأعمال الصيانة."},
++    {"slug": "fire-extinguishers", "en": "Fire Extinguishers", "ar": "طفايات الحريق", "desc_en": "Cabin and hangar fire extinguishers and mounting brackets.", "desc_ar": "طفايات حريق للمقصورة والحظائر وحوامل تثبيتها."},
++    {"slug": "protective-breathing-equipment-pbe", "en": "Protective Breathing Equipment (PBE)", "ar": "معدات التنفس الواقية (PBE)", "desc_en": "Smoke hoods and protective breathing equipment for crew.", "desc_ar": "أغطية رأس للحماية من الدخان ومعدات تنفس واقية للأطقم."},
++    {"slug": "safety-apparel", "en": "Safety Apparel", "ar": "ملابس السلامة", "desc_en": "Protective clothing, gloves and footwear.", "desc_ar": "ملابس واقية وقفازات وأحذية."}
++  ]},
++  {"slug": "ground-support-equipment", "en": "Ground Support Equipment", "ar": "معدات الدعم الأرضي", "nav": true, "desc_en": "Equipment for handling, servicing, powering and maintaining aircraft on the ramp and in the hangar, from jacks and towbars to ground power units.", "desc_ar": "معدات لمناولة الطائرات وخدمتها وتزويدها بالطاقة وصيانتها في ساحات الوقوف والحظائر، من الرافعات وقضبان السحب إلى وحدات الطاقة الأرضية.", "children": [
++    {"slug": "fueling-gse", "en": "Fueling GSE", "ar": "معدات التزود بالوقود", "desc_en": "Refuelling carts, nozzles, hoses and filtration equipment for handling aviation fuel.", "desc_ar": "عربات تزويد بالوقود وفوهات وخراطيم ومعدات ترشيح لمناولة وقود الطيران."}
+   ]}
+ ];
+diff --git a/js/home-filters.js b/js/home-filters.js
+deleted file mode 100644
+index 7dba6d01..00000000
+--- a/js/home-filters.js
++++ /dev/null
+@@ -1,78 +0,0 @@
+-/* Velmach Aerospace: home page catalogue filters (Aircraft, Brand, Category under the hero search).
+-   Options come from the catalogue itself: data/aircraft.js, data/brands.js and data/categories.js list what has parts,
+-   and data/catalog/meta.json gives the product count shown next to each option. Once a filter is picked, the search
+-   index (VM_CONFIG.searchIndex) is loaded and the counts of the other filters follow the choice (Falcon 2000 + Honeywell).
+-   The form submits to search.dc.html?q=&ac=<aircraft id>&brand=<brand slug>&sub=<subcategory>, where the listing
+-   applies the same filters (ProductListing.dc.html). */
+-(function () {
+-  var form = document.querySelector('[data-home-filters]');
+-  if (!form) return;
+-  var sels = { ac: form.querySelector('[data-hf="ac"]'), brand: form.querySelector('[data-hf="brand"]'), sub: form.querySelector('[data-hf="sub"]') };
+-  var GET = { ac: function (c) { return c.a || []; }, brand: function (c) { return c.bs ? [c.bs] : []; }, sub: function (c) { return c.c ? [c.c] : []; } };
+-  var meta = null, cards = null, loading = false;
+-
+-  function ready() { return window.VM && window.VM_I18N && window.VM_CATS && window.VM_BRANDS && window.VM_AIRCRAFT; }
+-
+-  // every option with its total from meta.json
+-  function options(dim) {
+-    var VM = window.VM, out = [];
+-    if (dim === 'ac') window.VM_AIRCRAFT.forEach(function (m) { m.models.forEach(function (model) { var id = VM.acId(m.make, model); out.push({ v: id, l: m.make + ' ' + model, n: (meta.aircraft || {})[id] || 0 }); }); });
+-    if (dim === 'brand') window.VM_BRANDS.forEach(function (b) { out.push({ v: b.slug, l: b.name, n: (meta.brands || {})[b.slug] || 0 }); });
+-    if (dim === 'sub') window.VM_CATS.forEach(function (p) { p.children.forEach(function (c) { out.push({ v: c.slug, l: VM.label(c), n: ((meta.categories[p.slug] || {}).c || {})[c.slug] || 0 }); }); });
+-    return out.filter(function (o) { return o.n > 0; }).sort(function (a, b) { return a.l.localeCompare(b.l); });
+-  }
+-
+-  // counts for one filter given the values picked in the others (needs the search index)
+-  function liveCounts(dim) {
+-    var n = {};
+-    cards.forEach(function (c) {
+-      for (var k in sels) if (k !== dim && sels[k].value && GET[k](c).indexOf(sels[k].value) < 0) return;
+-      GET[dim](c).forEach(function (v) { n[v] = (n[v] || 0) + 1; });
+-    });
+-    return n;
+-  }
+-
+-  function render() {
+-    if (!meta) return;
+-    var t = window.VM.t(), all = { ac: t.hf_all_ac, brand: t.hf_all_brand, sub: t.hf_all_cat };
+-    var picked = sels.ac.value || sels.brand.value || sels.sub.value;
+-    Object.keys(sels).forEach(function (dim) {
+-      var el = sels[dim], cur = el.value, live = cards && picked ? liveCounts(dim) : null;
+-      el.innerHTML = '';
+-      el.appendChild(new Option(all[dim], ''));
+-      options(dim).forEach(function (o) {
+-        var n = live ? live[o.v] || 0 : o.n, opt = new Option(o.l + ' (' + n + ')', o.v);
+-        opt.disabled = !n && o.v !== cur;
+-        el.appendChild(opt);
+-      });
+-      el.value = cur;
+-    });
+-  }
+-
+-  function loadCards() {
+-    if (cards || loading) return;
+-    // the header's search index (js/search.js reads and decodes data/catalog/search.json once for the whole page)
+-    if (!window.VM_SEARCH) { setTimeout(loadCards, 60); return; }
+-    loading = true;
+-    window.VM_SEARCH.index().then(function (d) { cards = d; render(); })
+-      .catch(function () { loading = false; });
+-  }
+-
+-  function start() {
+-    if (!ready()) { setTimeout(start, 40); return; }
+-    fetch('data/catalog/meta.json').then(function (r) { return r.json(); }).then(function (m) {
+-      meta = m; render();
+-      window.VM.subscribe(render);   // option names follow the language
+-    }).catch(function () { form.hidden = true; });
+-    Object.keys(sels).forEach(function (k) {
+-      sels[k].addEventListener('change', function () { loadCards(); render(); });
+-      sels[k].addEventListener('focus', loadCards, { once: true });
+-    });
+-    // leave unused filters out of the URL
+-    form.closest('form').addEventListener('submit', function () {
+-      Object.keys(sels).forEach(function (k) { sels[k].disabled = !sels[k].value; });
+-      setTimeout(function () { Object.keys(sels).forEach(function (k) { sels[k].disabled = false; }); }, 0);
+-    });
+-  }
+-  start();
+-})();
+diff --git a/js/search.js b/js/search.js
+index fae0bca9..edb5feda 100644
+--- a/js/search.js
++++ b/js/search.js
+@@ -20,35 +20,12 @@
+     return t.indexOf(q) > -1 ? 1 : 0;
+   }
+ 
+-  // compact card file ({f, d, r}, written by scripts/build-catalog.py) -> card objects; same as VM_CATALOG.decode,
+-  // repeated here because pages without the catalogue script (the home page) search too
+-  function decode(d) {
+-    if (Array.isArray(d)) return d;
+-    if (!d || !d.r) return [];
+-    var f = d.f, D = d.d, rows = d.r, out = new Array(rows.length);
+-    for (var i = 0; i < rows.length; i++) {
+-      var row = rows[i], c = { s: '', t: '', pn: '', b: '', bs: '', p: '', c: '', k: '', i: '', d: '' };
+-      for (var j = 0; j < row.length; j++) {
+-        var v = row[j], k = f[j];
+-        if (!v) continue;
+-        if (k === 'pc') { c.p = D.pc[v][0]; c.c = D.pc[v][1]; }
+-        else if (k === 'b') { c.b = D.b[v][0]; c.bs = D.b[v][1]; }
+-        else if (k === 'a') c.a = D.a[v].split(' ');
+-        else c[k] = D[k] ? D[k][v] : v;
+-      }
+-      out[i] = c;
+-    }
+-    return out;
+-  }
+-
+   function loadIndex() {
+     var url = window.VM_CONFIG && window.VM_CONFIG.searchIndex;
+     if (!url) return Promise.resolve([]);
+     if (index) return Promise.resolve(index);
+-    // catalogue pages already hold every card (VM_CATALOG.all() reads the same file): one download, one copy in memory
+-    var src = window.VM_CATALOG && window.VM_CATALOG.all ? window.VM_CATALOG.all()
+-      : fetch(url).then(function (r) { return r.ok ? r.json() : []; }).then(decode);
+-    if (!loading) loading = src.then(function (d) { index = Array.isArray(d) ? d : []; return index; })
++    if (!loading) loading = fetch(url).then(function (r) { return r.ok ? r.json() : []; })
++      .then(function (d) { index = Array.isArray(d) ? d : []; return index; })
+       .catch(function () { loading = null; return []; });
+     return loading;
+   }
+@@ -78,25 +55,13 @@
+       .slice(0, limit).map(function (m) { return { label: m.b.name, slug: m.b.slug, href: window.VM.brandHref(m.b.slug) }; });
+   }
+ 
+-  // how well a part number matches the compacted query: exact 10, starts with it 8, contains it 5
+-  function pnScore(pn, cq) {
+-    pn = compact(pn);
+-    return !cq || !pn ? 0 : pn === cq ? 10 : pn.indexOf(cq) === 0 ? 8 : pn.indexOf(cq) > -1 ? 5 : 0;
+-  }
+-
+-  // products matching q (already normalised), best first: part number (or alternate part number), then
+-  // description, then aircraft (card field m, e.g. "Dassault Falcon 2000") and brand
++  // products matching q (already normalised), best first: part number, then title, then brand
+   function rank(list, q) {
+     var cq = compact(q), out = [];
+     for (var i = 0; i < list.length; i++) {
+-      var p = list[i], r = Math.max(pnScore(p.pn, cq), pnScore(p.ap, cq) - 1);
+-      r = Math.max(r, score(p.t, q) * 2, score(p.m, q) * 1.5, score(p.b, q) * 1.5);
+-      // words in any order across fields: "falcon 2000 valve", "honeywell giv"
+-      if (!r && q.indexOf(' ') > 0) {
+-        var hay = ' ' + norm([p.t, p.m, p.b, p.pn, p.ap].join(' ')), words = q.split(' '), all = true;
+-        for (var w = 0; w < words.length && all; w++) all = hay.indexOf(' ' + words[w]) > -1 || compact(hay).indexOf(compact(words[w])) > -1;
+-        if (all) r = 1;
+-      }
++      var p = list[i], r = 0, pn = compact(p.pn);
++      if (cq && pn) r = pn === cq ? 10 : pn.indexOf(cq) === 0 ? 8 : pn.indexOf(cq) > -1 ? 5 : 0;
++      r = Math.max(r, score(p.t, q) * 2, score(p.b, q) * 1.5);
+       if (r) out.push({ p: p, r: r, i: i });
+     }
+     out.sort(function (a, b) { return b.r - a.r || a.i - b.i; });
+@@ -111,7 +76,6 @@
+ 
+   window.VM_SEARCH = {
+     norm: norm,
+-    decode: decode,
+     /* every product card (data/catalog/search.json) */
+     index: loadIndex,
+     /* product cards matching the text, best first */
+diff --git a/js/vm-core.js b/js/vm-core.js
+index 42e76974..743a2cc5 100644
+--- a/js/vm-core.js
++++ b/js/vm-core.js
+@@ -46,10 +46,10 @@
+     pageHref: function (slug) { return VM.clean() ? '/' + encodeURIComponent(slug) : 'page.dc.html?p=' + encodeURIComponent(slug); },
+     /* The previous catalogue's category ids (products.dc.html?cat=...), pointed at the closest new category. */
+     legacyCatHref: function (cat) {
+-      // only aircraft parts remain in the catalogue; the old materials categories go to all categories
+-      var m = { parts: 'aircraft-parts', used: 'aircraft-parts' };
++      var m = { parts: 'aircraft-parts', used: 'aircraft-parts', lubricants: 'consumables', chemicals: 'consumables', cleaners: 'consumables',
++        paints: 'consumables', adhesives: 'consumables', sealants: 'consumables', petrochem: 'consumables', tapes: 'consumables/tape' };
+       if (cat === 'consultancy') return 'services.dc.html';
+-      return m[cat] && VM.findCat(m[cat]) ? 'category.dc.html?c=' + m[cat] : 'categories.dc.html';
++      return m[cat] ? 'category.dc.html?c=' + m[cat] : 'categories.dc.html';
+     },
+     /* Category tree lookups (data/categories.js). path is "parent" or "parent/child". */
+     findCat: function (path) {
+@@ -93,12 +93,10 @@
+     selectAircraft: function (id) { var h = VM.hangar(); h.current = id || null; VM.setHangar(h); },
+     removeAircraft: function (id) { var h = VM.hangar(); h.saved = h.saved.filter(function (a) { return a.id !== id; }); if (h.current === id) h.current = null; VM.setHangar(h); },
+     clearAircraft: function () { VM.setHangar({ saved: [], current: null }); },
+-    /* true when a product suits the selected aircraft. Every product fits when no aircraft is selected; once one is,
+-       only parts listed for it do (inventory parts without an aircraft are not assumed to fit everything). */
++    /* true when a product suits the selected aircraft (no aircraft selected, or the product lists none, means it fits) */
+     fitsAircraft: function (product) {
+       var a = VM.currentAircraft(), list = product && product.compatibleAircraft;
+-      if (!a) return true;
+-      if (!list || !list.length) return false;
++      if (!a || !list || !list.length) return true;
+       for (var i = 0; i < list.length; i++) { var x = String(list[i]); if (x === a.id || x.toLowerCase() === (a.make + ' ' + a.model).toLowerCase()) return true; }
+       return false;
+     },
+@@ -127,11 +125,6 @@
+       VM.addRfq({ pn: product.pn, name_en: product.title, name_ar: product.title, brand: product.brand || '', slug: product.slug || '',
+         image: product.image || '', cond: 'any' }, qty || 1);
+     },
+-    /* "Inspected" for a condition code ("in", "IN"); unknown codes show as written. Older imports use "new" / "used". */
+-    condLabel: function (code) {
+-      var k = String(code || '').toLowerCase(), names = VM.t().cond || {};
+-      return names[k] || (k ? k.toUpperCase() : names.none);
+-    },
+     /* "Boeing 737 NG" for an aircraft id ("boeing/737-ng"), from data/aircraft.js */
+     acLabel: function (id) {
+       var list = window.VM_AIRCRAFT || [];
+diff --git a/scripts/find-product-images.py b/scripts/find-product-images.py
+deleted file mode 100644
+index 0a1b38de..00000000
+--- a/scripts/find-product-images.py
++++ /dev/null
+@@ -1,597 +0,0 @@
+-"""Find a photo for each inventory part on the web: python scripts/find-product-images.py [--test 40] [--limit N] [--reverify]
+-
+-Products that share a part number (ignoring dashes, spaces and case) are one group: one search, one photo. For each group:
+-  1. Image search through a search API, at most 3 queries, stopping once a photo is verified:
+-       "<part number>" <description>          (the part number as the inventory writes it)
+-       "<part number>" <aircraft>             (e.g. Falcon 2000, Gulfstream GIV)
+-       "<alternate part number>" <description>, or the part number without separators
+-     Only results that name the part number (page title, page or image address) are kept, never results from stock-photo,
+-     marketplace or social sites, never pictures named like logos, placeholders or "no image".
+-  2. Each kept result is checked on its own page (robots.txt respected, at most one request a second per site):
+-       a. the exact part number, as a whole code, is in the page text   b. and in the page title or main heading
+-       c. the page names the same kind of part (a word of our description: valve, wheel, actuator ...)
+-       d. the picture is the page's product picture and tied to the part number (in its address or alt text, or the page's
+-          og:image on a page titled with the part number)
+-       e. the picture is a real photo: at least 250 px, not blank, not a banner
+-  3. Verified (published automatically): a-e pass AND the site is the manufacturer's or an authorized distributor's (OEM,
+-     DISTRIBUTORS below). Needs Manual Review: the part number is on the page and d-e pass, but the site is a broker or other
+-     seller, or b/c fail; the photo is kept aside in data/catalog/.image-review/ (not on the site) and listed in
+-     reports/image-review.csv. Write approve or reject in its Decision column and run with --apply: approved photos are
+-     published. Unresolved: nothing passed. A picture found for two different part numbers is never published.
+-     No match means no photo: the products keep their category placeholder.
+-Photos are saved as WebP in images/products/<PN>/ (<PN>-1.webp at most 1200 px, thumbs/<PN>-1.webp 400 px). Published
+-photos are in data/catalog/product-images.json (with source page, site and the page's copyright line; also read by
+-import-inventory.py), the products get them and the catalogue is rebuilt. Only the images field of a product changes.
+-
+-Keys (environment variables, or a .env file in the project root, which git ignores; keys are never printed):
+-  brave    BRAVE_API_KEY                         https://api-dashboard.search.brave.com  (Search plan, $5 per 1,000 requests)
+-  google   GOOGLE_CSE_KEY and GOOGLE_CSE_CX      https://programmablesearchengine.google.com (image search on)
+-  serpapi  SERPAPI_KEY                           https://serpapi.com (Google Images)
+-Brave is used when its key is set, unless --provider says otherwise.
+-
+-Progress is saved after every part number in data/catalog/.image-state.json (with the search results, so --reverify can
+-check them again under new rules without new searches): stop at any time (Ctrl+C) and run again to continue. Searches that
+-failed (network, rate limit) are retried on the next run; --retry-unresolved searches again those that found nothing.
+---test N searches N representative part numbers, publishes nothing and writes reports/image-search-test.csv with the
+-API calls, cost and outcome of each. Afterwards run scripts/audit-product-images.py for the full audit.
+-"""
+-import argparse, collections, csv, hashlib, html, importlib.util, io, json, os, random, re, sys, time, urllib.error, urllib.parse, urllib.request
+-
+-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+-import catalog_lib as L
+-
+-_spec = importlib.util.spec_from_file_location('verify_pn', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'verify-pn-images.py'))
+-V = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(V)
+-
+-STATE = os.path.join(L.CATALOG, '.image-state.json')
+-IMAGES = os.path.join(L.CATALOG, 'product-images.json')
+-STAGING = os.path.join(L.CATALOG, '.image-review')
+-REPORT = os.path.join(L.ROOT, 'reports', 'image-report.csv')
+-REVIEW = os.path.join(L.ROOT, 'reports', 'image-review.csv')
+-TEST = os.path.join(L.ROOT, 'reports', 'image-search-test.csv')
+-UA = 'VelmachCatalogImages/1.0 (+https://www.velmachaerospace.com)'
+-COST = {'brave': 0.005, 'google': 0.005, 'serpapi': 0.015}     # USD per request (serpapi depends on the plan)
+-
+-# never used: stock libraries (watermarks), marketplaces and social sites (images not theirs to license)
+-BLOCKED = ['shutterstock.', 'alamy.', 'dreamstime.', 'istockphoto.', 'gettyimages.', '123rf.', 'depositphotos.', 'adobe.com',
+-           'pinterest.', 'facebook.', 'instagram.', 'twitter.', 'x.com', 'tiktok.', 'youtube.', 'reddit.', 'aliexpress.',
+-           'alibaba.', 'etsy.', 'walmart.', 'wish.com', 'temu.', 'craigslist.', 'lookaside.', 'fbsbx.', 'dhgate.',
+-           'indiamart.', 'made-in-china.', 'patents.google', 'wikipedia.', 'scribd.', 'manualslib.']
+-# manufacturers (aircraft and component OEMs) and their authorized distributors: the only sites published automatically
+-OEM = ['honeywell.', 'collinsaerospace.', 'rockwellcollins.', 'dassault-aviation.', 'dassaultfalcon.', 'gulfstream.', 'txtav.',
+-       'textron', 'bombardier.', 'safran-group.', 'safran', 'parker.', 'eaton.', 'woodward.', 'moog.', 'meggitt.', 'thalesgroup.',
+-       'l3harris.', 'garmin.', 'universalavionics.', 'astronics.', 'ametek', 'curtisswright.', 'crane-aerospace.', 'craneae.',
+-       'goodrich.', 'kidde-aerospace.', 'esterline.', 'liebherr.', 'triumphgroup.', 'transdigm.', 'boeing.com']
+-DISTRIBUTORS = ['shop.boeing.', 'aviall.', 'wencor.', 'satair.', 'aarcorp.', 'kellstrom.', 'heico.', 'skygeek.',
+-                'aircraftspruce.', 'proponent.', 'avfuelparts.']
+-# reasons that keep a photo off the site until someone approves it in reports/image-review.csv
+-HOLD = ('page does not name the part', 'too short')
+-BAD_IMG = re.compile(r'logo|placeholder|no[-_ ]?image|noimage|image[-_ ]?not|not[-_ ]?available|default|banner|icon|sprite|blank'
+-                     r'|spacer|coming[-_]soon|og[-_]?default|favicon|avatar', re.I)
+-# description words that say nothing about what the part is
+-GENERIC = {'assy', 'assembly', 'unit', 'part', 'parts', 'with', 'left', 'right', 'main', 'aircraft', 'kit', 'new', 'used', 'misc',
+-           'type', 'model', 'serial', 'complete', 'and', 'for', 'the', 'lower', 'upper', 'inboard', 'outboard', 'forward', 'rear'}
+-
+-
+-def compact(s):
+-    return re.sub(r'[^a-z0-9]', '', str(s).lower())
+-
+-
+-def host(url):
+-    return (urllib.parse.urlparse(url).hostname or '').lower()
+-
+-
+-def site_rank(h):
+-    """0 manufacturer, 1 authorized distributor, 2 anything else."""
+-    return 0 if any(o in h for o in OEM) else 1 if any(d in h for d in DISTRIBUTORS) else 2
+-
+-
+-def load_env():
+-    """KEY=value lines from .env in the project root (not committed); variables already set win."""
+-    path = os.path.join(L.ROOT, '.env')
+-    if os.path.exists(path):
+-        for line in open(path, encoding='utf-8'):
+-            m = re.match(r'\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.*?)\s*$', line)
+-            if m and not line.lstrip().startswith('#'):
+-                os.environ.setdefault(m.group(1), m.group(2).strip('"\''))
+-
+-
+-def get_json(url, headers=None, timeout=25):
+-    req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept': 'application/json', **(headers or {})})
+-    with urllib.request.urlopen(req, timeout=timeout) as r:
+-        return json.loads(r.read().decode('utf-8'))
+-
+-
+-# ---------- search providers: each returns [{image, page, title}] ----------
+-
+-def brave(q):
+-    d = get_json('https://api.search.brave.com/res/v1/images/search?' + urllib.parse.urlencode({'q': q, 'count': 50, 'safesearch': 'strict'}),
+-                 {'X-Subscription-Token': os.environ['BRAVE_API_KEY']})
+-    return [{'image': (r.get('properties') or {}).get('url', ''), 'page': r.get('url', ''), 'title': r.get('title', '')} for r in d.get('results', [])]
+-
+-
+-def google(q):
+-    d = get_json('https://www.googleapis.com/customsearch/v1?' + urllib.parse.urlencode(
+-        {'key': os.environ['GOOGLE_CSE_KEY'], 'cx': os.environ['GOOGLE_CSE_CX'], 'q': q, 'searchType': 'image', 'num': 10, 'safe': 'active'}))
+-    return [{'image': r.get('link', ''), 'page': (r.get('image') or {}).get('contextLink', ''), 'title': r.get('title', '')} for r in d.get('items', [])]
+-
+-
+-def serpapi(q):
+-    d = get_json('https://serpapi.com/search.json?' + urllib.parse.urlencode({'engine': 'google_images', 'q': q, 'api_key': os.environ['SERPAPI_KEY']}))
+-    return [{'image': r.get('original', ''), 'page': r.get('link', ''), 'title': r.get('title', '')} for r in d.get('images_results', [])[:30]]
+-
+-
+-PROVIDERS = {'brave': (brave, ['BRAVE_API_KEY']), 'google': (google, ['GOOGLE_CSE_KEY', 'GOOGLE_CSE_CX']), 'serpapi': (serpapi, ['SERPAPI_KEY'])}
+-
+-
+-def pick_provider(name):
+-    if name:
+-        fn, keys = PROVIDERS[name]
+-        missing = [k for k in keys if not os.environ.get(k)]
+-        if missing:
+-            raise SystemExit(f'--provider {name} needs the environment variable(s) {", ".join(missing)}.')
+-        return name, fn
+-    for n, (fn, keys) in PROVIDERS.items():
+-        if all(os.environ.get(k) for k in keys):
+-            return n, fn
+-    return None, None
+-
+-
+-def search(fn, q, calls):
+-    """One API request with retries on rate limits and server errors. Raises SystemExit when the key is refused."""
+-    for attempt in range(4):
+-        calls[0] += 1
+-        try:
+-            return fn(q)
+-        except urllib.error.HTTPError as e:
+-            if e.code in (401, 402, 403):
+-                raise SystemExit(f'The search API refused the request (HTTP {e.code}: key wrong, or credits used up). '
+-                                 'Progress is saved; fix it and run again.')
+-            if e.code == 429 or e.code >= 500:
+-                time.sleep(min(120, 10 * 2 ** attempt)); continue
+-            raise
+-        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+-            if attempt < 3:
+-                time.sleep(10 * (attempt + 1)); continue
+-            raise
+-    raise OSError('search API still rate limited after 4 tries')
+-
+-
+-# ---------- one part-number group ----------
+-
+-class Group:
+-    def __init__(self, key, rows):
+-        self.key, self.rows = key, rows
+-        self.pns = sorted({r['partNumber'] for r in rows}, key=lambda p: (-len(p), p))     # with separators first
+-        self.alts = sorted({a.strip() for r in rows for a in re.split(r'[,;/]\s*', r.get('altPartNumber') or '') if len(compact(a)) >= 4})
+-        self.titles = sorted({r['title'] for r in rows if r.get('title')})
+-        self.aircraft = next((r['aircraftListed'].split(' SN ')[0] for r in rows if r.get('aircraftListed')), '')
+-        self.brand = next((r['brand'] for r in rows if r.get('brand')), '')
+-        self.words = {w.rstrip('s') for t in self.titles for w in re.findall(r'[a-z]{4,}', t.lower()) if w not in GENERIC}
+-        self.short = len(key) < 4             # "270": too short to identify a product on its own; never published automatically
+-
+-    def queries(self):
+-        pn, t = self.pns[0], (self.titles[0] if self.titles else '')
+-        q = [f'"{pn}" {t}'.strip(), f'"{pn}" {self.aircraft or self.brand}'.strip()]
+-        if self.alts:
+-            q.append(f'"{self.alts[0]}" {t}'.strip())
+-        elif compact(pn) != pn.lower():
+-            q.append(f'"{compact(pn).upper()}" {t}'.strip())
+-        return list(dict.fromkeys(q))
+-
+-    def pattern(self):
+-        return re.compile('|'.join(V.pn_pattern(p).pattern for p in self.pns), re.I)
+-
+-    def names_pn(self, r):
+-        """A search result that names one of our part numbers (short ones only as a separate token)."""
+-        hay = ' '.join((r['title'], r['page'], r['image']))
+-        if self.short:
+-            return bool(self.pattern().search(hay))
+-        return self.key in compact(hay) or bool(self.pattern().search(hay))
+-
+-
+-def hits(group, results):
+-    """Results worth checking: name the part number, not blocked, not a stand-in picture; manufacturers first."""
+-    out, seen = [], set()
+-    for r in results:
+-        if not r['image'].startswith('http') or not r['page'].startswith('http') or r['image'] in seen:
+-            continue
+-        hs = host(r['image']) + ' ' + host(r['page'])
+-        if any(b in hs for b in BLOCKED) or BAD_IMG.search(urllib.parse.urlparse(r['image']).path) or not group.names_pn(r):
+-            continue
+-        seen.add(r['image'])
+-        out.append(r)
+-    out.sort(key=lambda r: site_rank(host(r['page'])))
+-    return out[:6]
+-
+-
+-def page_parts(page):
+-    title = ' '.join(re.findall(r'<title[^>]*>(.*?)</title>', page, re.S | re.I))
+-    h1 = ' '.join(re.findall(r'<h1[^>]*>(.*?)</h1>', page, re.S | re.I))
+-    return html.unescape(re.sub(r'<[^>]+>', ' ', title + ' ' + h1))
+-
+-
+-def copyright_line(page):
+-    m = re.search(r'<meta[^>]+name=["\']copyright["\'][^>]+content=["\']([^"\']+)', page, re.I)
+-    if m:
+-        return html.unescape(m.group(1))[:120]
+-    m = re.search(r'(?:&copy;|©|Copyright)\s*(?:&copy;|©)?\s*\d{4}[^<\n]{0,80}', page, re.I)
+-    return re.sub(r'\s+', ' ', html.unescape(m.group(0))).strip()[:120] if m else ''
+-
+-
+-def license_of(page):
+-    m = re.search(r'<a[^>]+rel=["\']license["\'][^>]+href=["\']([^"\']+)', page, re.I)
+-    return m.group(1) if m else ''
+-
+-
+-def tied_image(group, page, url, cand, pat):
+-    """The page's product picture tied to the part number, or ''. Prefers the picture the search found."""
+-    in_heading = bool(pat.search(page_parts(page)))
+-    og = V.FW.meta(page, 'og:image')
+-    og = urllib.parse.urljoin(url, html.unescape(og)) if og and not BAD_IMG.search(og) else ''
+-    path = urllib.parse.urlparse(cand).path
+-    if path and path in page:
+-        for tag in re.findall(r'<img[^>]+>', page, re.I):
+-            if path in html.unescape(tag):
+-                alt = re.search(r'alt=["\']([^"\']*)', tag)
+-                if pat.search(path) or (alt and pat.search(html.unescape(alt.group(1)))) or (cand == og and in_heading):
+-                    return cand
+-        if cand == og and in_heading:
+-            return cand
+-    img = V.product_image(page, url, pat)          # og:image, else an <img> whose address or alt holds the part number
+-    if img and not BAD_IMG.search(img) and (img != og or in_heading or pat.search(img)):
+-        return img
+-    return ''
+-
+-
+-def photo(fetcher, url):
+-    """Download and check the picture. Returns (PIL image, sha1) or raises ValueError with the reason."""
+-    from PIL import Image, ImageStat
+-    data = fetcher.get(url, binary=True)
+-    try:
+-        im = Image.open(io.BytesIO(data)); im.load()
+-    except Exception:
+-        raise ValueError('not a readable image')
+-    w, h = im.size
+-    if min(w, h) < 250:
+-        raise ValueError(f'too small ({w}x{h})')
+-    if max(w, h) > 3 * min(w, h):
+-        raise ValueError(f'banner shape ({w}x{h})')
+-    if ImageStat.Stat(im.convert('L')).stddev[0] < 8:
+-        raise ValueError('blank or almost uniform image')
+-    return im, hashlib.sha1(data).hexdigest()
+-
+-
+-def save_webp(im, folder, name):
+-    from PIL import Image
+-    if im.mode not in ('RGB', 'RGBA'):
+-        im = im.convert('RGBA' if 'transparency' in im.info or im.mode in ('LA', 'P') else 'RGB')
+-    os.makedirs(os.path.join(folder, 'thumbs'), exist_ok=True)
+-    out = {}
+-    for kind, width, path in (('large', 1200, os.path.join(folder, f'{name}-1.webp')), ('thumb', 400, os.path.join(folder, 'thumbs', f'{name}-1.webp'))):
+-        copy = im.copy()
+-        if copy.width > width:
+-            copy = copy.resize((width, round(copy.height * width / copy.width)), Image.LANCZOS)
+-        buf = io.BytesIO()
+-        copy.save(buf, 'WEBP', quality=85, method=6)
+-        L.write_file(path, buf.getvalue())
+-        out[kind] = L.rel(path)
+-    return out
+-
+-
+-def check(group, fetcher, cand):
+-    """Check one search result on its page. Returns a record with 'tier' verified / review / rejected and the reasons."""
+-    url, pat, h = cand['page'], group.pattern(), host(cand['page'])
+-    rec = {'page': url, 'site': h, 'image': cand['image'], 'checks': [], 'tier': 'rejected'}
+-    try:
+-        page = fetcher.get(url)
+-    except V.NetworkDown:
+-        raise
+-    except Exception as e:
+-        rec['reason'] = f'page not read: {e}'; return rec
+-    text = V.text_of(page)
+-    if not pat.search(text):
+-        rec['reason'] = 'exact part number not on the page'; return rec
+-    rec['checks'].append('part number on page')
+-    weak = []
+-    if pat.search(page_parts(page)):
+-        rec['checks'].append('part number in page title/heading')
+-    else:
+-        weak.append('part number not in the page title or heading (may be a list of parts)')
+-    low = text.lower()
+-    if group.words and any(w in low for w in group.words):
+-        rec['checks'].append('same kind of part')
+-    else:
+-        weak.append('page does not name the part (' + ', '.join(sorted(group.words)[:4]) + ')')
+-    img = tied_image(group, page, url, cand['image'], pat)
+-    if not img:
+-        rec['reason'] = 'no product picture tied to the part number'; return rec
+-    rec['image'] = img
+-    try:
+-        im, sha = photo(fetcher, img)
+-    except V.NetworkDown:
+-        raise
+-    except Exception as e:
+-        rec['reason'] = f'picture refused: {e}'; return rec
+-    rec['checks'].append(f'real photo {im.size[0]}x{im.size[1]}')
+-    rec.update(sha1=sha, copyright=copyright_line(page), license=license_of(page), pageTitle=page_parts(page).strip()[:160])
+-    rank = site_rank(h)
+-    if rank == 2:
+-        weak.append('site is not a manufacturer or authorized distributor')
+-    if group.short:
+-        weak.append('part number too short to identify one product')
+-    rec['tier'] = 'review' if weak else 'verified'
+-    rec['reason'] = '; '.join(weak)
+-    rec.update(save_webp(im, os.path.join(STAGING, L.safe_part_number(group.pns[0])), L.safe_part_number(group.pns[0])))
+-    return rec
+-
+-
+-def process(group, fetcher, fn, entry, reverify=False):
+-    """Search (or re-check stored results) for one group; fills entry and returns it."""
+-    calls = [0]
+-    best = None
+-    if reverify:
+-        plan = [(q['q'], q.get('hits', [])) for q in entry.get('queries', [])]
+-    else:
+-        plan = [(q, None) for q in group.queries()]
+-        entry['queries'] = []
+-    entry['checked'] = []
+-    for i, (q, stored) in enumerate(plan):
+-        if stored is None:
+-            found = hits(group, search(fn, q, calls))
+-            entry['queries'].append({'q': q, 'hits': found})
+-            if i + 1 < len(plan):
+-                time.sleep(1.1)
+-        else:
+-            found = stored
+-        for cand in found:
+-            if any((cand['image'] and c['image'] == cand['image']) or c['page'] == cand['page'] for c in entry['checked']):
+-                continue
+-            rec = check(group, fetcher, cand)
+-            entry['checked'].append({k: v for k, v in rec.items() if k not in ('thumb', 'large')} | ({'staged': rec['large']} if 'large' in rec else {}))
+-            if rec['tier'] == 'verified':
+-                best = rec; break
+-            if rec['tier'] == 'review' and (not best or site_rank(rec['site']) < site_rank(best['site'])):
+-                best = rec
+-        if best and best['tier'] == 'verified':
+-            break
+-    entry.update(calls=entry.get('calls', 0) + calls[0], tried=time.strftime('%Y-%m-%d %H:%M'))
+-    if best:
+-        entry['status'] = best['tier']
+-        entry['best'] = {k: best.get(k, '') for k in ('page', 'site', 'image', 'sha1', 'copyright', 'license', 'pageTitle', 'reason', 'thumb', 'large', 'checks')}
+-    else:
+-        entry['status'] = 'unresolved'
+-        entry.pop('best', None)
+-        reasons = collections.Counter(c.get('reason', '') for c in entry['checked'])
+-        entry['reason'] = ('; '.join(f'{r} ({n})' for r, n in reasons.most_common(3)) if reasons
+-                           else 'no search result names the part number')
+-    return entry
+-
+-
+-# ---------- publishing ----------
+-
+-def load(path, default):
+-    try:
+-        return json.load(open(path, encoding='utf-8'))
+-    except (OSError, ValueError):
+-        return default
+-
+-
+-def read_decisions():
+-    out = {}
+-    if os.path.exists(REVIEW):
+-        for r in csv.DictReader(open(REVIEW, encoding='utf-8-sig')):
+-            d = (r.get('Decision') or '').strip().lower()
+-            if d in ('approve', 'approved', 'yes', 'reject', 'rejected', 'no'):
+-                out[r['Key']] = 'approve' if d in ('approve', 'approved', 'yes') else 'reject'
+-    return out
+-
+-
+-def publish(state, groups, decisions):
+-    """Decide which photos go on the site; copy them from staging into images/products. Returns the published map."""
+-    # one picture, one part number: a picture found for different part numbers is never published
+-    by_pic = collections.defaultdict(set)
+-    for k, e in state.items():
+-        b = e.get('best')
+-        if b and e['status'] in ('verified', 'review'):
+-            by_pic[b.get('sha1') or b['image']].add(k)
+-            by_pic[b['image']].add(k)
+-    published = {}
+-    for k, e in state.items():
+-        b = e.get('best')
+-        if not b or k not in groups:
+-            continue
+-        shared = sorted((by_pic[b.get('sha1') or b['image']] | by_pic[b['image']]) - {k})
+-        e['shared'] = shared
+-        # published: every check passed, or the page shows the part number with its photo and names the same kind of part
+-        # (any site); held back: a page about another kind of part, a too-short part number, or a picture shared by two
+-        held = any(x in b.get('reason', '') for x in HOLD)
+-        ok = not shared and decisions.get(k) != 'reject' and (e['status'] == 'verified' or not held or decisions.get(k) == 'approve')
+-        if not ok:
+-            continue
+-        name = L.safe_part_number(groups[k].pns[0])
+-        folder = os.path.join(L.PRODUCT_DIR, name)
+-        out = {}
+-        for kind in ('large', 'thumb'):
+-            src = os.path.join(L.ROOT, b[kind])
+-            dst = os.path.join(folder, *(['thumbs'] if kind == 'thumb' else []), os.path.basename(src))
+-            if os.path.exists(src) and (not os.path.exists(dst) or open(src, 'rb').read() != open(dst, 'rb').read()):
+-                L.write_file(dst, open(src, 'rb').read())
+-            out[kind] = L.rel(dst)
+-        if not all(os.path.exists(os.path.join(L.ROOT, p)) for p in out.values()):
+-            continue
+-        published[k] = {'thumb': out['thumb'], 'large': out['large'], 'original': out['large'], 'source': b['image'],
+-                        'page': b['page'], 'site': b['site'], 'attribution': b.get('copyright') or b['site'],
+-                        'license': b.get('license') or 'not stated on the source page',
+-                        'verified': 'automatic' if e['status'] == 'verified' else 'manual review', 'checked': e.get('tried', '')}
+-    return published
+-
+-
+-def apply_images(store, found):
+-    """Put published photos on the products (only their images field) and rebuild the catalogue."""
+-    changed, reps = 0, L.load_representative()
+-    for r in store.values():
+-        want = L.images_for(r, found, reps)
+-        if r.get('images') != want:
+-            r['images'] = want; changed += 1
+-    if changed:
+-        L.save_store(store)
+-        spec = importlib.util.spec_from_file_location('build_catalog', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'build-catalog.py'))
+-        mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod); mod.build()
+-    return changed
+-
+-
+-def write_reports(store, state, groups, found, decisions):
+-    os.makedirs(os.path.dirname(REPORT), exist_ok=True)
+-    rows = sorted(store.values(), key=lambda r: r.get('serialNo') or 0)
+-    with open(REPORT, 'w', newline='', encoding='utf-8-sig') as f:
+-        w = csv.writer(f)
+-        w.writerow(['Serial No', 'Part Number', 'Image found', 'Image source URL', 'Source page', 'Placeholder used'])
+-        for r in rows:
+-            img = found.get(L.norm_key(r['partNumber']))
+-            w.writerow([r.get('serialNo', ''), r['partNumber'], 'yes' if img else 'no', img.get('source', '') if img else '',
+-                        img.get('page', '') if img else '', '' if img else r.get('placeholder', '')])
+-    with open(REVIEW, 'w', newline='', encoding='utf-8-sig') as f:
+-        w = csv.writer(f)
+-        w.writerow(['Key', 'Part Number', 'Products', 'Description', 'Aircraft', 'Staged image', 'Source page', 'Image URL', 'Site',
+-                    'Why review', 'Decision'])
+-        for k, e in sorted(state.items()):
+-            b = e.get('best')
+-            if not b or k not in groups or k in found:
+-                continue
+-            g = groups[k]
+-            why = b.get('reason', '') + ('; same picture as part number(s) ' + ', '.join(e['shared']) if e.get('shared') else '')
+-            w.writerow([k, g.pns[0], len(g.rows), ' / '.join(g.titles), g.aircraft, b.get('large', ''), b['page'], b['image'], b['site'],
+-                        why.strip('; '), decisions.get(k, '')])
+-
+-
+-def representative(groups, n, seed=29):
+-    """n part numbers spread over brands and categories (proportionally), plus awkward cases: alternate numbers, short ones."""
+-    rnd = random.Random(seed)
+-    strata = collections.defaultdict(list)
+-    for k, g in sorted(groups.items()):
+-        strata[(g.brand, g.rows[0].get('categoryChild', ''))].append(k)
+-    picked = []
+-    for s in sorted(strata, key=lambda s: -len(strata[s])):
+-        take = max(1, round(n * len(strata[s]) / len(groups)))
+-        picked += rnd.sample(strata[s], min(take, len(strata[s])))
+-    extra = [k for k in sorted(groups) if (groups[k].alts or groups[k].short) and k not in picked]
+-    picked += rnd.sample(extra, min(4, len(extra)))
+-    rnd.shuffle(picked)
+-    return picked[:n]
+-
+-
+-def main():
+-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+-    ap.add_argument('--provider', choices=sorted(PROVIDERS), help='search API to use (default: the first with a key set, brave first)')
+-    ap.add_argument('--test', type=int, default=0, metavar='N', help='search N representative part numbers, publish nothing')
+-    ap.add_argument('--limit', type=int, default=0, help='search at most N part numbers in this run (0 = all remaining)')
+-    ap.add_argument('--retry-unresolved', action='store_true', help='search again part numbers that found nothing before')
+-    ap.add_argument('--reverify', action='store_true', help='check the stored search results again (no new searches)')
+-    ap.add_argument('--apply', action='store_true', help='only publish: verified photos and those approved in reports/image-review.csv')
+-    ap.add_argument('--from-results', metavar='DIR', help='no search API: check the pages listed in DIR/*.json '
+-                    '([{"pn", "queries", "urls"}], from searching each part number by hand or with an assistant)')
+-    a = ap.parse_args()
+-
+-    load_env()
+-    store = L.load_store()
+-    state = load(STATE, {})
+-    by_key = collections.defaultdict(list)
+-    for r in sorted(store.values(), key=lambda r: r.get('serialNo') or 0):
+-        by_key[L.norm_key(r['partNumber'])].append(r)
+-    groups = {k: Group(k, rows) for k, rows in by_key.items()}
+-    decisions = read_decisions()
+-
+-    def finish(publish_now=True):
+-        found = publish(state, groups, decisions) if publish_now else load(IMAGES, {})
+-        if publish_now:
+-            L.write_file(IMAGES, json.dumps(found, ensure_ascii=False, indent=0).encode('utf-8'))
+-        L.write_file(STATE, json.dumps(state, ensure_ascii=False, indent=0).encode('utf-8'))
+-        changed = apply_images(store, found) if publish_now else 0
+-        write_reports(store, state, groups, found, decisions)
+-        n = sum(len(groups[k].rows) for k in found if k in groups)
+-        st = collections.Counter(state[k]['status'] for k in groups if k in state)
+-        print(f'Part numbers: {len(groups)}; searched {sum(st.values())} ({", ".join(f"{s} {c}" for s, c in st.most_common())}). '
+-              f'Published photos: {len(found)} part numbers, {n} of {len(store)} products; {changed} products updated.\n'
+-              f'Reports: {L.rel(REPORT)}, {L.rel(REVIEW)}')
+-
+-    if a.apply:
+-        finish(); return
+-    if a.from_results:
+-        # each part number's search results become stored queries, then are checked like --reverify (no API requests)
+-        import glob
+-        for path in sorted(glob.glob(os.path.join(a.from_results, '*.json'))):
+-            for it in load(path, []):
+-                k = L.norm_key(it.get('pn', ''))
+-                if k not in groups or state.get(k, {}).get('status') not in (None, 'error'):
+-                    continue
+-                urls = [u for u in it.get('urls', []) if u.startswith('http') and not re.search(r'\.pdf($|\?)', u, re.I)]
+-                state[k] = {'queries': [{'q': q, 'hits': []} for q in it.get('queries', [])] or [{'q': it['pn'], 'hits': []}], 'source': 'web search'}
+-                state[k]['queries'][0]['hits'] = [{'page': u, 'image': '', 'title': ''} for u in urls]
+-                state[k]['status'] = 'pending-check'
+-        a.reverify = True
+-    name, fn = (None, None) if a.reverify else pick_provider(a.provider)
+-    if not fn and not a.reverify:
+-        print('No search API key found (BRAVE_API_KEY, GOOGLE_CSE_KEY + GOOGLE_CSE_CX or SERPAPI_KEY, in the environment or .env), '
+-              'so nothing was searched.')
+-        finish(); return
+-
+-    if a.from_results:
+-        todo = [k for k in groups if state.get(k, {}).get('status') == 'pending-check']
+-    elif a.reverify:
+-        todo = [k for k in groups if state.get(k, {}).get('queries')]
+-    elif a.test:
+-        todo = [k for k in representative(groups, a.test) if state.get(k, {}).get('status') in (None, 'error')]
+-    else:
+-        todo = [k for k in groups if state.get(k, {}).get('status') in (None, 'error')
+-                or (a.retry_unresolved and state[k]['status'] == 'unresolved')]
+-    if a.limit:
+-        todo = todo[:a.limit]
+-    print(f'{name or "stored results"}: {len(todo)} part numbers to {"check" if a.reverify else "search"} '
+-          f'({len(groups)} in the catalogue, {len(store)} products).', flush=True)
+-    fetcher = V.Fetcher()
+-    fetcher_ua = V.UA
+-    V.UA = UA
+-    calls0 = sum(state.get(k, {}).get('calls', 0) for k in groups)
+-    test_rows = []
+-    try:
+-        for i, k in enumerate(todo, 1):
+-            g = groups[k]
+-            entry = dict(state.get(k, {})) if a.reverify else {}
+-            try:
+-                process(g, fetcher, fn, entry, reverify=a.reverify)
+-            except V.NetworkDown as e:
+-                print(f'Stopped: {e}. Run again to continue.'); break
+-            except (OSError, ValueError) as e:
+-                entry.update(status='error', error=str(e)[:200], tried=time.strftime('%Y-%m-%d %H:%M'))
+-            state[k] = entry
+-            L.write_file(STATE, json.dumps(state, ensure_ascii=False, indent=0).encode('utf-8'))
+-            b = entry.get('best') or {}
+-            print(f'  [{i}/{len(todo)}] {g.pns[0]}: {entry["status"]}' + (f' ({b.get("site")})' if b else ''), flush=True)
+-            if a.test:
+-                test_rows.append([k, g.pns[0], ' / '.join(g.titles), g.brand, g.aircraft, len(g.rows), entry.get('calls', 0),
+-                                  entry['status'], b.get('site', ''), b.get('page', ''), b.get('image', ''), b.get('large', ''),
+-                                  b.get('reason', '') or entry.get('reason', '') or entry.get('error', ''), ''])
+-            if not a.reverify:
+-                time.sleep(1.1)
+-    except KeyboardInterrupt:
+-        print('Stopped. Run again to continue.')
+-    finally:
+-        V.UA = fetcher_ua
+-    calls = sum(state.get(k, {}).get('calls', 0) for k in groups) - calls0
+-    if calls:
+-        print(f'API requests this run: {calls} (about ${calls * COST.get(name, 0):.2f} at ${COST.get(name, 0)} per request).')
+-    if a.test:
+-        with open(TEST, 'w', newline='', encoding='utf-8-sig') as f:
+-            w = csv.writer(f)
+-            w.writerow(['Key', 'Part Number', 'Description', 'Brand', 'Aircraft', 'Products', 'API requests', 'Status', 'Site',
+-                        'Source page', 'Image URL', 'Staged image', 'Reason', 'Picture shows the part (checked by eye)'])
+-            w.writerows(test_rows)
+-        print(f'Test: nothing published. Results: {L.rel(TEST)}')
+-        finish(publish_now=False)
+-        return
+-    finish()
+-
+-
+-if __name__ == '__main__':
+-    main()
+diff --git a/scripts/import-inventory.py b/scripts/import-inventory.py
+deleted file mode 100644
+index 02ae7c5a..00000000
+--- a/scripts/import-inventory.py
++++ /dev/null
+@@ -1,403 +0,0 @@
+-"""Import the master parts inventory spreadsheet: python scripts/import-inventory.py [file.xlsx] [--max-serial 5560]
+-
+-Replaces the inventory products with the rows of the inventory (the spreadsheet is the source of truth): every inventory
+-product (key "inv:") in the store that is not in the sheet is removed. Products of other imports
+-(scripts/import-list-sheet.py, key "list:") are kept. Re-run it whenever the inventory is updated.
+-
+-Columns are found by their header (the first row in the top 10 that names a part number and a description):
+-  Part # / Part Number / P/N            -> partNumber (required)
+-  Description                           -> title
+-  Alt P/N                               -> alternate part number (searchable)
+-  S/N / Serial Number                   -> the unit's serial number (keeps rows of the same part apart)
+-  Condition                             -> condition code (NE, OH, SV, AR, RP, IN ...; names in scripts/inventory_rules.py)
+-  8130                                  -> certification (FAA Form 8130-3, C of C ...)
+-  Aircraft Type                         -> aircraft model (Shop by Aircraft, aircraft filter) and the brand (aircraft OEM)
+-  Brand / Manufacturer / OEM (optional) -> brand; when the sheet has no such column the aircraft OEM is used
+-  Serial No. / Sr No (optional)         -> inventory serial number; without it, data row 1 is serial 1, and so on
+-Price, cost and quantity columns are not published (the site quotes on request).
+-
+-Each data row becomes one product: one row is one physical unit, so a part number listed with three serial numbers gives
+-three products. Rows past --max-serial are ignored. Empty rows are skipped and listed in reports/inventory-skipped.csv.
+-The category is chosen from keywords in the description (scripts/inventory_rules.py) because the sheet has none.
+-
+-Writes: the store (data/catalog/store/), data/aircraft.js (every aircraft model in the sheet), reports/inventory-skipped.csv,
+-reports/inventory-import-<date>.md; then runs scripts/build-catalog.py (product, listing, brand and search files, sitemaps).
+-Product images come from data/catalog/product-images.json (scripts/find-product-images.py); a product without one shows
+-the placeholder picture of its category (images/placeholders/).
+-URL slugs are part number + short description; a product keeps its slug on later imports (matched by part number,
+-serial number and position among identical rows).
+-"""
+-import argparse, collections, csv, datetime, html, json, os, re, sys
+-
+-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+-import catalog_lib as L
+-import inventory_rules as R
+-
+-DEFAULT_FILE = os.path.join(L.ROOT, 'assets', 'VELMACH AEROSPACE Master Parts Inventory 06-05-2026.xlsx')
+-IMAGES = os.path.join(L.CATALOG, 'product-images.json')
+-REPORTS = os.path.join(L.ROOT, 'reports')
+-PARENT = 'aircraft-parts'
+-
+-# header text -> field. Matched on the header lowered with spaces collapsed; first matching pattern wins.
+-COLUMNS = [
+-    ('serial', r'^(s\.?\s*no\.?|sr\.?\s*no\.?|sl\.?\s*no\.?|serial\s*no\.?|#|no\.?)$'),
+-    ('altPn', r'^alt(ernate|\.)?\s*(p/?n|part)'),
+-    ('pn', r'^(part\s*(#|no\.?|number|num)?|p/?n|pn)$'),
+-    ('desc', r'^(description|desc\.?|part\s*name|nomenclature)$'),
+-    ('sn', r'^(s/n|serial\s*(number|#)|sn)$'),
+-    ('cond', r'^(cond\.?|condition(\s*code)?)$'),
+-    ('cert', r'8130|^cert|^trace'),
+-    ('aircraft', r'aircraft|a/c|plane|^model$|^application$'),
+-    ('brand', r'^(brand|manufacturer|mfr|mfg|oem|make)$'),
+-    ('category', r'^(category|type)$'),
+-]
+-R_PN = r'^(part\s*(#|no\.?|number|num)?|p/?n|pn)$'
+-NO_SERIAL = {'nsn', 'na', 'n/a', 'none', '-', 'tbd', 'unknown', 'no s/n'}
+-
+-
+-def clean(v, warn=None):
+-    """Cell value as trimmed text with single spaces; Excel numbers keep their digits (270, not 270.0)."""
+-    if v is None:
+-        return ''
+-    if isinstance(v, (datetime.datetime, datetime.date)):    # a serial number Excel turned into a date
+-        if warn:
+-            warn(f'date value {v:%Y-%m-%d} read as "{v:%b-%Y}"')
+-        return f'{v:%b-%Y}'
+-    if isinstance(v, float) and v.is_integer():
+-        v = int(v)
+-    return re.sub(r'\s+', ' ', str(v)).strip()
+-
+-
+-def find_header(ws):
+-    for n, row in enumerate(ws.iter_rows(min_row=1, max_row=10, values_only=True), 1):
+-        heads = [re.sub(r'\s+', ' ', str(c or '')).strip().lower() for c in row]
+-        if any(re.match(R_PN, h) for h in heads) and any(re.match(r'^desc', h) for h in heads):
+-            cols = {}
+-            for i, h in enumerate(heads):
+-                if not h:
+-                    continue
+-                for field, rx in COLUMNS:
+-                    if field not in cols and re.search(rx, h):
+-                        cols[field] = i
+-                        break
+-            return n, cols, heads
+-    raise SystemExit('No header row with a part number and a description column in the first 10 rows.')
+-
+-
+-def norm_brand(name):
+-    name = clean(name)
+-    if not name:
+-        return ''
+-    return R.BRAND_ALIASES.get(L.norm_key(name)) or ' '.join(w if w.isupper() and len(w) <= 4 else w.capitalize() for w in name.split())
+-
+-
+-def parse_aircraft(raw):
+-    """'Falcon 2000 SN 138' -> {'make': 'Dassault', 'model': 'Falcon 2000', 'oem': 'Dassault Aviation', 'airframe': '138', 'engine': ''}"""
+-    text = clean(raw)
+-    if text.lower() in R.NO_AIRCRAFT:
+-        return None
+-    info = {'raw': text, 'airframe': '', 'engine': ''}
+-    m = R.AIRFRAME_SN.search(text)
+-    if m:
+-        info['airframe'] = m.group(1)
+-        text = text[:m.start()].strip()
+-    m = R.ENGINE_NOTE.search(text)
+-    if m:
+-        info['engine'] = R.ENGINES.get(m.group(1), m.group(1)) + ' engine'
+-        text = text[:m.start()].strip()
+-    for pattern, make, model, oem in R.AIRCRAFT:
+-        m = re.search(pattern, text, re.I)
+-        if m:
+-            if model is None:   # take the model from the text: the last group ("800A", "45", "328")
+-                model = re.sub(r'\s+', '', m.group(m.lastindex)).upper()
+-            return {**info, 'make': make, 'model': model, 'oem': oem}
+-    # an aircraft the rules do not know yet: first word is the make, the rest the model; reported for review
+-    words = text.split()
+-    make = words[0].title()
+-    return {**info, 'make': make, 'model': ' '.join(words[1:]) or text, 'oem': norm_brand(make), 'unknown': True}
+-
+-
+-def short_desc(desc, words=5):
+-    return ' '.join(re.sub(r'[^\w\s/-]+', ' ', desc).split()[:words])
+-
+-
+-def load_images():
+-    try:
+-        return json.load(open(IMAGES, encoding='utf-8'))
+-    except (OSError, ValueError):
+-        return {}
+-
+-
+-def main():
+-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+-    ap.add_argument('file', nargs='?', default=DEFAULT_FILE, help='inventory .xlsx (default: %(default)s)')
+-    ap.add_argument('--sheet', help='sheet name (default: the first sheet)')
+-    ap.add_argument('--max-serial', type=int, default=0, help='import serial numbers 1..N only; 0 = every row (default)')
+-    ap.add_argument('--no-build', action='store_true', help='do not run build-catalog.py afterwards')
+-    a = ap.parse_args()
+-
+-    import openpyxl
+-    wb = openpyxl.load_workbook(a.file, read_only=True, data_only=True)
+-    ws = wb[a.sheet] if a.sheet else wb.worksheets[0]
+-    head_row, cols, heads = find_header(ws)
+-    if 'pn' not in cols:
+-        raise SystemExit('No part number column found.')
+-    print(f'{os.path.basename(a.file)} / sheet "{ws.title}": header on row {head_row}; columns: '
+-          + ', '.join(f'{f}="{heads[i]}"' for f, i in sorted(cols.items(), key=lambda x: x[1])))
+-    ignored = [h for i, h in enumerate(heads) if h and i not in cols.values()]
+-    if ignored:
+-        print('  columns not imported: ' + ', '.join(ignored))
+-
+-    old = L.load_store()
+-    old_slug = {k: r['slug'] for k, r in old.items() if k.startswith('inv:')}
+-    old_created = {k: r.get('createdAt') for k, r in old.items() if k.startswith('inv:')}
+-    images, reps = load_images(), L.load_representative()
+-    now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat()
+-
+-    store, skipped, warnings = {}, [], []
+-    same_row, merged = {}, 0
+-    seen_unit = collections.Counter()
+-    taken = set()
+-    pos = 0
+-    for excel_row, row in enumerate(ws.iter_rows(min_row=head_row + 1, values_only=True), head_row + 1):
+-        cell = lambda f: row[cols[f]] if f in cols and cols[f] < len(row) else None
+-        pos += 1
+-        serial = pos
+-        if 'serial' in cols:
+-            s = clean(cell('serial'))
+-            serial = int(float(s)) if re.fullmatch(r'\d+(\.0+)?', s) else pos
+-        if a.max_serial and serial > a.max_serial:
+-            if 'serial' not in cols:
+-                break
+-            continue
+-        warn = lambda msg: warnings.append((serial, excel_row, msg))
+-        pn, desc = clean(cell('pn')), clean(cell('desc'))
+-        if not pn and not desc:
+-            skipped.append((serial, excel_row, '', 'empty row'))
+-            continue
+-        if not pn:
+-            skipped.append((serial, excel_row, desc, 'no part number'))
+-            continue
+-        alt = clean(cell('altPn'))
+-        sn = clean(cell('sn'), warn)
+-        sn_cell = sn                                 # as written: "NSN" / "N/A" rows are units of their own, not repeats
+-        if sn.lower() in NO_SERIAL:
+-            sn = ''
+-        code = clean(cell('cond')).upper()
+-        cond = R.CONDITIONS.get(code, code)
+-        if code and code not in R.CONDITIONS:
+-            warn(f'condition code "{code}" has no name in inventory_rules.CONDITIONS; shown as "{code}"')
+-        cert_raw = clean(cell('cert'))
+-        cert = R.CERT_ALIASES.get(L.norm_key(cert_raw), cert_raw)
+-        ac = parse_aircraft(cell('aircraft'))
+-        if ac and ac.get('unknown'):
+-            warn(f'aircraft "{ac["raw"]}" is not in inventory_rules.AIRCRAFT; read as make "{ac["make"]}", model "{ac["model"]}"')
+-        brand = norm_brand(cell('brand')) if 'brand' in cols else ''
+-        brand_basis = 'brand'
+-        if not brand and ac:
+-            brand, brand_basis = ac['oem'], 'aircraft OEM'
+-        # a row with no aircraft type goes to Other / Miscellaneous; the others by the words of their description
+-        cat = R.category_for(' '.join([desc, clean(cell('category'))])) if ac else R.NO_AIRCRAFT_CATEGORY
+-
+-        # a row without a serial number that repeats an earlier row exactly is the same listing, not another unit
+-        if not sn_cell:
+-            sig = (L.norm_key(pn), desc.lower(), alt.lower(), code, cert_raw.lower(), clean(cell('aircraft')).lower(), clean(cell('brand')).lower())
+-            if sig in same_row:
+-                store[same_row[sig]]['_rows'] += 1
+-                merged += 1
+-                seen_unit[L.norm_key(pn) + '|-'] += 1     # keeps the keys (and URLs) of the rows after it unchanged
+-                continue
+-
+-        unit = L.norm_key(pn) + '|' + (L.norm_key(sn) or '-')
+-        seen_unit[unit] += 1
+-        key = f'inv:{unit}|{seen_unit[unit]}'
+-        slug = old_slug.get(key)
+-        if not slug or slug in taken:
+-            base = L.slugify(f'{pn} {short_desc(desc)}', 70) or L.slugify(pn) or 'part'
+-            slug = base
+-            if slug in taken and sn:
+-                slug = L.slugify(f'{base} sn {sn}', 90)
+-            n = 2
+-            while slug in taken:
+-                slug = f'{base}-{n}'; n += 1
+-        taken.add(slug)
+-
+-        specs = []                                   # part number and brand have their own rows on the product page
+-        if alt:
+-            specs.append({'name': 'Alternate part number', 'value': alt})
+-        if sn:
+-            specs.append({'name': 'Serial number (S/N)', 'value': sn})
+-        if code:
+-            specs.append({'name': 'Condition', 'value': f'{cond} ({code})' if cond != code else code})
+-        if cert:
+-            specs.append({'name': 'Certification (8130)', 'value': cert})
+-        if ac:
+-            specs.append({'name': 'Aircraft', 'value': f"{ac['make']} {ac['model']}"})
+-            if ac['airframe']:
+-                specs.append({'name': 'Aircraft serial number', 'value': ac['airframe']})
+-            if ac['engine']:
+-                specs.append({'name': 'Application', 'value': ac['engine']})
+-        specs.append({'name': 'Inventory serial no.', 'value': str(serial)})
+-
+-        title = desc or pn
+-        sentence = f'{html.escape(title)}, part number {html.escape(pn)}'
+-        if ac:
+-            sentence += f", for the {html.escape(ac['make'] + ' ' + ac['model'])}"
+-        sentence += '.'
+-        extra = []
+-        if code:
+-            extra.append(f'Condition: {html.escape(cond)}.')
+-        if cert and cert not in ('N/A', 'No'):
+-            extra.append(f'Certification: {html.escape(cert if cert != "Yes" else "8130-3 available")}.')
+-        rec = {
+-            'key': key, 'id': L.product_id(key), 'slug': slug, 'pnDir': L.safe_part_number(pn),
+-            'title': title, 'partNumber': pn, 'altPartNumber': alt, 'serialNumber': sn, 'serialNo': serial,
+-            'brand': brand, 'brandSlug': L.slugify(brand) if brand else '', 'brandBasis': brand_basis if brand else '',
+-            'categoryParent': PARENT, 'categoryChild': cat,
+-            'shortDescription': ' '.join([sentence] + extra).replace('&amp;', '&'),
+-            'description': '<p>' + sentence + '</p>' + ('<p>' + ' '.join(extra) + '</p>' if extra else ''),
+-            'specifications': specs,
+-            'images': L.images_for({'partNumber': pn, 'title': title, 'id': L.product_id(key),
+-                                    'aircraftListed': ac['raw'] if ac and ac['make'] in R.REVIEWED_PHOTO_MAKES else ''}, images, reps),
+-            'placeholder': f"images/placeholders/{R.PLACEHOLDER.get(cat, 'generic')}.svg",
+-            'documents': [], 'compatibleAircraft': [L.aircraft_id(ac['make'], ac['model'])] if ac else [],
+-            'aircraftListed': ac['raw'] if ac else '', 'aircraftMake': ac['make'] if ac else '', 'aircraftModel': ac['model'] if ac else '',
+-            'condition': cond or 'Not stated', 'conditionCode': code, 'certification': cert, 'sample': False,
+-            'source': f'{os.path.basename(a.file)} row {excel_row}',
+-            'createdAt': old_created.get(key) or now, 'updatedAt': now, '_rows': 1,
+-        }
+-        store[key] = rec
+-        if not sn_cell:
+-            same_row[sig] = key
+-
+-    for key, rec in store.items():
+-        n = rec.pop('_rows')
+-        if n > 1:
+-            rec['specifications'].append({'name': 'Rows in the inventory sheet', 'value': str(n)})
+-        prev = old.get(key)
+-        if prev and {k: v for k, v in prev.items() if k != 'updatedAt'} == {k: v for k, v in rec.items() if k != 'updatedAt'}:
+-            rec['updatedAt'] = prev.get('updatedAt', now)    # unchanged: keeps its date (and the store file its content)
+-
+-    # ---- write ----
+-    removed = len([k for k in old if k.startswith('inv:') and k not in store])
+-    products = list(store.values())
+-    for k, r in old.items():                         # other imports (scripts/import-list-sheet.py: "list:") are kept
+-        if not k.startswith('inv:'):
+-            store[k] = r
+-    L.save_store(store)
+-    write_aircraft(store.values())
+-    expected = (max((r['serialNo'] for r in products), default=0) if not a.max_serial else a.max_serial)
+-    write_reports(a, products, skipped, warnings, removed, expected, merged)
+-    print(f'Imported {len(products)} products ({merged} repeated rows merged, {len(skipped)} rows skipped, {len(warnings)} warnings); '
+-          f'{removed} products not in the sheet removed from the catalogue.')
+-    if len(products) + merged + len(skipped) != expected:
+-        print(f'  ! {len(products)} imported + {merged} merged + {len(skipped)} skipped is not the expected {expected} rows: the sheet ends early or has gaps in its serial numbers')
+-    if not a.no_build:
+-        import importlib.util
+-        spec = importlib.util.spec_from_file_location('build_catalog', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'build-catalog.py'))
+-        mod = importlib.util.module_from_spec(spec)
+-        spec.loader.exec_module(mod)
+-        mod.build()
+-
+-
+-def write_aircraft(products):
+-    """data/aircraft.js: every aircraft make and model that has parts, so Shop by Aircraft and the filters list exactly these."""
+-    makes = {}
+-    for r in products:
+-        if r['aircraftMake']:
+-            makes.setdefault(r['aircraftMake'], set()).add(r['aircraftModel'])
+-
+-    def model_key(m):
+-        return [int(x) if x.isdigit() else x for x in re.split(r'(\d+)', m)]
+-    rows = ',\n'.join('  { make: ' + json.dumps(mk) + ', models: [' + ', '.join(json.dumps(x) for x in sorted(ms, key=model_key)) + '] }'
+-                      for mk, ms in sorted(makes.items()))
+-    text = ('/* Velmach Aerospace: aircraft makes and models for "Shop by Aircraft" and the aircraft filter.\n'
+-            '   Written by scripts/import-inventory.py from the Aircraft Type column of the inventory: every model that has parts.\n'
+-            '   A product\'s compatibleAircraft list uses the same ids ("<make-slug>/<model-slug>", e.g. "dassault/falcon-2000").\n'
+-            '   To add or rename a model, edit AIRCRAFT in scripts/inventory_rules.py and re-run the import. */\n'
+-            'window.VM_AIRCRAFT = [\n' + rows + '\n];\n')
+-    L.write_if_changed(os.path.join(L.ROOT, 'data', 'aircraft.js'), text)
+-
+-
+-def grouped(warnings):
+-    """One line per kind of warning, with the serial numbers it applies to."""
+-    by = collections.OrderedDict()
+-    for serial, _, msg in warnings:
+-        by.setdefault(msg, []).append(str(serial))
+-    lines = []
+-    for m, v in by.items():
+-        more = f' and {len(v) - 30} more' if len(v) > 30 else ''
+-        lines.append(f"- {m}: serial {', '.join(v[:30])}{more} ({len(v)} rows)")
+-    return '\n'.join(lines)
+-
+-
+-def write_reports(a, products, skipped, warnings, removed, expected, merged=0):
+-    os.makedirs(REPORTS, exist_ok=True)
+-    with open(os.path.join(REPORTS, 'inventory-skipped.csv'), 'w', newline='', encoding='utf-8-sig') as f:
+-        w = csv.writer(f)
+-        w.writerow(['Serial No', 'Excel row', 'Description', 'Reason'])
+-        w.writerows(skipped)
+-    today = datetime.date.today().isoformat()
+-    count = lambda f: collections.Counter(f(r) for r in products)
+-    ac = count(lambda r: next((s['value'] for s in r['specifications'] if s['name'] == 'Aircraft'), '(no aircraft)'))
+-    listed = count(lambda r: r['aircraftListed'] or '(empty)')
+-    brands = count(lambda r: r['brand'] or '(no brand)')
+-    cats = count(lambda r: r['categoryChild'])
+-    conds = count(lambda r: f"{r['condition']} ({r['conditionCode']})" if r['conditionCode'] else '(not stated)')
+-    certs = count(lambda r: r['certification'] or '(empty)')
+-    with_img = sum(1 for r in products if r['images'] and r['images'][0].get('kind') != 'representative')
+-    with_rep = sum(1 for r in products if r['images'] and r['images'][0].get('kind') == 'representative')
+-    table = lambda c: '\n'.join(f'| {k} | {v} |' for k, v in sorted(c.items(), key=lambda x: (-x[1], x[0])))
+-    md = f"""# Inventory import {today}
+-
+-Source: `{os.path.relpath(a.file, L.ROOT)}`, serial numbers 1 to {expected}.
+-
+-| | |
+-|---|---|
+-| Rows read | {len(products) + merged + len(skipped)} |
+-| Products imported | {len(products)} |
+-| Repeated rows merged (no S/N, every column the same) | {merged} |
+-| Rows skipped | {len(skipped)} (reports/inventory-skipped.csv) |
+-| Distinct part numbers | {len({L.norm_key(r['partNumber']) for r in products})} |
+-| Products with a photo of the part | {with_img} |
+-| Products with a representative photo of their component type | {with_rep} |
+-| Products removed (not in the sheet) | {removed} |
+-
+-## Aircraft (filter values)
+-| Aircraft | Products |
+-|---|---|
+-{table(ac)}
+-
+-## Aircraft Type as written in the sheet
+-| Sheet value | Products |
+-|---|---|
+-{table(listed)}
+-
+-## Brand (aircraft OEM)
+-| Brand | Products |
+-|---|---|
+-{table(brands)}
+-
+-## Category (from the description)
+-| Subcategory | Products |
+-|---|---|
+-{table(cats)}
+-
+-## Condition
+-| Condition | Products |
+-|---|---|
+-{table(conds)}
+-
+-## Certification (8130 column)
+-| Value | Products |
+-|---|---|
+-{table(certs)}
+-
+-## Warnings
+-{grouped(warnings) or 'None.'}
+-"""
+-    L.write_if_changed(os.path.join(REPORTS, f'inventory-import-{today}.md'), md)
+-
+-
+-if __name__ == '__main__':
+-    main()
+diff --git a/scripts/inventory_rules.py b/scripts/inventory_rules.py
+deleted file mode 100644
+index f1e6f159..00000000
+--- a/scripts/inventory_rules.py
++++ /dev/null
+@@ -1,132 +0,0 @@
+-"""Normalisation rules for scripts/import-inventory.py (the master parts inventory spreadsheet).
+-
+-Edit these tables when a new inventory brings a new aircraft, condition code or kind of part; everything else in the
+-import adapts. The sheet has no brand or category column, so:
+-  - brand  = the aircraft OEM, taken from the Aircraft Type column (AIRCRAFT below)
+-  - category = a subcategory of Aircraft Parts, chosen from keywords in the description (CATEGORY_RULES below)
+-"""
+-import re
+-
+-# ---------- aircraft ----------
+-# (pattern on the cleaned Aircraft Type cell, make, model, OEM brand). First match wins. The make + model become the
+-# "Shop by Aircraft" entry (data/aircraft.js) and the brand is the aircraft OEM shown on the product.
+-AIRCRAFT = [
+-    (r'^(dassault\s+)?(falcon|f)\s*2000', 'Dassault', 'Falcon 2000', 'Dassault Aviation'),
+-    (r'^(dassault\s+)?(falcon|f)\s*900\s*ex', 'Dassault', 'Falcon 900EX', 'Dassault Aviation'),
+-    (r'^(dassault\s+)?(falcon|f)\s*900', 'Dassault', 'Falcon 900', 'Dassault Aviation'),
+-    (r'^(dassault\s+)?(falcon|f)\s*50', 'Dassault', 'Falcon 50', 'Dassault Aviation'),
+-    (r'^(dassault\s+)?(falcon|f)\s*20', 'Dassault', 'Falcon 20', 'Dassault Aviation'),
+-    (r'^(dassault\s+)?(falcon|f)\s*7x', 'Dassault', 'Falcon 7X', 'Dassault Aviation'),
+-    (r'^gulfstream\s*(g\s*)?(iv|4)\b', 'Gulfstream', 'GIV', 'Gulfstream Aerospace'),
+-    (r'^gulfstream\s*(g\s*)?(v|5)\b', 'Gulfstream', 'GV', 'Gulfstream Aerospace'),
+-    (r'^gulfstream\s*(g\s*)?300\b', 'Gulfstream', 'G300', 'Gulfstream Aerospace'),
+-    (r'^gulfstream\s*(g\s*)?450\b', 'Gulfstream', 'G450', 'Gulfstream Aerospace'),
+-    (r'^gulfstream\s*(g\s*)?550\b', 'Gulfstream', 'G550', 'Gulfstream Aerospace'),
+-    (r'^(raytheon\s+|bae\s+)?hawker\s*(\d{3,4}\s*[a-z]*)', 'Hawker', None, 'Hawker Beechcraft'),   # model = "800A", "800XP" ...
+-    (r'^dornier\s*328\s*jet', 'Dornier', '328JET', 'Dornier'),
+-    (r'^dornier\s*(\d{3})', 'Dornier', None, 'Dornier'),
+-    (r'^(lockheed\s+)?jet\s*star', 'Lockheed', 'JetStar', 'Lockheed'),
+-    (r'^(bombardier\s+)?lear(jet)?\s*(\d{2})', 'Learjet', None, 'Learjet'),
+-    (r'^(bombardier\s+)?challenger\s*(\d{3})', 'Bombardier', None, 'Bombardier'),
+-    (r'^(boeing\s+)?(7[0-9]7)\b', 'Boeing', None, 'Boeing'),                # the Boeing lists give the model alone: "777"
+-]
+-# makes whose parts the representative photos were reviewed for (scripts/representative-images.py); other aircraft keep
+-# the placeholder until their photos are reviewed
+-REVIEWED_PHOTO_MAKES = {'Dassault', 'Gulfstream', 'Hawker', 'Dornier', 'Lockheed', 'Learjet'}
+-# values that mean "no aircraft"
+-NO_AIRCRAFT = {'', 'na', 'n/a', 'none', '-', 'tbd', 'unknown'}
+-# airframe / engine details after the model: "Falcon 2000 SN 138", "F2000 738 Engine"
+-AIRFRAME_SN = re.compile(r'\b(?:sn|s/n|msn)\s*[:#]?\s*(\S+)\s*$', re.I)
+-ENGINE_NOTE = re.compile(r'\b(\d{3})\s+engine\b', re.I)
+-ENGINES = {'738': 'CFE738'}   # "F2000 738 Engine": the Falcon 2000's CFE738 engine
+-
+-# unify brand spellings: key = brand lowered without spaces/punctuation
+-BRAND_ALIASES = {
+-    'dassault': 'Dassault Aviation', 'dassaultaviation': 'Dassault Aviation',
+-    'gulfstream': 'Gulfstream Aerospace', 'gulfstreamaerospace': 'Gulfstream Aerospace',
+-    'hawker': 'Hawker Beechcraft', 'hawkerbeechcraft': 'Hawker Beechcraft', 'raytheon': 'Hawker Beechcraft',
+-    'lockheed': 'Lockheed', 'lockheedmartin': 'Lockheed', 'learjet': 'Learjet', 'lear': 'Learjet',
+-    'boeing': 'Boeing', 'airbus': 'Airbus', 'honeywell': 'Honeywell', 'collins': 'Collins Aerospace',
+-    'rockwellcollins': 'Collins Aerospace', 'dornier': 'Dornier', 'bombardier': 'Bombardier',
+-}
+-
+-# ---------- condition (ATA Spec 2000 codes and the ones this inventory uses) ----------
+-CONDITIONS = {
+-    'NE': 'New', 'NS': 'New Surplus', 'FN': 'Factory New', 'OH': 'Overhauled', 'SV': 'Serviceable', 'RP': 'Repaired',
+-    'IN': 'Inspected', 'TST': 'Tested', 'AR': 'As Removed', 'BER': 'Beyond Economic Repair', 'MD': 'Modified',
+-}
+-
+-# ---------- 8130 column ----------
+-CERT_ALIASES = {'yes': 'Yes', 'faaform81303': 'FAA Form 8130-3', '81303': 'FAA Form 8130-3', 'na': 'N/A', 'no': 'No',
+-                'cofc': 'C of C', 'certificateofconformity': 'C of C', 'aircraft': 'Aircraft', 'engine': 'Engine'}
+-
+-# ---------- category (Aircraft Parts subcategories) ----------
+-# First matching rule wins, so specific systems come before generic words ("fuel pump" is fuel, a bare "pump" hydraulic).
+-# Patterns run on the lower-case description with punctuation turned into spaces.
+-CATEGORY_RULES = [
+-    ('aircraft-batteries', r'\bbatt(ery|eries)?\b'),
+-    ('emergency-locator-transmitters-elts', r'\belt\b|emergency locator'),
+-    ('seals-o-rings', r'\bseals?\b|o ring|\boring\b|gasket|\bpacking\b'),
+-    ('oxygen-fire-protection', r'\boxygen\b|\bo2\b|\bmask\b|\bfire\b|extinguish|\bsmoke\b|\bsquib\b|\bovht\b|overheat det'),
+-    ('fuel-system-parts', r'\bfuel\b|crossfeed|\bjet pump\b|\bfcu\b'),
+-    ('windows-windshields', r'windshield|windscreen|\bwindow\b|\bwiper\b'),
+-    ('lighting', r'\blights?\b|\blamp\b|\bstrobe\b|\bbeacon\b|\bballast\b|flashlight|\bled\b|\bdimm(er|ing)\b|\bnav pos\b'),
+-    ('wheels-brakes', r'\bwheel\b|(?<!air)brake|\brim\b|\btire\b|\btyre\b|anti skid|antiskid'),
+-    ('landing-gear-parts', r'landing gear|\bmlg\b|\bnlg\b|\buplock\b|\bdownlock\b|\bgear\b(?! ?box)|\bstrut\b|\bsteering\b|\bshimmy\b|\btorque link\b'),
+-    ('engine-parts', r'\bengine\b|\bfadec\b|\bignit|\bexciter\b|\bigniter\b|\bstarter\b|\bturbine\b|compressor|reverser|\bcowl|\bapu\b|\bstator\b|'
+-                     r'\bnacelle\b|\bgear ?box\b|\boil\b|\bitt\b|\begt\b|\bn1\b|\bn2\b|\bpylon\b|\bexhaust\b|\bfan blade\b|\bthrust\b|'
+-                     r'\bchip detector\b|\bspinner\b|\b(eng|engine) inlet\b|\bair intake\b|\bhmu\b|\bthrottle\b|\bairturbine\b'),
+-    ('hydraulic-parts', r'hydraul|\bhyd\b|accumulator|servo ?valve|\breservoir\b|\bpump\b|\bnitrogen\b'),
+-    ('flight-controls', r'\bflaps?\b|\bslats?\b|spoiler|airbrake|aileron|\brudder\b|elevator|\btrim\b|\byoke\b|\bpedal|bellcrank|stick shaker|'
+-                        r'control column|contorl column|bell ?crank|gust lock|\bservo\b|\bpitch\b|\broll\b|\byaw\b|\bafu\b|\bjack\b|\bactuator\b'),
+-    ('air-conditioning-pneumatics', r'\bbleed\b|pneumatic|air cond|\bpack\b|pressuri|outflow|cabin press|\bheat exch|\bducts?\b|\bblower\b|'
+-                                    r'\bfan\b|\bvent(ilation)?\b|precooler|water separ|\bozone\b|anti ice|de ice|\bice\b|\bheater\b|\bmixing\b|\bair cycle\b|\bacm\b|\bventuri\b|\bcondens|\bcold air\b|air temp|\bairflow\b|\bair inlet\b|\bair outlet\b|alternate air|\bdiffuser\b|refrigerat'),
+-    ('instruments-indicators', r'(pressure|temp|temperature|quantity|quanity|flow|oil) (transmitter|transducer|sensor|switch)|\bindicator\b|\bgauge\b|'
+-                               r'altimeter|airspeed|\bclock\b|tachometer|\bind\b|\bcompass\b|\bflux\b|attitude|\bpitot\b|\bstatic\b|\bprobe\b|'
+-                               r'angle of attack|\baoa\b|\bsensor\b|transducer|\bthermocouple\b|\bvsi\b|\bhsi\b|\badi\b|\binstrument\b|\bstandby\b|\bmach\b|chronometer|accelerometer|\bg meter\b|\bgyro\b|horizon|\bcounter pointer\b'),
+-    ('avionics', r'\bradio\b|\bvhf\b|\bhf\b|\bvor\b|\bdme\b|\badf\b|\bgps\b|transponder|\batc\b|\btcas\b|\begpws\b|\bradar\b|antenna|receiver|reciever|'
+-                 r'\brcvr\b|transmitter|transceiver|\baudio\b|\bdisplay\b|computer|\bfms\b|\bfdr\b|\bcvr\b|\bselcal\b|satcom|\bafis\b|\biec\b|\bdmu\b|'
+-                 r'\bnav\b|\bcomm?\b|\bvideo\b|\bcards?\b|\bpcb\b|circuit card|printed|\bmodule\b|\binterface\b|\bdata\b|processor|autopilot|'
+-                 r'\bahrs\b|\birs\b|\badc\b|\bmfd\b|\bpfd\b|\bcrt\b|\bmonitor\b|speaker|amplifier|\bamp\b|headset|\bioc\b|\bloc\b|glide ?slope|'
+-                 r'\bils\b|\bmarker\b|\bflight director\b|\bfgc\b|\btuning\b|\bacars\b|\bcmu\b|\bsdu\b|\bhpa\b|\bdigital\b|\bcamera\b|\bmodem\b|'
+-                 r'\bphone\b|\baircell\b|\bdau\b|\bacquisition\b|\bconcentrator\b|\bswitching\b|\bwarning\b|\bannunciator\b|\bcontroller\b|\bfmc\b|\bfcc\b|\biru\b|\bfdau\b|\bfdep\b|\bgpws\b|\befis\b|\beadi\b|\bgarmin\b|\badsb\b|'
+-                 r'duplexer|airshow|briefing|headphones?|\bmic\b|microphone|positioning|navigation|file server|firewire|wireless|airphone|'
+-                 r'\bfqmc\b|\bbscu\b|\bcsu\b|\bdu \d|\bcd \d|\bhd \d|\bfailure advisory\b|\bflight profile\b|\bequalizer\b|\bair ?cell\b'),
+-    ('electrical-hardware', r'\bswitch|\brelay\b|contactor|generator|inverter|converter|transformer|power supply|\bpsu\b|breaker|\bfuse\b|harness|'
+-                            r'\bwire\b|\bcable\b|connector|\bbus\b|solenoid|\bmotor\b|potentiometer|rectifier|\btru\b|\bvolt|current limit|\bgcu\b|'
+-                            r'\bresistor\b|\bdiode\b|\bshunt\b|\bpwr\b|\bpower\b|\belectric|\bplug\b|\bsocket\b|\bjunction\b|alternator|\b(ac|dc) (control|variable|vari|current)|\btime delay\b|\blimiter\b|\bvac outlet\b|\bcharging port\b|\btimer\b|\bbuzzer\b|\balarm\b|\bdisconnect\b'),
+-    ('cockpit-cabin-parts', r'\bseats?\b|\bcabin\b|\bgalley\b|\boven\b|coffee|\blav(atory)?\b|toilet|\bdoor\b|\bsign\b|passenger|\bdivan\b|\btable\b|'
+-                            r'curtain|carpet|cockpit|overhead|\bmirror\b|armrest|entertainment|\bdvd\b|\bplayer\b|\bchiller\b|\bsink\b|\bwater\b|'
+-                            r'\bpanel\b|\bpnl\b|\bcabinet\b|\bdrawer\b|\bglareshield\b|\bstep\b|\bstairs?\b'),
+-    ('ducting-hoses', r'\bhose\b|\btube\b|\bpipe\b|\bmanifold\b|\bline\b|\bfitting\b'),
+-    ('valves-regulators', r'valve|regulator|restrictor|\bcheck\b|shut ?off|\brelief\b|\bbutterfly\b|\bflow control\b'),
+-    ('airframe-structures', r'\bskin\b|\bweb\b|extrusion|\brib\b|\bspar\b|stringer|\bframe\b|fairing|leading edge|trailing edge|\bcone\b|radome|'
+-                            r'\bbeam\b|longeron|doubler|splice|\bangle\b|\bintercostal\b|\bclip\b|\bchord\b|\bcover\b|\bfillet\b|\bsupport\b|\bfloor\b|'
+-                            r'\bwing\b|\bfuselage\b|\bstabilizer\b|\bfin\b|\btail\b|\bnose\b|\binsulation\b|\bliner\b|\bshroud\b|\bpanel assy\b'),
+-    ('hardware-fasteners', r'\bscrew\b|\bbolt\b|\bnut\b|\brivet\b|\bwasher\b|bracket|\bclamp\b|\bpin\b|bushing|bearing|\bspacer\b|\bstud\b|\bolive\b|'
+-                           r'\bmount(ing)?\b|\blink\b|\brod\b|\bspring\b|\bshaft\b|\bhinge\b|\blatch\b|\bplate\b|\bcollar\b|\bretainer\b'),
+-    ('filters', r'\bfilters?\b|\belement\b|\bstrainer\b'),
+-]
+-FALLBACK_CATEGORY = 'other-aircraft-parts'
+-NO_AIRCRAFT_CATEGORY = 'other-aircraft-parts'   # Other / Miscellaneous: every row with no Aircraft Type (your rule, 2026-11-03)
+-
+-# placeholder picture for each subcategory (images/placeholders/<name>.svg) when a product has no photo
+-PLACEHOLDER = {
+-    'aircraft-batteries': 'electrical', 'emergency-locator-transmitters-elts': 'avionics', 'oxygen-fire-protection': 'safety',
+-    'fuel-system-parts': 'fuel', 'windows-windshields': 'window', 'lighting': 'lighting', 'wheels-brakes': 'landing-gear',
+-    'landing-gear-parts': 'landing-gear', 'engine-parts': 'engine', 'hydraulic-parts': 'hydraulic', 'flight-controls': 'flight-controls',
+-    'air-conditioning-pneumatics': 'pneumatic', 'instruments-indicators': 'instrument', 'avionics': 'avionics',
+-    'electrical-hardware': 'electrical', 'cockpit-cabin-parts': 'cabin', 'seals-o-rings': 'hardware', 'ducting-hoses': 'pneumatic',
+-    'valves-regulators': 'hydraulic', 'airframe-structures': 'structure', 'hardware-fasteners': 'hardware', 'filters': 'hydraulic',
+-    'other-aircraft-parts': 'generic',
+-}
+-
+-_COMPILED = [(slug, re.compile(p)) for slug, p in CATEGORY_RULES]
+-
+-
+-def category_for(description):
+-    text = ' ' + re.sub(r'[^a-z0-9]+', ' ', str(description or '').lower()) + ' '
+-    for slug, rx in _COMPILED:
+-        if rx.search(text):
+-            return slug
+-    return FALLBACK_CATEGORY

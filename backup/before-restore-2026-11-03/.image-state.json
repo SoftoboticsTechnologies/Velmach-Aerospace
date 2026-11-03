@@ -1,0 +1,408 @@
+{
+"270": {
+"queries": [
+{
+"q": "\"270\" Universal Amp",
+"hits": []
+},
+{
+"q": "\"270\" Hawker 800A",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"40565": {
+"queries": [
+{
+"q": "\"40565\" Control Valve",
+"hits": []
+},
+{
+"q": "\"40565\" Gulfstream GIV",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"42045": {
+"queries": [
+{
+"q": "\"42045\" Hydraulic Pump",
+"hits": []
+},
+{
+"q": "\"42045\" Falcon 900EX",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"43663": {
+"queries": [
+{
+"q": "\"43663\" Ignition Exciter",
+"hits": [
+{
+"page": "https://www.wbparts.com/rfq/2925-01-301-9339.html",
+"image": "",
+"title": ""
+}
+]
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [
+{
+"page": "https://www.wbparts.com/rfq/2925-01-301-9339.html",
+"site": "www.wbparts.com",
+"image": "",
+"checks": [],
+"tier": "rejected",
+"reason": "page not read: robots.txt does not allow this page"
+}
+],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "page not read: robots.txt does not allow this page (1)"
+},
+"105124": {
+"queries": [
+{
+"q": "\"105124\" Roll Main Afu",
+"hits": []
+},
+{
+"q": "\"105124\" Falcon 2000",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"132322": {
+"queries": [
+{
+"q": "\"132322\" Fan & Venturi Tube",
+"hits": []
+},
+{
+"q": "\"132322\" Hawker 800A",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"405010": {
+"queries": [
+{
+"q": "\"405010\" Aero-1 Satcom Hpa",
+"hits": [
+{
+"page": "https://locatory.com/products/aircraft-part/parts/405010A/aa22e92e2544650c919dcb4e609d284a883871f5",
+"image": "",
+"title": ""
+}
+]
+},
+{
+"q": "\"405010\" Gulfstream GIV",
+"hits": []
+},
+{
+"q": "\"405010A\" Aero-1 Satcom Hpa",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [
+{
+"page": "https://locatory.com/products/aircraft-part/parts/405010A/aa22e92e2544650c919dcb4e609d284a883871f5",
+"site": "locatory.com",
+"image": "",
+"checks": [],
+"tier": "rejected",
+"reason": "exact part number not on the page"
+}
+],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "exact part number not on the page (1)"
+},
+"508534": {
+"queries": [
+{
+"q": "\"508534\" Control Module",
+"hits": []
+},
+{
+"q": "\"508534\" Gulfstream GIV",
+"hits": []
+},
+{
+"q": "\"508617\" Control Module",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"508617": {
+"queries": [
+{
+"q": "\"508617\" Adapter Assembly",
+"hits": []
+},
+{
+"q": "\"508617\" Gulfstream GIV",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"690009": {
+"queries": [
+{
+"q": "\"690009\" Switch",
+"hits": []
+},
+{
+"q": "\"690009\" Hawker 800A",
+"hits": []
+},
+{
+"q": "\"HTE690009\" Switch",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"690012": {
+"queries": [
+{
+"q": "\"690012\" Pressure Switch",
+"hits": []
+},
+{
+"q": "\"690012\" aircraft pressure switch",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"4267575": {
+"queries": [
+{
+"q": "\"4267575\" Right Windshield Wiper Motor Brushes",
+"hits": []
+},
+{
+"q": "\"4267575\" Falcon 2000",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"4542410": {
+"queries": [
+{
+"q": "\"4542410\" Hydraulic Pump Handle",
+"hits": []
+},
+{
+"q": "\"4542410\" Hawker 800A",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"30100010": {
+"queries": [
+{
+"q": "\"30100010\" Fire Extinguisher",
+"hits": []
+},
+{
+"q": "\"30100010\" Gulfstream GIV",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"30800024": {
+"queries": [
+{
+"q": "\"30800024\" Cabin Audio Control, Switch Assembly",
+"hits": []
+},
+{
+"q": "\"30800024\" Falcon 2000",
+"hits": []
+},
+{
+"q": "\"SPS-C01-5008\" Cabin Audio Control, Switch Assembly",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"30800345": {
+"queries": [
+{
+"q": "\"30800345\" Switch Panel",
+"hits": []
+},
+{
+"q": "\"30800345\" Falcon 2000",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"32700022": {
+"queries": [
+{
+"q": "\"32700022\" Fire Extinguisher",
+"hits": []
+},
+{
+"q": "\"32700022\" Gulfstream GIV",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"104829001": {
+"queries": [
+{
+"q": "\"104829001\" Pusher",
+"hits": []
+},
+{
+"q": "\"104829001\" Hawker 800A",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"5208040001": {
+"queries": [
+{
+"q": "\"5208040001\" Magnetic Compensator",
+"hits": []
+},
+{
+"q": "\"5208040001\" Gulfstream GIV",
+"hits": []
+},
+{
+"q": "\"MCU-804A\" Magnetic Compensator",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+},
+"c1422683": {
+"queries": [
+{
+"q": "\"C142268-3\" Pressure Regulation Valve",
+"hits": []
+},
+{
+"q": "\"C142268-3\" valve aircraft",
+"hits": []
+}
+],
+"source": "web search",
+"status": "unresolved",
+"checked": [],
+"calls": 0,
+"tried": "2026-10-29 18:33",
+"reason": "no search result names the part number"
+}
+}
