@@ -41,7 +41,7 @@ window.VM_CATS = [
     {"slug": "hydraulic-fluid", "en": "Hydraulic Fluid", "ar": "السائل الهيدروليكي", "desc_en": "Mineral, synthetic and phosphate-ester hydraulic fluids.", "desc_ar": "سوائل هيدروليكية معدنية وصناعية وفوسفاتية الإستر."},
     {"slug": "fuel-additives", "en": "Fuel Additives", "ar": "إضافات الوقود", "desc_en": "Additives for fuel system icing inhibition and fuel treatment.", "desc_ar": "إضافات لمنع تجمد نظام الوقود ومعالجة الوقود."},
     {"slug": "calibration-fluids", "en": "Calibration Fluids", "ar": "سوائل المعايرة", "desc_en": "Fluids for calibrating fuel controls, flow meters and test equipment.", "desc_ar": "سوائل لمعايرة أنظمة التحكم بالوقود ومقاييس التدفق ومعدات الاختبار."},
-    {"slug": "lubricating-oils", "en": "Lubricating Oils", "ar": "زيوت التزليق", "desc_en": "General lubricating, instrument and gear oils.", "desc_ar": "زيوت تزليق عامة وزيوت للأجهزة والتروس."},
+    {"slug": "lubricating-oils", "en": "Lubricants", "ar": "مواد التشحيم", "desc_en": "General lubricating, instrument and gear oils.", "desc_ar": "زيوت تزليق عامة وزيوت للأجهزة والتروس."},
     {"slug": "landing-gear-fluid", "en": "Landing Gear Fluid", "ar": "سائل عجلات الهبوط", "desc_en": "Shock strut fluids for landing gear servicing.", "desc_ar": "سوائل المساعدات لخدمة عجلات الهبوط."},
     {"slug": "leak-detector-fluid", "en": "Leak Detector Fluid", "ar": "سائل كشف التسرب", "desc_en": "Leak detection solutions for pressurised systems and fittings.", "desc_ar": "محاليل كشف التسرب للأنظمة المضغوطة والوصلات."},
     {"slug": "tape", "en": "Tape", "ar": "الأشرطة اللاصقة", "desc_en": "Aluminium, masking, sealing and speed tapes for maintenance.", "desc_ar": "أشرطة ألومنيوم وتغطية وإحكام وأشرطة سريعة لأعمال الصيانة."},
