@@ -253,12 +253,19 @@ def build(force=False):
         for ch in p['children']:
             put_list(f"c/{p['slug']}/{ch['slug']}.json", by_child.get((p['slug'], ch['slug']), []), {'p': p['slug'], 'c': ch['slug']})
 
-    # brands: every brand that has products; one without products is dropped, featured or not
+    # brands: every brand that has products, plus the brands of data/supplier-brands.json (published before they have
+    # products; their page shows the empty listing). Any other brand without products is dropped, featured or not.
     known = {b['slug']: dict(b) for b in L.load_brands()}
     for r in products:
         if r['brandSlug'] and r['brandSlug'] not in known:
             known[r['brandSlug']] = {'slug': r['brandSlug'], 'name': r['brand'], 'featured': False}
-    brands = sorted((b for b in known.values() if b['slug'] in by_brand), key=lambda b: b['name'].lower())
+    by_name = {L.norm_key(b['name']): b['slug'] for b in known.values()}
+    listed = set()
+    for name in L.load_supplier_brands():
+        slug = by_name.get(L.norm_key(name)) or L.slugify(name)
+        known.setdefault(slug, {'slug': slug, 'name': name, 'featured': False})
+        listed.add(slug)
+    brands = sorted((b for b in known.values() if b['slug'] in by_brand or b['slug'] in listed), key=lambda b: b['name'].lower())
     for b in brands:
         b['featured'] = bool(b.get('featured', False))
         put_list(f"b/{b['slug']}.json", by_brand.get(b['slug'], []), {'bs': b['slug']})

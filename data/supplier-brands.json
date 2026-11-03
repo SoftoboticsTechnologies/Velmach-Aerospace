@@ -1,0 +1,14 @@
+{
+  "note": "Brands Velmach supplies that are published even before they have products on the site (scripts/build-catalog.py adds them to data/brands.js). Names as written by the source. Add a logo as public/brands/<slug>.svg|png|webp.",
+  "sources": {
+    "Pilot John International (pilotjohn.com, 2026-11-03)": "brand names from search-engine listings of pilotjohn.com/manufacturer and /shop-by-brand; the site itself blocks automated access, so its full A-Z list could not be read"
+  },
+  "brands": [
+    "Aerox", "Amphenol", "ATEQ", "Barry Mounts", "BendixKing", "Beringer Aero", "Champion", "Columbus Jack", "Corrosion Block",
+    "David Clark", "Eagle", "Flight Outfitters", "Fluke", "Flying Eyes", "Goodyear", "Hobart", "Jeppesen", "Kell-Strom",
+    "Kore Aviation", "KUNZ", "Laversab", "Malabar", "Marsh Brothers Aviation", "Meggitt", "Michelin", "Milwaukee Tool",
+    "MyGoFlight", "Nav Aids", "Parker Stratoflex", "Phillips 66", "Royco", "Sesame Technologies", "Sic-Sac", "Skydrol",
+    "Start Pac", "Teledyne Gill", "TPI", "Tronair", "Unitron", "Viavi",
+    "Castrol", "3M", "AeroShell"
+  ]
+}

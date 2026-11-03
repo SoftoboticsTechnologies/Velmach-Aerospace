@@ -126,6 +126,14 @@ def load_aircraft():
     return _js_value(os.path.join(ROOT, 'data', 'aircraft.js'), 'VM_AIRCRAFT')
 
 
+def load_supplier_brands():
+    """Brand names of data/supplier-brands.json: brands published before they have products."""
+    try:
+        return json.load(open(os.path.join(ROOT, 'data', 'supplier-brands.json'), encoding='utf-8')).get('brands', [])
+    except (OSError, ValueError):
+        return []
+
+
 def load_brands():
     path = os.path.join(ROOT, 'data', 'brands.js')
     return _js_value(path, 'VM_BRANDS') if os.path.exists(path) else []

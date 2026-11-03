@@ -105,7 +105,7 @@ class Component extends DCLogic {
     const shown = s.letter ? all.filter(b => first(b) === s.letter) : all;
     const brands = shown.map(b => { const logo = VM.brandLogo(b.slug);
       const n = s.meta && s.meta.brands ? s.meta.brands[b.slug] || 0 : null;
-      return { name: b.name, href: VM.brandHref(b.slug), logo, logoCls: VM.brandLogoDark(b.slug) ? 'is-dark' : '', noLogo: !logo, mono: b.name.replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase(), alt: b.name + ' logo', fail: () => VM.logoFailed(b.slug), count: n == null ? '' : n === 1 ? t.br_n1 : fmt(t.br_n, { n }) }; });
+      return { name: b.name, href: VM.brandHref(b.slug), logo, logoCls: VM.brandLogoDark(b.slug) ? 'is-dark' : '', noLogo: !logo, mono: b.name.replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase(), alt: b.name + ' logo', fail: () => VM.logoFailed(b.slug), count: !n ? '' : n === 1 ? t.br_n1 : fmt(t.br_n, { n }) }; });   // a supplied brand without products yet shows no count
     return { ...v, ready: true, t, crumbsAria: v.ar ? 'مسار التنقل' : 'Breadcrumb',
       allOn: String(!s.letter), showAll: () => this.pick(''),
       letters: AZ.map(ch => ({ ch, on: String(s.letter === ch), off: !has.has(ch), pick: () => this.pick(ch) })),
