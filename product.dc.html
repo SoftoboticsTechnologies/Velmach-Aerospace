@@ -240,6 +240,8 @@ class Component extends DCLogic {
         this.unsub = window.VM.subscribe(() => this.forceUpdate());
         const slug = productSlug(), C = window.VM_CATALOG;
         C.product(slug).then(p => {
+          // an old link to a merged product: show the product it was merged into, at its own address
+          if (p && p.slug !== slug) { location.replace(window.VM.productHref(p.slug)); return; }
           this.setState({ ready: true, p });
           if (!p) return;
           // related rails: the 24-card slice of the subcategory / brand list this product is in (built by build-catalog.py)

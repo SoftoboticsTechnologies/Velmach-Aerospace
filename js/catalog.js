@@ -64,7 +64,11 @@
     },
     brand: function (slug) { return cards('b/' + enc(slug) + '.json', function (c, d) { return c.bs === d.bs; }); },
     product: function (slug) {
-      return get('p/' + bucket(String(slug || '')) + '.json', null).then(function (m) { return (m && m[slug]) || null; });
+      var one = function (s) { return get('p/' + bucket(String(s || '')) + '.json', null).then(function (m) { return (m && m[s]) || null; }); };
+      // a product merged into another (scripts/merge-duplicate-pns.py) is found under the slug it was merged into
+      return one(slug).then(function (p) {
+        return p || get('moved.json', {}).then(function (mv) { return mv && mv[slug] ? one(mv[slug]) : null; });
+      });
     },
     rail: function (id) { return get('r/' + Math.floor(id / 1000) + '/' + id + '.json', [], decode); },
     /* products a category page shows when an aircraft is selected (VM.fitsAircraft reads card field a) */
