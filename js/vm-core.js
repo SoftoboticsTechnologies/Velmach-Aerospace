@@ -130,11 +130,15 @@
     condLabel: function (code) {
       var k = String(code || '').toLowerCase(), ar = lang === 'ar';
       var names = ar ? { 'new': 'جديد', used: 'مستعمل', none: 'غير محددة', ne: 'جديد', ns: 'فائض جديد', fn: 'جديد من المصنع', oh: 'مُعاد تأهيله',
-          sv: 'صالح للخدمة', rp: 'مُصلَح', 'in': 'مفحوص', tst: 'مُختبَر', ar: 'كما نُزع من الطائرة', ber: 'إصلاحه غير مجدٍ اقتصاديًا' }
+          sv: 'صالح للخدمة', rp: 'مُصلَح', 'in': 'مفحوص', tst: 'مُختبَر', ar: 'كما نُزع من الطائرة', ber: 'إصلاحه غير مجدٍ اقتصاديًا',
+          on: 'جديد / بيع مباشر', or: 'مُعاد تأهيله / بيع مباشر', oe: 'مُعاد تأهيله / استبدال', cr: 'إصلاح (وحدة العميل)', ft: 'اختبار وظيفي (وحدة العميل)' }
         : { 'new': 'New', used: 'Used', none: 'Not stated', ne: 'New', ns: 'New surplus', fn: 'Factory new', oh: 'Overhauled',
-          sv: 'Serviceable', rp: 'Repaired', 'in': 'Inspected', tst: 'Tested', ar: 'As removed', ber: 'Beyond economic repair' };
+          sv: 'Serviceable', rp: 'Repaired', 'in': 'Inspected', tst: 'Tested', ar: 'As removed', ber: 'Beyond economic repair',
+          on: 'Outright new', or: 'Overhauled / outright', oe: 'Overhauled / exchange', cr: 'Repair (customer unit)', ft: 'Functional test (customer unit)' };
       return names[k] || (k ? k.toUpperCase() : names.none);
     },
+    /* Condition codes offered on quote requests, in this order (labels in i18n "cond") */
+    COND_CODES: ['ne', 'ns', 'oh', 'sv', 'rp', 'or', 'ar', 'fn', 'on', 'oe', 'cr', 'ft'],
     /* "Boeing 737 NG" for an aircraft id ("boeing/737-ng"), from data/aircraft.js */
     acLabel: function (id) {
       var list = window.VM_AIRCRAFT || [];

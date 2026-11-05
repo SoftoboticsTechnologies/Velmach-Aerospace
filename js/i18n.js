@@ -100,7 +100,9 @@ en: {
 
   p_eyebrow: "Catalogue", p_title: "Products & Capabilities", p_sub: "Search by part number, SAP code or keyword, filter by category, and add items to your RFQ list.",
   p_cats: "Categories", p_all: "All categories", p_search_ph: "Part number or keyword", p_cond_label: "Condition",
-  cond: { all: "All", new: "New", used: "Used-Serviceable", surplus: "Surplus", any: "Any condition" },
+  cond: { all: "All", new: "New", used: "Used-Serviceable", surplus: "Surplus", any: "Any condition",
+    ne: "New", ns: "New Surplus", oh: "Overhauled", sv: "Serviceable", rp: "Repaired", or: "Overhauled / Outright", ar: "As Removed",
+    fn: "Factory New", on: "Outright New", oe: "Overhauled / Exchange", cr: "Repair (customer unit)", ft: "Functional Test (customer unit)" },
   p_results: "{n} items", p_sample: "Sample catalogue: all entries shown are placeholders.",
   p_add: "Add to RFQ", p_added: "Added to your RFQ list", p_qty: "Quantity", p_dec: "Decrease quantity", p_inc: "Increase quantity", p_details: "Details",
   p_none_t: "Can't find your part? Send us the part number", p_none_b: "Our catalogue shows a small selection. We source most parts on request.", p_none_btn: "Request this part",
@@ -274,7 +276,9 @@ ar: {
 
   p_eyebrow: "الكتالوج", p_title: "المنتجات والإمكانات", p_sub: "ابحث برقم القطعة أو رمز SAP أو بكلمة مفتاحية، وصفِّ النتائج حسب الفئة، ثم أضف القطع إلى قائمة طلب الأسعار.",
   p_cats: "الفئات", p_all: "جميع الفئات", p_search_ph: "رقم القطعة أو كلمة مفتاحية", p_cond_label: "الحالة",
-  cond: { all: "الكل", new: "جديدة", used: "مستعملة صالحة للخدمة", surplus: "فائضة", any: "أي حالة" },
+  cond: { all: "الكل", new: "جديدة", used: "مستعملة صالحة للخدمة", surplus: "فائضة", any: "أي حالة",
+    ne: "جديدة", ns: "فائض جديد", oh: "مُعاد تأهيلها", sv: "صالحة للخدمة", rp: "مُصلَحة", or: "مُعاد تأهيلها / بيع مباشر", ar: "كما نُزعت من الطائرة",
+    fn: "جديدة من المصنع", on: "جديدة / بيع مباشر", oe: "مُعاد تأهيلها / استبدال", cr: "إصلاح (وحدة العميل)", ft: "اختبار وظيفي (وحدة العميل)" },
   p_results: "{n} صنفاً", p_sample: "كتالوج تجريبي: جميع الإدخالات المعروضة نماذج مؤقتة.",
   p_add: "أضف إلى الطلب", p_added: "أُضيفت إلى قائمة طلب الأسعار", p_qty: "الكمية", p_dec: "إنقاص الكمية", p_inc: "زيادة الكمية", p_details: "التفاصيل",
   p_none_t: "لم تجد القطعة المطلوبة؟ أرسل إلينا رقمها", p_none_b: "يعرض الكتالوج جزءاً محدوداً، ونوفّر معظم القطع عند الطلب.", p_none_btn: "اطلب هذه القطعة",

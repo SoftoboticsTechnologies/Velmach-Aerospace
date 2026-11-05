@@ -91,7 +91,7 @@
                   <label style="display:flex;align-items:center;gap:8px;flex:1;min-width:190px">
                     <span style="font-size:12.5px;font-weight:600;color:#56626E;white-space:nowrap">{{ t.th.cond }}</span>
                     <select value="{{ r.cond }}" data-cond="{{ r.cond }}" onChange="{{ r.onCond }}" style="flex:1;min-width:0;height:36px;padding-inline:10px;border:1px solid #C3C7C9;font:inherit;font-size:13.5px;background:#FFFFFF;color:#0B1B2B;cursor:pointer">
-                      <sc-for list="{{ condOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+                      <sc-for list="{{ condOpts }}" as="o" hint-placeholder-count="13"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
                     </select>
                   </label>
                 </div>
@@ -180,6 +180,9 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const EMPTY = { name:'', company:'', country:'', email:'', phone:'', aircraft:'', date:'', priority:'routine', notes:'', website:'' };
 const REQUIRED = ['name','company','country','email'];
+// quote lines saved before the condition codes: new / used / surplus
+const OLD_COND = { new:'ne', used:'sv', surplus:'ns' };
+const condText = k => !k || k === 'any' ? 'any' : k.toUpperCase() + ' (' + (window.VM_I18N.en.cond[k] || k) + ')';
 class Component extends DCLogic {
   state = { ready:false, form:{ ...EMPTY }, errors:{}, sent:null, mPn:'', mQty:1 };
   componentDidMount() {
@@ -201,7 +204,7 @@ class Component extends DCLogic {
     const lines = ['REQUEST FOR QUOTE - Velmach Aerospace', '', 'Priority: ' + f.priority.toUpperCase(),
       'Name: ' + f.name, 'Company: ' + f.company, 'Country: ' + f.country, 'Email: ' + f.email, 'Phone: ' + (f.phone || '-'),
       'Aircraft type / Application: ' + (f.aircraft || '-'), 'Required by: ' + (f.date || '-'), '', 'PARTS',
-      ...rfq.map((x, i) => `${i + 1}. P/N ${x.pn || '-'} | ${x.name_en === '__manual' ? 'Manual entry' : x.name_en}${x.brand ? ' | ' + x.brand : ''} | Qty ${x.qty} | Condition: ${x.cond || 'any'}` +
+      ...rfq.map((x, i) => `${i + 1}. P/N ${x.pn || '-'} | ${x.name_en === '__manual' ? 'Manual entry' : x.name_en}${x.brand ? ' | ' + x.brand : ''} | Qty ${x.qty} | Condition: ${condText(OLD_COND[x.cond] || x.cond)}` +
         (x.slug ? `\n   ${new URL(VM.productHref(x.slug), location.href).href}` : '')),
       '', 'Notes:', f.notes || '-'];
     const subject = `RFQ [${f.priority.toUpperCase()}] ${f.company}`;
@@ -253,8 +256,8 @@ class Component extends DCLogic {
           bg: done || cur ? '#0759A5' : '#FFFFFF', fg: done || cur ? '#FFFFFF' : '#8A96A3', line: done || cur ? '#0759A5' : '#C3C7C9', tc: done || cur ? '#0B1B2B' : '#8A96A3' }; }),
       count: String(rfq.length).padStart(2, '0'), empty: !has, hasItems: has,
       totalLabel: (v.ar ? 'إجمالي الكمية: ' : 'Total qty: ') + totalQty,
-      condOpts: ['any','new','used','surplus'].map(k => ({ v:k, l:t.cond[k] })),
-      rows: rfq.map((x, i) => { const name = x.name_en === '__manual' ? t.r_manualName : (v.ar ? x.name_ar : x.name_en); return { pn: x.pn || '—', name, qty: x.qty, cond: x.cond || 'any',
+      condOpts: [{ v:'any', l:t.cond.any }, ...VM.COND_CODES.map(k => ({ v:k, l:k.toUpperCase() + ' – ' + t.cond[k] }))],
+      rows: rfq.map((x, i) => { const name = x.name_en === '__manual' ? t.r_manualName : (v.ar ? x.name_ar : x.name_en); return { pn: x.pn || '—', name, qty: x.qty, cond: OLD_COND[x.cond] || x.cond || 'any',
         showName: !!name && name.trim().toUpperCase() !== String(x.pn).trim().toUpperCase(),   // many catalogue items repeat the part number as their name
         img: imgOf(x) ? asset(imgOf(x)) : '',
         removeLabel: t.r_remove + ' ' + (x.pn || name || ''), href: x.slug ? VM.productHref(x.slug) : '', linkLabel: t.qp_link,
