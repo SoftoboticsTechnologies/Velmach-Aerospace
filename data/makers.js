@@ -3,7 +3,7 @@
    page and is left out of the "Brands we have" strip; any other maker links to the request-a-quote page. "logo" is a file in public/brands/; a maker with no logo shows its name as text. */
 window.VM_MAKERS = {
   aircraft: [
-    { name: "Airbus", logo: "public/brands/airbus.svg" },
+    { name: "Airbus", slug: "airbus", logo: "public/brands/airbus.svg" },
     { name: "Boeing", slug: "boeing", logo: "public/brands/boeing.svg" },
     { name: "Dassault Aviation", slug: "dassault-aviation", logo: "public/brands/dassault-aviation.svg" },
     { name: "Gulfstream Aerospace", slug: "gulfstream-aerospace", logo: "public/brands/gulfstream-aerospace.svg" },

@@ -123,7 +123,30 @@
     /* Quote list entry for a catalogue product (same list the header badge and rfq.dc.html use). */
     addToQuote: function (product, qty) {
       VM.addRfq({ pn: product.pn, name_en: product.title, name_ar: product.title, brand: product.brand || '', slug: product.slug || '',
-        image: product.image || '', cond: 'any' }, qty || 1);
+        image: product.image || '', cond: product.cond || 'any' }, qty || 1);
+    },
+    /* Wanted condition(s) of a quote line: "any", one code ("ne") or several picked together ("ne,ns,oh").
+       condText gives "NE (New), NS (New surplus)" in English for the emailed request, or "" for "any". */
+    /* The condition chips shown everywhere (home Part Search, listings, product page, quote forms), in this order */
+    COND_CHIPS: ['ne', 'ns', 'oh', 'sv', 'rp', 'or', 'ar'],
+    /* chip list for a template: [{ code: "NE", name: "New", pressed: "true"|"false", title, toggle }] for the wanted
+       condition string; onChange gets the new string ("ne,oh" or "any") */
+    condChips: function (cond, onChange) {
+      var t = VM.t(), on = VM.condCodes(cond);
+      return VM.COND_CHIPS.map(function (k) {
+        var name = (t.cond && t.cond[k]) || k, pressed = on.indexOf(k) > -1;
+        return { k: k, code: k.toUpperCase(), name: name, title: k.toUpperCase() + ' – ' + name, pressed: String(pressed),
+          toggle: function () {
+            var next = pressed ? on.filter(function (x) { return x !== k; }) : on.concat([k]);
+            next = VM.COND_CHIPS.filter(function (x) { return next.indexOf(x) > -1; }).concat(next.filter(function (x) { return VM.COND_CHIPS.indexOf(x) < 0; }));
+            onChange(next.join(',') || 'any');
+          } };
+      });
+    },
+    condCodes: function (cond) { return String(cond || '').split(',').filter(function (k) { return k && k !== 'any'; }); },
+    condText: function (cond) {
+      var en = (window.VM_I18N && window.VM_I18N.en.cond) || {};
+      return VM.condCodes(cond).map(function (k) { return k.toUpperCase() + ' (' + (en[k] || k) + ')'; }).join(', ');
     },
     /* Condition filter / product label for a card's condition key: "new", "used", "none" (not stated) or a parts-list
        condition code ("in", "ar", "sv" ...; ATA Spec 2000 names below). A code without a name shows as written. */

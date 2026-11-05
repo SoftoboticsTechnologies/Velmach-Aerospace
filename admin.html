@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Velmach Admin</title>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<!--
+  Velmach Aerospace admin: manage the Brand list and the Aircraft model list without editing code.
+  The site is static (GitHub Pages), so this page edits the files in the GitHub repository directly:
+    data/brands.js            brands shown in menus, the home Part Search and brand pages
+    data/supplier-brands.json brands kept by scripts/build-catalog.py even while they have no products
+    data/aircraft.js          aircraft makes and models (ids "<make>/<model>" that products refer to)
+  Saving makes one commit on main; GitHub Pages publishes it in a minute or two.
+  Sign-in: a GitHub fine-grained personal access token with "Contents: Read and write" on this repository only.
+  The token stays in this browser (this tab only, unless "Remember on this device" is ticked) and is sent only to api.github.com.
+  Safety: a brand or aircraft model that products use cannot be deleted, and a model's name cannot change once
+  products use it (that would break the products' aircraft links). Product counts come from data/catalog/meta.json.
+-->
+<style>
+:root { --ink: #0B1B2B; --steel: #56626E; --steel-2: #8A96A3; --line: #E6E4DE; --line-2: #C3C7C9; --paper: #F6F5F1;
+  --blue: #0759A5; --blue-2: #0A6BC4; --red: #B42318; --green: #137333; --bg: #FFFFFF; --hi: #EEF4FA; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+button, input, select { font: inherit; color: inherit; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+header { background: var(--ink); color: #fff; }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; flex-wrap: wrap; }
+header h1 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: .01em; }
+header h1 span { color: #9FB0C1; font-weight: 400; }
+header .who { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #C9D2DB; }
+main { padding: 24px 0 120px; }
+.card { background: var(--bg); border: 1px solid var(--line); padding: 20px; }
+.card + .card { margin-top: 16px; }
+h2 { margin: 0 0 6px; font-size: 20px; }
+p.note { margin: 0 0 14px; color: var(--steel); font-size: 14px; max-width: 70ch; }
+label.f { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--steel); }
+input[type=text], input[type=password], input[type=search] { height: 40px; padding: 0 12px; border: 1px solid var(--line-2); background: #fff; min-width: 0; }
+input:focus-visible, button:focus-visible { outline: 2px solid var(--blue-2); outline-offset: 1px; }
+.btn { height: 40px; padding: 0 16px; border: 1px solid var(--ink); background: var(--ink); color: #fff; cursor: pointer; font-weight: 600; font-size: 14px; white-space: nowrap; }
+.btn:hover { background: var(--blue); border-color: var(--blue); }
+.btn--line { background: #fff; color: var(--ink); border-color: var(--line-2); }
+.btn--line:hover { background: var(--hi); color: var(--ink); border-color: var(--ink); }
+.btn--sm { height: 32px; padding: 0 10px; font-size: 13px; font-weight: 500; }
+.btn--danger { color: var(--red); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+.row > .grow { flex: 1 1 240px; }
+.check { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--steel); }
+.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line-2); margin-bottom: 16px; }
+.tab { padding: 10px 18px; border: 0; border-bottom: 3px solid transparent; background: none; cursor: pointer; font-weight: 600; color: var(--steel); }
+.tab[aria-selected=true] { color: var(--ink); border-bottom-color: var(--blue); }
+.tools { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+.tools input[type=search] { flex: 1 1 220px; }
+.count { color: var(--steel); font-size: 13px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--steel); font-weight: 600; background: var(--paper); position: sticky; top: 0; z-index: 1; }
+td.num { font-variant-numeric: tabular-nums; color: var(--steel); }
+td .slug { font: 12px ui-monospace, Consolas, monospace; color: var(--steel-2); }
+td input[type=text] { width: 100%; height: 34px; }
+.acts { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+.tbl { max-height: 62vh; overflow: auto; border: 1px solid var(--line); }
+.tag { display: inline-block; padding: 1px 7px; font-size: 11.5px; font-weight: 600; border: 1px solid currentColor; }
+.tag--new { color: var(--green); } .tag--edit { color: var(--blue); } .tag--del { color: var(--red); }
+tr.is-del td { text-decoration: line-through; color: var(--steel-2); }
+tr.is-del td .acts, tr.is-del td:last-child { text-decoration: none; }
+.make { border: 1px solid var(--line); margin-bottom: 10px; background: #fff; }
+.make > summary { display: flex; align-items: center; gap: 10px; padding: 10px 12px; cursor: pointer; list-style: none; flex-wrap: wrap; }
+.make > summary::-webkit-details-marker { display: none; }
+.make > summary::before { content: "▸"; color: var(--steel-2); transition: transform .15s; }
+.make[open] > summary::before { transform: rotate(90deg); }
+.make > summary b { font-size: 15px; }
+.make > summary .count { margin-inline-end: auto; }
+.models { padding: 4px 12px 12px; }
+.model { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid var(--line); flex-wrap: wrap; }
+.model .name { flex: 1 1 180px; min-width: 0; }
+.model .name input { width: 100%; height: 32px; }
+.model.is-del .name { text-decoration: line-through; color: var(--steel-2); }
+.savebar { position: fixed; inset-inline: 0; bottom: 0; background: var(--ink); color: #fff; z-index: 10; transform: translateY(100%); transition: transform .2s; }
+.savebar.on { transform: none; }
+.savebar .wrap { display: flex; align-items: center; gap: 12px; min-height: 64px; flex-wrap: wrap; padding-block: 10px; }
+.savebar .msg { flex: 1 1 240px; font-size: 14px; }
+.savebar input { height: 40px; flex: 2 1 260px; color: var(--ink); }
+.savebar .btn--line { background: transparent; color: #fff; border-color: #56626E; }
+.alert { padding: 12px 14px; border: 1px solid; margin-bottom: 14px; font-size: 14px; }
+.alert--err { color: var(--red); background: #FEF3F2; }
+.alert--ok { color: var(--green); background: #ECFDF3; }
+.alert--info { color: var(--ink); background: var(--hi); border-color: #B9CDE3; }
+.muted { color: var(--steel); font-size: 13px; }
+ol.steps { margin: 6px 0 14px; padding-inline-start: 20px; color: var(--steel); font-size: 14px; }
+ol.steps li { margin: 3px 0; }
+code { font: 13px ui-monospace, Consolas, monospace; background: var(--paper); padding: 1px 5px; }
+[hidden] { display: none !important; }
+@media (max-width: 640px) {
+  .hide-sm { display: none; }
+  th, td { padding: 8px 6px; }
+  .card { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Velmach Aerospace <span>· Admin</span></h1>
+  <div class="who" id="who" hidden><span id="who-name"></span><button class="btn btn--line btn--sm" id="signout" type="button">Sign out</button></div>
+</div></header>
+
+<main class="wrap">
+  <div id="alert" role="status" aria-live="polite"></div>
+
+  <!-- sign in -->
+  <section class="card" id="login">
+    <h2>Sign in</h2>
+    <p class="note">This page edits the website's Brand and Aircraft lists directly in the GitHub repository <code id="repo-name"></code>. Saving makes a commit, and the live site updates within a minute or two.</p>
+    <ol class="steps">
+      <li>On GitHub, open <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>.</li>
+      <li>Under <b>Repository access</b>, pick <b>Only select repositories</b> and choose this repository.</li>
+      <li>Under <b>Permissions → Repository permissions</b>, set <b>Contents</b> to <b>Read and write</b>. Then generate the token and paste it below.</li>
+    </ol>
+    <form id="login-form" class="row">
+      <label class="f grow">GitHub access token<input type="password" id="token" autocomplete="off" spellcheck="false" placeholder="github_pat_…" required></label>
+      <button class="btn" type="submit">Sign in</button>
+    </form>
+    <p style="margin:12px 0 0"><label class="check"><input type="checkbox" id="remember"> Remember on this device (only on a computer that you alone use)</label></p>
+  </section>
+
+  <!-- editor -->
+  <section id="editor" hidden>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-brands" aria-controls="pane-brands" aria-selected="true" type="button">Brands</button>
+      <button class="tab" role="tab" id="tab-aircraft" aria-controls="pane-aircraft" aria-selected="false" type="button">Aircraft models</button>
+    </div>
+
+    <div id="pane-brands" role="tabpanel" aria-labelledby="tab-brands">
+      <div class="card">
+        <h2>Add a brand</h2>
+        <p class="note">Brands are listed A–Z on the website, in the home Part Search's Brand list, the header menu and the Brands page. A new brand gets its own page right away; products added to it later show up there. To show a logo, put <code>public/brands/&lt;slug&gt;.svg</code> (or .png / .webp) in the repository.</p>
+        <form id="brand-add" class="row">
+          <label class="f grow">Brand name<input type="text" id="brand-new" maxlength="80" placeholder="e.g. Honeywell" required></label>
+          <button class="btn" type="submit">Add brand</button>
+        </form>
+      </div>
+      <div class="card">
+        <div class="tools">
+          <input type="search" id="brand-q" placeholder="Search brands" aria-label="Search brands">
+          <span class="count" id="brand-count"></span>
+        </div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Name</th><th class="hide-sm">Slug</th><th>Products</th><th title="Featured brands come first in the header menu">Featured</th><th><span class="hide-sm">Actions</span></th></tr></thead>
+            <tbody id="brand-rows"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="pane-aircraft" role="tabpanel" aria-labelledby="tab-aircraft" hidden>
+      <div class="card">
+        <h2>Add an aircraft model</h2>
+        <p class="note">Models are grouped by manufacturer on the website (home Part Search, Shop by Aircraft, product filters). Choose an existing manufacturer or type a new one. Separate several models with commas.</p>
+        <form id="ac-add" class="row">
+          <label class="f grow">Manufacturer<input type="text" id="ac-make" list="ac-makes" maxlength="60" placeholder="e.g. Airbus" required></label>
+          <datalist id="ac-makes"></datalist>
+          <label class="f grow">Model(s)<input type="text" id="ac-model" maxlength="400" placeholder="e.g. A321XLR, A220-300" required></label>
+          <button class="btn" type="submit">Add</button>
+        </form>
+      </div>
+      <div class="card">
+        <div class="tools">
+          <input type="search" id="ac-q" placeholder="Search manufacturers and models" aria-label="Search aircraft">
+          <button class="btn btn--line btn--sm" type="button" id="ac-expand">Expand all</button>
+          <span class="count" id="ac-count"></span>
+        </div>
+        <div id="ac-list"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="savebar" id="savebar" aria-live="polite">
+  <div class="wrap">
+    <span class="msg" id="save-msg"></span>
+    <input type="text" id="save-note" maxlength="120" placeholder="What changed (optional, saved with the change)" aria-label="Change note">
+    <button class="btn btn--line" type="button" id="discard">Discard</button>
+    <button class="btn" type="button" id="save" style="background:var(--blue);border-color:var(--blue)">Save to website</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var REPO = 'SoftoboticsTechnologies/Velmach-Aerospace', BRANCH = 'main', API = 'https://api.github.com';
+  var FILES = { brands: 'data/brands.js', supplier: 'data/supplier-brands.json', aircraft: 'data/aircraft.js', meta: 'data/catalog/meta.json' };
+  var TK = 'vm_admin_token';
+  var token = '', loaded = null, state = null, logos = {};
+  var $ = function (id) { return document.getElementById(id); };
+  $('repo-name').textContent = REPO;
+
+  /* ---------- helpers ---------- */
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  // same as slugify() in scripts/catalog_lib.py
+  function slugify(text) {
+    var s = String(text).normalize('NFKD').replace(/[^\x00-\x7f]/g, '').toLowerCase().replace(/&/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    if (s.length > 80) { var cut = s.slice(0, 80); s = cut.slice(0, cut.lastIndexOf('-')) || cut; }
+    return s;
+  }
+  // same as norm_key() in scripts/catalog_lib.py
+  function normKey(t) { return String(t).normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  // same as VM.acId() in js/vm-core.js
+  function acSlug(x) { return String(x).toLowerCase().replace(/&/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
+  function acId(make, model) { return acSlug(make) + '/' + acSlug(model); }
+  function az(a, b) { return a.localeCompare(b, 'en', { numeric: true, sensitivity: 'base' }); }
+  function clone(x) { return JSON.parse(JSON.stringify(x)); }
+  function alertMsg(kind, html) { $('alert').innerHTML = html ? '<div class="alert alert--' + kind + '">' + html + '</div>' : ''; if (html) window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  function b64decode(s) { var bin = atob(s.replace(/\n/g, '')), bytes = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i); return new TextDecoder('utf-8').decode(bytes); }
+  function readJsValue(text, name) { var w = {}; new Function('window', text)(w); return w[name]; }
+
+  function gh(path, opts) {
+    opts = opts || {};
+    return fetch(API + path, { method: opts.method || 'GET', cache: 'no-store',
+      headers: { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', 'Content-Type': 'application/json' },
+      body: opts.body ? JSON.stringify(opts.body) : undefined })
+      .then(function (r) {
+        return r.text().then(function (t) {
+          var d = null; try { d = t ? JSON.parse(t) : null; } catch (e) {}
+          if (!r.ok) { var err = new Error((d && d.message) || ('HTTP ' + r.status)); err.status = r.status; throw err; }
+          return d;
+        });
+      });
+  }
+  function getFile(path) { return gh('/repos/' + REPO + '/contents/' + path + '?ref=' + BRANCH).then(function (d) { return { sha: d.sha, text: b64decode(d.content) }; }); }
+
+  /* ---------- file formats (match scripts/build-catalog.py and data/aircraft.js) ---------- */
+  var BRANDS_HEAD = '/* Velmach Aerospace: brands. Updated by scripts/build-catalog.py: every brand that appears on products is listed;\n' +
+    '   a brand with no products is dropped. featured: true puts the brand first in the header menu; set it by hand.\n' +
+    '   Logos: put <slug>.svg (or .png / .webp) in public/brands/ and rebuild; the build fills in "logo" (a white-only logo:\n' +
+    '   <slug>-white.<ext>, shown on a dark backing: "logoDark"). A brand without a\n' +
+    '   logo file shows its name as text instead. URLs: brand.dc.html?b=<slug> (clean form: /brand/<slug>). Keep a slug once published. */\n';
+  function brandsText(list) {
+    var rows = list.slice().sort(function (a, b) { var x = a.name.toLowerCase(), y = b.name.toLowerCase(); return x < y ? -1 : x > y ? 1 : 0; }).map(function (b) {
+      var o = { slug: b.slug, name: b.name, featured: !!b.featured };
+      if (b.logo) { o.logo = b.logo; if (b.logoDark) o.logoDark = true; }
+      return '  ' + JSON.stringify(o).split('","').join('", "').split('":').join('": ');
+    });
+    return BRANDS_HEAD + 'window.VM_BRANDS = [\n' + rows.join(',\n') + '\n];\n';
+  }
+  function aircraftText(list, original) {
+    var i = original.indexOf('window.VM_AIRCRAFT'), head = i > 0 ? original.slice(0, i) : '';
+    var rows = list.map(function (m) { return '  { make: ' + JSON.stringify(m.make) + ', models: [' + m.models.map(function (x) { return JSON.stringify(x); }).join(', ') + '] }'; });
+    return head + 'window.VM_AIRCRAFT = [\n' + rows.join(',\n') + '\n];\n';
+  }
+  function supplierText(obj) { return JSON.stringify(obj, null, 2) + '\n'; }
+
+  /* ---------- load ---------- */
+  function load() {
+    alertMsg('info', 'Loading the current lists from GitHub…');
+    return Promise.all([getFile(FILES.brands), getFile(FILES.supplier), getFile(FILES.aircraft), getFile(FILES.meta),
+      gh('/repos/' + REPO + '/contents/public/brands?ref=' + BRANCH).catch(function () { return []; })])
+      .then(function (res) {
+        var meta = JSON.parse(res[3].text);
+        logos = {}; (res[4] || []).forEach(function (f) { logos[f.name] = 1; });
+        loaded = { files: { brands: res[0], supplier: res[1], aircraft: res[2] },
+          brands: readJsValue(res[0].text, 'VM_BRANDS'), supplier: JSON.parse(res[1].text), aircraft: readJsValue(res[2].text, 'VM_AIRCRAFT'),
+          counts: { brands: meta.brands || {}, aircraft: meta.aircraft || {} } };
+        reset();
+        alertMsg('', '');
+      });
+  }
+  function reset() {
+    state = { brands: loaded.brands.map(function (b) { return Object.assign({ _orig: b.name }, clone(b)); }), deleted: {}, added: {},
+      aircraft: loaded.aircraft.map(function (m) { return { make: m.make, _orig: m.make, models: m.models.map(function (x) { return { name: x, _orig: x }; }), deleted: {} }; }),
+      supplier: clone(loaded.supplier) };
+    renderBrands(); renderAircraft(); dirty();
+  }
+
+  /* ---------- brands ---------- */
+  function brandCount(slug) { return loaded.counts.brands[slug] || 0; }
+  function logoFor(slug) {
+    var exts = ['svg', 'png', 'webp'];
+    for (var i = 0; i < exts.length; i++) if (logos[slug + '.' + exts[i]]) return { logo: 'public/brands/' + slug + '.' + exts[i] };
+    for (var j = 0; j < exts.length; j++) if (logos[slug + '-white.' + exts[j]]) return { logo: 'public/brands/' + slug + '-white.' + exts[j], logoDark: true };
+    return {};
+  }
+  function renderBrands() {
+    var q = normKey($('brand-q').value), list = state.brands.filter(function (b) { return !q || normKey(b.name).indexOf(q) > -1 || b.slug.indexOf(q) > -1; })
+      .sort(function (a, b) { return az(a.name, b.name); });
+    var kept = state.brands.filter(function (b) { return !state.deleted[b.slug]; }).length;
+    $('brand-count').textContent = (q ? list.length + ' shown · ' : '') + kept + ' brands';
+    $('brand-rows').innerHTML = list.map(function (b) {
+      var n = brandCount(b.slug), del = !!state.deleted[b.slug], isNew = !!state.added[b.slug], edited = !isNew && b.name !== b._orig;
+      var tag = del ? '<span class="tag tag--del">Will be deleted</span>' : isNew ? '<span class="tag tag--new">New</span>' : edited ? '<span class="tag tag--edit">Renamed</span>' : '';
+      return '<tr data-slug="' + esc(b.slug) + '"' + (del ? ' class="is-del"' : '') + '>' +
+        '<td><input type="text" value="' + esc(b.name) + '" data-act="rename" aria-label="Brand name"' + (del ? ' disabled' : '') + '> ' + tag + '</td>' +
+        '<td class="hide-sm"><span class="slug">' + esc(b.slug) + '</span></td>' +
+        '<td class="num">' + n.toLocaleString('en') + '</td>' +
+        '<td><input type="checkbox" data-act="feature" aria-label="Featured"' + (b.featured ? ' checked' : '') + (del ? ' disabled' : '') + '></td>' +
+        '<td><div class="acts">' + (del
+          ? '<button class="btn btn--line btn--sm" type="button" data-act="undelete">Undo</button>'
+          : '<button class="btn btn--line btn--sm btn--danger" type="button" data-act="delete"' + (n ? ' disabled title="' + n + ' products use this brand"' : '') + '>Delete</button>') +
+        '</div></td></tr>';
+    }).join('') || '<tr><td colspan="5" class="muted">No brand matches.</td></tr>';
+  }
+  $('brand-q').addEventListener('input', renderBrands);
+  $('brand-rows').addEventListener('change', function (e) {
+    var tr = e.target.closest('tr'); if (!tr) return;
+    var b = state.brands.find(function (x) { return x.slug === tr.dataset.slug; }); if (!b) return;
+    if (e.target.dataset.act === 'rename') {
+      var name = e.target.value.trim().replace(/\s+/g, ' ');
+      var clash = state.brands.find(function (x) { return x !== b && !state.deleted[x.slug] && normKey(x.name) === normKey(name); });
+      if (!name) { e.target.value = b.name; return; }
+      if (clash) { alertMsg('err', 'There is already a brand called <b>' + esc(clash.name) + '</b>.'); e.target.value = b.name; return; }
+      b.name = name; alertMsg('', '');
+    }
+    if (e.target.dataset.act === 'feature') b.featured = e.target.checked;
+    renderBrands(); dirty();
+  });
+  $('brand-rows').addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-act]'), tr = e.target.closest('tr'); if (!btn || !tr) return;
+    var slug = tr.dataset.slug;
+    if (btn.dataset.act === 'delete') {
+      if (brandCount(slug)) return;
+      if (state.added[slug]) { state.brands = state.brands.filter(function (x) { return x.slug !== slug; }); delete state.added[slug]; }
+      else state.deleted[slug] = 1;
+    }
+    if (btn.dataset.act === 'undelete') delete state.deleted[slug];
+    renderBrands(); dirty();
+  });
+  $('brand-add').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = $('brand-new').value.trim().replace(/\s+/g, ' '), slug = slugify(name);
+    if (!name || !slug) { alertMsg('err', 'Type a brand name with at least one letter or number.'); return; }
+    var same = state.brands.find(function (x) { return normKey(x.name) === normKey(name) || x.slug === slug; });
+    if (same) {
+      if (state.deleted[same.slug]) { delete state.deleted[same.slug]; alertMsg('ok', '<b>' + esc(same.name) + '</b> is no longer marked for deletion.'); }
+      else alertMsg('err', '<b>' + esc(same.name) + '</b> is already in the list.');
+      $('brand-q').value = same.name; renderBrands(); dirty(); return;
+    }
+    state.brands.push(Object.assign({ slug: slug, name: name, featured: false, _orig: name }, logoFor(slug)));
+    state.added[slug] = 1;
+    $('brand-new').value = ''; $('brand-q').value = name;
+    alertMsg('ok', '<b>' + esc(name) + '</b> added. Press <b>Save to website</b> to publish it.');
+    renderBrands(); dirty();
+  });
+
+  /* ---------- aircraft ---------- */
+  function idCount(id) { return loaded.counts.aircraft[id] || 0; }
+  function makeUsed(m) { return m.models.some(function (x) { return idCount(acId(m._orig || m.make, x._orig || x.name)); }); }
+  var openMakes = {};
+  function renderAircraft() {
+    var q = $('ac-q').value.trim().toLowerCase(), makes = state.aircraft.slice().sort(function (a, b) { return az(a.make, b.make); });
+    $('ac-makes').innerHTML = makes.map(function (m) { return '<option value="' + esc(m.make) + '">'; }).join('');
+    var total = 0, html = makes.map(function (m) {
+      var mi = state.aircraft.indexOf(m), makeHit = q && m.make.toLowerCase().indexOf(q) > -1;
+      var models = m.models.map(function (x, i) { return { x: x, i: i }; }).filter(function (o) { return !q || makeHit || o.x.name.toLowerCase().indexOf(q) > -1; })
+        .sort(function (a, b) { return az(a.x.name, b.x.name); });
+      if (q && !models.length) return '';
+      var live = m.models.filter(function (x) { return !m.deleted[x._orig || ('new:' + x.name)]; }).length; total += live;
+      var used = makeUsed(m), isOpen = q || openMakes[m._orig || m.make];
+      return '<details class="make" data-m="' + mi + '"' + (isOpen ? ' open' : '') + '><summary><b>' + esc(m.make) + '</b><span class="count">' + live + ' models</span>' +
+        (m._orig && m.make !== m._orig ? '<span class="tag tag--edit">Renamed</span>' : '') + (!m._orig ? '<span class="tag tag--new">New</span>' : '') +
+        '<button class="btn btn--line btn--sm" type="button" data-act="rename-make"' + (used ? ' disabled title="Products use models of this manufacturer"' : '') + '>Rename</button>' +
+        '<button class="btn btn--line btn--sm btn--danger" type="button" data-act="delete-make"' + (used ? ' disabled title="Products use models of this manufacturer"' : '') + '>Delete</button></summary>' +
+        '<div class="models">' + models.map(function (o) {
+          var x = o.x, key = x._orig || ('new:' + x.name), n = x._orig ? idCount(acId(m._orig || m.make, x._orig)) : 0, del = !!m.deleted[key];
+          var tag = del ? '<span class="tag tag--del">Will be deleted</span>' : !x._orig ? '<span class="tag tag--new">New</span>' : x.name !== x._orig ? '<span class="tag tag--edit">Renamed</span>' : '';
+          return '<div class="model' + (del ? ' is-del' : '') + '" data-i="' + o.i + '"><span class="name">' +
+            (n || del ? esc(x.name) : '<input type="text" value="' + esc(x.name) + '" data-act="rename-model" aria-label="Model name">') + '</span>' + tag +
+            '<span class="count">' + (n ? n.toLocaleString('en') + ' products' : 'no products') + '</span>' +
+            (del ? '<button class="btn btn--line btn--sm" type="button" data-act="undelete-model">Undo</button>'
+              : '<button class="btn btn--line btn--sm btn--danger" type="button" data-act="delete-model"' + (n ? ' disabled title="' + n + ' products list this model"' : '') + '>Delete</button>') + '</div>';
+        }).join('') + '</div></details>';
+    }).join('');
+    $('ac-list').innerHTML = html || '<p class="muted">No aircraft matches.</p>';
+    $('ac-count').textContent = state.aircraft.length + ' manufacturers · ' + total + ' models';
+  }
+  $('ac-q').addEventListener('input', renderAircraft);
+  $('ac-expand').addEventListener('click', function () {
+    var all = state.aircraft.every(function (m) { return openMakes[m._orig || m.make]; });
+    state.aircraft.forEach(function (m) { openMakes[m._orig || m.make] = !all; });
+    this.textContent = all ? 'Expand all' : 'Collapse all'; renderAircraft();
+  });
+  $('ac-list').addEventListener('toggle', function (e) {
+    var d = e.target; if (!d.matches || !d.matches('details.make')) return;
+    var m = state.aircraft[+d.dataset.m]; if (m) openMakes[m._orig || m.make] = d.open;
+  }, true);
+  $('ac-list').addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-act]'); if (!btn) return;
+    var det = btn.closest('details.make'), m = state.aircraft[+det.dataset.m], row = btn.closest('.model');
+    var act = btn.dataset.act;
+    if (act === 'rename-make' || act === 'delete-make') e.preventDefault();   // do not toggle the group
+    if (act === 'rename-make') {
+      if (makeUsed(m)) return;
+      var name = (prompt('New name for ' + m.make, m.make) || '').trim().replace(/\s+/g, ' ');
+      if (!name || name === m.make) return;
+      if (state.aircraft.some(function (x) { return x !== m && acSlug(x.make) === acSlug(name); })) { alertMsg('err', '<b>' + esc(name) + '</b> is already a manufacturer.'); return; }
+      m.make = name;
+    }
+    if (act === 'delete-make') {
+      if (makeUsed(m) || !confirm('Delete ' + m.make + ' and its ' + m.models.length + ' models?')) return;
+      state.aircraft.splice(state.aircraft.indexOf(m), 1);
+    }
+    if (row) {
+      var x = m.models[+row.dataset.i], key = x._orig || ('new:' + x.name);
+      if (act === 'delete-model') { if (!x._orig) m.models.splice(+row.dataset.i, 1); else m.deleted[key] = 1; }
+      if (act === 'undelete-model') delete m.deleted[key];
+    }
+    renderAircraft(); dirty();
+  });
+  $('ac-list').addEventListener('change', function (e) {
+    if (e.target.dataset.act !== 'rename-model') return;
+    var det = e.target.closest('details.make'), m = state.aircraft[+det.dataset.m], x = m.models[+e.target.closest('.model').dataset.i];
+    var name = e.target.value.trim().replace(/\s+/g, ' ');
+    if (!name) { e.target.value = x.name; return; }
+    if (m.models.some(function (y) { return y !== x && acSlug(y.name) === acSlug(name); })) { alertMsg('err', '<b>' + esc(m.make) + ' ' + esc(name) + '</b> is already listed.'); e.target.value = x.name; return; }
+    x.name = name; renderAircraft(); dirty();
+  });
+  $('ac-add').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var makeName = $('ac-make').value.trim().replace(/\s+/g, ' '), names = $('ac-model').value.split(',').map(function (s) { return s.trim().replace(/\s+/g, ' '); }).filter(Boolean);
+    if (!makeName || !acSlug(makeName) || !names.length) { alertMsg('err', 'Type a manufacturer and at least one model.'); return; }
+    var m = state.aircraft.find(function (x) { return acSlug(x.make) === acSlug(makeName); });
+    if (!m) { m = { make: makeName, models: [], deleted: {} }; state.aircraft.push(m); }
+    var added = [], skipped = [];
+    names.forEach(function (n) {
+      if (!acSlug(n)) return;
+      var have = m.models.find(function (y) { return acSlug(y.name) === acSlug(n); });
+      if (have) { if (m.deleted[have._orig]) { delete m.deleted[have._orig]; added.push(have.name); } else skipped.push(have.name); return; }
+      m.models.push({ name: n }); added.push(n);
+    });
+    openMakes[m._orig || m.make] = true;
+    $('ac-model').value = '';
+    alertMsg(added.length ? 'ok' : 'err', (added.length ? 'Added to <b>' + esc(m.make) + '</b>: ' + added.map(esc).join(', ') + '. Press <b>Save to website</b> to publish.' : '') +
+      (skipped.length ? (added.length ? '<br>' : '') + 'Already listed: ' + skipped.map(esc).join(', ') + '.' : ''));
+    renderAircraft(); dirty();
+  });
+
+  /* ---------- changes ---------- */
+  function outBrands() {
+    return state.brands.filter(function (b) { return !state.deleted[b.slug]; }).map(function (b) {
+      var o = { slug: b.slug, name: b.name, featured: !!b.featured }; if (b.logo) o.logo = b.logo; if (b.logoDark) o.logoDark = true; return o;
+    });
+  }
+  function outSupplier() {
+    // the build keeps a brand without products only when it is named here: new brands go in, deleted ones come out,
+    // renamed ones follow their new name
+    var s = clone(state.supplier), list = (s.brands || []).slice();
+    var renamed = {}; state.brands.forEach(function (b) { if (!state.added[b.slug] && b.name !== b._orig) renamed[normKey(b._orig)] = b.name; });
+    var gone = {}; loaded.brands.forEach(function (b) { if (state.deleted[b.slug]) gone[normKey(b.name)] = 1; });
+    list = list.filter(function (n) { return !gone[normKey(n)]; }).map(function (n) { return renamed[normKey(n)] || n; });
+    state.brands.forEach(function (b) { if (state.added[b.slug] && !list.some(function (n) { return normKey(n) === normKey(b.name); })) list.push(b.name); });
+    s.brands = list; return s;
+  }
+  function outAircraft() {
+    return state.aircraft.map(function (m) {
+      return { make: m.make, models: m.models.filter(function (x) { return !m.deleted[x._orig || ('new:' + x.name)]; }).map(function (x) { return x.name; }) };
+    }).filter(function (m) { return m.models.length; });
+  }
+  function changes() {
+    if (!loaded) return {};
+    var out = {}, f = loaded.files;
+    var b = brandsText(outBrands()); if (b !== f.brands.text) out[FILES.brands] = b;
+    var s = supplierText(outSupplier()); if (JSON.stringify(JSON.parse(s)) !== JSON.stringify(JSON.parse(f.supplier.text))) out[FILES.supplier] = s;
+    var a = aircraftText(outAircraft(), f.aircraft.text); if (JSON.stringify(outAircraft()) !== JSON.stringify(loaded.aircraft)) out[FILES.aircraft] = a;
+    return out;
+  }
+  function summary() {
+    var parts = [], nb = Object.keys(state.added).length, db = Object.keys(state.deleted).length;
+    var rb = state.brands.filter(function (b) { return !state.added[b.slug] && b.name !== b._orig; }).length;
+    var fb = state.brands.filter(function (b) { var o = loaded.brands.find(function (x) { return x.slug === b.slug; }); return o && !!o.featured !== !!b.featured; }).length;
+    if (nb) parts.push(nb + ' brand' + (nb > 1 ? 's' : '') + ' added'); if (rb) parts.push(rb + ' renamed'); if (db) parts.push(db + ' deleted'); if (fb) parts.push(fb + ' featured changed');
+    var before = {}, after = {};
+    loaded.aircraft.forEach(function (m) { m.models.forEach(function (x) { before[acId(m.make, x)] = 1; }); });
+    outAircraft().forEach(function (m) { m.models.forEach(function (x) { after[acId(m.make, x)] = 1; }); });
+    var na = Object.keys(after).filter(function (k) { return !before[k]; }).length, da = Object.keys(before).filter(function (k) { return !after[k]; }).length;
+    if (na) parts.push(na + ' aircraft model' + (na > 1 ? 's' : '') + ' added'); if (da) parts.push(da + ' aircraft model' + (da > 1 ? 's' : '') + ' removed');
+    return parts.join(', ');
+  }
+  function dirty() {
+    var n = Object.keys(changes()).length;
+    $('savebar').classList.toggle('on', n > 0);
+    $('save-msg').textContent = n ? 'Unsaved: ' + (summary() || 'changes') : '';
+  }
+  window.addEventListener('beforeunload', function (e) { if (loaded && Object.keys(changes()).length) { e.preventDefault(); e.returnValue = ''; } });
+  $('discard').addEventListener('click', function () { if (confirm('Discard all unsaved changes?')) { reset(); alertMsg('', ''); } });
+
+  // one commit with every changed file; refused if someone changed these files since they were loaded
+  $('save').addEventListener('click', function () {
+    var ch = changes(), paths = Object.keys(ch); if (!paths.length) return;
+    var btn = this; btn.disabled = true; btn.textContent = 'Saving…';
+    var msg = 'Admin: ' + (summary() || 'update lists') + ($('save-note').value.trim() ? ' (' + $('save-note').value.trim() + ')' : '');
+    var head;
+    Promise.all(paths.map(function (p) { return gh('/repos/' + REPO + '/contents/' + p + '?ref=' + BRANCH); }))
+      .then(function (now) {
+        var key = { }; key[FILES.brands] = 'brands'; key[FILES.supplier] = 'supplier'; key[FILES.aircraft] = 'aircraft';
+        now.forEach(function (d, i) { if (d.sha !== loaded.files[key[paths[i]]].sha) { var e = new Error('conflict'); e.conflict = true; throw e; } });
+        return gh('/repos/' + REPO + '/git/ref/heads/' + BRANCH);
+      })
+      .then(function (ref) { head = ref.object.sha; return gh('/repos/' + REPO + '/git/commits/' + head); })
+      .then(function (c) { return gh('/repos/' + REPO + '/git/trees', { method: 'POST', body: { base_tree: c.tree.sha, tree: paths.map(function (p) { return { path: p, mode: '100644', type: 'blob', content: ch[p] }; }) } }); })
+      .then(function (tree) { return gh('/repos/' + REPO + '/git/commits', { method: 'POST', body: { message: msg, tree: tree.sha, parents: [head] } }); })
+      .then(function (commit) { return gh('/repos/' + REPO + '/git/refs/heads/' + BRANCH, { method: 'PATCH', body: { sha: commit.sha, force: false } }); })
+      .then(function () { $('save-note').value = ''; return load(); })
+      .then(function () { alertMsg('ok', '<b>Saved.</b> ' + esc(msg.replace(/^Admin: /, '')) + '. The live website shows it within a minute or two (refresh the page there).'); })
+      .catch(function (err) {
+        if (err.conflict || err.status === 422 || err.status === 409) alertMsg('err', 'Someone else changed these lists since you opened this page. Your changes were <b>not</b> saved. Note them down, then reload this page and make them again.');
+        else if (err.status === 401 || err.status === 403 || err.status === 404) alertMsg('err', 'GitHub refused the save (' + esc(err.message) + '). The token needs <b>Contents: Read and write</b> on ' + esc(REPO) + '.');
+        else alertMsg('err', 'Could not save: ' + esc(err.message) + '. Nothing was changed. Check the connection and try again.');
+      })
+      .then(function () { btn.disabled = false; btn.textContent = 'Save to website'; dirty(); });
+  });
+
+  /* ---------- tabs ---------- */
+  function tab(name) {
+    ['brands', 'aircraft'].forEach(function (n) { $('tab-' + n).setAttribute('aria-selected', String(n === name)); $('pane-' + n).hidden = n !== name; });
+    try { sessionStorage.setItem('vm_admin_tab', name); } catch (e) {}
+  }
+  $('tab-brands').addEventListener('click', function () { tab('brands'); });
+  $('tab-aircraft').addEventListener('click', function () { tab('aircraft'); });
+
+  /* ---------- sign in ---------- */
+  function store(t, remember) {
+    try { sessionStorage.removeItem(TK); localStorage.removeItem(TK); if (t) (remember ? localStorage : sessionStorage).setItem(TK, t); } catch (e) {}
+  }
+  function signIn(t, remember) {
+    token = t;
+    return gh('/repos/' + REPO).then(function (repo) {
+      if (!repo.permissions || !repo.permissions.push) { var e = new Error('This token can read but not change ' + REPO + '.'); e.status = 403; throw e; }
+      return gh('/user').catch(function () { return {}; });
+    }).then(function (user) {
+      store(t, remember);
+      $('login').hidden = true; $('editor').hidden = false; $('who').hidden = false; $('who-name').textContent = user.login ? 'Signed in as ' + user.login : 'Signed in';
+      var last = 'brands'; try { last = sessionStorage.getItem('vm_admin_tab') || 'brands'; } catch (e) {}
+      tab(last);
+      return load();
+    }).catch(function (err) {
+      token = ''; store('', false);
+      $('login').hidden = false; $('editor').hidden = true; $('who').hidden = true;
+      alertMsg('err', err.status === 401 ? 'GitHub did not accept this token. Check that it was copied in full and has not expired.'
+        : err.status === 404 ? 'This token has no access to ' + esc(REPO) + '. Under "Repository access", choose this repository.'
+        : esc(err.message));
+    });
+  }
+  $('login-form').addEventListener('submit', function (e) { e.preventDefault(); var t = $('token').value.trim(); if (t) { $('token').value = ''; signIn(t, $('remember').checked); } });
+  $('signout').addEventListener('click', function () {
+    if (loaded && Object.keys(changes()).length && !confirm('You have unsaved changes. Sign out anyway?')) return;
+    store('', false); token = ''; loaded = null; state = null;
+    $('login').hidden = false; $('editor').hidden = true; $('who').hidden = true; $('savebar').classList.remove('on'); alertMsg('', '');
+  });
+  var saved = ''; try { saved = sessionStorage.getItem(TK) || localStorage.getItem(TK) || ''; } catch (e) {}
+  if (saved) { var rem = false; try { rem = !!localStorage.getItem(TK); } catch (e) {} signIn(saved, rem); }
+})();
+</script>
+</body>
+</html>

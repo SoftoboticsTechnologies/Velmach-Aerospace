@@ -386,6 +386,23 @@
 .rf-prod dt { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--steel); }
 [dir="rtl"] .rf-prod dt { letter-spacing: 0; }
 .rf-prod dd { margin: 0; font-weight: 600; font-size: 14.5px; overflow-wrap: anywhere; }
+/* Condition chips (listings, product page, quote form): code on top, full name below, several can be on */
+.vc { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.vc--bar { margin-bottom: 18px; }
+.vc-l { font-size: 12.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--steel); }
+[dir="rtl"] .vc-l { letter-spacing: 0; }
+.vc-l small { margin-inline-start: 6px; font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--steel-2); }
+.vc-row { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.vc--sm .vc-row { grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); }
+.pd-rfq .vc-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.vc-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 52px; padding: 6px 4px; border: 1px solid var(--line-2); border-radius: 0; background: #fff; color: var(--navy); font: inherit; text-align: center; cursor: pointer; transition: border-color .2s, background .2s, color .2s; }
+.vc-chip b { font: 600 14px/1 'Archivo', system-ui, sans-serif; letter-spacing: .04em; }
+.vc-chip span { font-size: 11px; line-height: 1.2; color: var(--steel); }
+.vc-chip:hover { border-color: var(--navy); }
+.vc-chip:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.vc-chip[aria-pressed="true"] { border-color: var(--blue); background: var(--blue); color: #fff; }
+.vc-chip[aria-pressed="true"] span { color: #fff; }
+@media (max-width: 759px) { .vc-row { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .rf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
 .rf-f { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: #1F2933; min-width: 0; }
 .rf-f--wide { grid-column: 1 / -1; }

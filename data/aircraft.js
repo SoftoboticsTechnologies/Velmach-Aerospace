@@ -2,7 +2,7 @@
    A product's compatibleAircraft list uses the same ids ("<make-slug>/<model-slug>", e.g. "boeing/737"); an empty list
    means the product fits any aircraft. Add makes or models here; keep existing ids once products use them. */
 window.VM_AIRCRAFT = [
-  { make: "Airbus", models: ["A220", "A300", "A310", "A318", "A319", "A320", "A321", "A330", "A340", "A350", "A380", "A300-600F", "A330neo", "A350-1000"] },
+  { make: "Airbus", models: ["A220", "A300", "A310", "A318", "A319", "A320", "A321", "A330", "A340", "A350", "A380", "A300-600F", "A330neo", "A350-1000", "A320neo family"] },
   { make: "Airbus Helicopters", models: ["H125", "H130", "H135", "H145", "H155", "H160", "H175", "H225", "AS350 Ecureuil", "AS355 Ecureuil 2", "AS365 Dauphin", "AS332 Super Puma", "EC120", "EC130", "EC135", "EC145", "EC155", "EC225", "BK117"] },
   { make: "Antonov", models: ["An-12", "An-24", "An-26", "An-32", "An-74", "An-124"] },
   { make: "ATR", models: ["ATR 42", "ATR 72", "ATR 72-600"] },

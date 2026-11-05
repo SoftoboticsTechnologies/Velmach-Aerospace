@@ -73,6 +73,12 @@
             <label class="rf-f"><span>{{ t.rf_date }}</span>
               <input name="date" type="date" value="{{ f.date }}" onChange="{{ on.date }}" min="{{ today }}">
             </label>
+            <div class="rf-f rf-f--wide vc vc--sm" role="group" aria-labelledby="rf-cond-l">
+              <span class="vc-l" id="rf-cond-l">{{ t.th.cond }} <small>{{ t.hf_cond_hint }}</small></span>
+              <div class="vc-row">
+                <sc-for list="{{ condChips }}" as="c" hint-placeholder-count="7"><button type="button" class="vc-chip" aria-pressed="{{ c.pressed }}" title="{{ c.title }}" onClick="{{ c.toggle }}"><b dir="ltr">{{ c.code }}</b><span>{{ c.name }}</span></button></sc-for>
+              </div>
+            </div>
             <label class="rf-f rf-f--wide"><span>{{ t.rf_msg }}</span>
               <textarea name="message" rows="4" value="{{ f.message }}" onChange="{{ on.message }}" placeholder="{{ t.rf_msg_ph }}"></textarea>
             </label>
@@ -122,7 +128,7 @@ class Component extends DCLogic {
       try { saved = JSON.parse(localStorage.getItem(CONTACT_KEY) || '{}') || {}; } catch (x) {}
       this.lastFocus = document.activeElement;
       this.file = null;
-      this.setState({ open: true, p: ev.detail || {}, f: { ...EMPTY, ...saved, qty: String((ev.detail && ev.detail.qty) || 1) }, e: {}, sending: false, done: '', sendErr: '' });
+      this.setState({ open: true, p: ev.detail || {}, f: { ...EMPTY, ...saved, qty: String((ev.detail && ev.detail.qty) || 1), cond: (ev.detail && ev.detail.cond) || 'any' }, e: {}, sending: false, done: '', sendErr: '' });
     };
     this.onKey = ev => {
       if (!this.state.open) return;
@@ -175,7 +181,7 @@ class Component extends DCLogic {
     const link = p.slug ? new URL(VM.productHref(p.slug), location.href).href : '';
     const country = f.country ? (this.names().of(f.country) || f.country) : '-';
     const lines = ['REQUEST FOR QUOTE - Velmach Aerospace', '',
-      'Product: ' + (p.title || '-'), 'Part number: ' + (p.pn || '-'), 'Brand: ' + (p.brand || '-'), 'Product page: ' + (link || '-'),
+      'Product: ' + (p.title || '-'), 'Part number: ' + (p.pn || '-'), 'Brand: ' + (p.brand || '-'), 'Condition required: ' + (VM.condText(f.cond) || 'any'), 'Product page: ' + (link || '-'),
       'Quantity: ' + f.qty, 'Required by: ' + (f.date || '-'), '',
       'Name: ' + f.name, 'Company: ' + (f.company || '-'), 'Email: ' + f.email, 'Phone: ' + this.dialOf(f.dial) + ' ' + f.phone, 'Country: ' + country, '',
       'Message:', f.message || '-'];
@@ -191,7 +197,7 @@ class Component extends DCLogic {
       const fd = new FormData();
       fd.append('_subject', subject); fd.append('_replyto', f.email); fd.append('email', f.email);
       fd.append('name', f.name); fd.append('company', f.company); fd.append('phone', this.dialOf(f.dial) + ' ' + f.phone); fd.append('country', country);
-      fd.append('product', p.title || ''); fd.append('part_number', p.pn || ''); fd.append('brand', p.brand || ''); fd.append('product_url', link);
+      fd.append('product', p.title || ''); fd.append('part_number', p.pn || ''); fd.append('brand', p.brand || ''); fd.append('condition', VM.condText(f.cond) || 'any'); fd.append('product_url', link);
       fd.append('quantity', f.qty); fd.append('required_by', f.date); fd.append('message', lines.join('\n'));
       if (this.file) fd.append('attachment', this.file);
       const r = await fetch(endpoint, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
@@ -217,7 +223,9 @@ class Component extends DCLogic {
     // choosing a country also picks its dialling code while no phone number has been typed
     on.country = ev => { const iso = ev.target.value; this.setState(st => ({ f: { ...st.f, country: iso, dial: iso && !st.f.phone ? iso : st.f.dial } })); };
     const inv = {}; ['name', 'email', 'phone', 'qty', 'file'].forEach(k => { inv[k] = s.e[k] ? 'true' : undefined; });
-    return { ...v, open: true, t, boxRef: this.boxRef, fileRef: this.fileRef, p: s.p || {}, f, e: s.e, on, inv,
+    // condition(s) wanted: starts with the ones picked on the listing or product page, changeable here
+    const condChips = VM.condChips(f.cond, c => this.set('cond', c));
+    return { ...v, open: true, t, boxRef: this.boxRef, fileRef: this.fileRef, p: s.p || {}, f, e: s.e, on, inv, condChips,
       countries, dials: countries.map(c => ({ iso: c.iso, label: c.iso + ' ' + this.dialOf(c.iso) })),
       today: new Date().toISOString().slice(0, 10),
       canAttach: !!(C.rfq && C.rfq.endpoint),

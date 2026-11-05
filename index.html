@@ -202,10 +202,25 @@
           </div>
           <!-- catalogue filters: options and counts filled in by js/home-filters.js from the catalogue data -->
           <div class="psearch-filters" data-home-filters>
-            <label class="psf"><span class="psf-l" data-t="hf_ac">Aircraft</span><select name="ac" data-hf="ac"><option value="">All aircraft</option></select></label>
-            <label class="psf"><span class="psf-l" data-t="hf_brand">Brand</span><select name="brand" data-hf="brand"><option value="">All brands</option></select></label>
+            <!-- Aircraft and Brand: js/home-filters.js lays a searchable list over the select (the select still holds the value) -->
+            <div class="psf"><span class="psf-l" id="hf-ac-l" data-t="hf_ac">Aircraft</span><select name="ac" data-hf="ac" aria-labelledby="hf-ac-l"><option value="">All aircraft</option></select></div>
+            <div class="psf"><span class="psf-l" id="hf-brand-l" data-t="hf_brand">Brand</span><select name="brand" data-hf="brand" aria-labelledby="hf-brand-l"><option value="">All brands</option></select></div>
             <label class="psf"><span class="psf-l" data-t="hf_cat">Category</span><select name="sub" data-hf="sub"><option value="">All categories</option></select></label>
           </div>
+          <!-- Condition: pick one or more; sent to the search page as cond=ne,ns (ProductListing filters by it and the quote request carries it) -->
+          <fieldset class="pcond" data-home-cond>
+            <legend class="psf-l"><span data-t="hf_cond">Condition</span> <span class="pcond-hint" data-t="hf_cond_hint">Pick one or more</span></legend>
+            <input type="hidden" name="cond" value="">
+            <div class="pcond-row">
+              <button type="button" class="pcond-chip" data-cond="ne" aria-pressed="false"><b dir="ltr">NE</b><span data-t="cond.ne">New</span></button>
+              <button type="button" class="pcond-chip" data-cond="ns" aria-pressed="false"><b dir="ltr">NS</b><span data-t="cond.ns">New Surplus</span></button>
+              <button type="button" class="pcond-chip" data-cond="oh" aria-pressed="false"><b dir="ltr">OH</b><span data-t="cond.oh">Overhauled</span></button>
+              <button type="button" class="pcond-chip" data-cond="sv" aria-pressed="false"><b dir="ltr">SV</b><span data-t="cond.sv">Serviceable</span></button>
+              <button type="button" class="pcond-chip" data-cond="rp" aria-pressed="false"><b dir="ltr">RP</b><span data-t="cond.rp">Repaired</span></button>
+              <button type="button" class="pcond-chip" data-cond="or" aria-pressed="false"><b dir="ltr">OR</b><span data-t="cond.or">Overhauled / Outright</span></button>
+              <button type="button" class="pcond-chip" data-cond="ar" aria-pressed="false"><b dir="ltr">AR</b><span data-t="cond.ar">As Removed</span></button>
+            </div>
+          </fieldset>
         </form>
 
         <div class="hero-aog">

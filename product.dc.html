@@ -84,6 +84,12 @@
         <div class="pd-rfq">
           <div class="pd-rfq-in">
             <p class="pp-price">{{ t.pp_price }}</p>
+            <div class="vc vc--sm" role="group" aria-labelledby="pp-cond-l">
+              <span class="vc-l" id="pp-cond-l">{{ t.th.cond }} <small>{{ t.hf_cond_hint }}</small></span>
+              <div class="vc-row">
+                <sc-for list="{{ condChips }}" as="c" hint-placeholder-count="7"><button type="button" class="vc-chip" aria-pressed="{{ c.pressed }}" title="{{ c.title }}" onClick="{{ c.toggle }}"><b dir="ltr">{{ c.code }}</b><span>{{ c.name }}</span></button></sc-for>
+              </div>
+            </div>
             <div class="pd-rfq-row" style="align-items:center">
               <div class="qty qty--lg" role="group" aria-label="{{ t.pp_qty }}">
                 <button type="button" onClick="{{ dec }}" aria-label="{{ t.p_dec }}">−</button>
@@ -232,7 +238,7 @@ const card = (c, t, VM) => {
 };
 
 class Component extends DCLogic {
-  state = { ready: false, p: undefined, related: [], brandCards: [], img: 0, tab: 'desc', viewer: false, zoom: false, origin: '50% 50%', qty: 1 };
+  state = { ready: false, p: undefined, related: [], brandCards: [], img: 0, tab: 'desc', viewer: false, zoom: false, origin: '50% 50%', qty: 1, cond: null };
   descRef = React.createRef(); lbRef = React.createRef();
   componentDidMount() {
     const go = () => {
@@ -324,7 +330,9 @@ class Component extends DCLogic {
     const n = imgs.length, idx = Math.min(s.img, n - 1);
     const cur = VM.currentAircraft();
     const fits = !!cur && p.compatibleAircraft.includes(cur.id);
-    const prod = { title: p.title, pn: p.partNumber, brand: p.brand, slug: p.slug, image: imgs[0].thumb };
+    // condition(s) the buyer asks for: starts at this part's own condition when it is one of the chip codes
+    const own = String(p.conditionCode || '').toLowerCase(), cond = s.cond != null ? s.cond : (VM.COND_CHIPS.includes(own) ? own : 'any');
+    const prod = { title: p.title, pn: p.partNumber, brand: p.brand, slug: p.slug, image: imgs[0].thumb, cond };
     const setQty = q => this.setState({ qty: Math.max(1, Math.min(99999, q || 1)) });
     const rtl = v.ar;
     const swipe = { touchStart: e => { this.tx = e.changedTouches[0].clientX; },
@@ -351,6 +359,7 @@ class Component extends DCLogic {
       toggleZoom: () => this.setState(st => ({ zoom: !st.zoom, origin: '50% 50%' })),
       zoomAt: e => { const r = e.currentTarget.getBoundingClientRect(); this.setState(st => ({ zoom: !st.zoom, origin: ((e.clientX - r.left) / r.width * 100).toFixed(1) + '% ' + ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%' })); },
       zoomTf: s.zoom ? 'scale(2.2)' : 'none', zoomOrigin: s.origin, stageCls: 'pp-lb-stage' + (s.zoom ? ' is-zoom' : ''),
+      condChips: VM.condChips(cond, c => this.setState({ cond: c })),
       qty: s.qty, dec: () => setQty(s.qty - 1), inc: () => setQty(s.qty + 1), onQty: e => setQty(parseInt(e.target.value, 10)),
       rfq: () => VM.requestQuote({ ...prod, qty: s.qty }), add: () => VM.addToQuote(prod, s.qty),
       telHref: 'tel:' + C.phone.tel, callLabel: fmt(t.pp_call, { p: C.phone.display }),

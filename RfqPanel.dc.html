@@ -88,12 +88,12 @@
                       <button type="button" onClick="{{ r.inc }}" aria-label="+" style="width:32px;border:0;background:transparent;color:#0B1B2B;font-size:17px;cursor:pointer" style-hover="background:#F3F1EC">+</button>
                     </span>
                   </span>
-                  <label style="display:flex;align-items:center;gap:8px;flex:1;min-width:190px">
-                    <span style="font-size:12.5px;font-weight:600;color:#56626E;white-space:nowrap">{{ t.th.cond }}</span>
-                    <select value="{{ r.cond }}" data-cond="{{ r.cond }}" onChange="{{ r.onCond }}" style="flex:1;min-width:0;height:36px;padding-inline:10px;border:1px solid #C3C7C9;font:inherit;font-size:13.5px;background:#FFFFFF;color:#0B1B2B;cursor:pointer">
-                      <sc-for list="{{ condOpts }}" as="o" hint-placeholder-count="13"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
-                    </select>
-                  </label>
+                  <div role="group" aria-label="{{ t.th.cond }}" style="display:flex;flex-direction:column;gap:6px;flex:1 1 100%;min-width:0">
+                    <span style="font-size:12.5px;font-weight:600;color:#56626E">{{ t.th.cond }} <span style="font-weight:400;color:#8A96A3">· {{ t.hf_cond_hint }}</span></span>
+                    <span style="display:flex;flex-wrap:wrap;gap:5px">
+                      <sc-for list="{{ r.condChips }}" as="c" hint-placeholder-count="7"><button type="button" aria-pressed="{{ c.pressed }}" title="{{ c.title }}" onClick="{{ c.toggle }}" style="{{ c.style }}"><b dir="ltr" style="font-size:12.5px;line-height:1.1">{{ c.code }}</b><span style="font-size:10px;line-height:1.15;opacity:.85">{{ c.name }}</span></button></sc-for>
+                    </span>
+                  </div>
                 </div>
               </li>
             </sc-for>
@@ -182,7 +182,8 @@ const EMPTY = { name:'', company:'', country:'', email:'', phone:'', aircraft:''
 const REQUIRED = ['name','company','country','email'];
 // quote lines saved before the condition codes: new / used / surplus
 const OLD_COND = { new:'ne', used:'sv', surplus:'ns' };
-const condText = k => !k || k === 'any' ? 'any' : k.toUpperCase() + ' (' + (window.VM_I18N.en.cond[k] || k) + ')';
+// a line can ask for several conditions at once ("ne,ns", picked with the home Part Search condition chips)
+const condText = k => window.VM.condText(k) || 'any';
 class Component extends DCLogic {
   state = { ready:false, form:{ ...EMPTY }, errors:{}, sent:null, mPn:'', mQty:1 };
   componentDidMount() {
@@ -192,7 +193,6 @@ class Component extends DCLogic {
     go();
   }
   componentWillUnmount() { clearTimeout(this.tw); this.unsub && this.unsub(); }
-  componentDidUpdate() { setTimeout(() => document.querySelectorAll('select[data-cond]').forEach(el => { if (el.value !== el.dataset.cond) el.value = el.dataset.cond; }), 0); }
   submit(e) {
     e.preventDefault();
     const VM = window.VM, f = this.state.form, err = {}, rfq = VM.rfq();
@@ -244,6 +244,8 @@ class Component extends DCLogic {
     const totalQty = rfq.reduce((n, x) => n + (x.qty || 0), 0);
     const has = rfq.length > 0;
     const padX = modal ? '24px' : (v.sm ? '0' : '32px');
+    // condition chips per line (inline styles: this panel also opens on the home page, which has no shop.css)
+    const chipStyle = on => 'display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:58px;flex:1 1 58px;max-width:96px;min-height:42px;padding:5px 4px;cursor:pointer;font:inherit;text-align:center;border:1px solid ' + (on ? '#0759A5' : '#C3C7C9') + ';background:' + (on ? '#0759A5' : '#FFFFFF') + ';color:' + (on ? '#FFFFFF' : '#0B1B2B');
     return {
       ...v, ready:true, t, isModal: modal,
       cols: twoCol ? 'minmax(0,1fr) minmax(0,1.1fr)' : 'minmax(0,1fr)',
@@ -256,14 +258,13 @@ class Component extends DCLogic {
           bg: done || cur ? '#0759A5' : '#FFFFFF', fg: done || cur ? '#FFFFFF' : '#8A96A3', line: done || cur ? '#0759A5' : '#C3C7C9', tc: done || cur ? '#0B1B2B' : '#8A96A3' }; }),
       count: String(rfq.length).padStart(2, '0'), empty: !has, hasItems: has,
       totalLabel: (v.ar ? 'إجمالي الكمية: ' : 'Total qty: ') + totalQty,
-      condOpts: [{ v:'any', l:t.cond.any }, ...VM.COND_CODES.map(k => ({ v:k, l:k.toUpperCase() + ' – ' + t.cond[k] }))],
-      rows: rfq.map((x, i) => { const name = x.name_en === '__manual' ? t.r_manualName : (v.ar ? x.name_ar : x.name_en); return { pn: x.pn || '—', name, qty: x.qty, cond: OLD_COND[x.cond] || x.cond || 'any',
+      rows: rfq.map((x, i) => { const name = x.name_en === '__manual' ? t.r_manualName : (v.ar ? x.name_ar : x.name_en); const cond = OLD_COND[x.cond] || x.cond || 'any';
+        return { pn: x.pn || '—', name, qty: x.qty, cond, condChips: VM.condChips(cond, c => { const r = VM.rfq(); if (r[i]) { r[i].cond = c; VM.setRfq(r); } }).map(c => ({ ...c, style: chipStyle(c.pressed === 'true') })),
         showName: !!name && name.trim().toUpperCase() !== String(x.pn).trim().toUpperCase(),   // many catalogue items repeat the part number as their name
         img: imgOf(x) ? asset(imgOf(x)) : '',
         removeLabel: t.r_remove + ' ' + (x.pn || name || ''), href: x.slug ? VM.productHref(x.slug) : '', linkLabel: t.qp_link,
         onQty: e => setQty(i, parseInt(e.target.value, 10) || 1),
         dec: () => setQty(i, (x.qty || 1) - 1), inc: () => setQty(i, (x.qty || 1) + 1),
-        onCond: e => { const r = VM.rfq(); r[i].cond = e.target.value; VM.setRfq(r); },
         remove: () => VM.setRfq(VM.rfq().filter((_, j) => j !== i)) }; }),
       errItems: errTxt(s.errors.items),
       mPn: s.mPn, mQty: s.mQty, onMPn: e => this.setState({ mPn: e.target.value }), onMQty: e => this.setState({ mQty: e.target.value }),

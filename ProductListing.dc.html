@@ -40,6 +40,13 @@
       <sc-if value="{{ fitsOn }}" hint-placeholder-val="{{ false }}">
         <p class="lx-fits" role="status"><span>{{ fitsLabel }}</span><button type="button" onClick="{{ showAllAc }}">{{ t.ls_fits_all }}</button></p>
       </sc-if>
+      <!-- Condition chips (same seven codes as the home Part Search); they set the cond filter and go with quote requests -->
+      <div class="vc vc--bar" role="group" aria-labelledby="lx-cond-l">
+        <span class="vc-l" id="lx-cond-l">{{ t.ls_cond }} <small>{{ t.hf_cond_hint }}</small></span>
+        <div class="vc-row">
+          <sc-for list="{{ condChips }}" as="c" hint-placeholder-count="7"><button type="button" class="vc-chip" aria-pressed="{{ c.pressed }}" title="{{ c.title }}" onClick="{{ c.toggle }}"><b dir="ltr">{{ c.code }}</b><span>{{ c.name }}</span></button></sc-for>
+        </div>
+      </div>
       <div class="cx-bar">
         <div class="cx-bar-l">
           <sc-if value="{{ showFilterBtn }}" hint-placeholder-val="{{ false }}">
@@ -259,6 +266,9 @@ class Component extends DCLogic {
       : mode === 'brand' ? ['cat', 'sub', 'cond', 'ac'] : ['cat', 'sub', 'brand', 'cond', 'ac'];
     const passes = (c, skip) => dims.every(d => d === skip || this.match(c, d, s.f[d]));
     const rows = base.filter(c => passes(c, null));
+    // quote-request condition: the condition codes picked in the filter ("ne,ns"), or "any"
+    const wantCond = s.f.cond.filter(k => VM.COND_CODES.includes(k)).join(',') || 'any';
+    const condChips = VM.condChips(s.f.cond.join(','), c => this.sync({ f: { ...s.f, cond: c === 'any' ? [] : c.split(',') }, page: 1 }));
 
     // facet options: every value present in the base list, counted against the other active filters
     const label = (dim, key, c) => {
@@ -268,7 +278,8 @@ class Component extends DCLogic {
       if (dim === 'cond') return VM.condLabel(key);
       return VM.acLabel(key);
     };
-    const facets = dims.map(dim => {
+    // condition is filtered with the chip row above the results, not in the side panel
+    const facets = dims.filter(dim => dim !== 'cond').map(dim => {
       const seen = new Map(), counts = new Map();
       base.forEach(c => { const val = DIMS[dim].get(c); (DIMS[dim].multi ? val : [val]).forEach(k => { if (k && !seen.has(k)) seen.set(k, c); }); });
       base.filter(c => passes(c, dim)).forEach(c => { const val = DIMS[dim].get(c); (DIMS[dim].multi ? val : [val]).forEach(k => { if (k) counts.set(k, (counts.get(k) || 0) + 1); }); });
@@ -287,7 +298,7 @@ class Component extends DCLogic {
     }).filter(f => f.visible);
 
     const chips = [];
-    dims.forEach(dim => s.f[dim].forEach(k => {
+    dims.filter(dim => dim !== 'cond').forEach(dim => s.f[dim].forEach(k => {
       const c = base.find(x => (DIMS[dim].multi ? DIMS[dim].get(x).includes(k) : DIMS[dim].get(x) === k));
       const l = label(dim, k, c);
       chips.push({ label: l, aria: fmt(t.ls_remove, { f: l }), remove: () => this.setFilter(dim, k, false) });
@@ -315,6 +326,7 @@ class Component extends DCLogic {
     return {
       ...v, ready: true, t, topRef: this.topRef, drawerRef: this.drawerRef,
       showRail: v.lg, showFilterBtn: !v.lg, facets, filtered, chips, resultsLabel, showLabel: t.ls_show + ' (' + n + ')',
+      condChips,
       fitsOn: !!ac, fitsLabel: ac ? fmt(t.ls_fits, { a: ac.make + ' ' + ac.model }) : '', showAllAc: () => VM.selectAircraft(null),
       sort: s.sort, onSort: e => this.sync({ sort: e.target.value, page: 1 }),
       sortOpts: [['rel', t.ls_sort_rel], ['az', t.ls_sort_az], ['za', t.ls_sort_za], ['new', t.ls_sort_new]].map(([vv, l]) => ({ v: vv, l })),
@@ -326,10 +338,11 @@ class Component extends DCLogic {
       emptyT: mode === 'search' && q ? fmt(t.sh_search_none_t, { q }) : t.ls_empty_t,
       emptyB: mode === 'search' && q ? t.sh_search_none_b : t.ls_empty_b,
       emptyBtn: mode === 'search' && q ? fmt(t.sh_add_q, { q }) : t.sh_rfq,
-      emptyAct: () => { if (mode === 'search' && q) VM.addRfq({ pn: q, name_en: '__manual', name_ar: '__manual', cond: 'any' }, 1); VM.openRfq(); },
+      emptyAct: () => { if (mode === 'search' && q) VM.addRfq({ pn: q, name_en: '__manual', name_ar: '__manual', cond: wantCond }, 1); VM.openRfq(); },
       openRfq: () => VM.openRfq(),
       cards: shown.map(c => {
-        const prod = { title: c.t, pn: c.pn, brand: c.b, slug: c.s, image: c.i };
+        // conditions picked in the filter (home Part Search chips or the Condition facet) go with the quote request
+        const prod = { title: c.t, pn: c.pn, brand: c.b, slug: c.s, image: c.i, cond: wantCond };
         return { title: c.t, brand: c.b, pn: c.pn, img: c.i || '', noImg: !c.i, sample: !!c.x, href: VM.productHref(c.s),
           enqLabel: t.pc_enquire + ': ' + c.t, addLabel: t.pc_add + ': ' + c.t,
           rfq: () => VM.requestQuote(prod), add: () => VM.addToQuote(prod, 1) };
