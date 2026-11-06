@@ -10,6 +10,23 @@
 <helmet>
 <script src="js/i18n.js"></script>
 <script src="js/vm-core.js"></script>
+<style>
+.vmf-credit-bg{background:#0B1120;color:rgba(248,250,252,.55)}
+.vmf-credit-wrap{width:100%;margin:0 auto;padding:0 16px;box-sizing:border-box}
+@media (min-width:640px){.vmf-credit-wrap{max-width:640px}}
+@media (min-width:768px){.vmf-credit-wrap{max-width:768px}}
+@media (min-width:1024px){.vmf-credit-wrap{max-width:1024px}}
+@media (min-width:1280px){.vmf-credit-wrap{max-width:1280px}}
+@media (min-width:1536px){.vmf-credit-wrap{max-width:1536px}}
+.vmf-credit{border-top:1px solid rgba(255,255,255,.1);padding:8px 0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:6px 16px;font-size:12px;line-height:16px;font-weight:500;text-align:center}
+@media (min-width:640px){.vmf-credit{flex-direction:row;padding-inline-end:64px;text-align:start}}
+.vmf-credit-by{display:flex;align-items:center;gap:8px}
+.vmf-credit-sep{display:none;opacity:.5}
+@media (min-width:640px){.vmf-credit-sep{display:inline}}
+.vmf-credit-link{display:inline-flex;transition:opacity .15s cubic-bezier(.4,0,.2,1)}
+.vmf-credit-link:hover{opacity:.8}
+.vmf-credit-link img{display:block;height:16px;width:auto}
+</style>
 </helmet>
 <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
 <footer dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ fBody }};line-height:1.5;font-size:15px;color:#1F2933">
@@ -88,29 +105,18 @@
     </div>
   </div>
 
-  <!-- bottom bar: navy, runway photo faded into the centre -->
-  <div style="position:relative;overflow:hidden;background:linear-gradient(90deg,#0D2440 0%,#143A66 50%,#0D2440 100%);color:#D5DFEA;font-size:14px;isolation:isolate">
-    <sc-if value="{{ lg }}" hint-placeholder-val="{{ true }}">
-      <img src="assets/footer/bar.jpg" alt="" aria-hidden="true" style="position:absolute;top:50%;left:50%;width:min(52%,720px);height:auto;transform:translate(-50%,-56%);z-index:-1;opacity:.85;mix-blend-mode:screen;filter:sepia(.55) saturate(1.5) hue-rotate(-12deg) contrast(1.1);-webkit-mask-image:radial-gradient(50% 60% at 50% 55%,#000 30%,transparent 100%);mask-image:radial-gradient(50% 60% at 50% 55%,#000 30%,transparent 100%)">
-    </sc-if>
-    <div aria-hidden="true" style="position:absolute;inset:0;z-index:-1;background:radial-gradient(40% 120% at 50% 100%,rgba(255,170,90,.18),transparent 70%)"></div>
-    <div style="max-width:1360px;margin:0 auto;padding:{{ barPad }};display:flex;flex-direction:{{ barDir }};justify-content:space-between;align-items:center;gap:14px 24px;text-align:{{ barAlign }}">
-      <span style="display:inline-flex;flex-direction:{{ barDir }};align-items:center;gap:10px 14px;font-weight:600;font-size:{{ legalFs }};line-height:1.5;color:#FFFFFF">
-        <img src="assets/img/velmach-logo.png" alt="" aria-hidden="true" width="1432" height="800" loading="lazy" style="height:{{ barLogoH }};width:auto;display:block;flex-shrink:0;filter:brightness(0) invert(1)">
-        {{ t.f_legal }}
-      </span>
-      <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;width:{{ pbW }}">
-        <span dir="ltr" style="display:inline-flex;align-items:center;justify-content:center;gap:12px;{{ pbSep }}">
-          <span style="color:#D5DFEA;font-size:14px;white-space:nowrap">Powered By</span>
-          <a href="https://www.dripfunnel.com/in/" target="_blank" rel="noopener" aria-label="DripFunnel" style="display:inline-flex;align-items:center;text-decoration:none">
-            <sc-if value="{{ pbImg }}" hint-placeholder-val="{{ true }}">
-              <img src="assets/dripfunnel/DRIPFUNNEL%20white%20logo.png" alt="DripFunnel" onError="{{ pbErr }}" loading="lazy" style="height:26px;width:auto;display:block">
-            </sc-if>
-            <sc-if value="{{ pbText }}" hint-placeholder-val="{{ false }}">
-              <span style="color:#FFFFFF;font-size:18px;font-weight:800">DripFunnel</span>
-            </sc-if>
+  <!-- bottom credit bar: thin, deep navy -->
+  <div class="vmf-credit-bg">
+    <div class="vmf-credit-wrap">
+      <div class="vmf-credit">
+        <div>{{ copy }}</div>
+        <div class="vmf-credit-by" dir="ltr">
+          <span aria-hidden="true" class="vmf-credit-sep">|</span>
+          <span>Powered by</span>
+          <a href="https://dripfunnel.com" target="_blank" rel="noopener noreferrer" class="vmf-credit-link">
+            <img src="assets/dripfunnel/DRIPFUNNEL%20white%20logo.png" alt="DripFunnel" width="2077" height="369" loading="lazy">
           </a>
-        </span>
+        </div>
       </div>
     </div>
   </div>
@@ -119,7 +125,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { ready: false, pbFail: false };
+  state = { ready: false };
   componentDidMount() {
     const go = () => { if (window.VM && window.VM_I18N) { this.unsub = window.VM.subscribe(() => this.forceUpdate()); this.setState({ ready: true }); } else this.tw = setTimeout(go, 30); };
     go();
@@ -158,12 +164,10 @@ class Component extends DCLogic {
     return { ...v, ready: true, t,
       fAlt: v.ar ? "'Archivo', system-ui, sans-serif" : "'IBM Plex Sans Arabic', Tahoma, sans-serif",
       toggleLang: () => VM.toggleLang(),
-      pbImg: !this.state.pbFail, pbText: this.state.pbFail, pbErr: () => this.setState({ pbFail: true }),
+      copy: t.f_copy.replace('{y}', new Date().getFullYear()),
       showPlane: v.lg, hMb: v.sm ? '18px' : '26px', icGap: v.sm ? '12px' : '18px',
       listCols: v.sm ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
-      barPad: v.sm ? '22px 16px 82px' : '14px 92px 14px clamp(16px,2.5vw,32px)', barDir: v.sm ? 'column' : 'row', barAlign: v.sm ? 'center' : 'start',
-      legalFs: v.sm ? '13px' : '14px', barLogoH: v.sm ? '52px' : '44px', pbW: v.sm ? '100%' : 'auto',
-      pbSep: v.sm ? 'width:100%;padding-top:14px;border-top:1px solid rgba(255,255,255,.18)' : 'padding-inline-start:20px;border-inline-start:1px solid rgba(255,255,255,.25)', navCols: v.sm ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)', hLs: v.ar ? '0' : '.24em',
+      navCols: v.sm ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)', hLs: v.ar ? '0' : '.24em',
       cols: v.lg ? 'minmax(0,.8fr) minmax(0,1.1fr) minmax(0,1.1fr) minmax(0,1.2fr)' : v.md ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)',
       gap: v.lg ? '0' : '40px 32px',
       divider: v.lg ? '1px solid rgba(7,89,165,.12)' : '0',

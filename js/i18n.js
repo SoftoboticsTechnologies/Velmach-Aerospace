@@ -71,6 +71,7 @@ en: {
 
   f_desc: "Aircraft parts and aerospace materials trading from Ajman Free Zone, UAE.",
   f_quick: "Company", f_cats: "Products", f_contact: "Contact", f_social: "Social links",
+  f_copy: "© {y} Velmach Aerospace F.Z.C. All rights reserved.",
   f_legal: "© 2026 Velmach Aerospace F.Z.C · Ajman Free Zone Registration No. 45584",
   f_addr_short: "Ajman Free Zone, U.A.E",
 
@@ -247,6 +248,7 @@ ar: {
 
   f_desc: "تجارة قطع غيار الطائرات ومواد الطيران من منطقة عجمان الحرة، الإمارات.",
   f_quick: "الشركة", f_cats: "المنتجات", f_contact: "التواصل", f_social: "روابط التواصل الاجتماعي",
+  f_copy: "© {y} فيلماك إيروسبايس ش.م.ح. جميع الحقوق محفوظة.",
   f_legal: "© 2026 فيلماك إيروسبايس ش.م.ح · رقم التسجيل في منطقة عجمان الحرة 45584",
   f_addr_short: "منطقة عجمان الحرة، الإمارات",
 
