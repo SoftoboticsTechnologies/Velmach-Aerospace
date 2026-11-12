@@ -16,6 +16,8 @@
   var condBox = root.querySelector('[data-home-cond]'), condInput = condBox && condBox.querySelector('input[name="cond"]');
   var chips = condBox ? [].slice.call(condBox.querySelectorAll('[data-cond]')) : [];
   var meta = null, cards = null, loading = false, combos = {};
+  // Aircraft and Brand hold hundreds of options: they are built the first time their list opens (page speed)
+  var full = { ac: false, brand: false, sub: true };
 
   function ready() { return window.VM && window.VM_I18N && window.VM_CATS && window.VM_BRANDS && window.VM_AIRCRAFT; }
   function pickedConds() { return chips.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; }).map(function (b) { return b.dataset.cond; }); }
@@ -56,7 +58,13 @@
     var t = window.VM.t(), all = { ac: t.hf_all_ac, brand: t.hf_all_brand, sub: t.hf_all_cat };
     var picked = sels.ac.value || sels.brand.value || sels.sub.value || pickedConds().length;
     Object.keys(sels).forEach(function (dim) {
-      var el = sels[dim], cur = el.value, live = cards && picked ? liveCounts(dim) : null, group = null, groupName = null;
+      var el = sels[dim], cur = el.value, live = null, group = null, groupName = null;
+      if (!full[dim] && !cur) {
+        if (!el.options.length || el.options[0].text !== all[dim]) { el.innerHTML = ''; el.appendChild(new Option(all[dim], '')); }
+        if (combos[dim]) combos[dim].sync();
+        return;
+      }
+      live = cards && picked ? liveCounts(dim) : null;
       el.innerHTML = '';
       el.appendChild(new Option(all[dim], ''));
       options(dim).forEach(function (o) {
@@ -146,6 +154,8 @@
     function open() {
       if (!pop.hidden) return;
       loadCards();
+      var dim = sel.getAttribute('data-hf');
+      if (!full[dim]) { full[dim] = true; render(); }
       // the hero clips overflow: open upwards when there is not enough room below
       var hero = box.closest('.hero') || document.body, r = btn.getBoundingClientRect(), h = hero.getBoundingClientRect();
       var below = h.bottom - r.bottom - 12, above = r.top - h.top - 12, up = below < 260 && above > below;
@@ -204,7 +214,8 @@
     window.VM.subscribe(setChips);
     fetch('data/catalog/meta.json').then(function (r) { return r.json(); }).then(function (m) {
       meta = m; render();
-      window.VM.subscribe(render);   // option names follow the language
+      var lang = window.VM.lang;
+      window.VM.subscribe(function () { if (window.VM.lang !== lang) { lang = window.VM.lang; render(); } });   // option names follow the language
     }).catch(function () { form.hidden = true; });
     Object.keys(sels).forEach(function (k) {
       sels[k].addEventListener('change', function () { loadCards(); render(); });

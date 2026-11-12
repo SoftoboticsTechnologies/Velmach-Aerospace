@@ -4,7 +4,7 @@
    Rows scroll in alternating directions without a seam and keep moving on hover (pause only for keyboard focus); each tile shows the logo (when
    there is one) above the name. With reduced motion the rows stay still and scroll by hand. */
 (function () {
-  var builtW = 0, resizeT;
+  var builtW = 0, resizeT, MAX_BRANDS = 60;
   function brandTile(b) { return { name: b.name, href: window.VM.brandHref(b.slug), slug: b.slug }; }
   // a maker that is a catalog brand links to its brand page; any other maker to the quote request page
   function isBrand(slug) { return !!slug && (window.VM_BRANDS || []).some(function (b) { return b.slug === slug; }); }
@@ -12,7 +12,12 @@
   function brandRows() {
     var mk = window.VM_MAKERS || {}, skip = {};
     (mk.aircraft || []).concat(mk.helicopters || []).forEach(function (m) { if (m.slug) skip[m.slug] = 1; });
-    var all = (window.VM_BRANDS || []).filter(function (b) { return !skip[b.slug]; })
+    // at most MAX_BRANDS tiles (featured first, then brands with a logo): the page stays light and "View all brands"
+    // lists the rest
+    var all = (window.VM_BRANDS || []).filter(function (b) { return !skip[b.slug]; });
+    var rank = function (b) { return (b.featured ? 0 : 2) + (window.VM.brandLogo(b.slug) ? 0 : 1); };
+    all = all.map(function (b, i) { return [rank(b), i, b]; }).sort(function (x, y) { return x[0] - y[0] || x[1] - y[1]; })
+      .slice(0, MAX_BRANDS).map(function (x) { return x[2]; })
       .sort(function (a, b) { return a.name.localeCompare(b.name); });
     // dealt in turn, so each row runs A to Z on its own
     var rows = [[], [], []];
@@ -94,7 +99,12 @@
     });
   }
   function start() {
-    build();
+    // the strips sit below the first screen: build them when they come near, so they cost nothing at page load
+    var host = document.querySelector('[data-maker-strip]') || document.querySelector('[data-brand-strip]');
+    if (host && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); build(); } }, { rootMargin: '600px 0px' });
+      io.observe(host);
+    } else build();
     if (window.VM) window.VM.subscribe(paintLogos);
     window.addEventListener('resize', onResize);
   }

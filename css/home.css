@@ -11,10 +11,11 @@
   --ls-k: .1em;
   --wrap: 1320px; --gut: clamp(16px, 4vw, 56px);
   --ease: cubic-bezier(.2, .7, .2, 1); --ease-io: cubic-bezier(.65, 0, .35, 1);
-  --dir: 1; --hdr: 112px;
+  --dir: 1; --hdr: 160px;
 }
 [dir="rtl"] { --fs: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; --fk: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; --ls-k: 0; --dir: -1; }
-@media (max-width: 759px) { :root { --hdr: 104px; } }
+@media (max-width: 1199px) { :root { --hdr: 123px; } }
+@media (max-width: 759px) { :root { --hdr: 119px; } }
 
 /* (unused since the switch to Inter) */
 @font-face { font-family: 'VMAmp'; src: local('Helvetica Neue'), local('HelveticaNeue'), local('Arial'), local('Liberation Sans'); unicode-range: U+0026; }
@@ -84,7 +85,7 @@ main { display: block; background: var(--white); }
 .hero-bg { position: absolute; inset: 0; z-index: -2; background: radial-gradient(48% 62% at 72% 52%, rgba(22, 40, 60, .55) 0%, rgba(8, 14, 22, .4) 45%, transparent 72%), linear-gradient(180deg, #050A10 0%, #020407 60%, #010203 100%); animation: fadeIn 1.2s both; }
 [dir="rtl"] .hero-bg { transform: scaleX(-1); }
 /* the engine's right edge mirrors the text's left margin: the stage is placed from the content edge, less the empty margin inside the drawing (~19% of its width) */
-.hero-viz { position: absolute; z-index: -1; top: calc(50% + var(--hdr) / 2 - clamp(56px, 8vh, 104px)); --hv-w: min(54vw, 860px); inset-inline-end: calc(max(0px, (100% - var(--wrap)) / 2) + var(--gut) - var(--hv-w) * .19); width: var(--hv-w); aspect-ratio: 9 / 7; transform: translateY(-50%); pointer-events: none; perspective: 1600px; }
+.hero-viz { position: absolute; z-index: -1; top: calc(50% + var(--hdr) / 2 - clamp(150px, 20vh, 250px)); --hv-w: min(54vw, 860px); inset-inline-end: calc(max(0px, (100% - var(--wrap)) / 2) + var(--gut) - var(--hv-w) * .19); width: var(--hv-w); aspect-ratio: 9 / 7; transform: translateY(-50%); pointer-events: none; perspective: 1600px; }
 /* stage: whole composition tilts with the pointer; each layer sits at its own depth and parallax rate */
 .hv-stage { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateY(calc(var(--mx, 0) * 3deg)) rotateX(calc(var(--my, 0) * -2.4deg)); transition: transform 1.2s var(--ease); }
 .hv-layer { position: absolute; inset: 0; transition: transform 1.2s var(--ease); }
@@ -745,8 +746,6 @@ html:has(body.home) { background: #DDF2FB; }
 .hero-bg { background:
     radial-gradient(60% 55% at 88% 8%, rgba(0, 163, 224, .30) 0%, rgba(0, 163, 224, 0) 70%),
     radial-gradient(55% 50% at 6% 100%, rgba(255, 106, 0, .26) 0%, rgba(255, 106, 0, 0) 70%),
-    linear-gradient(90deg, rgba(10, 37, 64, .045) 1px, transparent 1px) 0 0 / 56px 56px,
-    linear-gradient(rgba(10, 37, 64, .045) 1px, transparent 1px) 0 0 / 56px 56px,
     linear-gradient(172deg, #BEE8FA 0%, #DDF2FB 30%, #F5F3F0 58%, #FFE6D2 82%, #FFCFA8 100%); }
 .hero-bg::after { content: ""; position: absolute; inset: auto 0 0 0; height: 3px; background: linear-gradient(90deg, var(--vm-sky), var(--vm-orange)); }
 
@@ -796,6 +795,8 @@ html:has(body.home) { background: #DDF2FB; }
 .hv-glow { background: radial-gradient(42% 46% at 52% 50%, rgba(255, 255, 255, .75), rgba(0, 163, 224, .10) 55%, transparent 72%); }
 .hv-back svg { filter: invert(1) hue-rotate(180deg); opacity: .8; }
 .hv-corner { border-color: rgba(10, 37, 64, .3); }
+/* light hero: drop the drafting marks (corner brackets, centre lines, ruler ticks, dashed ellipses) */
+.hv-back, .hv-front, .hv-corner { display: none; }
 .hv-lead { stroke: rgba(10, 37, 64, .35); }
 .hv-lead.is-on { stroke: var(--vm-sky); }
 .hv-dot { fill: #FFFFFF; stroke: rgba(10, 37, 64, .7); }
@@ -886,3 +887,9 @@ html:has(body.home) { background: #DDF2FB; }
 .map-end[data-end="1"] .map-end-ring { animation-delay: .6s; } .map-end[data-end="2"] .map-end-ring { animation-delay: 1.2s; } .map-end[data-end="3"] .map-end-ring { animation-delay: 1.8s; }
 @keyframes mapRing { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(1.9); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .map-pulses { display: none; } .map-end-ring { animation: none; } }
+
+/* page speed: the first lines of the hero rise in without fading, so the heading counts as painted at first paint */
+@keyframes riseIn { from { transform: translateY(16px); } to { transform: none; } }
+.hero-copy > .tagbar, .hero-copy > .hero-h, .hero-copy > .hero-sub { animation-name: riseIn; }
+/* the header is fixed on the home page: its runtime root never takes space (it held 60px while loading, shifting the hero) */
+body.home > #dc-root { height: 0 !important; min-height: 0 !important; overflow: visible; }

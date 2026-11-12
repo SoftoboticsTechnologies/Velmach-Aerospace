@@ -19,15 +19,18 @@
 <link rel="manifest" href="assets/favicon_io/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="preload" href="assets/img/velmach-logo-h.webp" as="image" fetchpriority="high">
+<!-- fonts load without blocking the first paint (text shows in the system font, then swaps) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&amp;display=swap"></noscript>
 <link rel="stylesheet" href="css/home.css">
 <link rel="stylesheet" href="css/sell.css">
 <script>document.documentElement.classList.add("js")</script>
-<script src="js/i18n.js"></script>
-<script src="js/vm-core.js"></script>
-<script src="js/site-config.js"></script>
+<script src="js/i18n.js" defer></script>
+<script src="js/vm-core.js" defer></script>
+<script src="js/site-config.js" defer></script>
 <!-- the DC runtime only renders the shared header (with the RFQ panel) and footer; page content below is plain HTML -->
-<script src="./support.js"></script>
+<script src="./support.js" defer></script>
 <script src="js/sell.js" defer></script>
 </head>
 <body class="sell">

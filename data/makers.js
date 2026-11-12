@@ -14,7 +14,19 @@ window.VM_MAKERS = {
     { name: "Cessna", logo: "public/brands/cessna.svg" },
     { name: "Dornier", slug: "dornier", logo: "public/brands/dornier.svg" },
     { name: "Pilatus", logo: "public/brands/pilatus.svg" },
-    { name: "Lockheed", slug: "lockheed", logo: "public/brands/lockheed.png" }
+    { name: "Lockheed", slug: "lockheed", logo: "public/brands/lockheed.png" },
+    { name: "Bombardier" },
+    { name: "De Havilland Canada" },
+    { name: "Textron Aviation" },
+    { name: "Saab" },
+    { name: "Fokker" },
+    { name: "Daher" },
+    { name: "Piper" },
+    { name: "Cirrus" },
+    { name: "Diamond Aircraft" },
+    { name: "Honda Aircraft" },
+    { name: "Antonov" },
+    { name: "COMAC" }
   ],
   helicopters: [
     { name: "Airbus Helicopters", logo: "public/brands/airbus-helicopters.svg" },
@@ -22,6 +34,12 @@ window.VM_MAKERS = {
     { name: "Sikorsky", logo: "public/brands/sikorsky.svg" },
     { name: "Leonardo Helicopters" },
     { name: "Robinson Helicopter" },
-    { name: "MD Helicopters" }
+    { name: "MD Helicopters" },
+    { name: "Russian Helicopters (Mil / Kamov)" },
+    { name: "Kaman" },
+    { name: "Enstrom" },
+    { name: "Schweizer" },
+    { name: "HAL" },
+    { name: "Guimbal" }
   ]
 };
