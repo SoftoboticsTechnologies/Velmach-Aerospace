@@ -162,7 +162,7 @@ class Component extends DCLogic {
       s_consult: 'M9 11a3.5 3.5 0 1 0 0-7a3.5 3.5 0 1 0 0 7ZM2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.2a3.5 3.5 0 0 1 0 6.6M18 14.3c2 .8 3.5 2.8 3.5 5.7'
     };
     return { ...v, ready: true, t,
-      fAlt: v.ar ? "'Archivo', system-ui, sans-serif" : "'IBM Plex Sans Arabic', Tahoma, sans-serif",
+      fAlt: v.ar ? "'Inter', system-ui, sans-serif" : "'IBM Plex Sans Arabic', Tahoma, sans-serif",
       toggleLang: () => VM.toggleLang(),
       copy: t.f_copy.replace('{y}', new Date().getFullYear()),
       showPlane: v.lg, hMb: v.sm ? '18px' : '26px', icGap: v.sm ? '12px' : '18px',

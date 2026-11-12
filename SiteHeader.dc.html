@@ -9,7 +9,7 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="icon" href="assets/favicon_io/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
@@ -27,10 +27,11 @@
 html,body{margin:0;padding:0;-webkit-font-smoothing:antialiased}
 body:not(.home){background:#FFFFFF}
 *{box-sizing:border-box}
-a{color:#0759A5;text-underline-offset:4px}
-a:hover{color:#0B1B2B}
+a{color:#0A2540;text-underline-offset:4px}
+a:hover{color:#00A3E0}
 *:focus-visible{outline:2px solid #3D8BE0;outline-offset:3px}
-@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(224,68,46,.55)}70%{box-shadow:0 0 0 7px rgba(224,68,46,0)}100%{box-shadow:0 0 0 0 rgba(224,68,46,0)}}
+@keyframes vmPulse{0%{box-shadow:0 0 0 0 rgba(255,106,0,.55)}70%{box-shadow:0 0 0 7px rgba(255,106,0,0)}100%{box-shadow:0 0 0 0 rgba(255,106,0,0)}}
+@keyframes vmRing{0%{box-shadow:0 0 0 0 rgba(255,106,0,.5),0 10px 26px rgba(10,37,64,.3)}70%{box-shadow:0 0 0 14px rgba(255,106,0,0),0 10px 26px rgba(10,37,64,.3)}100%{box-shadow:0 0 0 0 rgba(255,106,0,0),0 10px 26px rgba(10,37,64,.3)}}
 @keyframes vmFade{from{opacity:0}to{opacity:1}}
 @keyframes vmUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes vmFromR{from{transform:translateX(100%)}to{transform:none}}
@@ -39,8 +40,8 @@ a:hover{color:#0B1B2B}
 @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 
 /* ---- shop header: same tokens as css/home.css; desktop layout from 1200px ---- */
-.vh{--ink:#07111D;--navy:#0B1B2B;--blue:#0759A5;--blue-2:#0A6BC4;--sig:#6AA6E8;--aog:#E0442E;--aog-2:#FF8A73;--paper:#F3F1EC;--white:#FBFBF9;--line:#DADBD8;--line-2:#C3C7C9;--steel:#56626E;--steel-2:#8A96A3;--mist:#C9D2DB;--dim:#9FB0C1;--hover:#F1EFEA;
-  --mono:'Archivo',system-ui,sans-serif;--gut:clamp(16px,4vw,56px);--ease:cubic-bezier(.2,.7,.2,1)}
+.vh{--ink:#07111D;--navy:#0A2540;--blue:#0A2540;--blue-2:#123A63;--sky:#00A3E0;--sig:#00A3E0;--aog:#E65100;--aog-2:#FF6A00;--cta:#E65100;--cta-2:#CC4800;--paper:#F3F1EC;--white:#FBFBF9;--line:#DADBD8;--line-2:#C3C7C9;--steel:#56626E;--steel-2:#8A96A3;--mist:#C9D2DB;--dim:#9FB0C1;--hover:#F1EFEA;
+  --mono:'Inter',system-ui,sans-serif;--gut:clamp(16px,4vw,56px);--ease:cubic-bezier(.2,.7,.2,1)}
 /* resets carry no specificity, so the component classes below always win */
 :where(.vh) :where(ul,ol){margin:0;padding:0;list-style:none}
 :where(.vh) :where(p,h2,h3){margin:0}
@@ -54,19 +55,19 @@ a:hover{color:#0B1B2B}
 
 .vh-hdr{position:fixed;top:0;left:0;right:0;z-index:100;--h-fg:#0B1B2B;--h-fg2:#3A4652;--h-line:#DADBD8;--h-btn:#C3C7C9;--h-acc:#0759A5;--h-field:#FFFFFF;
   color:var(--h-fg);background:rgba(251,251,249,.96);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--h-line);transition:background .45s ease,border-color .45s ease,color .45s ease}
-.vh-hdr--over{--h-fg:#FFFFFF;--h-fg2:rgba(255,255,255,.8);--h-line:rgba(255,255,255,.12);--h-btn:rgba(255,255,255,.3);--h-acc:#6AA6E8;--h-field:rgba(255,255,255,.08);background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
-.vh-prog{position:absolute;bottom:-1px;inset-inline-start:0;height:1px;width:0;background:#6AA6E8;transition:width .1s linear}
+.vh-hdr--over{--h-fg:#0A2540;--h-fg2:rgba(10,37,64,.8);--h-line:rgba(10,37,64,.12);--h-btn:rgba(10,37,64,.28);--h-acc:#00A3E0;--h-field:rgba(255,255,255,.72);background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.vh-prog{position:absolute;bottom:-1px;inset-inline-start:0;height:2px;width:0;background:linear-gradient(90deg,#00A3E0,#FF6A00);transition:width .1s linear}
 
 /* utility bar (desktop) */
 .vh-util{display:none;max-height:34px;overflow:hidden;background:var(--paper);color:var(--steel);transition:max-height .4s ease,background .45s ease}
-.vh-hdr--over .vh-util{background:transparent;color:rgba(255,255,255,.66)}
+.vh-hdr--over .vh-util{background:transparent;color:rgba(10,37,64,.7)}
 .vh-hdr--scrolled .vh-util{max-height:0}
 .vh-util-in{height:34px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:13px}
 .vh-aog{display:inline-flex;align-items:center;gap:9px;color:inherit;text-decoration:none;white-space:nowrap}
 .vh-aog:hover{color:var(--h-fg)}
 .vh-aog-dot{width:6px;height:6px;border-radius:50%;background:var(--aog);animation:vmPulse 2.6s infinite}
 .vh-aog-k{font:500 11px/1 var(--mono);letter-spacing:.12em;color:var(--aog)}
-.vh-hdr--over .vh-aog-k{color:var(--aog-2)}
+.vh-hdr--over .vh-aog-k{color:var(--aog)}
 .vh-util-nav{display:flex;align-items:center}
 .vh-util-a{padding-inline:14px;color:inherit;text-decoration:none;white-space:nowrap;line-height:1;transition:color .2s}
 .vh-util-a + .vh-util-a{border-inline-start:1px solid var(--h-btn)}
@@ -81,21 +82,20 @@ a:hover{color:#0B1B2B}
 .vh-burger span + span{width:14px}
 .vh-logo{grid-area:logo;display:flex;align-items:center;height:64px;margin:0;padding:0}
 .vh-logo-full{height:56px;width:auto;display:block;transition:filter .45s ease}
-.vh-hdr--over .vh-logo-full{filter:brightness(0) invert(1)}
 .vh-actions{grid-area:actions;display:flex;align-items:center;gap:8px}
 .vh-search{grid-area:search;position:relative;padding-bottom:12px}
 .vh-sform{display:flex;height:46px}
 .vh-sinput{flex:1;min-width:0;height:100%;border:1px solid var(--h-btn);border-inline-end:0;background:var(--h-field);color:inherit;padding-inline:16px;font-size:15px;outline:none;border-radius:0;-webkit-appearance:none;appearance:none;transition:border-color .2s,background .3s}
 .vh-sinput::placeholder{color:var(--steel-2);opacity:1}
-.vh-hdr--over .vh-sinput::placeholder{color:rgba(255,255,255,.6)}
+.vh-hdr--over .vh-sinput::placeholder{color:rgba(10,37,64,.55)}
 .vh-sinput:focus{border-color:var(--blue)}
 .vh-sinput::-webkit-search-cancel-button{cursor:pointer}
 .vh-sbtn{width:50px;flex-shrink:0;border:0;background:var(--blue);color:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
 .vh-sbtn:hover{background:var(--blue-2)}
 .vh-cart{position:relative;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border:1px solid var(--h-btn);background:transparent;color:inherit;cursor:pointer;transition:border-color .2s}
 .vh-cart:hover{border-color:var(--h-acc)}
-.vh-rq{display:inline-flex;align-items:center;gap:10px;height:44px;padding-inline:20px;flex-shrink:0;border:0;background:var(--blue);color:#FFFFFF;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer;transition:background .2s}
-.vh-rq:hover{background:var(--blue-2)}
+.vh-rq{display:inline-flex;align-items:center;gap:10px;height:44px;padding-inline:20px;flex-shrink:0;border:0;border-radius:4px;background:var(--cta);color:#FFFFFF;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer;transition:background .2s}
+.vh-rq:hover{background:var(--cta-2)}
 .vh-rq-s{display:none;font:500 12.5px/1 var(--mono);letter-spacing:.08em}
 .vh-badge{position:absolute;top:-8px;inset-inline-end:-8px;min-width:20px;height:20px;padding-inline:5px;border-radius:10px;background:var(--sig);color:var(--ink);font:500 11px/20px var(--mono);text-align:center}
 .vh-acbtn{display:none;align-items:center;gap:10px;height:46px;max-width:240px;padding-inline:14px;border:1px solid var(--h-btn);background:transparent;color:inherit;cursor:pointer;text-align:start;transition:border-color .2s}
@@ -119,6 +119,13 @@ a:hover{color:#0B1B2B}
 .vh-opt-meta{font:400 12px/1.3 var(--mono);color:var(--steel)}
 .vh-opt-sub{font-size:12.5px;color:var(--steel)}
 .vh-opt--all{font-weight:600;padding-block:13px}
+.vh-conds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:2px 16px 6px}
+.vh-cond{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;color:var(--navy);text-decoration:none;min-width:0;transition:all .3s ease-in-out}
+.vh-cond b{font:700 13px/1.2 var(--mono);color:var(--aog);letter-spacing:.04em}
+.vh-cond span{font:500 12.5px/1.3 var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vh-cond small{font-size:11.5px;color:var(--steel)}
+.vh-cond:hover,.vh-cond[aria-selected="true"]{border-color:var(--sky);box-shadow:0 6px 14px -8px rgba(0,163,224,.7);background:#F2FAFE}
+@media (max-width:480px){.vh-conds{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .vh-sugg-none{padding:14px 16px;font-size:14px;color:var(--steel)}
 
 /* desktop navigation and mega menus */
@@ -196,11 +203,11 @@ a:hover{color:#0B1B2B}
 .vh-dsub:hover{color:#FFFFFF}
 .vh-dsub--all{color:var(--sig);font-weight:600}
 .vh-dfoot{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding:20px 20px 28px}
-.vh-dcta{height:50px;display:flex;align-items:center;justify-content:center;gap:10px;border:0;background:var(--blue);color:#FFFFFF;font-weight:600;font-size:16px;cursor:pointer}
-.vh-dcta:hover{background:var(--blue-2)}
+.vh-dcta{height:50px;display:flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:4px;background:var(--cta);color:#FFFFFF;font-weight:600;font-size:16px;cursor:pointer}
+.vh-dcta:hover{background:var(--cta-2)}
 .vh-dtel{display:flex;align-items:center;gap:10px;color:var(--mist);text-decoration:none;font:500 14px/1 var(--mono)}
 .vh-dtel:hover{color:#FFFFFF}
-.vh-daog{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;border:1px solid rgba(224,68,46,.7);border-radius:4px;background:rgba(224,68,46,.08);color:#FFFFFF;padding:13px 14px;text-decoration:none;font-weight:600}
+.vh-daog{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;border:1px solid rgba(255,106,0,.7);border-radius:4px;background:rgba(255,106,0,.1);color:#FFFFFF;padding:13px 14px;text-decoration:none;font-weight:600}
 .vh-daog:hover{color:#FFFFFF;border-color:var(--aog)}
 
 /* Shop by Aircraft panel: dropdown on desktop, full screen below 1200px */
@@ -245,13 +252,36 @@ a:hover{color:#0B1B2B}
 .vh-acp--full .vh-acp-foot{padding-inline:max(18px,calc((100% - 560px)/2))}
 .vh-acp-hint{font-size:12.5px;line-height:1.5;color:var(--steel)}
 
+/* floating 24/7 AOG emergency desk */
+.vh-fab{position:fixed;right:22px;bottom:22px;z-index:95;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.vh-fab-btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding-inline:20px 16px;border:0;border-radius:26px;background:linear-gradient(135deg,#FF6A00,#E65100);color:#FFFFFF;font-size:15px;font-weight:700;letter-spacing:.01em;cursor:pointer;animation:vmRing 2.8s infinite;transition:all .3s ease-in-out}
+.vh-fab-btn:hover{background:linear-gradient(135deg,#FF7A1A,#CC4800);transform:translateY(-2px)}
+.vh-fab-btn .vh-ic{transition:transform .3s ease-in-out}
+.vh-fab-dot{width:8px;height:8px;border-radius:50%;background:#FFFFFF;flex-shrink:0;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+.vh-fab-menu{width:min(320px,calc(100vw - 28px));padding:16px;border-radius:10px;background:#FFFFFF;color:#0A2540;border-top:3px solid #FF6A00;box-shadow:0 24px 48px rgba(10,37,64,.28);animation:vmUp .25s ease}
+.vh-fab-h{display:flex;align-items:center;gap:8px;font:700 12px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#E65100}
+.vh-fab-h .vh-fab-dot{background:#FF6A00;box-shadow:none;animation:vmPulse 2s infinite}
+.vh-fab-sub{margin:6px 0 12px!important;font-size:13.5px;line-height:1.5;color:#4A5A6B}
+.vh-fab-a{display:flex;align-items:center;gap:12px;width:100%;padding:11px 12px;border:1px solid #E3E8EE;border-radius:8px;background:#FFFFFF;color:#0A2540;text-decoration:none;text-align:left;cursor:pointer;transition:all .3s ease-in-out}
+.vh-fab-a + .vh-fab-a{margin-top:8px}
+.vh-fab-a:hover{border-color:#00A3E0;box-shadow:0 6px 16px -8px rgba(0,163,224,.6);color:#0A2540}
+.vh-fab-a .vh-ic{width:20px;height:20px;color:#00A3E0}
+.vh-fab-a span{display:flex;flex-direction:column;line-height:1.3}
+.vh-fab-a b{font-size:14.5px;font-weight:600}
+.vh-fab-a small{font-size:12.5px;color:#5A6B7B}
+.vh-fab-a--call{background:#0A2540;border-color:#0A2540;color:#FFFFFF}
+.vh-fab-a--call:hover{color:#FFFFFF;background:#123A63}
+.vh-fab-a--call .vh-ic{color:#FF8A3D}
+.vh-fab-a--call small{color:#B9C7D6}
+@media (max-width:759px){.vh-fab{right:14px;bottom:14px}.vh-fab-btn{height:48px;font-size:14px;padding-inline:16px 12px}}
+
 @media (min-width:760px){
   .vh-main-in{column-gap:16px}
 }
 @media (max-width:759px){
   .vh-main-in{column-gap:10px}
   .vh-logo{height:64px}
-  .vh-logo-full{height:46px}
+  .vh-logo-full{height:52px}
   .vh-burger,.vh-cart{width:42px;height:42px}
   .vh-burger{padding-inline:10px}
   .vh-rq{height:42px}
@@ -303,7 +333,7 @@ a:hover{color:#0B1B2B}
       <div class="vh-wrap vh-main-in">
         <button type="button" class="vh-burger" onClick="{{ openDrawer }}" aria-label="{{ t.hd_menu }}" aria-expanded="{{ drawerExp }}" aria-haspopup="dialog"><span></span><span></span></button>
         <a href="index.html" class="vh-logo" aria-label="{{ t.hd_home }}">
-          <img class="vh-logo-full" src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" width="1432" height="700">
+          <img class="vh-logo-full" src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" width="1432" height="720">
         </a>
 
         <div class="vh-search">
@@ -318,6 +348,16 @@ a:hover{color:#0B1B2B}
           </form>
           <sc-if value="{{ showSugg }}" hint-placeholder-val="{{ false }}">
             <div id="vh-sugg" class="vh-sugg" role="listbox" aria-label="{{ t.hd_search_aria }}" onMouseDown="{{ keepFocus }}">
+              <sc-if value="{{ hasConds }}" hint-placeholder-val="{{ false }}">
+                <div class="vh-sugg-sec" role="group" aria-label="Part number by condition">
+                  <span class="vh-k" aria-hidden="true">Part number by condition</span>
+                  <div class="vh-conds">
+                    <sc-for list="{{ sConds }}" as="o" hint-placeholder-count="4">
+                      <a id="{{ o.id }}" class="vh-cond" href="{{ o.href }}" role="option" aria-selected="{{ o.sel }}" tabIndex="-1"><b>{{ o.code }}</b><span>{{ o.pn }}</span><small>{{ o.name }}</small></a>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
               <sc-if value="{{ hasProducts }}" hint-placeholder-val="{{ false }}">
                 <div class="vh-sugg-sec" role="group" aria-label="{{ t.hd_sugg_products }}">
                   <span class="vh-k" aria-hidden="true">{{ t.hd_sugg_products }}</span>
@@ -434,9 +474,8 @@ a:hover{color:#0B1B2B}
     <div class="vh-ov" onClick="{{ closeDrawer }}"></div>
     <div ref="{{ drawerRef }}" class="vh-drawer" role="dialog" aria-modal="true" aria-label="{{ t.menu }}">
       <div class="vh-dhead">
-        <a href="index.html" class="vh-dlogo" aria-label="{{ t.hd_home }}"><img src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" width="1432" height="700"></a>
+        <a href="index.html" class="vh-dlogo" aria-label="{{ t.hd_home }}"><img src="assets/img/velmach-logo.png" alt="{{ logoAlt }}" width="1432" height="720"></a>
         <span class="vh-dhead-a">
-        <button type="button" class="vh-dbtn" onClick="{{ toggleLang }}" style="font-family:{{ fAlt }}">{{ t.lang_btn }}</button>
         <button type="button" class="vh-dbtn vh-dbtn--sq" onClick="{{ closeDrawer }}" aria-label="{{ t.close }}">
           <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><path d="M5 5l14 14M19 5 5 19"></path></svg>
         </button>
@@ -464,12 +503,13 @@ a:hover{color:#0B1B2B}
         </sc-if>
         <a class="vh-dl" href="brands.dc.html">{{ t.hd_d.brands }}</a>
         <button type="button" class="vh-dl" onClick="{{ openAcFromDrawer }}" aria-haspopup="dialog">
-          <span>{{ t.hd_d.aircraft }}<sc-if value="{{ hasAc }}" hint-placeholder-val="{{ false }}"><span style="display:block;font:500 12px/1.4 'Archivo',system-ui,sans-serif;color:#6AA6E8;margin-top:2px">{{ acName }}</span></sc-if></span>
+          <span>{{ t.hd_d.aircraft }}<sc-if value="{{ hasAc }}" hint-placeholder-val="{{ false }}"><span style="display:block;font:500 12px/1.4 'Inter',system-ui,sans-serif;color:#6AA6E8;margin-top:2px">{{ acName }}</span></sc-if></span>
           <svg class="vh-ic vh-flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
         </button>
         <a class="vh-dl" href="services.dc.html">{{ t.hd_d.services }}</a>
         <a class="vh-dl" href="{{ calHref }}">{{ t.hd_d.calibration }}</a>
         <a class="vh-dl" href="{{ rentHref }}">{{ t.hd_d.rentals }}</a>
+        <a class="vh-dl" href="sell.html">Sell Your Inventory</a>
         <a class="vh-dl" href="contact.dc.html">{{ t.hd_d.contact }}</a>
       </nav>
       <div class="vh-dfoot">
@@ -479,10 +519,10 @@ a:hover{color:#0B1B2B}
         <a class="vh-dbtn" href="{{ accountHref }}" style="height:48px">
           <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"></path></svg>{{ t.hd_signin_up }}
         </a>
-        <button type="button" class="vh-dcta" onClick="{{ openRfqFromDrawer }}">{{ t.hd_quote }}<sc-if value="{{ hasCount }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Archivo',system-ui,sans-serif;font-weight:500">({{ count }})</span></sc-if></button>
+        <button type="button" class="vh-dcta" onClick="{{ openRfqFromDrawer }}">{{ t.hd_quote }}<sc-if value="{{ hasCount }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Inter',system-ui,sans-serif;font-weight:500">({{ count }})</span></sc-if></button>
         <a class="vh-daog" href="mailto:AOG@velmachaerospace.com">
-          <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:50%;background:#E0442E;animation:vmPulse 2.6s infinite"></span><span dir="ltr">AOG 24/7</span></span>
-          <span dir="ltr" style="font-family:'Archivo',system-ui,sans-serif;font-size:13px;font-weight:400;color:#FF8A73">AOG@velmachaerospace.com</span>
+          <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:50%;background:#FF6A00;animation:vmPulse 2.6s infinite"></span><span dir="ltr">AOG 24/7</span></span>
+          <span dir="ltr" style="font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:400;color:#FFB27A">AOG@velmachaerospace.com</span>
         </a>
       </div>
     </div>
@@ -554,7 +594,7 @@ a:hover{color:#0B1B2B}
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px;background:#07111D;color:#FFFFFF;flex-shrink:0;border-top-left-radius:{{ rqRad }};border-top-right-radius:{{ rqRad }}">
         <div style="display:flex;flex-direction:column;gap:2px">
           <span id="rq-title" style="font-family:{{ fHead }};font-stretch:106%;font-size:15px;font-weight:600;letter-spacing:{{ lsTitle }};text-transform:uppercase;color:#FFFFFF;-webkit-font-smoothing:antialiased">{{ t.rq_title }}</span>
-          <span dir="ltr" style="font-family:'Archivo',system-ui,sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;color:#7F8C99;text-align:{{ start }}">RFQ · {{ count }} · VELMACH AEROSPACE</span>
+          <span dir="ltr" style="font-family:'Inter',system-ui,sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;color:#7F8C99;text-align:{{ start }}">RFQ · {{ count }} · VELMACH AEROSPACE</span>
         </div>
         <button type="button" onClick="{{ closeRfq }}" aria-label="{{ t.rq_close }}" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"></path></svg>
@@ -566,11 +606,24 @@ a:hover{color:#0B1B2B}
     </div>
   </sc-if>
 
+  <!-- 24/7 AOG emergency desk: orange button bottom right; opens call / WhatsApp / email / priority quote -->
   <sc-if value="{{ showFloat }}" hint-placeholder-val="{{ true }}">
-    <a href="https://wa.me/971509259286" target="_blank" rel="noopener" aria-label="{{ t.float_wa }}" onMouseEnter="{{ waIn }}" onMouseLeave="{{ waOut }}" onFocus="{{ waIn }}" onBlur="{{ waOut }}" dir="ltr" style="position:fixed;bottom:{{ floatB }};right:{{ floatX }};z-index:90;height:52px;min-width:52px;border-radius:26px;background:#25D366;display:flex;align-items:center;justify-content:flex-end;gap:{{ waGap }};padding-inline:{{ waPadL }} 13px;box-shadow:0 8px 22px rgba(7,17,29,.28);text-decoration:none;transition:padding .35s cubic-bezier(.2,.7,.2,1),gap .35s ease">
-      <span style="display:block;overflow:hidden;white-space:nowrap;max-width:{{ waLabelW }};opacity:{{ waLabelOp }};color:#0B3D20;font-family:{{ fBody }};font-weight:600;font-size:15px;transition:max-width .35s cubic-bezier(.2,.7,.2,1),opacity .25s ease">{{ waLabel }}</span>
-      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" style="flex-shrink:0"><path fill="#FFFFFF" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.900-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.200-1.8-1.9-3.9-1.9-6.1C4.9 9.8 9.9 4.9 16 4.9s11.1 4.9 11.1 10.9S22.1 26.4 16 26.4zm6.1-8.1c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.900-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1.1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.500c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.300-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"></path></svg>
-    </a>
+    <div ref="{{ aogRef }}" class="vh-fab" dir="ltr">
+      <sc-if value="{{ aogOpen }}" hint-placeholder-val="{{ false }}">
+        <div id="vh-fab-menu" class="vh-fab-menu" role="menu" aria-label="AOG emergency desk">
+          <p class="vh-fab-h"><span class="vh-fab-dot"></span>AOG desk &middot; 24/7/365</p>
+          <p class="vh-fab-sub">Aircraft on ground? A person on our desk picks up, day or night.</p>
+          <a class="vh-fab-a vh-fab-a--call" role="menuitem" href="{{ telHref }}"><svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z"></path></svg><span><b>Call the AOG desk</b><small>{{ phone }}</small></span></a>
+          <a class="vh-fab-a" role="menuitem" href="{{ aogWa }}" target="_blank" rel="noopener"><svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8Z"></path><path d="M9.2 8.6c0 3.3 2.900 6.200 6.200 6.200l1-1.6-2-1-1 1c-1-.4-2.200-1.600-2.600-2.600l1-1-1-2Z"></path></svg><span><b>WhatsApp</b><small>Send part number and photos</small></span></a>
+          <a class="vh-fab-a" role="menuitem" href="{{ aogMail }}"><svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5h18v13H3zM3.5 6.5 12 13l8.5-6.5"></path></svg><span><b>Email AOG request</b><small>AOG@velmachaerospace.com</small></span></a>
+          <button type="button" class="vh-fab-a" role="menuitem" onClick="{{ aogRfq }}"><svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8.5L18 6.5V21H6zM14 3v4h4M9 11h6M9 14.5h6M9 18h3.5"></path></svg><span><b>High-priority quote form</b><small>List several part numbers at once</small></span></button>
+        </div>
+      </sc-if>
+      <button type="button" class="vh-fab-btn" onClick="{{ toggleAog }}" aria-expanded="{{ aogExp }}" aria-controls="vh-fab-menu" aria-haspopup="menu">
+        <span class="vh-fab-dot"></span><span class="vh-fab-l">{{ aogLabel }}</span>
+        <svg class="vh-ic" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;transform:{{ aogChev }}"><path d="m6 15 6-6 6 6"></path></svg>
+      </button>
+    </div>
   </sc-if>
 
   <!-- back to top: appears after the first screen; the outline fills with scroll progress -->
@@ -591,18 +644,18 @@ a:hover{color:#0B1B2B}
 </div>
 </sc-if>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;products&quot;,&quot;categories&quot;,&quot;category&quot;,&quot;brands&quot;,&quot;search&quot;,&quot;industries&quot;,&quot;services&quot;,&quot;quality&quot;,&quot;blog&quot;,&quot;contact&quot;,&quot;rfq&quot;,&quot;page&quot;,&quot;404&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showFloating&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;products&quot;,&quot;categories&quot;,&quot;category&quot;,&quot;brands&quot;,&quot;search&quot;,&quot;industries&quot;,&quot;services&quot;,&quot;quality&quot;,&quot;blog&quot;,&quot;contact&quot;,&quot;rfq&quot;,&quot;page&quot;,&quot;404&quot;,&quot;sell&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showFloating&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 const WIDE = '(min-width: 1200px)';
 const OPEN_DELAY = 150, CLOSE_DELAY = 150, SUGGEST_DELAY = 300;
 const fmt = (s, o) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in o ? o[k] : m));
 
 class Component extends DCLogic {
-  state = { ready: false, scrolled: false, showTop: false, drawer: false, rfqOpen: false, toast: '', waOpen: false, wide: true, hdrH: 0,
+  state = { ready: false, scrolled: false, showTop: false, drawer: false, rfqOpen: false, toast: '', waOpen: false, aogOpen: false, wide: true, hdrH: 0,
     mega: -1, q: '', sugg: null, suggOpen: false, active: -1,
     acOpen: false, acMake: '', acModel: '', acPos: '', dCats: false, dCat: '' };
   progRef = React.createRef(); rfqRef = React.createRef(); drawerRef = React.createRef(); topRingRef = React.createRef();
   hdrRef = React.createRef(); utilRef = React.createRef(); mainRef = React.createRef(); navRef = React.createRef();
-  acRef = React.createRef(); acBtnRef = React.createRef();
+  acRef = React.createRef(); acBtnRef = React.createRef(); aogRef = React.createRef();
   wasOpen = false; hH = 0; sTok = 0;
 
   componentDidMount() {
@@ -623,8 +676,11 @@ class Component extends DCLogic {
     this.onToast = e => { this.setState({ toast: e.detail }); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 3200); };
     this.onKey = e => this.globalKey(e);
     this.onDown = e => {
+      const s = this.state;
+      // a click outside the AOG desk menu closes it
+      if (s.aogOpen && this.aogRef.current && !this.aogRef.current.contains(e.target)) this.setState({ aogOpen: false });
       // a click outside the desktop aircraft dropdown closes it
-      const s = this.state; if (!s.acOpen || !s.wide) return;
+      if (!s.acOpen || !s.wide) return;
       const p = this.acRef.current, b = this.acBtnRef.current;
       if (p && !p.contains(e.target) && !(b && b.contains(e.target))) this.setState({ acOpen: false });
     };
@@ -689,6 +745,7 @@ class Component extends DCLogic {
   globalKey(e) {
     const s = this.state;
     if (e.key === 'Escape') {
+      if (s.aogOpen) { this.setState({ aogOpen: false }); return; }
       if (s.rfqOpen || s.drawer) { this.setState({ rfqOpen: false, drawer: false }); return; }
       if (s.acOpen) { this.setState({ acOpen: false }); return; }
       if (s.mega >= 0) { this.closeMega(true); return; }
@@ -756,10 +813,16 @@ class Component extends DCLogic {
     const tok = ++this.sTok;
     window.VM_SEARCH.suggest(q, window.VM.lang === 'ar').then(r => { if (tok === this.sTok) this.setState({ sugg: r, active: -1 }); });
   }
+  // A query that looks like a part number (has a digit, no spaces beyond one) also offers it in each condition code.
+  condOpts(q) {
+    if (!/\d/.test(q) || q.length < 3 || q.split(/\s+/).length > 2) return [];
+    return [['NE', 'New'], ['NS', 'New surplus'], ['OH', 'Overhauled'], ['SV', 'Serviceable']].map(([code, name]) =>
+      ({ code, name, pn: q, href: window.VM.searchHref(q) + '&cond=' + code.toLowerCase() }));
+  }
   options() {
     const r = this.state.sugg, q = this.state.q.trim();
     if (!r || !q) return [];
-    return [...r.products, ...r.cats, ...r.brands, { href: window.VM.searchHref(q) }];
+    return [...this.condOpts(q), ...r.products, ...r.cats, ...r.brands, { href: window.VM.searchHref(q) }];
   }
   qKey(e) {
     const s = this.state, opts = this.options(), n = opts.length;
@@ -798,8 +861,8 @@ class Component extends DCLogic {
       .concat(cats.map(c => ({ key: c.slug, label: VM.label(c), href: VM.catHref(c.slug), type: 'cat', cat: c })))
       .concat([{ key: 'brands', label: t.hd_nav.brands, href: VM.HREF.brands, type: 'brand' },
         { key: 'services', label: t.hd_nav.services, href: VM.HREF.services, type: 'svc' },
-        { key: 'blog', label: t.hd_nav.blog, href: VM.HREF.blog }]);
-    const curKey = page === 'category' ? curCat : page === 'brands' ? 'brands' : page === 'services' || page === 'page' ? 'services' : page === 'blog' ? 'blog' : page === 'categories' ? 'all' : '';
+        { key: 'blog', label: t.hd_nav.blog, href: VM.HREF.blog }, { key: 'sell', label: 'Sell Inventory', href: 'sell.html' }]);
+    const curKey = page === 'sell' ? 'sell' : page === 'category' ? curCat : page === 'brands' ? 'brands' : page === 'services' || page === 'page' ? 'services' : page === 'blog' ? 'blog' : page === 'categories' ? 'all' : '';
     const navItems = items.map((n, i) => {
       const menu = !!n.type, open = menu && s.mega === i;
       const o = { i: String(i), label: n.label, href: n.href, current: n.key === curKey ? 'page' : undefined,
@@ -828,6 +891,7 @@ class Component extends DCLogic {
     // search suggestions
     const r = s.sugg, qTrim = s.q.trim();
     let k = 0; const mark = o => { const j = k++; return { ...o, id: 'vh-opt-' + j, sel: String(s.active === j) }; };
+    const sConds = r ? this.condOpts(qTrim).map(mark) : [];
     const sProducts = r ? r.products.map(p => mark({ ...p, img: p.img || '', meta: [p.brand, p.pn ? t.hd_pn + ' ' + p.pn : ''].filter(Boolean).join(' · ') })) : [];
     const sCats = r ? r.cats.map(mark) : [];
     const sBrands = r ? r.brands.map(mark) : [];
@@ -845,7 +909,7 @@ class Component extends DCLogic {
 
     return {
       ...v, ready: true, t,
-      fAlt: v.ar ? "'Archivo', system-ui, sans-serif" : "'IBM Plex Sans Arabic', Tahoma, sans-serif",
+      fAlt: v.ar ? "'Inter', system-ui, sans-serif" : "'IBM Plex Sans Arabic', Tahoma, sans-serif",
       logoAlt: v.ar ? 'شعار فيلماك إيروسبايس' : 'Velmach Aerospace F.Z.C logo',
       progRef: this.progRef, rfqRef: this.rfqRef, drawerRef: this.drawerRef, topRingRef: this.topRingRef,
       hdrRef: this.hdrRef, utilRef: this.utilRef, mainRef: this.mainRef, navRef: this.navRef, acRef: this.acRef, acBtnRef: this.acBtnRef,
@@ -854,7 +918,7 @@ class Component extends DCLogic {
       navAria: v.ar ? 'التنقل الرئيسي' : 'Main',
 
       utilLinks: [{ label: t.hd_util.calibration, href: VM.pageHref('calibration') }, { label: t.hd_util.gse, href: VM.pageHref('gse-service-repair') },
-        { label: t.hd_util.rent, href: VM.pageHref('rentals') }, { label: t.hd_util.sell, href: VM.pageHref('sell-trade') },
+        { label: t.hd_util.rent, href: VM.pageHref('rentals') }, { label: t.hd_util.sell, href: 'sell.html' },
         { label: t.hd_util.contact, href: VM.HREF.contact }],
       phone: C.phone.display, telHref: 'tel:' + C.phone.tel,
       accountHref: VM.pageHref('account'), calHref: VM.pageHref('calibration'), rentHref: VM.pageHref('rentals'),
@@ -866,7 +930,7 @@ class Component extends DCLogic {
       keepFocus: e => e.preventDefault(),
       onSubmit: e => { if (!qTrim) { e.preventDefault(); } },
       suggExp: String(showSugg), activeId: showSugg && s.active >= 0 ? 'vh-opt-' + s.active : undefined,
-      showSugg, sProducts, sCats, sBrands, sAll, hasProducts: sProducts.length > 0, hasCats: sCats.length > 0, hasBrands: sBrands.length > 0,
+      showSugg, sConds, hasConds: sConds.length > 0, sProducts, sCats, sBrands, sAll, hasProducts: sProducts.length > 0, hasCats: sCats.length > 0, hasBrands: sBrands.length > 0,
       noMatch: !!r && !sProducts.length && !sCats.length && !sBrands.length,
 
       navItems,
@@ -900,10 +964,16 @@ class Component extends DCLogic {
       rqAnim: v.sm ? 'vmSheet' : (v.ar ? 'vmFromL' : 'vmFromR'), rqRad: v.sm ? '8px' : '0px',
       showFloat: this.props.showFloating !== false,
       goTop: () => this.goTop(),
-      topB: this.props.showFloating !== false ? (v.sm ? '80px' : '90px') : (v.sm ? '14px' : '22px'), topX: v.sm ? '18px' : '26px',
+      topB: this.props.showFloating !== false ? (v.sm ? '80px' : '90px') : (v.sm ? '14px' : '22px'), topX: v.sm ? '16px' : '26px',
       topOp: s.showTop ? 1 : 0, topVis: s.showTop ? 'visible' : 'hidden', topVisDelay: s.showTop ? '0s' : '.45s',
       topTf: s.showTop ? 'none' : 'translateY(10px)', topTab: s.showTop ? 0 : -1, topHidden: s.showTop ? 'false' : 'true',
       floatB: v.sm ? '14px' : '22px', floatX: v.sm ? '14px' : '22px',
+      aogRef: this.aogRef, aogOpen: s.aogOpen, aogExp: String(s.aogOpen), aogChev: s.aogOpen ? 'rotate(180deg)' : 'none',
+      aogLabel: v.sm ? 'AOG Desk 24/7' : '24/7 AOG Emergency Desk',
+      toggleAog: () => this.setState(st => ({ aogOpen: !st.aogOpen })),
+      aogWa: 'https://wa.me/' + C.phone.tel.replace(/\D/g, '') + '?text=' + encodeURIComponent('AOG request (Aircraft on Ground)\nPart number:\nQuantity:\nAircraft type:\nDelivery location:'),
+      aogMail: 'mailto:' + ((C.email && C.email.aog) || 'AOG@velmachaerospace.com') + '?subject=' + encodeURIComponent('AOG request: ') + '&body=' + encodeURIComponent('Part number:\nQuantity:\nAircraft type:\nDelivery location:\nContact phone:\n'),
+      aogRfq: () => this.setState({ aogOpen: false, rfqOpen: true, drawer: false, acOpen: false }),
       toast: s.toast,
       waLabel: v.ar ? 'تحدث معنا' : 'Chat with us', waOpen: s.waOpen,
       waIn: () => this.setState({ waOpen: true }), waOut: () => this.setState({ waOpen: false }),

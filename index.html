@@ -5,15 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-t="meta.home.0">Velmach Aerospace | Aircraft Parts &amp; Aerospace Materials, UAE</title>
 <meta name="description" data-t-attr="content:meta.home.1" content="Aircraft spare parts, components, lubricants, chemicals and technical materials traded from Ajman Free Zone, UAE. 24/7 AOG desk.">
-<meta name="theme-color" content="#07111D">
+<meta name="theme-color" content="#0A2540">
 <meta property="og:title" content="Velmach Aerospace | Aircraft Parts &amp; Aerospace Materials, UAE">
-<meta property="og:description" content="Aircraft parts and aerospace materials, sourced and delivered from the UAE.">
+<meta property="og:description" content="Precision aircraft parts and aerospace materials, sourced and supplied worldwide. 100,000+ parts through our aviation network, with a 24/7 AOG desk.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/img/velmach-logo.png">
 <!-- TODO: replace canonical domain -->
 <link rel="canonical" href="https://www.velmachaerospace.com/">
 <link rel="alternate" hreflang="en" href="https://www.velmachaerospace.com/?lang=en">
-<link rel="alternate" hreflang="ar" href="https://www.velmachaerospace.com/?lang=ar">
 <link rel="icon" href="assets/favicon_io/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon_io/favicon-16x16.png">
@@ -21,7 +20,7 @@
 <link rel="manifest" href="assets/favicon_io/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="css/home.css">
 <script>document.documentElement.classList.add("js")</script>
 <!-- language is applied before first paint so Arabic visitors never see a flash of English layout -->
@@ -35,6 +34,7 @@
 <script src="data/makers.js" defer></script>
 <script src="js/home-filters.js" defer></script>
 <script src="js/brand-strip.js" defer></script>
+<script src="js/home-aog.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"VELMACH AEROSPACE F.Z.C","alternateName":"فيلماك إيروسبايس ش.م.ح","logo":"assets/img/velmach-logo.png","address":{"@type":"PostalAddress","streetAddress":"Office - C1 - 1F – SF20786","addressLocality":"Ajman Free Zone","addressCountry":"AE"},"telephone":["+971509259286","+971509155899"],"email":"info@velmachaerospace.com","contactPoint":[{"@type":"ContactPoint","contactType":"AOG support","email":"AOG@velmachaerospace.com"},{"@type":"ContactPoint","contactType":"sales","email":"sales@velmachaerospace.com"},{"@type":"ContactPoint","contactType":"quality","email":"QC@velmachaerospace.com"},{"@type":"ContactPoint","contactType":"customer support","email":"partsupport@velmachaerospace.com"}]}</script>
 </head>
 <body class="home">
@@ -98,7 +98,7 @@
             <circle cx="400" cy="400" r="110" stroke="rgba(170,196,222,.10)" stroke-dasharray="2 6"/>
             <path d="M400 54V746M54 400H746" stroke="rgba(170,196,222,.06)"/>
           </g>
-          <g class="nd-labels" font-family="Archivo, system-ui, sans-serif" font-size="12" fill="rgba(190,206,222,.55)" text-anchor="middle" dominant-baseline="middle">
+          <g class="nd-labels" font-family="Inter, system-ui, sans-serif" font-size="12" fill="rgba(190,206,222,.55)" text-anchor="middle" dominant-baseline="middle">
             <text x="400" y="48" fill="rgba(230,238,246,.9)">N</text><text x="576" y="95">030</text><text x="705" y="224">060</text>
             <text x="752" y="400">E</text><text x="705" y="576">120</text><text x="576" y="705">150</text>
             <text x="400" y="752">S</text><text x="224" y="705">210</text><text x="95" y="576">240</text>
@@ -187,8 +187,8 @@
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <p class="tagbar"><span class="tagbar-mark" aria-hidden="true"></span><span class="tagbar-items" data-t="hero2_eyebrow" data-split="•">Aerospace parts • Materials • Sourcing</span></p>
-        <h1 id="hero-h" class="hero-h" data-t="hero_title">Aircraft Parts &amp; Aerospace Materials, Sourced and Delivered from the UAE</h1>
-        <p class="hero-sub" data-t="hero2_sub">We source aircraft spare parts, components and technical materials for aviation, MRO, oil and gas and industrial buyers, with a dedicated AOG desk and import and export handled from Ajman Free Zone.</p>
+        <h1 id="hero-h" class="hero-h" data-t="hero_title">Precision Aircraft Parts &amp; Aerospace Materials, Sourced and Supplied Worldwide</h1>
+        <p class="hero-sub" data-t="hero2_sub">Connecting aviation globally. Access over 100,000+ parts in stock through our trusted aviation network, ready for immediate, same-day dispatch.</p>
 
         <form class="psearch" role="search" action="search.dc.html" method="get">
           <label class="psearch-label" for="hero-q">
@@ -199,6 +199,22 @@
             <input id="hero-q" type="search" name="q" autocomplete="off" spellcheck="false" dir="ltr" data-t-attr="placeholder:hs_ph;aria-label:search_aria" placeholder="Enter part number or keyword" aria-label="Part number search">
             <button type="submit" class="btn btn--blue psearch-btn"><span data-t="hero_cta_search">Search parts</span><svg class="ic arw" aria-hidden="true"><use href="#i-arrow"/></svg></button>
             <span class="psearch-line" aria-hidden="true"></span>
+          </div>
+          <!-- AOG routing: when ticked, js/home-aog.js sends the part number straight to the AOG desk (email, WhatsApp or call) -->
+          <div class="paog" data-paog>
+            <label class="paog-box">
+              <input type="checkbox" name="aog" value="1" data-paog-check>
+              <span class="paog-tick" aria-hidden="true"></span>
+              <span class="paog-t"><b>Is this an AOG?</b> Check this box for immediate 15-minute desk routing.</span>
+            </label>
+            <div class="paog-panel" data-paog-panel hidden>
+              <p class="paog-p"><span class="paog-dot" aria-hidden="true"></span>Priority routing on. Send the request to a person on our AOG desk now:</p>
+              <div class="paog-acts">
+                <a class="paog-a paog-a--main" data-paog-mail href="mailto:AOG@velmachaerospace.com"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>Email AOG desk</a>
+                <a class="paog-a" data-paog-wa href="https://wa.me/971509259286" target="_blank" rel="noopener">WhatsApp</a>
+                <a class="paog-a" href="tel:+971509259286"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>+971 50 925 9286</a>
+              </div>
+            </div>
           </div>
           <!-- catalogue filters: options and counts filled in by js/home-filters.js from the catalogue data -->
           <div class="psearch-filters" data-home-filters>
@@ -242,6 +258,49 @@
         <span class="hero-meta-hdg" aria-hidden="true"><span>000</span><span>045</span><span>090</span><span>135</span><span>180</span><span>225</span><span>270</span><span>315</span><i></i></span>
         <a class="hero-meta-scroll" href="#location"><span data-t="scroll_hint">Scroll</span><span class="scroll-bar" aria-hidden="true"></span></a>
       </div>
+    </div>
+  </section>
+
+  <!-- TRUST BADGES: certification and traceability, directly below the hero -->
+  <section class="tbadge" aria-label="Certification and traceability">
+    <div class="wrap">
+      <ul class="tbadge-row">
+        <li class="tbadge-i"><span class="tbadge-ic" aria-hidden="true"><svg class="ic"><use href="#i-doc"/></svg></span><span><b>FAA Form 8130-3</b><small>Compatible documentation</small></span></li>
+        <li class="tbadge-i"><span class="tbadge-ic" aria-hidden="true"><svg class="ic"><use href="#i-shield"/></svg></span><span><b>EASA Form 1</b><small>Certified material</small></span></li>
+        <li class="tbadge-i"><span class="tbadge-ic" aria-hidden="true"><svg class="ic"><use href="#i-check"/></svg></span><span><b>ASA-100 / ISO 9001:2015</b><small>Sourcing standards</small></span></li>
+        <li class="tbadge-i"><span class="tbadge-ic" aria-hidden="true"><svg class="ic"><use href="#i-globe"/></svg></span><span><b>Bilateral Airworthiness</b><small>Agreement compliant, worldwide</small></span></li>
+      </ul>
+      <p class="tbadge-qc"><svg class="ic" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>All dual-release (FAA/EASA) documentation verified by Velmach QC Desk prior to dispatch.</p>
+    </div>
+  </section>
+
+  <!-- VELMACH SPEED: AOG metric grid -->
+  <section class="speed" aria-labelledby="speed-h">
+    <div class="wrap">
+      <div class="speed-head">
+        <p class="speed-k">Velmach speed</p>
+        <h2 id="speed-h" class="speed-h">Built for AOG. Every hour on the ground costs you money.</h2>
+      </div>
+      <ul class="speed-grid">
+        <li class="speed-c">
+          <span class="speed-ic" aria-hidden="true"><svg class="ic"><use href="#i-clock"/></svg></span>
+          <p class="speed-big" dir="ltr">24/7/365</p>
+          <h3 class="speed-t">AOG desk</h3>
+          <p class="speed-b">Never automated. Always human aerospace experts answering your call.</p>
+        </li>
+        <li class="speed-c">
+          <span class="speed-ic" aria-hidden="true"><svg class="ic"><use href="#i-origin"/></svg></span>
+          <p class="speed-big" dir="ltr">AJM</p>
+          <h3 class="speed-t">Strategic hub</h3>
+          <p class="speed-b">Ajman Free Zone sits between the major global air routes, for the fastest shipping to Europe, Africa and Asia.</p>
+        </li>
+        <li class="speed-c">
+          <span class="speed-ic" aria-hidden="true"><svg class="ic"><use href="#i-route"/></svg></span>
+          <p class="speed-big">Real-time</p>
+          <h3 class="speed-t">Tracking</h3>
+          <p class="speed-b">Instant dispatch notifications, from our desk to your hangar.</p>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -324,7 +383,7 @@
                 <path d="M181.2 0V670M362.4 0V670M543.6 0V670M724.8 0V670M906 0V670"/>
                 <path d="M0 20H1087M0 220H1087M0 420H1087M0 620H1087"/>
               </g>
-              <g class="map-grat-l" font-family="Archivo, system-ui, sans-serif" font-size="13" fill="#7A8591">
+              <g class="map-grat-l" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#7A8591">
                 <text x="187" y="660">0°</text><text x="368" y="660">20°E</text><text x="549" y="660">40°E</text><text x="730" y="660">60°E</text><text x="912" y="660">80°E</text>
                 <text x="8" y="214">40°N</text><text x="8" y="414">20°N</text><text x="8" y="614">0°</text>
               </g>
@@ -334,22 +393,30 @@
                 <path d="M683.5 365.9Q795.4 343 887.9 410"/>
                 <path d="M683.5 365.9Q536.4 166.4 289.9 140"/>
               </g>
-              <g class="map-routes" stroke="#0759A5" stroke-width="2.6" stroke-linecap="round">
-                <path class="route" pathLength="1" d="M683.5 365.9Q630.2 297.2 543.6 290"/>
-                <path class="route" pathLength="1" d="M683.5 365.9Q500.7 407.3 407.7 570"/>
-                <path class="route" pathLength="1" d="M683.5 365.9Q795.4 343 887.9 410"/>
-                <path class="route" pathLength="1" d="M683.5 365.9Q536.4 166.4 289.9 140"/>
+              <g class="map-routes" stroke="#00A3E0" stroke-width="2.6" stroke-linecap="round">
+                <path id="mr-0" class="route" pathLength="1" d="M683.5 365.9Q630.2 297.2 543.6 290"/>
+                <path id="mr-1" class="route" pathLength="1" d="M683.5 365.9Q500.7 407.3 407.7 570"/>
+                <path id="mr-2" class="route" pathLength="1" d="M683.5 365.9Q795.4 343 887.9 410"/>
+                <path id="mr-3" class="route" pathLength="1" d="M683.5 365.9Q536.4 166.4 289.9 140"/>
               </g>
-              <g class="map-ends" fill="#0759A5" stroke="#FBFBF9" stroke-width="2.5">
+              <!-- light pulses travelling from AJM along each route (SMIL; hidden with reduced motion) -->
+              <defs><radialGradient id="mp-glow"><stop offset="0" stop-color="#FF6A00" stop-opacity=".75"/><stop offset="1" stop-color="#FF6A00" stop-opacity="0"/></radialGradient></defs>
+              <g class="map-pulses">
+                <g class="map-pulse-g"><circle r="9" fill="url(#mp-glow)"/><circle r="3.6" fill="#FF6A00"/><animateMotion dur="2.6s" begin="0.0s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mr-0"/></animateMotion></g>
+                <g class="map-pulse-g"><circle r="9" fill="url(#mp-glow)"/><circle r="3.6" fill="#FF6A00"/><animateMotion dur="3.0s" begin="0.7s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mr-1"/></animateMotion></g>
+                <g class="map-pulse-g"><circle r="9" fill="url(#mp-glow)"/><circle r="3.6" fill="#FF6A00"/><animateMotion dur="3.4000000000000004s" begin="1.4s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mr-2"/></animateMotion></g>
+                <g class="map-pulse-g"><circle r="9" fill="url(#mp-glow)"/><circle r="3.6" fill="#FF6A00"/><animateMotion dur="3.8000000000000003s" begin="2.0999999999999996s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#mr-3"/></animateMotion></g>
+              </g>
+              <g class="map-ends" fill="#00A3E0" stroke="#FBFBF9" stroke-width="2.5">
                 <g class="map-end" data-end="0"><circle cx="543.6" cy="290" r="11" class="map-end-ring"/><circle cx="543.6" cy="290" r="5.5"/></g>
                 <g class="map-end" data-end="1"><circle cx="407.7" cy="570" r="11" class="map-end-ring"/><circle cx="407.7" cy="570" r="5.5"/></g>
                 <g class="map-end" data-end="2"><circle cx="887.9" cy="410" r="11" class="map-end-ring"/><circle cx="887.9" cy="410" r="5.5"/></g>
                 <g class="map-end" data-end="3"><circle cx="289.9" cy="140" r="11" class="map-end-ring"/><circle cx="289.9" cy="140" r="5.5"/></g>
               </g>
               <g class="map-ajm">
-                <circle class="map-pulse" cx="683.5" cy="365.9" r="10" stroke="#0759A5" stroke-width="2"/>
-                <circle cx="683.5" cy="365.9" r="24" stroke="#0759A5" stroke-width="1.4" stroke-dasharray="3 4"/>
-                <circle cx="683.5" cy="365.9" r="8.5" fill="#07111D" stroke="#FBFBF9" stroke-width="3"/>
+                <circle class="map-pulse" cx="683.5" cy="365.9" r="10" stroke="#FF6A00" stroke-width="2"/>
+                <circle cx="683.5" cy="365.9" r="24" stroke="#00A3E0" stroke-width="1.4" stroke-dasharray="3 4"/>
+                <circle cx="683.5" cy="365.9" r="8.5" fill="#0A2540" stroke="#FBFBF9" stroke-width="3"/>
               </g>
             </svg>
             <span class="map-tag map-tag--ajm"><b>AJM</b><span>25.41° N 55.44° E</span></span>
@@ -680,7 +747,7 @@
           </form>
         </div>
         <aside class="rfq-co" data-rv aria-label="Velmach Aerospace F.Z.C">
-          <a href="index.html" class="rfq-logo" aria-label="Velmach Aerospace, home"><img src="assets/img/velmach-logo.png" alt="Velmach Aerospace F.Z.C logo" width="1432" height="700" loading="lazy" decoding="async"></a>
+          <a href="index.html" class="rfq-logo" aria-label="Velmach Aerospace, home"><img src="assets/img/velmach-logo.png" alt="Velmach Aerospace F.Z.C logo" width="1432" height="720" loading="lazy" decoding="async"></a>
           <p class="rfq-co-name" data-co-name>Velmach Aerospace F.Z.C</p>
           <dl class="rfq-docs">
             <div><dt data-t="docs.2.k">Registration No.</dt><dd dir="auto" data-t="docs.2.no">45584</dd></div>

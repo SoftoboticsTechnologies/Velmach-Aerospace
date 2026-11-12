@@ -23,6 +23,7 @@
       </span>
       <h2 style="margin:0;font-family:{{ fHead }};font-stretch:106%;font-size:clamp(26px,3vw,32px);font-weight:500;line-height:1.2">{{ t.r_ok_t }}</h2>
       <p style="margin:0;color:#4A5561;font-size:16px;max-width:52ch">{{ sentMsg }}</p>
+      <p style="margin:0;display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border:1px solid #BFE8D2;border-radius:6px;background:#F0FAF4;color:#14532D;font-size:13.5px;line-height:1.45;max-width:52ch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1FA463" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><path d="M5 12.5l4.5 4.5L19 7"></path></svg><span>All dual-release (FAA/EASA) documentation verified by Velmach QC Desk prior to dispatch.</span></p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
         <button type="button" onClick="{{ reset }}" style="height:48px;padding-inline:22px;background:#0B1B2B;color:#FFFFFF;border:0;font:inherit;font-weight:600;cursor:pointer" style-hover="background:#0759A5">{{ t.r_ok_again }}</button>
         <a href="categories.dc.html" style="display:inline-flex;align-items:center;height:48px;padding-inline:20px;border:1px solid #0B1B2B;color:#0B1B2B;text-decoration:none;font-weight:600">{{ t.r_browse }}</a>
@@ -72,7 +73,7 @@
                 </span>
                 <div style="display:flex;flex-direction:column;gap:5px;min-width:0;align-self:center">
                   <span style="font-family:{{ fHead }};font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8A96A3">{{ t.th.pn }}</span>
-                  <span dir="ltr" style="font-family:'Archivo',system-ui,sans-serif;font-stretch:106%;font-size:15.5px;font-weight:600;line-height:1.3;letter-spacing:-.005em;color:#0B1B2B;unicode-bidi:isolate;text-align:{{ start }};overflow-wrap:anywhere;-webkit-font-smoothing:antialiased">{{ r.pn }}</span>
+                  <span dir="ltr" style="font-family:'Inter',system-ui,sans-serif;font-stretch:106%;font-size:15.5px;font-weight:600;line-height:1.3;letter-spacing:-.005em;color:#0B1B2B;unicode-bidi:isolate;text-align:{{ start }};overflow-wrap:anywhere;-webkit-font-smoothing:antialiased">{{ r.pn }}</span>
                   <sc-if value="{{ r.showName }}" hint-placeholder-val="{{ true }}"><span style="font-size:13.5px;line-height:1.45;color:#56626E;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">{{ r.name }}</span></sc-if>
                   <sc-if value="{{ r.href }}" hint-placeholder-val="{{ false }}"><a href="{{ r.href }}" style="align-self:flex-start;font-size:12.5px;font-weight:600;color:#0759A5">{{ r.linkLabel }}</a></sc-if>
                 </div>
@@ -107,7 +108,7 @@
           </span>
           <span style="font-size:13px;color:#56626E;margin-top:-4px">{{ t.r_manual_sub }}</span>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <input value="{{ mPn }}" onChange="{{ onMPn }}" onKeyDown="{{ mKey }}" placeholder="{{ t.r_manual_pn }}" aria-label="{{ t.r_manual_pn }}" dir="ltr" style="flex:2 1 160px;min-width:0;height:44px;padding-inline:12px;border:1px solid #C3C7C9;background:#FFFFFF;font-family:'Archivo',system-ui,sans-serif;font-size:14px;text-align:{{ start }};outline:none" style-focus="border-color:#0759A5">
+            <input value="{{ mPn }}" onChange="{{ onMPn }}" onKeyDown="{{ mKey }}" placeholder="{{ t.r_manual_pn }}" aria-label="{{ t.r_manual_pn }}" dir="ltr" style="flex:2 1 160px;min-width:0;height:44px;padding-inline:12px;border:1px solid #C3C7C9;background:#FFFFFF;font-family:'Inter',system-ui,sans-serif;font-size:14px;text-align:{{ start }};outline:none" style-focus="border-color:#0759A5">
             <input type="number" min="1" value="{{ mQty }}" onChange="{{ onMQty }}" aria-label="{{ t.r_manual_qty }}" style="flex:0 0 78px;height:44px;padding-inline:10px;border:1px solid #C3C7C9;background:#FFFFFF;font:inherit;font-size:14px;outline:none" style-focus="border-color:#0759A5">
             <button type="button" onClick="{{ addManual }}" style="flex:1 1 110px;height:44px;border:0;background:#0759A5;color:#FFFFFF;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s" style-hover="background:#0B1B2B">{{ t.r_manual_add }}</button>
           </div>

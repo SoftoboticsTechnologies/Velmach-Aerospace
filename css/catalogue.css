@@ -6,7 +6,7 @@
   --steel: #56626E; --steel-2: #8A96A3; --mist: #C9D2DB; --dim: #9FB0C1;
   --paper: #F3F1EC; --paper-2: #EAE7E0; --white: #FBFBF9; --line: #DADBD8; --line-2: #C3C7C9;
   --blue: #0759A5; --blue-2: #0A6BC4; --sig: #6AA6E8; --aog: #E0442E; --aog-2: #FF8A73;
-  --fm: 'Archivo', system-ui, sans-serif;
+  --fm: 'Inter', system-ui, sans-serif;
   --ease: cubic-bezier(.2, .7, .2, 1);
   --wrap: 1320px; --gut: clamp(16px, 4vw, 56px);
   --dir: 1;

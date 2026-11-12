@@ -7,7 +7,7 @@ en: {
   nav: { home: "Home", about: "About", products: "Products", industries: "Industries", services: "Services", quality: "Quality", rfq: "RFQ", contact: "Contact" },
 
   hero_eyebrow: "Aircraft parts · Aerospace materials · Ajman Free Zone, UAE",
-  hero_title: "Aircraft Parts & Aerospace Materials, Sourced and Delivered from the UAE",
+  hero_title: "Precision Aircraft Parts & Aerospace Materials, Sourced and Supplied Worldwide",
   hero_sub: "Velmach Aerospace F.Z.C trades aircraft spare parts, components and technical materials for aviation, MRO, oil and gas and industrial buyers. Send us a part number and our team will return a quotation.",
   hero_cta1: "Search Parts / Request Quote", hero_cta2: "AOG Support",
   hero_note: "Enter a part number or description. If it is not in our catalogue, we will source it for you.",
@@ -359,7 +359,7 @@ ar: {
 (function (D) {
   Object.assign(D.en, {
     hero2_eyebrow: "Aerospace parts • Materials • Sourcing",
-    hero2_sub: "We source aircraft spare parts, components and technical materials for aviation, MRO, oil and gas and industrial buyers, with a dedicated AOG desk and import and export handled from Ajman Free Zone.",
+    hero2_sub: "Connecting aviation globally. Access over 100,000+ parts in stock through our trusted aviation network, ready for immediate, same-day dispatch.",
     hero_cta_search: "Search parts", hero_cta_aog: "AOG support",
     viz_ref: "Reference drawing", viz_scale: "Not to scale", viz_origin: "Origin · Ajman Free Zone", viz_track: "Track",
     hv_c1: "Spinner", hv_c1s: "Composite nose cap", hv_c2: "Fan rotor", hv_c2s: "12 blades · Ø 2 360", hv_c3: "Compressor", hv_c3s: "9 stages",

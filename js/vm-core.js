@@ -4,7 +4,11 @@
   var LK = 'vm_lang', RK = 'vm_rfq', AK = 'vm_aircraft';
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  // The site is English only for now (the Arabic switch was removed from the header). Set ARABIC to true to bring back
+  // the old behaviour: ?lang=ar, a saved choice or an Arabic browser opens the Arabic version.
+  var ARABIC = false;
   function initLang() {
+    if (!ARABIC) { set(LK, 'en'); return 'en'; }
     var u = new URLSearchParams(location.search).get('lang');
     if (u === 'en' || u === 'ar') { set(LK, u); return u; }          // URL wins
     var s = get(LK); if (s === 'en' || s === 'ar') return s;
@@ -20,7 +24,7 @@
   window.addEventListener('load', function () { lastBp = bpOf(window.innerWidth); emit(); });
   document.addEventListener('DOMContentLoaded', checkBp);
   setTimeout(checkBp, 300); setTimeout(checkBp, 1200);
-  window.addEventListener('storage', function (e) { if (e.key === RK || e.key === AK) emit(); if (e.key === LK && (e.newValue === 'en' || e.newValue === 'ar')) { lang = e.newValue; apply(); emit(); } });
+  window.addEventListener('storage', function (e) { if (e.key === RK || e.key === AK) emit(); if (ARABIC && e.key === LK && (e.newValue === 'en' || e.newValue === 'ar')) { lang = e.newValue; apply(); emit(); } });
   function apply() { var d = document.documentElement; d.lang = lang; d.dir = lang === 'ar' ? 'rtl' : 'ltr'; }
   apply();
 
@@ -181,9 +185,9 @@
       var ar = lang === 'ar', bp = bpOf(window.innerWidth);
       return {
         lang: lang, dir: ar ? 'rtl' : 'ltr', ar: ar,
-        fBody: ar ? FAR : "'VMAmp', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif",
-        fHead: ar ? FAR : "'VMAmp', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif",
-        fMono: ar ? FAR : "'Archivo', system-ui, sans-serif",
+        fBody: ar ? FAR : "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif",
+        fHead: ar ? FAR : "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif",
+        fMono: ar ? FAR : "'Inter', system-ui, sans-serif",
         lh: ar ? 1.85 : 1.6, lhHead: ar ? 1.35 : 1.06, ls: ar ? '0' : '.16em', lsHead: ar ? '0' : '-0.02em',
         arrow: ar ? '←' : '→', flip: ar ? 'scaleX(-1)' : 'none', start: ar ? 'right' : 'left', end: ar ? 'left' : 'right',
         sm: bp === 'sm', md: bp === 'md', lg: bp === 'lg', notLg: bp !== 'lg', notSm: bp !== 'sm'

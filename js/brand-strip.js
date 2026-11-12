@@ -1,7 +1,7 @@
 /* Velmach Aerospace: home page brand strips.
    [data-brand-strip]: every product brand (data/brands.js, A to Z, aircraft makers left out) dealt across three rows.
    [data-maker-strip]: aircraft and helicopter manufacturers (data/makers.js), one labelled row per type.
-   Rows scroll in alternating directions without a seam and pause on hover or keyboard focus; each tile shows the logo (when
+   Rows scroll in alternating directions without a seam and keep moving on hover (pause only for keyboard focus); each tile shows the logo (when
    there is one) above the name. With reduced motion the rows stay still and scroll by hand. */
 (function () {
   var builtW = 0, resizeT;

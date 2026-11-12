@@ -13,7 +13,7 @@
 <meta name="description" content="Aircraft part and aerospace equipment details with request for quote.">
 <meta property="og:type" content="product">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="css/catalogue.css">
 <link rel="stylesheet" href="css/shop.css">
 <script src="js/i18n.js"></script>
@@ -125,7 +125,7 @@
           <sc-if value="{{ hasSpecs }}" hint-placeholder-val="{{ true }}">
             <table class="pp-table">
               <tbody>
-                <sc-if value="{{ p.partNumber }}" hint-placeholder-val="{{ true }}"><tr><th scope="row">{{ t.rf_pn }}</th><td dir="ltr" style="font-family:'Archivo',system-ui,sans-serif">{{ p.partNumber }}</td></tr></sc-if>
+                <sc-if value="{{ p.partNumber }}" hint-placeholder-val="{{ true }}"><tr><th scope="row">{{ t.rf_pn }}</th><td dir="ltr" style="font-family:'Inter',system-ui,sans-serif">{{ p.partNumber }}</td></tr></sc-if>
                 <sc-if value="{{ p.brand }}" hint-placeholder-val="{{ true }}"><tr><th scope="row">{{ t.pp_brand }}</th><td>{{ p.brand }}</td></tr></sc-if>
                 <sc-for list="{{ specs }}" as="r" hint-placeholder-count="4"><tr><th scope="row" dir="auto">{{ r.name }}</th><td dir="auto">{{ r.value }}</td></tr></sc-for>
               </tbody>
